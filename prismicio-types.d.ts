@@ -1149,6 +1149,72 @@ export type PageDocument<Lang extends string = string> = prismic.PrismicDocument
 >;
 
 /**
+ * Item in *Settings → brand*
+ */
+export interface SettingsDocumentDataBrandItem {
+    /**
+     * label field in *Settings → brand*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: settings.brand[].label
+     * - **Documentation**: https://prismic.io/docs/fields/text
+     */
+    label: prismic.KeyTextField;
+
+    /**
+     * link field in *Settings → brand*
+     *
+     * - **Field Type**: Link
+     * - **Placeholder**: *None*
+     * - **API ID Path**: settings.brand[].link
+     * - **Documentation**: https://prismic.io/docs/fields/link
+     */
+    link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+    /**
+     * icon_image field in *Settings → brand*
+     *
+     * - **Field Type**: Image
+     * - **Placeholder**: *None*
+     * - **API ID Path**: settings.brand[].icon_image
+     * - **Documentation**: https://prismic.io/docs/fields/image
+     */
+    icon_image: prismic.ImageField<never>;
+
+    /**
+     * icon_alt_override field in *Settings → brand*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: settings.brand[].icon_alt_override
+     * - **Documentation**: https://prismic.io/docs/fields/text
+     */
+    icon_alt_override: prismic.KeyTextField;
+
+    /**
+     * icon_position field in *Settings → brand*
+     *
+     * - **Field Type**: Select
+     * - **Placeholder**: *None*
+     * - **API ID Path**: settings.brand[].icon_position
+     * - **Documentation**: https://prismic.io/docs/fields/select
+     */
+    icon_position: prismic.SelectField<'left' | 'right'>;
+
+    /**
+     * hide_label field in *Settings → brand*
+     *
+     * - **Field Type**: Boolean
+     * - **Placeholder**: *None*
+     * - **Default Value**: false
+     * - **API ID Path**: settings.brand[].hide_label
+     * - **Documentation**: https://prismic.io/docs/fields/boolean
+     */
+    hide_label: prismic.BooleanField;
+}
+
+/**
  * Item in *Settings → social_links*
  */
 export interface SettingsDocumentDataSocialLinksItem {
@@ -1269,6 +1335,17 @@ interface SettingsDocumentData {
      * - **Documentation**: https://prismic.io/docs/fields/rich-text
      */
     site_title: prismic.RichTextField;
+
+    /**
+     * brand field in *Settings*
+     *
+     * - **Field Type**: Group
+     * - **Placeholder**: *None*
+     * - **API ID Path**: settings.brand[]
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+     */
+    brand: prismic.GroupField<Simplify<SettingsDocumentDataBrandItem>>;
 
     /**
      * logo field in *Settings*
@@ -4434,6 +4511,7 @@ declare module '@prismicio/client' {
             PageDocumentDataSlicesSlice,
             SettingsDocument,
             SettingsDocumentData,
+            SettingsDocumentDataBrandItem,
             SettingsDocumentDataSocialLinksItem,
             SettingsDocumentDataStoreLinksItem,
             SettingsDocumentDataNewsletterItem,
