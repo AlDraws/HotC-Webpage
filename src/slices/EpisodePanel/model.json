@@ -1,0 +1,110 @@
+{
+  "id": "episode_panel",
+  "type": "SharedSlice",
+  "name": "EpisodePanel",
+  "description": "EpisodePanel",
+  "variations": [
+    {
+      "id": "default",
+      "name": "fullWidth",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "image",
+            "constraint": {
+              "width": 2000
+            },
+            "thumbnails": []
+          }
+        },
+        "alt": {
+          "type": "Text",
+          "config": {
+            "label": "alt",
+            "placeholder": ""
+          }
+        },
+        "caption": {
+          "type": "Text",
+          "config": {
+            "label": "caption",
+            "placeholder": ""
+          }
+        },
+        "semantic_break": {
+          "type": "Boolean",
+          "config": {
+            "label": "semantic_break",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "anchor_label": {
+          "type": "Text",
+          "config": {
+            "label": "anchor_label",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "narrow",
+      "name": "narrow",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "image",
+            "constraint": {
+              "width": 1200
+            },
+            "thumbnails": []
+          }
+        },
+        "alt": {
+          "type": "Text",
+          "config": {
+            "label": "alt",
+            "placeholder": ""
+          }
+        },
+        "caption": {
+          "type": "Text",
+          "config": {
+            "label": "caption",
+            "placeholder": ""
+          }
+        },
+        "semantic_break": {
+          "type": "Boolean",
+          "config": {
+            "label": "semantic_break",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        },
+        "anchor_label": {
+          "type": "Text",
+          "config": {
+            "label": "anchor_label",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

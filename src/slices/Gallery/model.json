@@ -1,0 +1,266 @@
+{
+  "id": "gallery",
+  "type": "SharedSlice",
+  "name": "Gallery",
+  "description": "Gallery",
+  "variations": [
+    {
+      "id": "default",
+      "name": "two",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "items",
+            "repeat": true,
+            "fields": {
+              "image_1": {
+                "type": "Image",
+                "config": {
+                  "label": "image_1",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "caption_1": {
+                "type": "Text",
+                "config": {
+                  "label": "caption_1",
+                  "placeholder": ""
+                }
+              },
+              "image_2": {
+                "type": "Image",
+                "config": {
+                  "label": "image_2",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "caption_2": {
+                "type": "Text",
+                "config": {
+                  "label": "caption_2",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "spacing": {
+          "type": "Select",
+          "config": {
+            "label": "spacing",
+            "placeholder": "",
+            "options": [
+              "tight",
+              "normal",
+              "roomy"
+            ]
+          }
+        },
+        "show_captions": {
+          "type": "Boolean",
+          "config": {
+            "label": "show_captions",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "three",
+      "name": "three",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "items",
+            "repeat": true,
+            "fields": {
+              "image_1": {
+                "type": "Image",
+                "config": {
+                  "label": "image_1",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "caption_1": {
+                "type": "Text",
+                "config": {
+                  "label": "caption_1",
+                  "placeholder": ""
+                }
+              },
+              "image_2": {
+                "type": "Image",
+                "config": {
+                  "label": "image_2",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "caption_2": {
+                "type": "Text",
+                "config": {
+                  "label": "caption_2",
+                  "placeholder": ""
+                }
+              },
+              "image_3": {
+                "type": "Image",
+                "config": {
+                  "label": "image_3",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "caption_3": {
+                "type": "Text",
+                "config": {
+                  "label": "caption_3",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "spacing": {
+          "type": "Select",
+          "config": {
+            "label": "spacing",
+            "placeholder": "",
+            "options": [
+              "tight",
+              "normal",
+              "roomy"
+            ]
+          }
+        },
+        "show_captions": {
+          "type": "Boolean",
+          "config": {
+            "label": "show_captions",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "four",
+      "name": "four",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "items",
+            "repeat": true,
+            "fields": {
+              "image_1": {
+                "type": "Image",
+                "config": {
+                  "label": "image_1",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "caption_1": {
+                "type": "Text",
+                "config": {
+                  "label": "caption_1",
+                  "placeholder": ""
+                }
+              },
+              "image_2": {
+                "type": "Image",
+                "config": {
+                  "label": "image_2",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "caption_2": {
+                "type": "Text",
+                "config": {
+                  "label": "caption_2",
+                  "placeholder": ""
+                }
+              },
+              "image_3": {
+                "type": "Image",
+                "config": {
+                  "label": "image_3",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "caption_3": {
+                "type": "Text",
+                "config": {
+                  "label": "caption_3",
+                  "placeholder": ""
+                }
+              },
+              "image_4": {
+                "type": "Image",
+                "config": {
+                  "label": "image_4",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "caption_4": {
+                "type": "Text",
+                "config": {
+                  "label": "caption_4",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "spacing": {
+          "type": "Select",
+          "config": {
+            "label": "spacing",
+            "placeholder": "",
+            "options": [
+              "tight",
+              "normal",
+              "roomy"
+            ]
+          }
+        },
+        "show_captions": {
+          "type": "Boolean",
+          "config": {
+            "label": "show_captions",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

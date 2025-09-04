@@ -1,0 +1,86 @@
+{
+    "format": "custom",
+    "id": "episodes_index",
+    "label": "episodes_index",
+    "repeatable": false,
+    "status": true,
+    "json": {
+        "Main": {
+            "intro_richtext": {
+                "type": "StructuredText",
+                "config": {
+                    "label": "intro_richtext",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph,heading2"
+                }
+            },
+            "filter_toggle": {
+                "type": "Boolean",
+                "config": {
+                    "label": "filter_toggle",
+                    "placeholder_false": "false",
+                    "placeholder_true": "true",
+                    "default_value": false
+                }
+            },
+            "grid_layout": {
+                "type": "Select",
+                "config": {
+                    "label": "grid_layout",
+                    "placeholder": "",
+                    "options": ["threeCols", "fourCols", "masonry"]
+                }
+            },
+            "slices": {
+                "type": "Slices",
+                "fieldset": "Slice Zone",
+                "config": {
+                    "choices": {
+                        "feature_grid": {
+                            "type": "SharedSlice"
+                        },
+                        "text": {
+                            "type": "SharedSlice"
+                        }
+                    }
+                }
+            }
+        },
+        "SEO": {
+            "meta_title": {
+                "type": "Text",
+                "config": {
+                    "label": "meta_title",
+                    "placeholder": ""
+                }
+            },
+            "meta_description": {
+                "type": "StructuredText",
+                "config": {
+                    "label": "meta_description",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+            },
+            "og_image_override": {
+                "type": "Image",
+                "config": {
+                    "label": "og_image_override",
+                    "constraint": {},
+                    "thumbnails": []
+                }
+            },
+            "noindex": {
+                "type": "Boolean",
+                "config": {
+                    "label": "noindex",
+                    "placeholder_false": "false",
+                    "placeholder_true": "true",
+                    "default_value": false
+                }
+            }
+        }
+    }
+}

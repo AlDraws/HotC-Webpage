@@ -1,0 +1,84 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "young",
+				"type": "Text"
+			},
+			"copy": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Deserunt nostrud officia labore dolore officia amet ad sit nostrud aliqua voluptate quis mollit esse do. Amet pariatur nulla magna ad ipsum ea aute exercitation cupidatat nostrud nisi qui laborum magna dolor. Nisi eu occaecat pariatur aute voluptate exercitation."
+						}
+					}
+				]
+			},
+			"provider": {
+				"__TYPE__": "FieldContent",
+				"value": "Beehiiv",
+				"type": "Select"
+			},
+			"legal_note": {
+				"__TYPE__": "FieldContent",
+				"value": "particular",
+				"type": "Text"
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "rawEmbed",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "beauty",
+				"type": "Text"
+			},
+			"copy": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Reprehenderit cillum occaecat pariatur tempor. Lorem exercitation mollit qui cillum fugiat commodo mollit eiusmod ad. Ullamco duis voluptate est ullamco fugiat irure labore nulla dolor."
+						}
+					}
+				]
+			},
+			"provider": {
+				"__TYPE__": "FieldContent",
+				"value": "Mailchimp",
+				"type": "Select"
+			},
+			"legal_note": {
+				"__TYPE__": "FieldContent",
+				"value": "meant",
+				"type": "Text"
+			},
+			"embed_raw": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Eiusmod sunt deserunt minim pariatur ea nostrud. Ut incididunt esse ipsum et incididunt reprehenderit id cillum voluptate laborum laborum."
+						}
+					}
+				]
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

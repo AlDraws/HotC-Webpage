@@ -1,0 +1,63 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"size": {
+				"__TYPE__": "FieldContent",
+				"value": "lg",
+				"type": "Select"
+			},
+			"opacity": {
+				"__TYPE__": "FieldContent",
+				"value": "strong",
+				"type": "Select"
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "line",
+		"primary": {
+			"size": {
+				"__TYPE__": "FieldContent",
+				"value": "md",
+				"type": "Select"
+			},
+			"opacity": {
+				"__TYPE__": "FieldContent",
+				"value": "subtle",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "flourish",
+		"primary": {
+			"size": {
+				"__TYPE__": "FieldContent",
+				"value": "lg",
+				"type": "Select"
+			},
+			"opacity": {
+				"__TYPE__": "FieldContent",
+				"value": "strong",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

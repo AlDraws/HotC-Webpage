@@ -1,0 +1,110 @@
+{
+    "format": "custom",
+    "id": "lore_entry",
+    "label": "lore_entry",
+    "repeatable": true,
+    "status": true,
+    "json": {
+        "Main": {
+            "title": {
+                "type": "Text",
+                "config": {
+                    "label": "title",
+                    "placeholder": ""
+                }
+            },
+            "uid": {
+                "type": "UID",
+                "config": {
+                    "label": "UID"
+                }
+            },
+            "cover": {
+                "type": "Image",
+                "config": {
+                    "label": "cover",
+                    "constraint": {
+                        "width": 1200,
+                        "height": 630
+                    },
+                    "thumbnails": []
+                }
+            },
+            "category": {
+                "type": "Select",
+                "config": {
+                    "label": "category",
+                    "placeholder": "",
+                    "options": ["Locations", "Factions", "Tech", "Creatures", "History", "Culture", "Systems"]
+                }
+            },
+            "short_intro": {
+                "type": "StructuredText",
+                "config": {
+                    "label": "short_intro",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph"
+                }
+            },
+            "slices": {
+                "type": "Slices",
+                "fieldset": "Slice Zone",
+                "config": {
+                    "choices": {
+                        "text_with_image": {
+                            "type": "SharedSlice"
+                        },
+                        "callout": {
+                            "type": "SharedSlice"
+                        },
+                        "quote": {
+                            "type": "SharedSlice"
+                        },
+                        "image_full": {
+                            "type": "SharedSlice"
+                        },
+                        "gallery": {
+                            "type": "SharedSlice"
+                        }
+                    }
+                }
+            }
+        },
+        "SEO": {
+            "meta_title": {
+                "type": "Text",
+                "config": {
+                    "label": "meta_title",
+                    "placeholder": ""
+                }
+            },
+            "meta_description": {
+                "type": "StructuredText",
+                "config": {
+                    "label": "meta_description",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+            },
+            "og_image_override": {
+                "type": "Image",
+                "config": {
+                    "label": "og_image_override",
+                    "constraint": {},
+                    "thumbnails": []
+                }
+            },
+            "noindex": {
+                "type": "Boolean",
+                "config": {
+                    "label": "noindex",
+                    "placeholder_false": "false",
+                    "placeholder_true": "true",
+                    "default_value": false
+                }
+            }
+        }
+    }
+}

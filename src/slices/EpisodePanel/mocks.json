@@ -1,0 +1,104 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1587840171670-8b850147754e",
+					"width": 4480,
+					"height": 4480
+				},
+				"url": "https://images.unsplash.com/photo-1587840171670-8b850147754e?rect=0%2C0%2C4480%2C4480&w=2000&h=2000",
+				"width": 2000,
+				"height": 2000,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "music",
+				"credits": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {}
+			},
+			"alt": {
+				"__TYPE__": "FieldContent",
+				"value": "supper",
+				"type": "Text"
+			},
+			"caption": {
+				"__TYPE__": "FieldContent",
+				"value": "night",
+				"type": "Text"
+			},
+			"semantic_break": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"anchor_label": {
+				"__TYPE__": "FieldContent",
+				"value": "understanding",
+				"type": "Text"
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "narrow",
+		"primary": {
+			"image": {
+				"__TYPE__": "ImageContent",
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1493119508027-2b584f234d6c",
+					"width": 3424,
+					"height": 3424
+				},
+				"url": "https://images.unsplash.com/photo-1493119508027-2b584f234d6c?rect=0%2C0%2C3424%2C3424&w=1200&h=1200",
+				"width": 1200,
+				"height": 1200,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "airplane",
+				"thumbnails": {}
+			},
+			"alt": {
+				"__TYPE__": "FieldContent",
+				"value": "excited",
+				"type": "Text"
+			},
+			"caption": {
+				"__TYPE__": "FieldContent",
+				"value": "fine",
+				"type": "Text"
+			},
+			"semantic_break": {
+				"__TYPE__": "BooleanContent",
+				"value": false
+			},
+			"anchor_label": {
+				"__TYPE__": "FieldContent",
+				"value": "single",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

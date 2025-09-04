@@ -1,0 +1,269 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"key_art": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1589321578146-4c1ba445cc88",
+					"width": 3168,
+					"height": 4752
+				},
+				"url": "https://images.unsplash.com/photo-1589321578146-4c1ba445cc88",
+				"width": 3168,
+				"height": 4752,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "pilot",
+				"credits": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {
+					"desktop": {
+						"origin": {
+							"id": "desktop",
+							"url": "https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab",
+							"width": 12288,
+							"height": 16384
+						},
+						"url": "https://images.unsplash.com/photo-1587613865763-4b8b0d19e8ab?rect=1%2C0%2C12286%2C16384&w=2000&h=2667",
+						"width": 2000,
+						"height": 2667,
+						"edit": {
+							"zoom": 1,
+							"crop": {
+								"x": 1,
+								"y": 0
+							},
+							"background": "transparent"
+						},
+						"alt": "lift",
+						"credits": null
+					},
+					"mobile": {
+						"origin": {
+							"id": "mobile",
+							"url": "https://images.unsplash.com/photo-1591012911207-0dbac31f37da",
+							"width": 4000,
+							"height": 4000
+						},
+						"url": "https://images.unsplash.com/photo-1591012911207-0dbac31f37da?rect=0%2C0%2C4000%2C4000&w=1000&h=1000",
+						"width": 1000,
+						"height": 1000,
+						"edit": {
+							"zoom": 1,
+							"crop": {
+								"x": 0,
+								"y": 0
+							},
+							"background": "transparent"
+						},
+						"alt": "company",
+						"credits": null
+					}
+				}
+			},
+			"overlay": {
+				"__TYPE__": "FieldContent",
+				"type": "Select",
+				"value": "none"
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Pitch"
+						}
+					}
+				]
+			},
+			"subtitle": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Sunt fugiat mollit consectetur aute laboris ipsum culpa ad ullamco esse deserunt culpa deserunt."
+						}
+					}
+				]
+			},
+			"cta_link": {
+				"__TYPE__": "RepeatableContent",
+				"type": "Link",
+				"value": [
+					{
+						"key": "630bb8c8-cbca-42df-94d4-e83e55153dc9",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "ExternalLink",
+							"url": "http://google.com",
+							"text": "death"
+						}
+					},
+					{
+						"key": "d629dc2a-b301-4971-983d-9ce8ec1919dd",
+						"__TYPE__": "LinkContent",
+						"value": {
+							"__TYPE__": "AnyLink",
+							"kind": "any",
+							"text": ""
+						}
+					}
+				]
+			},
+			"kicker": {
+				"__TYPE__": "FieldContent",
+				"value": "valuable",
+				"type": "Text"
+			},
+			"cta_label": {
+				"__TYPE__": "FieldContent",
+				"value": "chapter",
+				"type": "Text"
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "left",
+		"primary": {
+			"overlay": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"background_image": {
+				"origin": {
+					"id": "main",
+					"url": "https://images.unsplash.com/photo-1589652717521-10c0d092dea9",
+					"width": 4752,
+					"height": 3168
+				},
+				"url": "https://images.unsplash.com/photo-1589652717521-10c0d092dea9?rect=0%2C0%2C4752%2C3167&w=2000&h=1333",
+				"width": 2000,
+				"height": 1333,
+				"edit": {
+					"zoom": 1,
+					"crop": {
+						"x": 0,
+						"y": 0
+					},
+					"background": "transparent"
+				},
+				"alt": "forth",
+				"credits": null,
+				"__TYPE__": "ImageContent",
+				"thumbnails": {
+					"desktop": {
+						"origin": {
+							"id": "desktop",
+							"url": "https://images.unsplash.com/photo-1600861194802-a2b11076bc51",
+							"width": 2545,
+							"height": 2545
+						},
+						"url": "https://images.unsplash.com/photo-1600861194802-a2b11076bc51?rect=0%2C0%2C2545%2C2545&w=2000&h=2000",
+						"width": 2000,
+						"height": 2000,
+						"edit": {
+							"zoom": 1,
+							"crop": {
+								"x": 0,
+								"y": 0
+							},
+							"background": "transparent"
+						},
+						"alt": "hour",
+						"credits": null
+					},
+					"mobile": {
+						"origin": {
+							"id": "mobile",
+							"url": "https://images.unsplash.com/photo-1591012911207-0dbac31f37da",
+							"width": 4000,
+							"height": 4000
+						},
+						"url": "https://images.unsplash.com/photo-1591012911207-0dbac31f37da?rect=0%2C0%2C4000%2C4000&w=1000&h=1000",
+						"width": 1000,
+						"height": 1000,
+						"edit": {
+							"zoom": 1,
+							"crop": {
+								"x": 0,
+								"y": 0
+							},
+							"background": "transparent"
+						},
+						"alt": "earn",
+						"credits": null
+					}
+				}
+			},
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading1",
+						"content": {
+							"text": "Memory"
+						}
+					}
+				]
+			},
+			"subtitle": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Laborum est eiusmod nulla velit Lorem do dolore laborum pariatur duis occaecat sunt tempor."
+						}
+					}
+				]
+			},
+			"cta_link": {
+				"key": "9d56e6de-3b0c-4659-9bc5-a73f49d84770",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "FileLink",
+					"id": "mock_Media_link",
+					"kind": "file",
+					"name": "mock_name",
+					"url": "https://source.unsplash.com/daily",
+					"size": "0",
+					"text": "taken"
+				}
+			},
+			"align": {
+				"__TYPE__": "FieldContent",
+				"value": "left",
+				"type": "Select"
+			},
+			"kicker": {
+				"__TYPE__": "FieldContent",
+				"value": "largest",
+				"type": "Text"
+			},
+			"cta_label": {
+				"__TYPE__": "FieldContent",
+				"value": "sugar",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

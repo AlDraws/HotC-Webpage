@@ -1,0 +1,116 @@
+{
+  "id": "character_grid",
+  "type": "SharedSlice",
+  "name": "CharacterGrid",
+  "description": "CharacterGrid",
+  "variations": [
+    {
+      "id": "default",
+      "name": "manual",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "characters": {
+          "type": "Group",
+          "config": {
+            "label": "characters",
+            "repeat": true,
+            "fields": {
+              "character": {
+                "type": "Link",
+                "config": {
+                  "label": "character",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": [
+                    "character"
+                  ]
+                }
+              },
+              "override_role": {
+                "type": "Text",
+                "config": {
+                  "label": "override_role",
+                  "placeholder": ""
+                }
+              },
+              "overrride_portrait": {
+                "type": "Image",
+                "config": {
+                  "label": "overrride_portrait",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "auto",
+      "name": "auto",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "characters": {
+          "type": "Group",
+          "config": {
+            "label": "characters",
+            "repeat": true,
+            "fields": {
+              "character": {
+                "type": "Link",
+                "config": {
+                  "label": "character",
+                  "select": "document",
+                  "repeat": false,
+                  "customtypes": []
+                }
+              },
+              "override_role": {
+                "type": "Text",
+                "config": {
+                  "label": "override_role",
+                  "placeholder": ""
+                }
+              },
+              "overrride_portrait": {
+                "type": "Image",
+                "config": {
+                  "label": "overrride_portrait",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              }
+            }
+          }
+        },
+        "max_items": {
+          "type": "Number",
+          "config": {
+            "label": "max_items",
+            "placeholder": ""
+          }
+        },
+        "filter_role": {
+          "type": "Select",
+          "config": {
+            "label": "filter_role",
+            "placeholder": "",
+            "options": [
+              "1",
+              "2"
+            ]
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+    "format": "custom",
+    "id": "home",
+    "label": "home",
+    "repeatable": false,
+    "status": true,
+    "json": {
+        "Main": {
+            "title": {
+                "type": "Text",
+                "config": {
+                    "label": "title",
+                    "placeholder": ""
+                }
+            },
+            "hero_image": {
+                "type": "Image",
+                "config": {
+                    "label": "hero_image",
+                    "constraint": {},
+                    "thumbnails": []
+                }
+            },
+            "hero_kicker": {
+                "type": "Text",
+                "config": {
+                    "label": "hero_kicker",
+                    "placeholder": ""
+                }
+            },
+            "hero_cta": {
+                "type": "Group",
+                "config": {
+                    "label": "hero_cta",
+                    "repeat": true,
+                    "fields": {
+                        "label": {
+                            "type": "Text",
+                            "config": {
+                                "label": "label",
+                                "placeholder": ""
+                            }
+                        },
+                        "link": {
+                            "type": "Link",
+                            "config": {
+                                "label": "link",
+                                "placeholder": "",
+                                "select": null,
+                                "allowTargetBlank": true,
+                                "allowText": true,
+                                "repeat": false
+                            }
+                        }
+                    }
+                }
+            },
+            "featured_episodes": {
+                "type": "Group",
+                "config": {
+                    "label": "featured_episodes",
+                    "repeat": true,
+                    "fields": {
+                        "episode_ref": {
+                            "type": "Link",
+                            "config": {
+                                "label": "episode_ref",
+                                "select": "document",
+                                "repeat": false,
+                                "customtypes": ["episode"]
+                            }
+                        }
+                    }
+                }
+            },
+            "slices": {
+                "type": "Slices",
+                "fieldset": "Slice Zone",
+                "config": {
+                    "choices": {
+                        "text_with_image": {
+                            "type": "SharedSlice"
+                        },
+                        "quote": {
+                            "type": "SharedSlice"
+                        },
+                        "gallery": {
+                            "type": "SharedSlice"
+                        },
+                        "image_full": {
+                            "type": "SharedSlice"
+                        },
+                        "text": {
+                            "type": "SharedSlice"
+                        },
+                        "newsletter_embed": {
+                            "type": "SharedSlice"
+                        },
+                        "cta": {
+                            "type": "SharedSlice"
+                        },
+                        "feature_grid": {
+                            "type": "SharedSlice"
+                        },
+                        "hero_project": {
+                            "type": "SharedSlice"
+                        }
+                    }
+                }
+            }
+        },
+        "SEO": {
+            "meta_title": {
+                "type": "Text",
+                "config": {
+                    "label": "meta_title",
+                    "placeholder": ""
+                }
+            },
+            "meta_description": {
+                "type": "StructuredText",
+                "config": {
+                    "label": "meta_description",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+            },
+            "og_image_override": {
+                "type": "Image",
+                "config": {
+                    "label": "og_image_override",
+                    "constraint": {},
+                    "thumbnails": []
+                }
+            },
+            "noindex": {
+                "type": "Boolean",
+                "config": {
+                    "label": "noindex",
+                    "placeholder_false": "false",
+                    "placeholder_true": "true",
+                    "default_value": false
+                }
+            }
+        }
+    }
+}

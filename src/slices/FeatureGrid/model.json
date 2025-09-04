@@ -1,0 +1,152 @@
+{
+  "id": "feature_grid",
+  "type": "SharedSlice",
+  "name": "FeatureGrid",
+  "description": "FeatureGrid",
+  "variations": [
+    {
+      "id": "threeCols",
+      "name": "threeCols",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "intro": {
+          "type": "StructuredText",
+          "config": {
+            "label": "intro",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2,paragraph"
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "items",
+            "repeat": true,
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "title",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,list-item,o-list-item"
+                }
+              },
+              "eyebrow": {
+                "type": "Text",
+                "config": {
+                  "label": "eyebrow",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "theme": {
+          "type": "Select",
+          "config": {
+            "label": "theme",
+            "placeholder": "",
+            "options": [
+              "light",
+              "dark",
+              "brand"
+            ]
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "fourCols",
+      "name": "fourCols",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "intro": {
+          "type": "StructuredText",
+          "config": {
+            "label": "intro",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "heading2,paragraph"
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "items",
+            "repeat": true,
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "title": {
+                "type": "Text",
+                "config": {
+                  "label": "title",
+                  "placeholder": ""
+                }
+              },
+              "description": {
+                "type": "StructuredText",
+                "config": {
+                  "label": "description",
+                  "placeholder": "",
+                  "allowTargetBlank": true,
+                  "multi": "paragraph,list-item,o-list-item"
+                }
+              },
+              "eyebrow": {
+                "type": "Text",
+                "config": {
+                  "label": "eyebrow",
+                  "placeholder": ""
+                }
+              }
+            }
+          }
+        },
+        "theme": {
+          "type": "Select",
+          "config": {
+            "label": "theme",
+            "placeholder": "",
+            "options": [
+              "light",
+              "dark",
+              "brand"
+            ]
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -1,36 +1,65 @@
 {
-  "id": "navigation",
-  "label": "Navigation",
-  "format": "custom",
-  "repeatable": false,
-  "status": true,
-  "json": {
-    "Main": {
-      "links": {
-        "type": "Group",
-        "config": {
-          "label": "Links",
-          "fields": {
-            "label": {
-              "type": "StructuredText",
-              "config": {
-                "label": "Label",
-                "placeholder": "Optional - Label for the link",
-                "allowTargetBlank": false,
-                "single": "heading3"
-              }
+    "id": "navigation",
+    "label": "Navigation",
+    "format": "custom",
+    "repeatable": false,
+    "status": true,
+    "json": {
+        "Main": {
+            "primary_links": {
+                "type": "Group",
+                "config": {
+                    "label": "primary_links",
+                    "repeat": true,
+                    "fields": {
+                        "label": {
+                            "type": "StructuredText",
+                            "config": {
+                                "label": "label",
+                                "placeholder": "Optional - Label for the link",
+                                "allowTargetBlank": false,
+                                "single": "heading3"
+                            }
+                        },
+                        "link": {
+                            "type": "Link",
+                            "config": {
+                                "label": "link",
+                                "placeholder": "Link for navigation item",
+                                "select": null
+                            }
+                        }
+                    }
+                }
             },
-            "link": {
-              "type": "Link",
-              "config": {
-                "label": "Link",
-                "placeholder": "Link for navigation item",
-                "select": null
-              }
+            "secondary_links": {
+                "type": "Group",
+                "config": {
+                    "label": "secondary_links",
+                    "repeat": true,
+                    "fields": {
+                        "label": {
+                            "type": "Text",
+                            "config": {
+                                "label": "label",
+                                "placeholder": ""
+                            }
+                        },
+                        "link": {
+                            "type": "Link",
+                            "config": {
+                                "label": "link",
+                                "placeholder": "",
+                                "select": null,
+                                "allowTargetBlank": true,
+                                "allowText": true,
+                                "repeat": false
+                            }
+                        }
+                    }
+                }
             }
-          }
-        }
-      }
+        },
+        "SEO": {}
     }
-  }
 }

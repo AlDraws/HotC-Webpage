@@ -1,0 +1,111 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "traffic",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Nostrud tempor qui culpa aliquip in. Reprehenderit nulla labore tempor proident laborum sunt sint fugiat et sit commodo commodo velit."
+						}
+					}
+				]
+			},
+			"icon": {
+				"__TYPE__": "FieldContent",
+				"value": "star",
+				"type": "Select"
+			},
+			"emphasis": {
+				"__TYPE__": "FieldContent",
+				"value": "high",
+				"type": "Select"
+			}
+		},
+		"items": []
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "warning",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "seven",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Tempor aute non nostrud consequat nulla tempor nulla id duis labore. Duis proident ea aliquip enim. Labore anim consequat adipisicing eiusmod pariatur ullamco sint."
+						}
+					}
+				]
+			},
+			"icon": {
+				"__TYPE__": "FieldContent",
+				"value": "none",
+				"type": "Select"
+			},
+			"emphasis": {
+				"__TYPE__": "FieldContent",
+				"value": "low",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "lore",
+		"primary": {
+			"title": {
+				"__TYPE__": "FieldContent",
+				"value": "jungle",
+				"type": "Text"
+			},
+			"body": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Nulla veniam sit ut sit ad velit eiusmod sunt quis occaecat laborum est. Fugiat fugiat consectetur veniam laborum deserunt in occaecat ad nisi ex enim et dolore labore. Amet deserunt enim aliquip culpa."
+						}
+					}
+				]
+			},
+			"icon": {
+				"__TYPE__": "FieldContent",
+				"value": "info",
+				"type": "Select"
+			},
+			"emphasis": {
+				"__TYPE__": "FieldContent",
+				"value": "high",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

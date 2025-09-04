@@ -1,20 +1,194 @@
 {
-  "id": "settings",
-  "label": "Settings",
-  "format": "custom",
-  "repeatable": false,
-  "status": true,
-  "json": {
-    "Main": {
-      "siteTitle": {
-        "type": "StructuredText",
-        "config": {
-          "label": "Site Title",
-          "placeholder": "Title of the site",
-          "allowTargetBlank": false,
-          "single": "heading1"
+    "id": "settings",
+    "label": "Settings",
+    "format": "custom",
+    "repeatable": false,
+    "status": true,
+    "json": {
+        "Main": {
+            "siteTitle": {
+                "type": "StructuredText",
+                "config": {
+                    "label": "Site Title",
+                    "placeholder": "Title of the site",
+                    "allowTargetBlank": false,
+                    "single": "heading1"
+                }
+            },
+            "logo": {
+                "type": "Image",
+                "config": {
+                    "label": "logo",
+                    "constraint": {},
+                    "thumbnails": []
+                }
+            },
+            "og_default": {
+                "type": "Image",
+                "config": {
+                    "label": "og_default",
+                    "constraint": {
+                        "width": 1200,
+                        "height": 630
+                    },
+                    "thumbnails": []
+                }
+            },
+            "footer_text": {
+                "type": "StructuredText",
+                "config": {
+                    "label": "footer_text",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph"
+                }
+            },
+            "social_links": {
+                "type": "Group",
+                "config": {
+                    "label": "social_links",
+                    "repeat": true,
+                    "fields": {
+                        "label": {
+                            "type": "Text",
+                            "config": {
+                                "label": "label",
+                                "placeholder": ""
+                            }
+                        },
+                        "url": {
+                            "type": "Link",
+                            "config": {
+                                "label": "url",
+                                "placeholder": "",
+                                "select": null,
+                                "allowTargetBlank": true,
+                                "allowText": true,
+                                "repeat": false
+                            }
+                        },
+                        "icon_key": {
+                            "type": "Select",
+                            "config": {
+                                "label": "icon_key",
+                                "placeholder": "",
+                                "options": [
+                                    "X",
+                                    "instagram",
+                                    "tumblr",
+                                    "webtoon",
+                                    "tapas",
+                                    "youtube",
+                                    "tiktok",
+                                    "discord",
+                                    "github",
+                                    "other"
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "store_links": {
+                "type": "Group",
+                "config": {
+                    "label": "store_links",
+                    "repeat": true,
+                    "fields": {
+                        "label": {
+                            "type": "Text",
+                            "config": {
+                                "label": "label",
+                                "placeholder": ""
+                            }
+                        },
+                        "url": {
+                            "type": "Link",
+                            "config": {
+                                "label": "url",
+                                "placeholder": "",
+                                "select": null,
+                                "allowTargetBlank": true,
+                                "allowText": true,
+                                "repeat": false
+                            }
+                        }
+                    }
+                }
+            },
+            "newsletter": {
+                "type": "Group",
+                "config": {
+                    "label": "newsletter",
+                    "repeat": true,
+                    "fields": {
+                        "provider": {
+                            "type": "Select",
+                            "config": {
+                                "label": "provider",
+                                "placeholder": "",
+                                "options": ["Beehiiv", "Mailchimp", "Buttondown", "Netlify"]
+                            }
+                        },
+                        "embed": {
+                            "type": "Text",
+                            "config": {
+                                "label": "embed",
+                                "placeholder": ""
+                            }
+                        },
+                        "url": {
+                            "type": "Text",
+                            "config": {
+                                "label": "url",
+                                "placeholder": ""
+                            }
+                        },
+                        "cta_label": {
+                            "type": "Text",
+                            "config": {
+                                "label": "cta_label",
+                                "placeholder": ""
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "SEO": {
+            "meta_title": {
+                "type": "Text",
+                "config": {
+                    "label": "meta_title",
+                    "placeholder": ""
+                }
+            },
+            "meta_description": {
+                "type": "StructuredText",
+                "config": {
+                    "label": "meta_description",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+            },
+            "og_image_override": {
+                "type": "Image",
+                "config": {
+                    "label": "og_image_override",
+                    "constraint": {},
+                    "thumbnails": []
+                }
+            },
+            "noindex": {
+                "type": "Boolean",
+                "config": {
+                    "label": "noindex",
+                    "placeholder_false": "false",
+                    "placeholder_true": "true",
+                    "default_value": false
+                }
+            }
         }
-      }
     }
-  }
 }

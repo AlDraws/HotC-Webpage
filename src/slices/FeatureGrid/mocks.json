@@ -1,0 +1,190 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "threeCols",
+		"primary": {
+			"intro": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Minim amet aliquip proident sit pariatur laborum reprehenderit duis elit amet adipisicing dolor adipisicing. Id qui sunt deserunt velit aliquip sunt officia labore eu."
+						}
+					}
+				]
+			},
+			"items": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1591012911207-0dbac31f37da",
+										"width": 4000,
+										"height": 4000
+									},
+									"url": "https://images.unsplash.com/photo-1591012911207-0dbac31f37da",
+									"width": 4000,
+									"height": 4000,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "window",
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Enim voluptate irure incididunt. Pariatur duis consectetur reprehenderit ex. Nisi et consequat est occaecat incididunt ut id duis laborum nisi anim."
+											}
+										}
+									]
+								}
+							],
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "steady",
+									"type": "Text"
+								}
+							],
+							[
+								"eyebrow",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "scale",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"theme": {
+				"__TYPE__": "FieldContent",
+				"value": "light",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "fourCols",
+		"primary": {
+			"intro": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Eiusmod pariatur aute adipisicing esse labore nostrud fugiat incididunt veniam laborum culpa laboris reprehenderit. Cillum laboris do minim dolore incididunt amet ea proident sit dolor in laborum. Labore incididunt cupidatat deserunt mollit."
+						}
+					}
+				]
+			},
+			"items": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"image",
+								{
+									"origin": {
+										"id": "main",
+										"url": "https://images.unsplash.com/photo-1606248897732-2c5ffe759c04",
+										"width": 4000,
+										"height": 4000
+									},
+									"url": "https://images.unsplash.com/photo-1606248897732-2c5ffe759c04",
+									"width": 4000,
+									"height": 4000,
+									"edit": {
+										"zoom": 1,
+										"crop": {
+											"x": 0,
+											"y": 0
+										},
+										"background": "transparent"
+									},
+									"alt": "relationship",
+									"credits": null,
+									"__TYPE__": "ImageContent",
+									"thumbnails": {}
+								}
+							],
+							[
+								"title",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "having",
+									"type": "Text"
+								}
+							],
+							[
+								"description",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Ipsum qui quis qui ea do proident veniam. Non sit ullamco aute esse non nulla commodo."
+											}
+										}
+									]
+								}
+							],
+							[
+								"eyebrow",
+								{
+									"__TYPE__": "FieldContent",
+									"value": "divide",
+									"type": "Text"
+								}
+							]
+						]
+					}
+				]
+			},
+			"theme": {
+				"__TYPE__": "FieldContent",
+				"value": "brand",
+				"type": "Select"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

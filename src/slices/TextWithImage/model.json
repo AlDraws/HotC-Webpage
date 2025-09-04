@@ -6,18 +6,25 @@
   "variations": [
     {
       "id": "default",
-      "name": "Default",
+      "name": "imageRight",
       "docURL": "...",
       "version": "sktwi1xtmkfgx8626",
       "description": "TextWithImage",
       "primary": {
-        "text": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "title",
+            "placeholder": ""
+          }
+        },
+        "body": {
           "type": "StructuredText",
           "config": {
-            "label": "Text",
+            "label": "body",
             "placeholder": "",
             "allowTargetBlank": true,
-            "multi": "paragraph,heading1,heading2,heading3,strong,em,hyperlink,list-item,o-list-item"
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
           }
         },
         "image": {
@@ -29,6 +36,42 @@
               "height": 1200
             },
             "thumbnails": []
+          }
+        },
+        "caption": {
+          "type": "Text",
+          "config": {
+            "label": "caption",
+            "placeholder": ""
+          }
+        },
+        "button_label": {
+          "type": "Text",
+          "config": {
+            "label": "button_label",
+            "placeholder": ""
+          }
+        },
+        "button_link": {
+          "type": "Link",
+          "config": {
+            "label": "button_link",
+            "placeholder": "",
+            "select": "media",
+            "allowText": true
+          }
+        },
+        "tone": {
+          "type": "Select",
+          "config": {
+            "label": "tone",
+            "placeholder": "",
+            "options": [
+              "default",
+              "highlight",
+              "subtle"
+            ],
+            "default_value": "default"
           }
         }
       },
@@ -72,6 +115,80 @@
             "label": "Image",
             "constraint": {},
             "thumbnails": []
+          }
+        }
+      },
+      "items": {},
+      "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+    },
+    {
+      "id": "imageLeft",
+      "name": "imageLeft",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "TextWithImage",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "title",
+            "placeholder": ""
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {
+              "width": 1000,
+              "height": 1200
+            },
+            "thumbnails": []
+          }
+        },
+        "caption": {
+          "type": "Text",
+          "config": {
+            "label": "caption",
+            "placeholder": ""
+          }
+        },
+        "button_label": {
+          "type": "Text",
+          "config": {
+            "label": "button_label",
+            "placeholder": ""
+          }
+        },
+        "button_link": {
+          "type": "Link",
+          "config": {
+            "label": "button_link",
+            "placeholder": "",
+            "select": "media",
+            "allowText": true
+          }
+        },
+        "tone": {
+          "type": "Select",
+          "config": {
+            "label": "tone",
+            "placeholder": "",
+            "options": [
+              "default",
+              "highlight",
+              "subtle"
+            ],
+            "default_value": "default"
           }
         }
       },

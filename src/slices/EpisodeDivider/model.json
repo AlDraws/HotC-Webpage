@@ -1,0 +1,116 @@
+{
+  "id": "episode_divider",
+  "type": "SharedSlice",
+  "name": "EpisodeDivider",
+  "description": "EpisodeDivider",
+  "variations": [
+    {
+      "id": "default",
+      "name": "space",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "size": {
+          "type": "Select",
+          "config": {
+            "label": "size",
+            "placeholder": "",
+            "options": [
+              "xs",
+              "sm",
+              "md",
+              "lg"
+            ]
+          }
+        },
+        "opacity": {
+          "type": "Select",
+          "config": {
+            "label": "opacity",
+            "placeholder": "",
+            "options": [
+              "subtle",
+              "medium",
+              "strong"
+            ]
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "line",
+      "name": "line",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "size": {
+          "type": "Select",
+          "config": {
+            "label": "size",
+            "placeholder": "",
+            "options": [
+              "xs",
+              "sm",
+              "md",
+              "lg"
+            ]
+          }
+        },
+        "opacity": {
+          "type": "Select",
+          "config": {
+            "label": "opacity",
+            "placeholder": "",
+            "options": [
+              "subtle",
+              "medium",
+              "strong"
+            ]
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "flourish",
+      "name": "flourish",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "size": {
+          "type": "Select",
+          "config": {
+            "label": "size",
+            "placeholder": "",
+            "options": [
+              "xs",
+              "sm",
+              "md",
+              "lg"
+            ]
+          }
+        },
+        "opacity": {
+          "type": "Select",
+          "config": {
+            "label": "opacity",
+            "placeholder": "",
+            "options": [
+              "subtle",
+              "medium",
+              "strong"
+            ]
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

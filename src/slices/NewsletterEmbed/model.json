@@ -1,0 +1,111 @@
+{
+  "id": "newsletter_embed",
+  "type": "SharedSlice",
+  "name": "NewsletterEmbed",
+  "description": "NewsletterEmbed",
+  "variations": [
+    {
+      "id": "default",
+      "name": "providerUrl",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "title",
+            "placeholder": ""
+          }
+        },
+        "copy": {
+          "type": "StructuredText",
+          "config": {
+            "label": "copy",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph"
+          }
+        },
+        "provider": {
+          "type": "Select",
+          "config": {
+            "label": "provider",
+            "placeholder": "",
+            "options": [
+              "Beehiiv",
+              "Mailchimp",
+              "Buttondown",
+              "Netlify"
+            ]
+          }
+        },
+        "legal_note": {
+          "type": "Text",
+          "config": {
+            "label": "legal_note",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "rawEmbed",
+      "name": "rawEmbed",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "title",
+            "placeholder": ""
+          }
+        },
+        "copy": {
+          "type": "StructuredText",
+          "config": {
+            "label": "copy",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph"
+          }
+        },
+        "provider": {
+          "type": "Select",
+          "config": {
+            "label": "provider",
+            "placeholder": "",
+            "options": [
+              "Beehiiv",
+              "Mailchimp",
+              "Buttondown",
+              "Netlify"
+            ]
+          }
+        },
+        "legal_note": {
+          "type": "Text",
+          "config": {
+            "label": "legal_note",
+            "placeholder": ""
+          }
+        },
+        "embed_raw": {
+          "type": "StructuredText",
+          "config": {
+            "label": "embed_raw",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

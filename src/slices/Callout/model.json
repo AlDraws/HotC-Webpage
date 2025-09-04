@@ -1,0 +1,173 @@
+{
+  "id": "callout",
+  "type": "SharedSlice",
+  "name": "Callout",
+  "description": "Callout",
+  "variations": [
+    {
+      "id": "default",
+      "name": "info",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "title",
+            "placeholder": ""
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,o-list-item"
+          }
+        },
+        "icon": {
+          "type": "Select",
+          "config": {
+            "label": "icon",
+            "placeholder": "",
+            "options": [
+              "none",
+              "info",
+              "warning",
+              "star",
+              "cog",
+              "map"
+            ],
+            "default_value": "none"
+          }
+        },
+        "emphasis": {
+          "type": "Select",
+          "config": {
+            "label": "emphasis",
+            "placeholder": "",
+            "options": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "warning",
+      "name": "warning",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "title",
+            "placeholder": ""
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,o-list-item"
+          }
+        },
+        "icon": {
+          "type": "Select",
+          "config": {
+            "label": "icon",
+            "placeholder": "",
+            "options": [
+              "none",
+              "info",
+              "warning",
+              "star",
+              "cog",
+              "map"
+            ],
+            "default_value": "none"
+          }
+        },
+        "emphasis": {
+          "type": "Select",
+          "config": {
+            "label": "emphasis",
+            "placeholder": "",
+            "options": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "lore",
+      "name": "lore",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "title",
+            "placeholder": ""
+          }
+        },
+        "body": {
+          "type": "StructuredText",
+          "config": {
+            "label": "body",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,o-list-item"
+          }
+        },
+        "icon": {
+          "type": "Select",
+          "config": {
+            "label": "icon",
+            "placeholder": "",
+            "options": [
+              "none",
+              "info",
+              "warning",
+              "star",
+              "cog",
+              "map"
+            ],
+            "default_value": "none"
+          }
+        },
+        "emphasis": {
+          "type": "Select",
+          "config": {
+            "label": "emphasis",
+            "placeholder": "",
+            "options": [
+              "low",
+              "medium",
+              "high"
+            ]
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

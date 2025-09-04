@@ -19,6 +19,15 @@
             "allowTargetBlank": true,
             "multi": "paragraph,heading1,heading2,heading3,strong,em,hyperlink,list-item,o-list-item"
           }
+        },
+        "narrow": {
+          "type": "Boolean",
+          "config": {
+            "label": "narrow",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
+          }
         }
       },
       "items": {},
@@ -38,6 +47,15 @@
             "placeholder": "",
             "allowTargetBlank": true,
             "multi": "heading1,heading2,heading3,paragraph,em,strong,hyperlink,list-item,o-list-item"
+          }
+        },
+        "narrow": {
+          "type": "Boolean",
+          "config": {
+            "label": "narrow",
+            "placeholder_false": "false",
+            "placeholder_true": "true",
+            "default_value": false
           }
         }
       },

@@ -6,7 +6,7 @@
   "variations": [
     {
       "id": "default",
-      "name": "Default",
+      "name": "pullquote",
       "docURL": "...",
       "version": "sktwi1xtmkfgx8626",
       "description": "Quote",
@@ -20,11 +20,84 @@
             "single": "strong,em,heading3"
           }
         },
-        "source": {
+        "author": {
           "type": "Text",
           "config": {
-            "label": "Source",
+            "label": "author",
             "placeholder": ""
+          }
+        },
+        "source_link": {
+          "type": "Link",
+          "config": {
+            "label": "source_link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "accent": {
+          "type": "Select",
+          "config": {
+            "label": "accent",
+            "placeholder": "",
+            "options": [
+              "none",
+              "leftBar",
+              "largeMarks"
+            ]
+          }
+        }
+      },
+      "items": {},
+      "imageUrl": "https://images.prismic.io/slice-machine/621a5ec4-0387-4bc5-9860-2dd46cbc07cd_default_ss.png?auto=compress,format"
+    },
+    {
+      "id": "block",
+      "name": "block",
+      "docURL": "...",
+      "version": "sktwi1xtmkfgx8626",
+      "description": "Quote",
+      "primary": {
+        "quote": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Quote",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "single": "strong,em,heading3"
+          }
+        },
+        "author": {
+          "type": "Text",
+          "config": {
+            "label": "author",
+            "placeholder": ""
+          }
+        },
+        "source_link": {
+          "type": "Link",
+          "config": {
+            "label": "source_link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true,
+            "allowText": true,
+            "repeat": false
+          }
+        },
+        "accent": {
+          "type": "Select",
+          "config": {
+            "label": "accent",
+            "placeholder": "",
+            "options": [
+              "none",
+              "leftBar",
+              "largeMarks"
+            ]
           }
         }
       },
