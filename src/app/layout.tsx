@@ -111,11 +111,11 @@ async function Header() {
         </PrismicNextLink>
 
         <nav>
-          <ul className="flex flex-wrap gap-2 md:gap-10">
+          <ul className="flex flex-wrap gap-1 md:gap-10">
             {links.map((item, i) => (
               <li
                 key={`nav-${i}`}
-                className="font-regular tracking-tight text-slate-400"
+                className="font-regular tracking-tight text-slate-400 text-xs"
               >
                 <PrismicNextLink field={item.link} className="flex items-center gap-2">
                   {/* Icono a la izquierda si existe y no es 'right' */}
@@ -135,7 +135,7 @@ async function Header() {
                   {hasNavIcon(item) && isFilled.image((item as any).icon_image) && (item as any).icon_position === "right" && (
                     <PrismicNextImage
                       field={(item as any).icon_image}
-                      className="h-8 w-auto"
+                      className="h-6 w-auto"
                       fallbackAlt=""
                       priority
                     />
