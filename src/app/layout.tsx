@@ -4,8 +4,6 @@ import { Inter } from "next/font/google";
 import { asText } from "@prismicio/client";
 import { PrismicText } from "@prismicio/react";
 import { PrismicNextLink, PrismicPreview } from "@prismicio/next";
-import { PrismicPreview } from "@prismicio/next";
-import { repositoryName } from "@/prismicio";
 
 import { createClient, repositoryName } from "@/prismicio";
 import { Bounded } from "@/components/Bounded";
@@ -29,17 +27,7 @@ export default async function RootLayout({
     </html>
   );
 }
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="es">
-      <body>
-        {children}
-        {/* Carga la Prismic Toolbar para previews */}
-        <PrismicPreview repositoryName={repositoryName} />
-      </body>
-    </html>
-  );
-}
+
 async function Header() {
   const client = createClient();
   const settings = await client.getSingle("settings");
