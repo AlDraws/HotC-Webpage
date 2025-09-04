@@ -852,25 +852,50 @@ export type LoreEntryDocument<Lang extends string = string> = prismic.PrismicDoc
 >;
 
 /**
- * Item in *Navigation → links*
+ * Item in *Navigation → primary_links*
  */
-export interface NavigationDocumentDataLinksItem {
+export interface NavigationDocumentDataPrimaryLinksItem {
     /**
-     * label field in *Navigation → links*
+     * label field in *Navigation → primary_links*
      *
      * - **Field Type**: Rich Text
      * - **Placeholder**: Optional - Label for the link
-     * - **API ID Path**: navigation.links[].label
+     * - **API ID Path**: navigation.primary_links[].label
      * - **Documentation**: https://prismic.io/docs/fields/rich-text
      */
     label: prismic.RichTextField;
 
     /**
-     * link field in *Navigation → links*
+     * link field in *Navigation → primary_links*
      *
      * - **Field Type**: Link
      * - **Placeholder**: Link for navigation item
-     * - **API ID Path**: navigation.links[].link
+     * - **API ID Path**: navigation.primary_links[].link
+     * - **Documentation**: https://prismic.io/docs/fields/link
+     */
+    link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+}
+
+/**
+ * Item in *Navigation → secondary_links*
+ */
+export interface NavigationDocumentDataSecondaryLinksItem {
+    /**
+     * label field in *Navigation → secondary_links*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: navigation.secondary_links[].label
+     * - **Documentation**: https://prismic.io/docs/fields/rich-text
+     */
+    label: prismic.RichTextField;
+
+    /**
+     * link field in *Navigation → secondary_links*
+     *
+     * - **Field Type**: Link
+     * - **Placeholder**: *None*
+     * - **API ID Path**: navigation.secondary_links[].link
      * - **Documentation**: https://prismic.io/docs/fields/link
      */
     link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
@@ -881,15 +906,26 @@ export interface NavigationDocumentDataLinksItem {
  */
 interface NavigationDocumentData {
     /**
-     * links field in *Navigation*
+     * primary_links field in *Navigation*
      *
      * - **Field Type**: Group
      * - **Placeholder**: *None*
-     * - **API ID Path**: navigation.links[]
+     * - **API ID Path**: navigation.primary_links[]
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
      */
-    links: prismic.GroupField<Simplify<NavigationDocumentDataLinksItem>> /**
+    primary_links: prismic.GroupField<Simplify<NavigationDocumentDataPrimaryLinksItem>>;
+
+    /**
+     * secondary_links field in *Navigation*
+     *
+     * - **Field Type**: Group
+     * - **Placeholder**: *None*
+     * - **API ID Path**: navigation.secondary_links[]
+     * - **Tab**: Main
+     * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+     */
+    secondary_links: prismic.GroupField<Simplify<NavigationDocumentDataSecondaryLinksItem>> /**
      * meta_title field in *Navigation*
      *
      * - **Field Type**: Text
@@ -1033,6 +1069,17 @@ interface PageDocumentData {
     meta_image: prismic.ImageField<never>;
 
     /**
+     * og_image_override field in *Page*
+     *
+     * - **Field Type**: Image
+     * - **Placeholder**: *None*
+     * - **API ID Path**: page.og_image_override
+     * - **Tab**: SEO
+     * - **Documentation**: https://prismic.io/docs/fields/image
+     */
+    og_image_override: prismic.ImageField<never>;
+
+    /**
      * noindex field in *Page*
      *
      * - **Field Type**: Boolean
@@ -1172,15 +1219,15 @@ export interface SettingsDocumentDataNewsletterItem {
  */
 interface SettingsDocumentData {
     /**
-     * Site Title field in *Settings*
+     * site_title field in *Settings*
      *
      * - **Field Type**: Rich Text
-     * - **Placeholder**: Title of the site
-     * - **API ID Path**: settings.siteTitle
+     * - **Placeholder**: *None*
+     * - **API ID Path**: settings.site_title
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/fields/rich-text
      */
-    siteTitle: prismic.RichTextField;
+    site_title: prismic.RichTextField;
 
     /**
      * logo field in *Settings*
@@ -4339,7 +4386,8 @@ declare module '@prismicio/client' {
             LoreEntryDocumentDataSlicesSlice,
             NavigationDocument,
             NavigationDocumentData,
-            NavigationDocumentDataLinksItem,
+            NavigationDocumentDataPrimaryLinksItem,
+            NavigationDocumentDataSecondaryLinksItem,
             PageDocument,
             PageDocumentData,
             PageDocumentDataSlicesSlice,

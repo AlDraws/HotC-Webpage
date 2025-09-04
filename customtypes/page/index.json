@@ -94,6 +94,14 @@
                 "type": "Image",
                 "config": {
                     "label": "meta_image",
+                    "constraint": {},
+                    "thumbnails": []
+                }
+            },
+            "og_image_override": {
+                "type": "Image",
+                "config": {
+                    "label": "og_image_override",
                     "constraint": {
                         "width": 2400,
                         "height": 1260

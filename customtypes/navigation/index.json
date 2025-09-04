@@ -6,10 +6,10 @@
     "status": true,
     "json": {
         "Main": {
-            "links": {
+            "primary_links": {
                 "type": "Group",
                 "config": {
-                    "label": "links",
+                    "label": "primary_links",
                     "repeat": true,
                     "fields": {
                         "label": {
@@ -27,6 +27,35 @@
                                 "label": "link",
                                 "placeholder": "Link for navigation item",
                                 "select": null
+                            }
+                        }
+                    }
+                }
+            },
+            "secondary_links": {
+                "type": "Group",
+                "config": {
+                    "label": "secondary_links",
+                    "repeat": true,
+                    "fields": {
+                        "label": {
+                            "type": "StructuredText",
+                            "config": {
+                                "label": "label",
+                                "placeholder": "",
+                                "allowTargetBlank": true,
+                                "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                            }
+                        },
+                        "link": {
+                            "type": "Link",
+                            "config": {
+                                "label": "link",
+                                "placeholder": "",
+                                "select": null,
+                                "allowTargetBlank": true,
+                                "allowText": true,
+                                "repeat": false
                             }
                         }
                     }

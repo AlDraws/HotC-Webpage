@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import { Inter } from "next/font/google";
+import { PrismicText } from "@prismicio/react";
 import { PrismicNextLink, PrismicPreview } from "@prismicio/next";
 
 import { createClient, repositoryName } from "@/prismicio";
@@ -36,22 +37,34 @@ async function Header() {
   const secondary = navigation.data.secondary_links ?? [];
   const links = [...primary, ...secondary];
 
+  const siteTitle = settings.data.site_title;
+
   return (
     <Bounded as="header" yPadding="sm">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 leading-none">
         <PrismicNextLink href="/" className="text-xl font-semibold tracking-tight">
-          {settings.data.site_title || "Site"}
+          {/* site_title puede ser RichText o KeyText; maneja ambos */}
+          {Array.isArray(siteTitle) ? (
+            <PrismicText field={siteTitle} />
+          ) : (
+            siteTitle || "Site"
+          )}
         </PrismicNextLink>
 
         <nav>
           <ul className="flex flex-wrap gap-6 md:gap-10">
             {links.map((item, i) => (
               <li
-                key={`${item.label}-${i}`}
+                key={`nav-${i}`}
                 className="font-semibold tracking-tight text-slate-800"
               >
                 <PrismicNextLink field={item.link}>
-                  {item.label}
+                  {/* label puede ser RichText o KeyText según tu schema */}
+                  {Array.isArray(item.label) ? (
+                    <PrismicText field={item.label} />
+                  ) : (
+                    item.label
+                  )}
                 </PrismicNextLink>
               </li>
             ))}
