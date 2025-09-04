@@ -874,6 +874,47 @@ export interface NavigationDocumentDataPrimaryLinksItem {
      * - **Documentation**: https://prismic.io/docs/fields/link
      */
     link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+    /**
+     * icon_image field in *Navigation → primary_links*
+     *
+     * - **Field Type**: Image
+     * - **Placeholder**: *None*
+     * - **API ID Path**: navigation.primary_links[].icon_image
+     * - **Documentation**: https://prismic.io/docs/fields/image
+     */
+    icon_image: prismic.ImageField<never>;
+
+    /**
+     * icon_alt_override field in *Navigation → primary_links*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: navigation.primary_links[].icon_alt_override
+     * - **Documentation**: https://prismic.io/docs/fields/text
+     */
+    icon_alt_override: prismic.KeyTextField;
+
+    /**
+     * icon_position field in *Navigation → primary_links*
+     *
+     * - **Field Type**: Select
+     * - **Placeholder**: *None*
+     * - **API ID Path**: navigation.primary_links[].icon_position
+     * - **Documentation**: https://prismic.io/docs/fields/select
+     */
+    icon_position: prismic.SelectField<'left' | 'right'>;
+
+    /**
+     * hide_label field in *Navigation → primary_links*
+     *
+     * - **Field Type**: Boolean
+     * - **Placeholder**: *None*
+     * - **Default Value**: false
+     * - **API ID Path**: navigation.primary_links[].hide_label
+     * - **Documentation**: https://prismic.io/docs/fields/boolean
+     */
+    hide_label: prismic.BooleanField;
 }
 
 /**

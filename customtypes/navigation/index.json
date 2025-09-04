@@ -28,6 +28,38 @@
                                 "placeholder": "Link for navigation item",
                                 "select": null
                             }
+                        },
+                        "icon_image": {
+                            "type": "Image",
+                            "config": {
+                                "label": "icon_image",
+                                "constraint": {},
+                                "thumbnails": []
+                            }
+                        },
+                        "icon_alt_override": {
+                            "type": "Text",
+                            "config": {
+                                "label": "icon_alt_override",
+                                "placeholder": ""
+                            }
+                        },
+                        "icon_position": {
+                            "type": "Select",
+                            "config": {
+                                "label": "icon_position",
+                                "placeholder": "",
+                                "options": ["left", "right"]
+                            }
+                        },
+                        "hide_label": {
+                            "type": "Boolean",
+                            "config": {
+                                "label": "hide_label",
+                                "placeholder_false": "false",
+                                "placeholder_true": "true",
+                                "default_value": false
+                            }
                         }
                     }
                 }
