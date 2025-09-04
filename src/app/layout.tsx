@@ -74,7 +74,7 @@ async function Header() {
               {isFilled.image(brand.icon_image) && brand.icon_position !== "right" && (
                 <PrismicNextImage
                   field={brand.icon_image}
-                  className="h-12 w-auto"
+                  className="h-10 w-auto"
                   fallbackAlt=""
                   priority
                 />
@@ -85,7 +85,7 @@ async function Header() {
               {isFilled.image(brand.icon_image) && brand.icon_position === "right" && (
                 <PrismicNextImage
                   field={brand.icon_image}
-                  className="h-10 w-auto"
+                  className="h-8 w-auto"
                   fallbackAlt=""
                   priority
                 />
@@ -97,7 +97,7 @@ async function Header() {
               {isFilled.image(settings.data.logo) ? (
                 <PrismicNextImage
                   field={settings.data.logo}
-                  className="h-10 w-auto"
+                  className="h-8 w-auto"
                   fallbackAlt=""
                   priority
                 />
@@ -135,7 +135,7 @@ async function Header() {
                   {hasNavIcon(item) && isFilled.image((item as any).icon_image) && (item as any).icon_position === "right" && (
                     <PrismicNextImage
                       field={(item as any).icon_image}
-                      className="h-10 w-auto"
+                      className="h-8 w-auto"
                       fallbackAlt=""
                       priority
                     />
