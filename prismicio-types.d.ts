@@ -877,31 +877,6 @@ export interface NavigationDocumentDataLinksItem {
 }
 
 /**
- * Item in *Navigation → secondary_links*
- */
-export interface NavigationDocumentDataSecondaryLinksItem {
-    /**
-     * label field in *Navigation → secondary_links*
-     *
-     * - **Field Type**: Text
-     * - **Placeholder**: *None*
-     * - **API ID Path**: navigation.secondary_links[].label
-     * - **Documentation**: https://prismic.io/docs/fields/text
-     */
-    label: prismic.KeyTextField;
-
-    /**
-     * link field in *Navigation → secondary_links*
-     *
-     * - **Field Type**: Link
-     * - **Placeholder**: *None*
-     * - **API ID Path**: navigation.secondary_links[].link
-     * - **Documentation**: https://prismic.io/docs/fields/link
-     */
-    link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
-}
-
-/**
  * Content for Navigation documents
  */
 interface NavigationDocumentData {
@@ -914,18 +889,7 @@ interface NavigationDocumentData {
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
      */
-    links: prismic.GroupField<Simplify<NavigationDocumentDataLinksItem>>;
-
-    /**
-     * secondary_links field in *Navigation*
-     *
-     * - **Field Type**: Group
-     * - **Placeholder**: *None*
-     * - **API ID Path**: navigation.secondary_links[]
-     * - **Tab**: Main
-     * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
-     */
-    secondary_links: prismic.GroupField<Simplify<NavigationDocumentDataSecondaryLinksItem>> /**
+    links: prismic.GroupField<Simplify<NavigationDocumentDataLinksItem>> /**
      * meta_title field in *Navigation*
      *
      * - **Field Type**: Text
@@ -3889,14 +3853,14 @@ export interface QuoteSliceDefaultPrimary {
     quote: prismic.RichTextField;
 
     /**
-     * author field in *Quote → pullquote → Primary*
+     * source field in *Quote → pullquote → Primary*
      *
      * - **Field Type**: Text
      * - **Placeholder**: *None*
-     * - **API ID Path**: quote.default.primary.author
+     * - **API ID Path**: quote.default.primary.source
      * - **Documentation**: https://prismic.io/docs/fields/text
      */
-    author: prismic.KeyTextField;
+    source: prismic.KeyTextField;
 
     /**
      * source_link field in *Quote → pullquote → Primary*
@@ -3943,14 +3907,14 @@ export interface QuoteSliceBlockPrimary {
     quote: prismic.RichTextField;
 
     /**
-     * author field in *Quote → block → Primary*
+     * source field in *Quote → block → Primary*
      *
      * - **Field Type**: Text
      * - **Placeholder**: *None*
-     * - **API ID Path**: quote.block.primary.author
+     * - **API ID Path**: quote.block.primary.source
      * - **Documentation**: https://prismic.io/docs/fields/text
      */
-    author: prismic.KeyTextField;
+    source: prismic.KeyTextField;
 
     /**
      * source_link field in *Quote → block → Primary*
@@ -4089,14 +4053,14 @@ export type TextSlice = prismic.SharedSlice<'text', TextSliceVariation>;
  */
 export interface TextWithImageSliceDefaultPrimary {
     /**
-     * title field in *TextWithImage → imageRight → Primary*
+     * text field in *TextWithImage → imageRight → Primary*
      *
-     * - **Field Type**: Text
+     * - **Field Type**: Rich Text
      * - **Placeholder**: *None*
-     * - **API ID Path**: text_with_image.default.primary.title
-     * - **Documentation**: https://prismic.io/docs/fields/text
+     * - **API ID Path**: text_with_image.default.primary.text
+     * - **Documentation**: https://prismic.io/docs/fields/rich-text
      */
-    title: prismic.KeyTextField;
+    text: prismic.RichTextField;
 
     /**
      * body field in *TextWithImage → imageRight → Primary*
@@ -4236,14 +4200,14 @@ export type TextWithImageSliceWithButton = prismic.SharedSliceVariation<
  */
 export interface TextWithImageSliceImageLeftPrimary {
     /**
-     * title field in *TextWithImage → imageLeft → Primary*
+     * text field in *TextWithImage → imageLeft → Primary*
      *
-     * - **Field Type**: Text
+     * - **Field Type**: Rich Text
      * - **Placeholder**: *None*
-     * - **API ID Path**: text_with_image.imageLeft.primary.title
-     * - **Documentation**: https://prismic.io/docs/fields/text
+     * - **API ID Path**: text_with_image.imageLeft.primary.text
+     * - **Documentation**: https://prismic.io/docs/fields/rich-text
      */
-    title: prismic.KeyTextField;
+    text: prismic.RichTextField;
 
     /**
      * body field in *TextWithImage → imageLeft → Primary*
@@ -4376,7 +4340,6 @@ declare module '@prismicio/client' {
             NavigationDocument,
             NavigationDocumentData,
             NavigationDocumentDataLinksItem,
-            NavigationDocumentDataSecondaryLinksItem,
             PageDocument,
             PageDocumentData,
             PageDocumentDataSlicesSlice,

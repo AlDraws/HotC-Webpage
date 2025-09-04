@@ -31,33 +31,6 @@
                         }
                     }
                 }
-            },
-            "secondary_links": {
-                "type": "Group",
-                "config": {
-                    "label": "secondary_links",
-                    "repeat": true,
-                    "fields": {
-                        "label": {
-                            "type": "Text",
-                            "config": {
-                                "label": "label",
-                                "placeholder": ""
-                            }
-                        },
-                        "link": {
-                            "type": "Link",
-                            "config": {
-                                "label": "link",
-                                "placeholder": "",
-                                "select": null,
-                                "allowTargetBlank": true,
-                                "allowText": true,
-                                "repeat": false
-                            }
-                        }
-                    }
-                }
             }
         },
         "SEO": {

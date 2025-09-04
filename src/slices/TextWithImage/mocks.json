@@ -55,11 +55,6 @@
 				"value": "subtle",
 				"type": "Select"
 			},
-			"title": {
-				"__TYPE__": "FieldContent",
-				"value": "needs",
-				"type": "Text"
-			},
 			"caption": {
 				"__TYPE__": "FieldContent",
 				"value": "river",
@@ -69,6 +64,17 @@
 				"__TYPE__": "FieldContent",
 				"value": "walk",
 				"type": "Text"
+			},
+			"text": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Irure aliquip tempor irure id magna quis reprehenderit exercitation ea magna nisi laborum non laboris ut. Consequat Lorem elit qui fugiat ipsum deserunt deserunt magna esse aliqua."
+						}
+					}
+				]
 			}
 		},
 		"items": [
@@ -141,11 +147,6 @@
 		"__TYPE__": "SharedSliceContent",
 		"variation": "imageLeft",
 		"primary": {
-			"title": {
-				"__TYPE__": "FieldContent",
-				"value": "thou",
-				"type": "Text"
-			},
 			"body": {
 				"__TYPE__": "StructuredTextContent",
 				"value": [
@@ -207,6 +208,17 @@
 				"__TYPE__": "FieldContent",
 				"value": "default",
 				"type": "Select"
+			},
+			"text": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Do commodo reprehenderit officia mollit dolor quis nostrud nisi do. Ea reprehenderit mollit dolor commodo."
+						}
+					}
+				]
 			}
 		},
 		"items": [

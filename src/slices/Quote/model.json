@@ -20,10 +20,10 @@
             "single": "strong,em,heading3"
           }
         },
-        "author": {
+        "source": {
           "type": "Text",
           "config": {
-            "label": "author",
+            "label": "source",
             "placeholder": ""
           }
         },
@@ -70,10 +70,10 @@
             "single": "strong,em,heading3"
           }
         },
-        "author": {
+        "source": {
           "type": "Text",
           "config": {
-            "label": "author",
+            "label": "source",
             "placeholder": ""
           }
         },
