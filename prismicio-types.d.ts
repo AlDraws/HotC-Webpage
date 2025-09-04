@@ -208,15 +208,15 @@ interface CharacterDocumentData {
     meta_description: prismic.RichTextField;
 
     /**
-     * og_image_override field in *character*
+     * meta_image field in *character*
      *
      * - **Field Type**: Image
      * - **Placeholder**: *None*
-     * - **API ID Path**: character.og_image_override
+     * - **API ID Path**: character.meta_image
      * - **Tab**: SEO
      * - **Documentation**: https://prismic.io/docs/fields/image
      */
-    og_image_override: prismic.ImageField<never>;
+    meta_image: prismic.ImageField<never>;
 
     /**
      * noindex field in *character*
@@ -403,15 +403,15 @@ interface EpisodeDocumentData {
     meta_description: prismic.RichTextField;
 
     /**
-     * og_image_override field in *episode*
+     * meta_image field in *episode*
      *
      * - **Field Type**: Image
      * - **Placeholder**: *None*
-     * - **API ID Path**: episode.og_image_override
+     * - **API ID Path**: episode.meta_image
      * - **Tab**: SEO
      * - **Documentation**: https://prismic.io/docs/fields/image
      */
-    og_image_override: prismic.ImageField<never>;
+    meta_image: prismic.ImageField<never>;
 
     /**
      * noindex field in *episode*
@@ -513,15 +513,15 @@ interface EpisodesIndexDocumentData {
     meta_description: prismic.RichTextField;
 
     /**
-     * og_image_override field in *episodes_index*
+     * meta_image field in *episodes_index*
      *
      * - **Field Type**: Image
      * - **Placeholder**: *None*
-     * - **API ID Path**: episodes_index.og_image_override
+     * - **API ID Path**: episodes_index.meta_image
      * - **Tab**: SEO
      * - **Documentation**: https://prismic.io/docs/fields/image
      */
-    og_image_override: prismic.ImageField<never>;
+    meta_image: prismic.ImageField<never>;
 
     /**
      * noindex field in *episodes_index*
@@ -693,15 +693,15 @@ interface HomeDocumentData {
     meta_description: prismic.RichTextField;
 
     /**
-     * og_image_override field in *home*
+     * meta_image field in *home*
      *
      * - **Field Type**: Image
      * - **Placeholder**: *None*
-     * - **API ID Path**: home.og_image_override
+     * - **API ID Path**: home.meta_image
      * - **Tab**: SEO
      * - **Documentation**: https://prismic.io/docs/fields/image
      */
-    og_image_override: prismic.ImageField<never>;
+    meta_image: prismic.ImageField<never>;
 
     /**
      * noindex field in *home*
@@ -813,15 +813,15 @@ interface LoreEntryDocumentData {
     meta_description: prismic.RichTextField;
 
     /**
-     * og_image_override field in *lore_entry*
+     * meta_image field in *lore_entry*
      *
      * - **Field Type**: Image
      * - **Placeholder**: *None*
-     * - **API ID Path**: lore_entry.og_image_override
+     * - **API ID Path**: lore_entry.meta_image
      * - **Tab**: SEO
      * - **Documentation**: https://prismic.io/docs/fields/image
      */
-    og_image_override: prismic.ImageField<never>;
+    meta_image: prismic.ImageField<never>;
 
     /**
      * noindex field in *lore_entry*
@@ -852,25 +852,25 @@ export type LoreEntryDocument<Lang extends string = string> = prismic.PrismicDoc
 >;
 
 /**
- * Item in *Navigation → primary_links*
+ * Item in *Navigation → links*
  */
-export interface NavigationDocumentDataPrimaryLinksItem {
+export interface NavigationDocumentDataLinksItem {
     /**
-     * label field in *Navigation → primary_links*
+     * label field in *Navigation → links*
      *
      * - **Field Type**: Rich Text
      * - **Placeholder**: Optional - Label for the link
-     * - **API ID Path**: navigation.primary_links[].label
+     * - **API ID Path**: navigation.links[].label
      * - **Documentation**: https://prismic.io/docs/fields/rich-text
      */
     label: prismic.RichTextField;
 
     /**
-     * link field in *Navigation → primary_links*
+     * link field in *Navigation → links*
      *
      * - **Field Type**: Link
      * - **Placeholder**: Link for navigation item
-     * - **API ID Path**: navigation.primary_links[].link
+     * - **API ID Path**: navigation.links[].link
      * - **Documentation**: https://prismic.io/docs/fields/link
      */
     link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
@@ -906,15 +906,15 @@ export interface NavigationDocumentDataSecondaryLinksItem {
  */
 interface NavigationDocumentData {
     /**
-     * primary_links field in *Navigation*
+     * links field in *Navigation*
      *
      * - **Field Type**: Group
      * - **Placeholder**: *None*
-     * - **API ID Path**: navigation.primary_links[]
+     * - **API ID Path**: navigation.links[]
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
      */
-    primary_links: prismic.GroupField<Simplify<NavigationDocumentDataPrimaryLinksItem>>;
+    links: prismic.GroupField<Simplify<NavigationDocumentDataLinksItem>>;
 
     /**
      * secondary_links field in *Navigation*
@@ -925,7 +925,50 @@ interface NavigationDocumentData {
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
      */
-    secondary_links: prismic.GroupField<Simplify<NavigationDocumentDataSecondaryLinksItem>>;
+    secondary_links: prismic.GroupField<Simplify<NavigationDocumentDataSecondaryLinksItem>> /**
+     * meta_title field in *Navigation*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: navigation.meta_title
+     * - **Tab**: SEO
+     * - **Documentation**: https://prismic.io/docs/fields/text
+     */;
+    meta_title: prismic.KeyTextField;
+
+    /**
+     * meta_description field in *Navigation*
+     *
+     * - **Field Type**: Rich Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: navigation.meta_description
+     * - **Tab**: SEO
+     * - **Documentation**: https://prismic.io/docs/fields/rich-text
+     */
+    meta_description: prismic.RichTextField;
+
+    /**
+     * meta_image field in *Navigation*
+     *
+     * - **Field Type**: Image
+     * - **Placeholder**: *None*
+     * - **API ID Path**: navigation.meta_image
+     * - **Tab**: SEO
+     * - **Documentation**: https://prismic.io/docs/fields/image
+     */
+    meta_image: prismic.ImageField<never>;
+
+    /**
+     * noindex field in *Navigation*
+     *
+     * - **Field Type**: Boolean
+     * - **Placeholder**: *None*
+     * - **Default Value**: false
+     * - **API ID Path**: navigation.noindex
+     * - **Tab**: SEO
+     * - **Documentation**: https://prismic.io/docs/fields/boolean
+     */
+    noindex: prismic.BooleanField;
 }
 
 /**
@@ -1015,15 +1058,15 @@ interface PageDocumentData {
     meta_description: prismic.KeyTextField;
 
     /**
-     * og_image_override field in *Page*
+     * meta_image field in *Page*
      *
      * - **Field Type**: Image
      * - **Placeholder**: *None*
-     * - **API ID Path**: page.og_image_override
+     * - **API ID Path**: page.meta_image
      * - **Tab**: SEO
      * - **Documentation**: https://prismic.io/docs/fields/image
      */
-    og_image_override: prismic.ImageField<never>;
+    meta_image: prismic.ImageField<never>;
 
     /**
      * noindex field in *Page*
@@ -1262,15 +1305,15 @@ interface SettingsDocumentData {
     meta_description: prismic.RichTextField;
 
     /**
-     * og_image_override field in *Settings*
+     * meta_image field in *Settings*
      *
      * - **Field Type**: Image
      * - **Placeholder**: *None*
-     * - **API ID Path**: settings.og_image_override
+     * - **API ID Path**: settings.meta_image
      * - **Tab**: SEO
      * - **Documentation**: https://prismic.io/docs/fields/image
      */
-    og_image_override: prismic.ImageField<never>;
+    meta_image: prismic.ImageField<never>;
 
     /**
      * noindex field in *Settings*
@@ -4332,7 +4375,7 @@ declare module '@prismicio/client' {
             LoreEntryDocumentDataSlicesSlice,
             NavigationDocument,
             NavigationDocumentData,
-            NavigationDocumentDataPrimaryLinksItem,
+            NavigationDocumentDataLinksItem,
             NavigationDocumentDataSecondaryLinksItem,
             PageDocument,
             PageDocumentData,

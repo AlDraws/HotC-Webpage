@@ -137,10 +137,10 @@
                     "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
                 }
             },
-            "og_image_override": {
+            "meta_image": {
                 "type": "Image",
                 "config": {
-                    "label": "og_image_override",
+                    "label": "meta_image",
                     "constraint": {},
                     "thumbnails": []
                 }

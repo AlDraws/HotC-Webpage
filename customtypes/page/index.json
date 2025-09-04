@@ -90,10 +90,10 @@
                     "placeholder": "A brief summary of the page"
                 }
             },
-            "og_image_override": {
+            "meta_image": {
                 "type": "Image",
                 "config": {
-                    "label": "og_image_override",
+                    "label": "meta_image",
                     "constraint": {
                         "width": 2400,
                         "height": 1260

@@ -6,10 +6,10 @@
     "status": true,
     "json": {
         "Main": {
-            "primary_links": {
+            "links": {
                 "type": "Group",
                 "config": {
-                    "label": "primary_links",
+                    "label": "links",
                     "repeat": true,
                     "fields": {
                         "label": {
@@ -60,6 +60,40 @@
                 }
             }
         },
-        "SEO": {}
+        "SEO": {
+            "meta_title": {
+                "type": "Text",
+                "config": {
+                    "label": "meta_title",
+                    "placeholder": ""
+                }
+            },
+            "meta_description": {
+                "type": "StructuredText",
+                "config": {
+                    "label": "meta_description",
+                    "placeholder": "",
+                    "allowTargetBlank": true,
+                    "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+                }
+            },
+            "meta_image": {
+                "type": "Image",
+                "config": {
+                    "label": "meta_image",
+                    "constraint": {},
+                    "thumbnails": []
+                }
+            },
+            "noindex": {
+                "type": "Boolean",
+                "config": {
+                    "label": "noindex",
+                    "placeholder_false": "false",
+                    "placeholder_true": "true",
+                    "default_value": false
+                }
+            }
+        }
     }
 }
