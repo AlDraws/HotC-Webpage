@@ -4,7 +4,10 @@ import { asText } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
+import type { Content } from "@prismicio/client";
 import { components } from "@/slices";
+import { Bounded } from "@/components/Bounded";
+import { Heading } from "@/components/Heading";
 
 type Params = { uid: string };
 
@@ -15,14 +18,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { uid } = await params;
   const client = createClient();
-  const page = await client.getByUID("page", uid).catch(() => notFound());
+  const page = await client.getByUID<Content.PageDocument>("page", uid).catch(() => notFound());
 
   return {
-    title: asText(page.data.title),
-    description: page.data.meta_description,
+    title: page.data.meta_title || asText(page.data.title) || undefined,
+    description: page.data.meta_description || undefined,
     openGraph: {
-      title: page.data.meta_title ?? undefined,
-      images: [{ url: page.data.meta_image.url ?? "" }],
+      title: page.data.meta_title || undefined,
+      images: page.data.meta_image?.url ? [{ url: page.data.meta_image.url }] : undefined,
     },
   };
 }
@@ -30,17 +33,22 @@ export async function generateMetadata({
 export default async function Page({ params }: { params: Promise<Params> }) {
   const { uid } = await params;
   const client = createClient();
-  const page = await client.getByUID("page", uid).catch(() => notFound());
+  const page = await client.getByUID<Content.PageDocument>("page", uid).catch(() => notFound());
 
-  return <SliceZone slices={page.data.slices} components={components} />;
+  return (
+    <>
+      {page.data.title?.length ? (
+        <Bounded yPadding="sm">
+          <Heading as="h1">{asText(page.data.title)}</Heading>
+        </Bounded>
+      ) : null}
+      <SliceZone slices={page.data.slices} components={components} />
+    </>
+  );
 }
 
 export async function generateStaticParams() {
   const client = createClient();
-
   const pages = await client.getAllByType("page");
-
-  return pages.map((page) => {
-    return { uid: page.uid };
-  });
+  return pages.map((page) => ({ uid: page.uid! }));
 }
