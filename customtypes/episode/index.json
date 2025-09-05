@@ -39,15 +39,9 @@
                     "label": "cover",
                     "constraint": {
                         "width": 1200,
-                        "height": 1200
+                        "height": ""
                     },
-                    "thumbnails": [
-                        {
-                            "name": "wide",
-                            "width": 1200,
-                            "height": 1600
-                        }
-                    ]
+                    "thumbnails": []
                 }
             },
             "summary": {

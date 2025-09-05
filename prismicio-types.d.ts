@@ -324,7 +324,7 @@ interface EpisodeDocumentData {
      * - **Tab**: Main
      * - **Documentation**: https://prismic.io/docs/fields/image
      */
-    cover: prismic.ImageField<'wide'>;
+    cover: prismic.ImageField<never>;
 
     /**
      * summary field in *episode*
