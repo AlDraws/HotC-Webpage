@@ -38,8 +38,8 @@
                 "config": {
                     "label": "cover",
                     "constraint": {
-                        "width": 1200,
-                        "height": ""
+                        "width": "",
+                        "height": null
                     },
                     "thumbnails": []
                 }
