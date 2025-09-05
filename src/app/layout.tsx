@@ -64,6 +64,28 @@ async function Header() {
     return typeof it === "object" && it !== null && "hide_label" in it && Boolean((it as any).hide_label);
   }
 
+  function normalizeUrl(url: unknown): string | null {
+    if (typeof url !== "string" || url.trim() === "") return null;
+    return /^https?:\/\//i.test(url) ? url : `https://${url}`;
+  }
+
+  function getNavLink(it: unknown): any | null {
+    if (typeof it !== "object" || it === null) return null;
+    const obj: any = it as any;
+    // Prefer the proper Prismic Link field if present
+    if (obj.link) return obj.link;
+    // Fallbacks in case the field was modeled with a different id
+    if (typeof obj.url === "string") {
+      const normalized = normalizeUrl(obj.url);
+      return normalized ? { link_type: "Web", url: normalized } : null;
+    }
+    if (typeof obj.href === "string") {
+      const normalized = normalizeUrl(obj.href);
+      return normalized ? { link_type: "Web", url: normalized } : null;
+    }
+    return null;
+  }
+
   return (
     <Bounded as="header" yPadding="sm">
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3 leading-none">
@@ -117,30 +139,45 @@ async function Header() {
                 key={`nav-${i}`}
                 className="font-regular tracking-tight text-slate-400 text-xs"
               >
-                <PrismicNextLink field={item.link} className="flex items-center gap-2">
-                  {/* Icono a la izquierda si existe y no es 'right' */}
-                  {hasNavIcon(item) && isFilled.image((item as any).icon_image) && (item as any).icon_position !== "right" && (
-                    <PrismicNextImage
-                      field={(item as any).icon_image}
-                      className="h-6 w-auto"
-                      fallbackAlt=""
-                      priority
-                    />
-                  )}
+                {(() => {
+                  const linkField = getNavLink(item);
+                  const Content = (
+                    <>
+                      {/* Icono a la izquierda si existe y no es 'right' */}
+                      {hasNavIcon(item) && isFilled.image((item as any).icon_image) && (item as any).icon_position !== "right" && (
+                        <PrismicNextImage
+                          field={(item as any).icon_image}
+                          className="h-6 w-auto"
+                          fallbackAlt=""
+                          priority
+                        />
+                      )}
 
-                  {/* Texto (si no está hide_label) */}
-                  {!isHideLabel(item) && renderLabel(item.label)}
+                      {/* Texto (si no está hide_label) */}
+                      {!isHideLabel(item) && renderLabel(item.label)}
 
-                  {/* Icono a la derecha si existe y la posición es 'right' */}
-                  {hasNavIcon(item) && isFilled.image((item as any).icon_image) && (item as any).icon_position === "right" && (
-                    <PrismicNextImage
-                      field={(item as any).icon_image}
-                      className="h-6 w-auto"
-                      fallbackAlt=""
-                      priority
-                    />
-                  )}
-                </PrismicNextLink>
+                      {/* Icono a la derecha si existe y la posición es 'right' */}
+                      {hasNavIcon(item) && isFilled.image((item as any).icon_image) && (item as any).icon_position === "right" && (
+                        <PrismicNextImage
+                          field={(item as any).icon_image}
+                          className="h-6 w-auto"
+                          fallbackAlt=""
+                          priority
+                        />
+                      )}
+                    </>
+                  );
+
+                  return linkField ? (
+                    <PrismicNextLink field={linkField} className="flex items-center gap-2">
+                      {Content}
+                    </PrismicNextLink>
+                  ) : (
+                    <span className="flex items-center gap-2 opacity-70 cursor-not-allowed">
+                      {Content}
+                    </span>
+                  );
+                })()}
               </li>
             ))}
           </ul>
