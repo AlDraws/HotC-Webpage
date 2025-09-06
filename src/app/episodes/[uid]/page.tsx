@@ -47,7 +47,14 @@ export default async function EpisodePage({ params }: { params: Promise<Params> 
         <Heading as="h1">{page.data.title}</Heading>
         {page.data.cover?.url ? (
           <div className="mt-6 overflow-hidden rounded-md">
-            <PrismicNextImage field={page.data.cover} className="h-auto w-full" fallbackAlt="" />
+            <PrismicNextImage
+              field={page.data.cover}
+              className="h-auto w-full"
+              sizes="100vw"
+              quality={100}
+              imgixParams={{ q: 100, auto: null }}
+              fallbackAlt=""
+            />
           </div>
         ) : null}
         {page.data.summary?.length ? (
