@@ -19,6 +19,7 @@ type HeroProps = SliceComponentProps<Content.HeroSlice>;
 
 const Hero: FC<HeroProps> = ({ slice }) => {
   const backgroundImage = slice.primary.backgroundImage;
+  const logo = (slice.primary as any).logo;
 
   return (
     <section className="relative bg-slate-900 text-white">
@@ -33,10 +34,16 @@ const Hero: FC<HeroProps> = ({ slice }) => {
       <Bounded yPadding="lg" className="relative">
         <div className="grid justify-items-center gap-8">
           <div className="max-w-2xl text-center">
-            <PrismicRichText
-              field={slice.primary.text}
-              components={components}
-            />
+            {isFilled.image(logo) ? (
+              <PrismicNextImage
+                field={logo}
+                className="mx-auto h-16 w-auto md:h-20"
+                fallbackAlt=""
+                priority
+              />
+            ) : (
+              <PrismicRichText field={slice.primary.text} components={components} />
+            )}
           </div>
           {isFilled.link(slice.primary.buttonLink) && (
             <PrismicNextLink
