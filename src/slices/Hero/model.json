@@ -20,6 +20,14 @@
             "multi": "paragraph,heading1,strong,em"
           }
         },
+        "logo": {
+          "type": "Image",
+          "config": {
+            "label": "logo",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
         "buttonLink": {
           "type": "Link",
           "config": {

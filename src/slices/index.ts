@@ -17,6 +17,7 @@ export const components = {
     image: dynamic(() => import('./Image')),
     image_cards: dynamic(() => import('./ImageCards')),
     image_full: dynamic(() => import('./ImageFull')),
+    image_ticker: dynamic(() => import('./ImageTicker')),
     lore_section: dynamic(() => import('./LoreSection')),
     newsletter_embed: dynamic(() => import('./NewsletterEmbed')),
     quote: dynamic(() => import('./Quote')),

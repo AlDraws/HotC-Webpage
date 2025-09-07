@@ -1,0 +1,101 @@
+{
+  "id": "image_ticker",
+  "type": "SharedSlice",
+  "name": "ImageTicker",
+  "description": "ImageTicker",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "bg_color": {
+          "type": "Color",
+          "config": {
+            "label": "bg_color",
+            "placeholder": ""
+          }
+        },
+        "speed_sec": {
+          "type": "Number",
+          "config": {
+            "label": "speed_sec",
+            "placeholder": ""
+          }
+        },
+        "direction": {
+          "type": "Select",
+          "config": {
+            "label": "direction",
+            "placeholder": "",
+            "options": [
+              "left",
+              "right"
+            ],
+            "default_value": "left"
+          }
+        },
+        "item_size": {
+          "type": "Select",
+          "config": {
+            "label": "item_size",
+            "placeholder": "",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ]
+          }
+        },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "items",
+            "repeat": true,
+            "fields": {
+              "image": {
+                "type": "Image",
+                "config": {
+                  "label": "image",
+                  "constraint": {},
+                  "thumbnails": []
+                }
+              },
+              "subtitle": {
+                "type": "Text",
+                "config": {
+                  "label": "subtitle",
+                  "placeholder": ""
+                }
+              },
+              "link": {
+                "type": "Link",
+                "config": {
+                  "label": "link",
+                  "placeholder": "",
+                  "select": null,
+                  "allowTargetBlank": true,
+                  "allowText": true,
+                  "repeat": false
+                }
+              },
+              "contain": {
+                "type": "Boolean",
+                "config": {
+                  "label": "contain",
+                  "placeholder_false": "false",
+                  "placeholder_true": "true",
+                  "default_value": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

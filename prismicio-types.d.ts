@@ -3125,6 +3125,16 @@ export interface HeroSliceDefaultPrimary {
     text: prismic.RichTextField;
 
     /**
+     * logo field in *Hero → Default → Primary*
+     *
+     * - **Field Type**: Image
+     * - **Placeholder**: *None*
+     * - **API ID Path**: hero.default.primary.logo
+     * - **Documentation**: https://prismic.io/docs/fields/image
+     */
+    logo: prismic.ImageField<never>;
+
+    /**
      * Button Link field in *Hero → Default → Primary*
      *
      * - **Field Type**: Link
@@ -3686,6 +3696,135 @@ type ImageFullSliceVariation = ImageFullSliceDefault | ImageFullSliceContained;
  * - **Documentation**: https://prismic.io/docs/slices
  */
 export type ImageFullSlice = prismic.SharedSlice<'image_full', ImageFullSliceVariation>;
+
+/**
+ * Item in *ImageTicker → Default → Primary → items*
+ */
+export interface ImageTickerSliceDefaultPrimaryItemsItem {
+    /**
+     * image field in *ImageTicker → Default → Primary → items*
+     *
+     * - **Field Type**: Image
+     * - **Placeholder**: *None*
+     * - **API ID Path**: image_ticker.default.primary.items[].image
+     * - **Documentation**: https://prismic.io/docs/fields/image
+     */
+    image: prismic.ImageField<never>;
+
+    /**
+     * subtitle field in *ImageTicker → Default → Primary → items*
+     *
+     * - **Field Type**: Text
+     * - **Placeholder**: *None*
+     * - **API ID Path**: image_ticker.default.primary.items[].subtitle
+     * - **Documentation**: https://prismic.io/docs/fields/text
+     */
+    subtitle: prismic.KeyTextField;
+
+    /**
+     * link field in *ImageTicker → Default → Primary → items*
+     *
+     * - **Field Type**: Link
+     * - **Placeholder**: *None*
+     * - **API ID Path**: image_ticker.default.primary.items[].link
+     * - **Documentation**: https://prismic.io/docs/fields/link
+     */
+    link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+    /**
+     * contain field in *ImageTicker → Default → Primary → items*
+     *
+     * - **Field Type**: Boolean
+     * - **Placeholder**: *None*
+     * - **Default Value**: false
+     * - **API ID Path**: image_ticker.default.primary.items[].contain
+     * - **Documentation**: https://prismic.io/docs/fields/boolean
+     */
+    contain: prismic.BooleanField;
+}
+
+/**
+ * Primary content in *ImageTicker → Default → Primary*
+ */
+export interface ImageTickerSliceDefaultPrimary {
+    /**
+     * bg_color field in *ImageTicker → Default → Primary*
+     *
+     * - **Field Type**: Color
+     * - **Placeholder**: *None*
+     * - **API ID Path**: image_ticker.default.primary.bg_color
+     * - **Documentation**: https://prismic.io/docs/fields/color
+     */
+    bg_color: prismic.ColorField;
+
+    /**
+     * speed_sec field in *ImageTicker → Default → Primary*
+     *
+     * - **Field Type**: Number
+     * - **Placeholder**: *None*
+     * - **API ID Path**: image_ticker.default.primary.speed_sec
+     * - **Documentation**: https://prismic.io/docs/fields/number
+     */
+    speed_sec: prismic.NumberField;
+
+    /**
+     * direction field in *ImageTicker → Default → Primary*
+     *
+     * - **Field Type**: Select
+     * - **Placeholder**: *None*
+     * - **Default Value**: left
+     * - **API ID Path**: image_ticker.default.primary.direction
+     * - **Documentation**: https://prismic.io/docs/fields/select
+     */
+    direction: prismic.SelectField<'left' | 'right', 'filled'>;
+
+    /**
+     * item_size field in *ImageTicker → Default → Primary*
+     *
+     * - **Field Type**: Select
+     * - **Placeholder**: *None*
+     * - **API ID Path**: image_ticker.default.primary.item_size
+     * - **Documentation**: https://prismic.io/docs/fields/select
+     */
+    item_size: prismic.SelectField<'sm' | 'md' | 'lg'>;
+
+    /**
+     * items field in *ImageTicker → Default → Primary*
+     *
+     * - **Field Type**: Group
+     * - **Placeholder**: *None*
+     * - **API ID Path**: image_ticker.default.primary.items[]
+     * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+     */
+    items: prismic.GroupField<Simplify<ImageTickerSliceDefaultPrimaryItemsItem>>;
+}
+
+/**
+ * Default variation for ImageTicker Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageTickerSliceDefault = prismic.SharedSliceVariation<
+    'default',
+    Simplify<ImageTickerSliceDefaultPrimary>,
+    never
+>;
+
+/**
+ * Slice variation for *ImageTicker*
+ */
+type ImageTickerSliceVariation = ImageTickerSliceDefault;
+
+/**
+ * ImageTicker Shared Slice
+ *
+ * - **API ID**: `image_ticker`
+ * - **Description**: ImageTicker
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageTickerSlice = prismic.SharedSlice<'image_ticker', ImageTickerSliceVariation>;
 
 /**
  * Item in *LoreSection → cards → Primary → entries*
@@ -4613,6 +4752,11 @@ declare module '@prismicio/client' {
             ImageFullSliceVariation,
             ImageFullSliceDefault,
             ImageFullSliceContained,
+            ImageTickerSlice,
+            ImageTickerSliceDefaultPrimaryItemsItem,
+            ImageTickerSliceDefaultPrimary,
+            ImageTickerSliceVariation,
+            ImageTickerSliceDefault,
             LoreSectionSlice,
             LoreSectionSliceDefaultPrimaryEntriesItem,
             LoreSectionSliceDefaultPrimary,
