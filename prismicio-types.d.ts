@@ -592,6 +592,7 @@ export interface HomeDocumentDataFeaturedEpisodesItem {
 }
 
 type HomeDocumentDataSlicesSlice =
+    | ImageTickerSlice
     | TextWithImageSlice
     | QuoteSlice
     | GallerySlice
