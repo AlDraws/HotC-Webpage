@@ -31,13 +31,13 @@ const Hero: FC<HeroProps> = ({ slice }) => {
           className="pointer-events-none select-none object-cover opacity-40"
         />
       )}
-      <Bounded className="relative py-8" className="relative">
+      <Bounded className="relative py-8">
         <div className="grid justify-items-center gap-3">
           <div className="max-w-2xl text-center">
             {isFilled.image(logo) ? (
               <PrismicNextImage
                 field={logo}
-                className="mx-auto h-70 w-auto md:h-70"
+                className="mx-auto h-[64px] w-auto md:h-[80px]"
                 fallbackAlt=""
                 priority
               />
