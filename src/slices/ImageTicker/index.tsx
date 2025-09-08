@@ -42,7 +42,7 @@ export default function ImageTicker({ slice }: Props) {
             "hotc-marquee flex w-max items-center gap-6 py-4 md:gap-8 md:py-6",
             direction === "right" && "hotc-marquee--right"
           )}
-          style={{ ["--marquee-speed" as any]: `${speed}s` }}
+          style={{ ["--marquee-speed" as string]: `${speed}s` }}
           role="list"
         >
           {loop.map((it, idx) => {
@@ -62,10 +62,10 @@ export default function ImageTicker({ slice }: Props) {
                   <PrismicNextImage
                     field={I.image}
                     className={classForImg}
-                    fallbackAlt=""
+                    alt={I?.image?.alt || I?.subtitle || ""}
                     priority={false}
                     sizes="(min-width: 1024px) 128px, 20vw"
-                    imgixParams={{ q: 85, fm: "webp" }}
+                    quality={85}
                   />
                   {isFilled.keyText(I.subtitle) && (
                     <span className="mt-2 text-xs md:text-sm text-slate-200/80">

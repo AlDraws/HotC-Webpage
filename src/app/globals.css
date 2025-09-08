@@ -6,3 +6,23 @@
     sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     "Noto Color Emoji";
 }
+
+/* Fuente global aplicada a todo el sitio */
+html { font-family: var(--font-sans); }
+
+/* ========== ImageTicker / Marquee ========== */
+@keyframes hotc-marquee { to { transform: translateX(-50%); } }
+
+.hotc-marquee {
+  animation: hotc-marquee var(--marquee-speed, 30s) linear infinite;
+  will-change: transform;
+}
+.hotc-marquee--right { animation-direction: reverse; }
+
+/* Accesibilidad: si el usuario prefiere menos animación, desactívala */
+@media (prefers-reduced-motion: reduce) {
+  .hotc-marquee { animation: none !important; transform: none !important; }
+}
+
+/* Pausar la animación al pasar el ratón, solo cuando el contenedor lo permite */
+.hotc-hover-pause .hotc-marquee:hover { animation-play-state: paused; }
