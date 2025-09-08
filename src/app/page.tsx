@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { asText } from "@prismicio/client";
+import { asText, isFilled, type Content } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
-import type { Content } from "@prismicio/client";
 import { components } from "@/slices";
 
 async function getHomepageDoc(client: ReturnType<typeof createClient>) {
+  // 1) Intenta el singleton `home`; 2) fallback a `page` con UID `home`.
   const home = await client.getSingle<Content.HomeDocument>("home").catch(() => null);
   if (home) return home;
-  const pageHome = await client.getByUID<Content.PageDocument>("page", "home").catch(() => null);
+  const pageHome = await client
+    .getByUID<Content.PageDocument>("page", "home")
+    .catch(() => null);
   return pageHome;
 }
 
@@ -19,22 +21,30 @@ export async function generateMetadata(): Promise<Metadata> {
   const doc = await getHomepageDoc(client);
   if (!doc) notFound();
 
-  const title = doc.type === "page"
-    ? doc.data.meta_title || asText((doc as Content.PageDocument).data.title) || undefined
+  // Carga settings para fallback de OG image
+  const settings = await client.getSingle("settings").catch(() => null);
+
+  const isPage = doc.type === "page";
+
+  const title = isPage
+    ? (doc as Content.PageDocument).data.meta_title || asText((doc as Content.PageDocument).data.title) || undefined
     : (doc as Content.HomeDocument).data.meta_title || (doc as Content.HomeDocument).data.title || undefined;
 
-  const description = doc.type === "page"
+  const description = isPage
     ? (doc as Content.PageDocument).data.meta_description || undefined
     : asText((doc as Content.HomeDocument).data.meta_description) || undefined;
 
-  const metaImage = (doc.data as any)?.meta_image?.url;
+  // Usa og_image_override si existe; si no, cae a settings.og_default; nunca envíes array vacío
+  const ogOverride = (doc.data as any)?.og_image_override;
+  const settingsOg = (settings?.data as any)?.og_default;
+  const ogUrl = isFilled.image(ogOverride) ? ogOverride.url : isFilled.image(settingsOg) ? settingsOg.url : undefined;
 
   return {
     title,
     description,
     openGraph: {
       title: title || undefined,
-      images: metaImage ? [{ url: metaImage }] : undefined,
+      images: ogUrl ? [{ url: ogUrl }] : undefined,
     },
   };
 }
@@ -44,5 +54,9 @@ export default async function Page() {
   const doc = await getHomepageDoc(client);
   if (!doc) notFound();
 
-  return <SliceZone slices={doc.data.slices} components={components} />;
+  // Soporta `slices` o `body` según el custom type
+  const data: any = doc.data as any;
+  const slices = Array.isArray(data.slices) ? data.slices : Array.isArray(data.body) ? data.body : [];
+
+  return <SliceZone slices={slices} components={components} />;
 }
