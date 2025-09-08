@@ -17,10 +17,36 @@ const sizeClassByItem = (size: string | null | undefined) =>
 export default function ImageTicker({ slice }: Props) {
   const p = slice.primary as any;
 
-  const items = (slice.items ?? []).filter(
-    (it) => isFilled.link((it as any).link) && isFilled.image((it as any).image)
+  // Logs de depuración (solo en dev)
+  if (process.env.NODE_ENV !== "production") {
+    console.log("[ImageTicker] first items:", (slice.items ?? []).slice(0, 2));
+    if ((p as any)?.items) {
+      console.log("[ImageTicker] first primary.items:", ((p as any).items ?? []).slice(0, 2));
+    }
+  }
+
+  // Compatibilidad: items pueden vivir en slice.items o en slice.primary.items
+  const rawItems = Array.isArray((slice as any).items)
+    ? (slice as any).items
+    : Array.isArray((p as any)?.items)
+    ? (p as any).items
+    : [];
+
+  const items = (rawItems as any[]).filter(
+    (it: any) => isFilled.link((it as any).link) && isFilled.image((it as any).image)
   );
-  if (items.length === 0) return null;
+
+  if (items.length === 0) {
+    return (
+      <section data-slice-type="image_ticker" className="py-6">
+        <div className="mx-auto max-w-screen-md rounded bg-red-50 p-4 text-red-700">
+          ImageTicker: sin items válidos (faltan link o image).{' '}
+          Count slice.items: {(slice.items ?? []).length}{' '}
+          · Count primary.items: {Array.isArray((p as any)?.items) ? (p as any).items.length : 0}
+        </div>
+      </section>
+    );
+  }
 
   const speed = Number(p.speed_sec) > 0 ? Number(p.speed_sec) : 30;
   const direction = p.direction === "right" ? "right" : "left";

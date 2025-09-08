@@ -56,7 +56,23 @@ export default async function Page() {
 
   // Soporta `slices` o `body` según el custom type
   const data: any = doc.data as any;
+  if (process.env.NODE_ENV !== "production") {
+    console.log("[HOME] doc.type:", doc.type);
+    console.log("[HOME] has data.slices:", Array.isArray((doc.data as any).slices));
+    console.log("[HOME] has data.body:", Array.isArray((doc.data as any).body));
+    console.log(
+      "[HOME] slices count:",
+      Array.isArray((doc.data as any).slices)
+        ? (doc.data as any).slices.length
+        : Array.isArray((doc.data as any).body)
+        ? (doc.data as any).body.length
+        : "none"
+    );
+  }
   const slices = Array.isArray(data.slices) ? data.slices : Array.isArray(data.body) ? data.body : [];
+  if (process.env.NODE_ENV !== "production") {
+    console.log("[HOME] slice_types:", slices.map((s: any) => s.slice_type));
+  }
 
   return <SliceZone slices={slices} components={components} />;
 }
