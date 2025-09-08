@@ -5,11 +5,6 @@ const config: Config = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  safelist: [
-    "hotc-marquee",
-    "hotc-marquee--right",
-    "hotc-hover-pause",
-  ],
   plugins: [aspectRatio],
 };
 

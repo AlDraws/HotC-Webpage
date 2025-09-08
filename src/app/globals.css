@@ -27,3 +27,10 @@ html { font-family: var(--font-sans); }
 
 /* Pausar la animación al pasar el ratón, solo cuando el contenedor lo permite */
 .hotc-hover-pause .hotc-marquee:hover { animation-play-state: paused; }
+
+/* Forzar inclusión de utilidades personalizadas en Tailwind v4 */
+@layer utilities {
+  .hotc-marquee {}
+  .hotc-marquee--right {}
+  .hotc-hover-pause {}
+}
