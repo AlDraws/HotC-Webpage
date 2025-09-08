@@ -37,7 +37,7 @@ const Hero: FC<HeroProps> = ({ slice }) => {
             {isFilled.image(logo) ? (
               <PrismicNextImage
                 field={logo}
-                className="mx-auto h-[64px] w-auto md:h-[80px]"
+                className="mx-auto h-80px w-auto md:h-80px"
                 fallbackAlt=""
                 priority
               />
