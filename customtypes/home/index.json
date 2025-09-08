@@ -78,9 +78,6 @@
                 "fieldset": "Slice Zone",
                 "config": {
                     "choices": {
-                        "image_ticker": {
-                            "type": "SharedSlice"
-                        },
                         "text_with_image": {
                             "type": "SharedSlice"
                         },

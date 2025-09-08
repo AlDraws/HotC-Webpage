@@ -35,9 +35,6 @@
                 "fieldset": "Slice Zone",
                 "config": {
                     "choices": {
-                        "image_ticker": {
-                            "type": "SharedSlice"
-                        },
                         "cta": {
                             "type": "SharedSlice"
                         },

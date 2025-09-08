@@ -592,7 +592,6 @@ export interface HomeDocumentDataFeaturedEpisodesItem {
 }
 
 type HomeDocumentDataSlicesSlice =
-    | ImageTickerSlice
     | TextWithImageSlice
     | QuoteSlice
     | GallerySlice
@@ -1029,7 +1028,6 @@ export type NavigationDocument<Lang extends string = string> = prismic.PrismicDo
 >;
 
 type PageDocumentDataSlicesSlice =
-    | ImageTickerSlice
     | CtaSlice
     | FeatureGridSlice
     | NewsletterEmbedSlice
