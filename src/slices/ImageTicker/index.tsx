@@ -25,12 +25,16 @@ export default function ImageTicker({ slice }: Props) {
     }
   }
 
-  // Compatibilidad: items pueden vivir en slice.items o en slice.primary.items
-  const rawItems = Array.isArray((slice as any).items)
-    ? (slice as any).items
-    : Array.isArray((p as any)?.items)
-    ? (p as any).items
+  // Compatibilidad: items pueden vivir en slice.items (zona repetible)
+  // o en slice.primary.items (Group en Primary). Si hay items en primary,
+  // se priorizan, ya que slice.items suele existir como [] por defecto.
+  const repeatItems = Array.isArray((slice as any).items)
+    ? ((slice as any).items as any[])
     : [];
+  const primaryGroupItems = Array.isArray((p as any)?.items)
+    ? (((p as any).items as any[]) ?? [])
+    : [];
+  const rawItems = primaryGroupItems.length > 0 ? primaryGroupItems : repeatItems;
 
   const items = (rawItems as any[]).filter(
     (it: any) => isFilled.link((it as any).link) && isFilled.image((it as any).image)

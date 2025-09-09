@@ -2,63 +2,6 @@
   "id": "image_ticker",
   "type": "SharedSlice",
   "name": "ImageTicker",
-  "description": "ImageTicker",
-  "variations": [
-    {
-      "id": "default",
-      "name": "Default",
-      "docURL": "...",
-      "version": "initial",
-      "description": "Default",
-      "imageUrl": "",
-      "primary": {
-        "bg_color": {
-          "type": "Color",
-          "config": {
-            "label": "bg_color",
-            "placeholder": ""
-          }
-        },
-        "speed_sec": {
-          "type": "Number",
-          "config": {
-            "label": "speed_sec",
-            "placeholder": ""
-          }
-        },
-        "direction": {
-          "type": "Select",
-          "config": {
-            "label": "direction",
-            "placeholder": "",
-            "options": [
-              "left",
-              "right"
-            ],
-            "default_value": "left"
-          }
-        },
-        "item_size": {
-          "type": "Select",
-          "config": {
-            "label": "item_size",
-            "placeholder": "",
-            "options": [
-              "sm",
-              "md",
-              "lg"
-            ]
-          }
-        }
-      },
-      "items": {}
-    }
-  ]
-}
-{
-  "id": "image_ticker",
-  "type": "SharedSlice",
-  "name": "ImageTicker",
   "description": "Franja con imágenes enlazadas en marquee",
   "variations": [
     {
@@ -73,14 +16,21 @@
         "speed_sec": { "type": "Number", "config": { "label": "Speed (sec)", "placeholder": "30" } },
         "direction": { "type": "Select", "config": { "label": "Direction", "options": ["left", "right"], "default_value": "left" } },
         "item_size": { "type": "Select", "config": { "label": "Item size", "options": ["sm", "md", "lg"], "default_value": "md" } },
-        "pause_on_hover": { "type": "Boolean", "config": { "label": "Pause on hover", "default_value": true } }
+        "pause_on_hover": { "type": "Boolean", "config": { "label": "Pause on hover", "default_value": true } },
+        "items": {
+          "type": "Group",
+          "config": {
+            "label": "Items",
+            "fields": {
+              "image": { "type": "Image", "config": { "label": "Image" } },
+              "link": { "type": "Link", "config": { "label": "Link" } },
+              "subtitle": { "type": "Text", "config": { "label": "Subtitle", "single": "text" } },
+              "contain": { "type": "Boolean", "config": { "label": "Contain (no crop)" } }
+            }
+          }
+        }
       },
-      "items": {
-        "image": { "type": "Image", "config": { "label": "Image" } },
-        "link":  { "type": "Link",  "config": { "label": "Link" } },
-        "subtitle": { "type": "Text", "config": { "label": "Subtitle", "single": "text" } },
-        "contain": { "type": "Boolean", "config": { "label": "Contain (no crop)" } }
-      }
+      "items": {}
     }
   ]
 }
