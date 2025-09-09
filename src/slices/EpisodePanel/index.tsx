@@ -22,16 +22,18 @@ const EpisodePanel: FC<EpisodePanelProps> = ({ slice }) => {
     >
       {isFilled.image(image) && (
         <figure className={containerClass}>
-          <PrismicNextImage
-            field={image}
-            className="w-full h-auto"
-            sizes="100vw"
-            // Fuerza máxima calidad y evita auto-compress/formato de Imgix
-            quality={100}
-            imgixParams={{ q: 100, auto: null }}
-            // Si hay alt específico en el slice, úsalo; si no, cae al alt del campo
-            fallbackAlt=""
-          />
+          <div className={variant === 'narrow' ? 'overflow-hidden rounded-md' : ''}>
+            <PrismicNextImage
+              field={image}
+              className="w-full h-auto"
+              sizes="100vw"
+              // Fuerza máxima calidad y evita auto-compress/formato de Imgix
+              quality={100}
+              imgixParams={{ q: 100, auto: null }}
+              // Si hay alt específico en el slice, úsalo; si no, cae al alt del campo
+              fallbackAlt=""
+            />
+          </div>
           {typeof caption === 'string' && caption.trim() && (
             <figcaption className="mt-2 text-center text-sm text-slate-500">{caption}</figcaption>
           )}

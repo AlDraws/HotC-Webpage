@@ -1,3 +1,5 @@
+"use client";
+
 import { FC } from "react";
 import { type Content, isFilled } from "@prismicio/client";
 import { PrismicNextLink, PrismicNextImage } from "@prismicio/next";
@@ -6,6 +8,7 @@ import type { SliceComponentProps, JSXMapSerializer } from "@prismicio/react";
 import { Bounded } from "@/components/Bounded";
 import { Heading } from "@/components/Heading";
 import { PrismicRichText } from "@/components/PrismicRichText";
+import { useParallax } from "@/hooks/useParallax";
 
 const components: JSXMapSerializer = {
   heading1: ({ children }) => (
@@ -21,15 +24,28 @@ const Hero: FC<HeroProps> = ({ slice }) => {
   const backgroundImage = slice.primary.backgroundImage;
   const logo = (slice.primary as any).logo;
 
+  const { ref: parallaxRef, style: parallaxStyle } = useParallax({
+    strength: 0.12,
+    max: 48,
+    pointerStrength: { x: 18, y: 6 },
+    mode: "both",
+    scale: 1.18,
+    disablePointerBelow: 768,
+  });
+
   return (
-    <section className="relative bg-slate-900 text-white">
+    <section className="relative overflow-hidden bg-slate-900 text-white">
       {isFilled.image(backgroundImage) && (
-        <PrismicNextImage
-          field={backgroundImage}
-          alt=""
-          fill={true}
-          className="pointer-events-none select-none object-cover opacity-40"
-        />
+        <div ref={parallaxRef as any} className="pointer-events-none absolute inset-0">
+          <PrismicNextImage
+            field={backgroundImage}
+            alt=""
+            fill={true}
+            className="select-none object-cover opacity-40"
+            style={parallaxStyle}
+            priority
+          />
+        </div>
       )}
       <Bounded className="relative py-8">
         <div className="grid justify-items-center gap-3">

@@ -1,7 +1,10 @@
+"use client";
+
 import { Content, isFilled } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import clsx from "clsx";
+import { useEffect, useRef } from "react";
 
 export type ImageTickerProps = SliceComponentProps<Content.ImageTickerSlice>;
 
@@ -36,15 +39,67 @@ export default function ImageTicker({ slice }: Props) {
     : [];
   const rawItems = primaryGroupItems.length > 0 ? primaryGroupItems : repeatItems;
 
-  const items = (rawItems as any[]).filter(
-    (it: any) => isFilled.link((it as any).link) && isFilled.image((it as any).image)
-  );
+  // Ahora permitimos ítems sin link; solo exigimos imagen.
+  const items = (rawItems as any[]).filter((it: any) => isFilled.image((it as any).image));
+
+  const speed = Number(p.speed_sec) > 0 ? Number(p.speed_sec) : 30;
+  const direction = p.direction === "right" ? "right" : "left";
+  const itemSize = p.item_size ?? "md";
+  const pauseOnHover = p.pause_on_hover !== false; // por defecto true
+
+  // Un solo set visible; añadimos un gap off-screen y una copia para loop sin saltos.
+  const loop = [...items];
+
+  // Centrado: calculamos un offset inicial para que, si el track
+  // base (sin duplicar) es más estrecho que el contenedor, arranque
+  // visualmente centrado. El keyframe usa --marquee-offset.
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const baseRef = useRef<HTMLUListElement | null>(null);
+
+  // Recalcular en resize y cuando cambie el número de items o tamaños
+  useEffect(() => {
+    const el = containerRef.current;
+    const base = baseRef.current;
+    const track = trackRef.current;
+    if (!el || !base || !track) return;
+
+    const calc = () => {
+      // Medidas
+      const baseWidth = base.scrollWidth; // ancho del set real
+      const containerWidth = el.clientWidth;
+
+      // Posición inicial centrada
+      const start = (containerWidth - baseWidth) / 2;
+
+      // Distancia total a recorrer antes de reiniciar (una longitud del set)
+      const distance = baseWidth;
+
+      // Dirección: izquierda => end = start - distance; derecha => end = start + distance
+      const end = direction === "right" ? start + distance : start - distance;
+
+      // Aplicar variables en el track animado
+      track.style.setProperty("--marquee-start", `${start}px`);
+      track.style.setProperty("--marquee-end", `${end}px`);
+      track.style.setProperty("--marquee-speed", `${speed}s`);
+    };
+
+    // Calcular tras un frame por si aún se han renderizado imágenes
+    const r1 = requestAnimationFrame(calc);
+    const r2 = setTimeout(calc, 300);
+    window.addEventListener("resize", calc);
+    return () => {
+      cancelAnimationFrame(r1);
+      clearTimeout(r2 as unknown as number);
+      window.removeEventListener("resize", calc);
+    };
+  }, [items.length, itemSize, direction, speed]);
 
   if (items.length === 0) {
     return (
       <section data-slice-type="image_ticker" className="py-6">
         <div className="mx-auto max-w-screen-md rounded bg-red-50 p-4 text-red-700">
-          ImageTicker: sin items válidos (faltan link o image).{' '}
+          ImageTicker: sin items válidos (falta image).{' '}
           Count slice.items: {(slice.items ?? []).length}{' '}
           · Count primary.items: {Array.isArray((p as any)?.items) ? (p as any).items.length : 0}
         </div>
@@ -52,30 +107,22 @@ export default function ImageTicker({ slice }: Props) {
     );
   }
 
-  const speed = Number(p.speed_sec) > 0 ? Number(p.speed_sec) : 30;
-  const direction = p.direction === "right" ? "right" : "left";
-  const itemSize = p.item_size ?? "md";
-  const pauseOnHover = p.pause_on_hover !== false; // por defecto true
-
-  // Duplicamos para scroll sin cortes
-  const loop = [...items, ...items];
-
   return (
     <section
       className={clsx("relative", pauseOnHover && "hotc-hover-pause")}
       style={{ backgroundColor: p.bg_color || "transparent" }}
       aria-label="Links destacados"
     >
-      <div className="mx-auto w-full overflow-hidden">
-        <ul
-          className={clsx(
-            "hotc-marquee flex w-max items-center gap-6 py-4 md:gap-8 md:py-6",
-            direction === "right" && "hotc-marquee--right"
-          )}
-          style={{ ["--marquee-speed" as string]: `${speed}s` }}
-          role="list"
+      <div ref={containerRef} className="mx-auto w-full overflow-hidden">
+        {/* Track animado */}
+        <div
+          ref={trackRef}
+          className={clsx("hotc-marquee flex w-max items-center py-4 md:py-6")}
+          aria-hidden={false}
         >
-          {loop.map((it, idx) => {
+          {/* Set base visible */}
+          <ul ref={baseRef} className="flex w-max items-center gap-6 md:gap-8" role="list">
+            {loop.map((it, idx) => {
             const I = it as any;
             const classForImg = clsx(
               "aspect-square shrink-0 rounded-md bg-white/5",
@@ -85,28 +132,77 @@ export default function ImageTicker({ slice }: Props) {
 
             return (
               <li key={idx} className="inline-flex flex-col items-center">
-                <PrismicNextLink
-                  field={I.link}
-                  className="inline-flex flex-col items-center no-underline"
-                >
-                  <PrismicNextImage
-                    field={I.image}
-                    className={classForImg}
-                    alt={I?.image?.alt || I?.subtitle || ""}
-                    priority={false}
-                    sizes="(min-width: 1024px) 128px, 20vw"
-                    quality={85}
-                  />
-                  {isFilled.keyText(I.subtitle) && (
-                    <span className="mt-2 text-xs md:text-sm text-slate-200/80">
-                      {I.subtitle}
-                    </span>
-                  )}
-                </PrismicNextLink>
+                {isFilled.link(I.link) ? (
+                  <PrismicNextLink
+                    field={I.link}
+                    className="inline-flex flex-col items-center no-underline"
+                  >
+                    <PrismicNextImage
+                      field={I.image}
+                      className={classForImg}
+                      alt={I?.image?.alt || I?.subtitle || ""}
+                      priority={false}
+                      sizes="(min-width: 1024px) 128px, 20vw"
+                      quality={85}
+                    />
+                    {isFilled.keyText(I.subtitle) && (
+                      <span className="mt-2 text-xs md:text-sm text-slate-200/80">
+                        {I.subtitle}
+                      </span>
+                    )}
+                  </PrismicNextLink>
+                ) : (
+                  <div className="inline-flex flex-col items-center">
+                    <PrismicNextImage
+                      field={I.image}
+                      className={classForImg}
+                      alt={I?.image?.alt || I?.subtitle || ""}
+                      priority={false}
+                      sizes="(min-width: 1024px) 128px, 20vw"
+                      quality={85}
+                    />
+                    {isFilled.keyText(I.subtitle) && (
+                      <span className="mt-2 text-xs md:text-sm text-slate-200/80">
+                        {I.subtitle}
+                      </span>
+                    )}
+                  </div>
+                )}
               </li>
             );
-          })}
-        </ul>
+            })}
+          </ul>
+          {/* Copia para loop contínuo, contigua al set base */}
+          <ul className="flex w-max items-center gap-6 md:gap-8" aria-hidden role="list">
+            {loop.map((it, idx) => {
+              const I = it as any;
+              const classForImg = clsx(
+                "aspect-square shrink-0 rounded-md bg-white/5",
+                sizeClassByItem(itemSize),
+                I.contain ? "object-contain p-1" : "object-cover"
+              );
+              return (
+                <li key={`clone-${idx}`} className="inline-flex flex-col items-center">
+                  <div className="inline-flex flex-col items-center">
+                    <PrismicNextImage
+                      field={I.image}
+                      className={classForImg}
+                      alt={I?.image?.alt || I?.subtitle || ""}
+                      priority={false}
+                      sizes="(min-width: 1024px) 128px, 20vw"
+                      quality={85}
+                    />
+                    {isFilled.keyText(I.subtitle) && (
+                      <span className="mt-2 text-xs md:text-sm text-slate-200/80">
+                        {I.subtitle}
+                      </span>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </section>
   );

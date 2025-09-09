@@ -12,10 +12,14 @@
 html { font-family: var(--font-sans); }
 
 /* ========== ImageTicker / Marquee ========== */
-@keyframes hotc-marquee { to { transform: translateX(-50%); } }
+/* Offset y posición final configurables via variables. */
+@keyframes hotc-marquee {
+  from { transform: translateX(var(--marquee-start, 0px)); }
+  to { transform: translateX(var(--marquee-end, -300%)); }
+}
 
 .hotc-marquee {
-  animation: hotc-marquee var(--marquee-speed, 30s) linear infinite;
+  animation: hotc-marquee var(--marquee-speed, 10s) linear infinite;
   will-change: transform;
 }
 .hotc-marquee--right { animation-direction: reverse; }
