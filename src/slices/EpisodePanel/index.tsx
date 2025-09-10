@@ -22,7 +22,7 @@ const EpisodePanel: FC<EpisodePanelProps> = ({ slice }) => {
     >
       {isFilled.image(image) && (
         <figure className={containerClass}>
-          <div className={variant === 'narrow' ? 'overflow-hidden rounded-md' : ''}>
+          <div className={variant === 'narrow' ? 'overflow-hidden rounded-lg' : ''}>
             <PrismicNextImage
               field={image}
               className="w-full h-auto"

@@ -22,7 +22,7 @@ html { font-family: var(--font-sans); }
   animation: hotc-marquee var(--marquee-speed, 10s) linear infinite;
   will-change: transform;
 }
-.hotc-marquee--right { animation-direction: reverse; }
+/* La dirección se controla con --marquee-start/--marquee-end; no se usa reverse. */
 
 /* Accesibilidad: si el usuario prefiere menos animación, desactívala */
 @media (prefers-reduced-motion: reduce) {

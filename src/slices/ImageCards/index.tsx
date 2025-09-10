@@ -18,7 +18,7 @@ const ImageCard: FC<ImageCardProps> = ({ card }) => {
   return (
     <li className="grid gap-8">
       {isFilled.image(image) && (
-        <div className="bg-gray-100 overflow-hidden rounded-md">
+        <div className="bg-gray-100 overflow-hidden rounded-lg">
           <ConditionalWrap
             condition={isFilled.link(card.buttonLink)}
             wrap={({ children }) => (
