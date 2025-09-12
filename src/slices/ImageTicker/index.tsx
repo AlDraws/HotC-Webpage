@@ -50,6 +50,18 @@ export default function ImageTicker({ slice }: Props) {
   // Un solo set visible; añadimos un gap off-screen y una copia para loop sin saltos.
   const loop = [...items];
 
+  // Permitir configurar el gap entre imágenes (px) desde Prismic (primary.image_gap_px)
+  const imageGapPxOverride = Number((p as any)?.image_gap_px);
+  const imageGapStyle = Number.isFinite(imageGapPxOverride) && imageGapPxOverride > 0
+    ? ({ gap: `${imageGapPxOverride}px` } as React.CSSProperties)
+    : undefined;
+
+  // Permitir configurar el gap entre tiras desde Prismic
+  // - En vw: primary.strip_gap_vw (por ejemplo, 40 => 40vw)
+  // - En px: primary.strip_gap_px (fallback)
+  const stripGapVwOverride = Number((p as any)?.strip_gap_vw);
+  const stripGapPxOverride = Number((p as any)?.strip_gap_px);
+
   // Centrado: calculamos un offset inicial para que, si el track
   // base (sin duplicar) es más estrecho que el contenedor, arranque
   // visualmente centrado. El keyframe usa --marquee-offset.
@@ -67,13 +79,28 @@ export default function ImageTicker({ slice }: Props) {
     const calc = () => {
       // Medidas
       const baseWidth = base.scrollWidth; // ancho del set real
-      const containerWidth = el.clientWidth;
+      // Usamos el ancho del viewport (no el del body/contenedor) para evitar saltos
+      const containerWidth = window.innerWidth;
 
       // Posición inicial centrada
       const start = (containerWidth - baseWidth) / 2;
 
-      // Distancia total a recorrer antes de reiniciar (una longitud del set)
-      const distance = baseWidth;
+      // Offset entre tiras: configurable (vw tiene prioridad), si no px, si no cálculo default
+      let gapPx: number;
+      let gapVar: string; // para el espaciador visual
+      if (Number.isFinite(stripGapVwOverride) && stripGapVwOverride >= 0) {
+        gapPx = (containerWidth * stripGapVwOverride) / 100;
+        gapVar = `${stripGapVwOverride}vw`;
+      } else if (Number.isFinite(stripGapPxOverride) && stripGapPxOverride >= 0) {
+        gapPx = stripGapPxOverride;
+        gapVar = `${stripGapPxOverride}px`;
+      } else {
+        gapPx = Math.max(containerWidth / 2, 64);
+        gapVar = `${gapPx}px`;
+      }
+
+      // Distancia total a recorrer antes de reiniciar (set + gap)
+      const distance = baseWidth + gapPx;
 
       // Dirección: izquierda => end = start - distance; derecha => end = start + distance
       const end = direction === "right" ? start + distance : start - distance;
@@ -82,6 +109,7 @@ export default function ImageTicker({ slice }: Props) {
       track.style.setProperty("--marquee-start", `${start}px`);
       track.style.setProperty("--marquee-end", `${end}px`);
       track.style.setProperty("--marquee-speed", `${speed}s`);
+      track.style.setProperty("--marquee-gap", gapVar);
     };
 
     // Calcular tras un frame por si aún se han renderizado imágenes
@@ -93,7 +121,7 @@ export default function ImageTicker({ slice }: Props) {
       clearTimeout(r2 as unknown as number);
       window.removeEventListener("resize", calc);
     };
-  }, [items.length, itemSize, direction, speed]);
+  }, [items.length, itemSize, direction, speed, stripGapPxOverride, stripGapVwOverride]);
 
   if (items.length === 0) {
     return (
@@ -113,7 +141,12 @@ export default function ImageTicker({ slice }: Props) {
       style={{ backgroundColor: p.bg_color || "transparent" }}
       aria-label="Links destacados"
     >
-      <div ref={containerRef} className="mx-auto w-full overflow-hidden">
+      {/* Contenedor full-bleed: ocupa todo el viewport, no solo el cuerpo */}
+      <div
+        ref={containerRef}
+        className="overflow-hidden"
+        style={{ width: "100vw", marginLeft: "calc(50% - 50vw)", marginRight: "calc(50% - 50vw)" }}
+      >
         {/* Track animado */}
         <div
           ref={trackRef}
@@ -121,7 +154,12 @@ export default function ImageTicker({ slice }: Props) {
           aria-hidden={false}
         >
           {/* Set base visible */}
-          <ul ref={baseRef} className="flex w-max items-center gap-6 md:gap-8" role="list">
+          <ul
+            ref={baseRef}
+            className="flex w-max items-center gap-6 md:gap-8"
+            role="list"
+            style={imageGapStyle}
+          >
             {loop.map((it, idx) => {
             const I = it as any;
             const classForImg = clsx(
@@ -172,8 +210,13 @@ export default function ImageTicker({ slice }: Props) {
             );
             })}
           </ul>
-          {/* Copia para loop contínuo, contigua al set base */}
-          <ul className="flex w-max items-center gap-6 md:gap-8" aria-hidden role="list">
+          <div aria-hidden className="shrink-0" style={{ width: "var(--marquee-gap)" }} />
+          <ul
+            className="flex w-max items-center gap-6 md:gap-8"
+            aria-hidden
+            role="list"
+            style={imageGapStyle}
+          >
             {loop.map((it, idx) => {
               const I = it as any;
               const classForImg = clsx(
