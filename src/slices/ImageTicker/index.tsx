@@ -124,6 +124,13 @@ export default function ImageTicker({ slice }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const baseRef = useRef<HTMLUListElement | null>(null);
+  // Drag state refs
+  const draggingRef = useRef(false);
+  const pointerIdRef = useRef<number | null>(null);
+  const dragStartXRef = useRef(0);
+  const startVar0Ref = useRef(0);
+  const endVar0Ref = useRef(0);
+  const suppressClickRef = useRef(false);
 
   // Recalcular en resize y cuando cambie el número de items o tamaños
   useEffect(() => {
@@ -179,6 +186,62 @@ export default function ImageTicker({ slice }: Props) {
     };
   }, [items.length, itemSize, direction, speed, stripGapPxOverride, stripGapVwOverride]);
 
+  // Handlers: arrastrar para desplazar izquierda/derecha (PC + móvil)
+  const onPointerDown = (e: any) => {
+    const track = trackRef.current;
+    if (!track) return;
+    draggingRef.current = true;
+    suppressClickRef.current = false;
+    if (track.setPointerCapture) {
+      try { track.setPointerCapture(e.pointerId); } catch {}
+    }
+    pointerIdRef.current = e.pointerId ?? null;
+    dragStartXRef.current = e.clientX ?? 0;
+    // Pausar la animación mientras se arrastra
+    (track.style as any).animationPlayState = "paused";
+    track.style.cursor = "grabbing";
+    // Leer variables actuales (px)
+    const startVarStr = track.style.getPropertyValue("--marquee-start");
+    const endVarStr = track.style.getPropertyValue("--marquee-end");
+    const start0 = parseFloat(startVarStr) || 0;
+    const end0 = parseFloat(endVarStr) || 0;
+    startVar0Ref.current = start0;
+    endVar0Ref.current = end0;
+  };
+
+  const onPointerMove = (e: any) => {
+    if (!draggingRef.current) return;
+    const track = trackRef.current;
+    if (!track) return;
+    const dx = (e.clientX ?? 0) - dragStartXRef.current;
+    if (Math.abs(dx) > 4) suppressClickRef.current = true;
+    const newStart = startVar0Ref.current + dx;
+    const newEnd = endVar0Ref.current + dx;
+    track.style.setProperty("--marquee-start", `${newStart}px`);
+    track.style.setProperty("--marquee-end", `${newEnd}px`);
+  };
+
+  const endDrag = () => {
+    if (!draggingRef.current) return;
+    draggingRef.current = false;
+    const track = trackRef.current;
+    if (track) {
+      if (track.releasePointerCapture && pointerIdRef.current != null) {
+        try { track.releasePointerCapture(pointerIdRef.current); } catch {}
+      }
+      (track.style as any).animationPlayState = "running";
+      track.style.cursor = "grab";
+    }
+  };
+
+  const onClickCapture = (e: any) => {
+    if (suppressClickRef.current) {
+      e.preventDefault?.();
+      e.stopPropagation?.();
+      suppressClickRef.current = false;
+    }
+  };
+
   if (items.length === 0) {
     return (
       <section data-slice-type="image_ticker" className="py-6">
@@ -207,6 +270,12 @@ export default function ImageTicker({ slice }: Props) {
         <div
           ref={trackRef}
           className={clsx("hotc-marquee flex w-max items-center py-4 md:py-6")}
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          onClickCapture={onClickCapture}
+          style={{ touchAction: "pan-y", cursor: "grab" }}
           aria-hidden={false}
         >
           {/* Set base visible */}
