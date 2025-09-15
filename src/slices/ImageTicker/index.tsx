@@ -133,7 +133,10 @@ export default function ImageTicker({ slice }: Props) {
   const endVar0Ref = useRef(0);
   const suppressClickRef = useRef(false);
   const hoveredRef = useRef(false);
-  const DRAG_THRESHOLD_PX = 12;
+  const pointerTypeRef = useRef<"mouse" | "touch" | "pen" | "unknown">("unknown");
+  const DRAG_THRESHOLD_MOUSE = 6;
+  const DRAG_THRESHOLD_TOUCH = 28;
+  const DRAG_THRESHOLD_PEN = 12;
 
   // Recalcular en resize y cuando cambie el número de items o tamaños
   useEffect(() => {
@@ -196,6 +199,7 @@ export default function ImageTicker({ slice }: Props) {
     draggingRef.current = false;
     maybeDragRef.current = true;
     suppressClickRef.current = false;
+    pointerTypeRef.current = (e.pointerType as any) || "unknown";
     pointerIdRef.current = e.pointerId ?? null;
     dragStartXRef.current = e.clientX ?? 0;
   };
@@ -206,7 +210,9 @@ export default function ImageTicker({ slice }: Props) {
     if (!track) return;
     const dx = (e.clientX ?? 0) - dragStartXRef.current;
     if (!draggingRef.current) {
-      if (Math.abs(dx) < DRAG_THRESHOLD_PX) return;
+      const pt = pointerTypeRef.current;
+      const threshold = pt === "touch" ? DRAG_THRESHOLD_TOUCH : pt === "mouse" ? DRAG_THRESHOLD_MOUSE : DRAG_THRESHOLD_PEN;
+      if (Math.abs(dx) < threshold) return;
       draggingRef.current = true;
       suppressClickRef.current = true;
       // Capturar puntero y pausar animación
