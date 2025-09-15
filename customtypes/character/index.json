@@ -101,6 +101,54 @@
                 "fieldset": "Slice Zone",
                 "config": {
                     "choices": {
+                        "cta": {
+                            "type": "SharedSlice"
+                        },
+                        "character_grid": {
+                            "type": "SharedSlice"
+                        },
+                        "callout": {
+                            "type": "SharedSlice"
+                        },
+                        "episode_divider": {
+                            "type": "SharedSlice"
+                        },
+                        "episode_panel": {
+                            "type": "SharedSlice"
+                        },
+                        "episode_text_beat": {
+                            "type": "SharedSlice"
+                        },
+                        "lore_section": {
+                            "type": "SharedSlice"
+                        },
+                        "hero_project": {
+                            "type": "SharedSlice"
+                        },
+                        "feature_grid": {
+                            "type": "SharedSlice"
+                        },
+                        "newsletter_embed": {
+                            "type": "SharedSlice"
+                        },
+                        "image_ticker": {
+                            "type": "SharedSlice"
+                        },
+                        "image_cards": {
+                            "type": "SharedSlice"
+                        },
+                        "quote": {
+                            "type": "SharedSlice"
+                        },
+                        "hero": {
+                            "type": "SharedSlice"
+                        },
+                        "text_with_image": {
+                            "type": "SharedSlice"
+                        },
+                        "image": {
+                            "type": "SharedSlice"
+                        },
                         "gallery": {
                             "type": "SharedSlice"
                         },

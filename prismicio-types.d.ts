@@ -104,7 +104,27 @@ export interface CharacterDocumentDataRelationsItem {
     note: prismic.KeyTextField;
 }
 
-type CharacterDocumentDataSlicesSlice = GallerySlice | ImageFullSlice | TextSlice | CharacterProfileSlice;
+type CharacterDocumentDataSlicesSlice =
+    | CtaSlice
+    | CharacterGridSlice
+    | CalloutSlice
+    | EpisodeDividerSlice
+    | EpisodePanelSlice
+    | EpisodeTextBeatSlice
+    | LoreSectionSlice
+    | HeroProjectSlice
+    | FeatureGridSlice
+    | NewsletterEmbedSlice
+    | ImageTickerSlice
+    | ImageCardsSlice
+    | QuoteSlice
+    | HeroSlice
+    | TextWithImageSlice
+    | ImageSlice
+    | GallerySlice
+    | ImageFullSlice
+    | TextSlice
+    | CharacterProfileSlice;
 
 /**
  * Content for character documents
