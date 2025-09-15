@@ -126,11 +126,13 @@ export default function ImageTicker({ slice }: Props) {
   const baseRef = useRef<HTMLUListElement | null>(null);
   // Drag state refs
   const draggingRef = useRef(false);
+  const maybeDragRef = useRef(false);
   const pointerIdRef = useRef<number | null>(null);
   const dragStartXRef = useRef(0);
   const startVar0Ref = useRef(0);
   const endVar0Ref = useRef(0);
   const suppressClickRef = useRef(false);
+  const DRAG_THRESHOLD_PX = 12;
 
   // Recalcular en resize y cuando cambie el número de items o tamaños
   useEffect(() => {
@@ -190,31 +192,36 @@ export default function ImageTicker({ slice }: Props) {
   const onPointerDown = (e: any) => {
     const track = trackRef.current;
     if (!track) return;
-    draggingRef.current = true;
+    draggingRef.current = false;
+    maybeDragRef.current = true;
     suppressClickRef.current = false;
-    if (track.setPointerCapture) {
-      try { track.setPointerCapture(e.pointerId); } catch {}
-    }
     pointerIdRef.current = e.pointerId ?? null;
     dragStartXRef.current = e.clientX ?? 0;
-    // Pausar la animación mientras se arrastra
-    (track.style as any).animationPlayState = "paused";
-    track.style.cursor = "grabbing";
-    // Leer variables actuales (px)
-    const startVarStr = track.style.getPropertyValue("--marquee-start");
-    const endVarStr = track.style.getPropertyValue("--marquee-end");
-    const start0 = parseFloat(startVarStr) || 0;
-    const end0 = parseFloat(endVarStr) || 0;
-    startVar0Ref.current = start0;
-    endVar0Ref.current = end0;
   };
 
   const onPointerMove = (e: any) => {
-    if (!draggingRef.current) return;
+    if (!maybeDragRef.current) return;
     const track = trackRef.current;
     if (!track) return;
     const dx = (e.clientX ?? 0) - dragStartXRef.current;
-    if (Math.abs(dx) > 4) suppressClickRef.current = true;
+    if (!draggingRef.current) {
+      if (Math.abs(dx) < DRAG_THRESHOLD_PX) return;
+      draggingRef.current = true;
+      suppressClickRef.current = true;
+      // Capturar puntero y pausar animación
+      if (track.setPointerCapture && pointerIdRef.current != null) {
+        try { track.setPointerCapture(pointerIdRef.current); } catch {}
+      }
+      (track.style as any).animationPlayState = "paused";
+      track.style.cursor = "grabbing";
+      // Leer variables actuales (px)
+      const startVarStr = track.style.getPropertyValue("--marquee-start");
+      const endVarStr = track.style.getPropertyValue("--marquee-end");
+      const start0 = parseFloat(startVarStr) || 0;
+      const end0 = parseFloat(endVarStr) || 0;
+      startVar0Ref.current = start0;
+      endVar0Ref.current = end0;
+    }
     const newStart = startVar0Ref.current + dx;
     const newEnd = endVar0Ref.current + dx;
     track.style.setProperty("--marquee-start", `${newStart}px`);
@@ -222,14 +229,18 @@ export default function ImageTicker({ slice }: Props) {
   };
 
   const endDrag = () => {
-    if (!draggingRef.current) return;
+    if (!maybeDragRef.current) return;
+    const wasDragging = draggingRef.current;
     draggingRef.current = false;
+    maybeDragRef.current = false;
     const track = trackRef.current;
     if (track) {
       if (track.releasePointerCapture && pointerIdRef.current != null) {
         try { track.releasePointerCapture(pointerIdRef.current); } catch {}
       }
-      (track.style as any).animationPlayState = "running";
+      if (wasDragging) {
+        (track.style as any).animationPlayState = "running";
+      }
       track.style.cursor = "grab";
     }
   };
