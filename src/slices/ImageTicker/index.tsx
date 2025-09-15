@@ -168,6 +168,13 @@ export default function ImageTicker({ slice }: Props) {
         gapVar = `${gapPx}px`;
       }
 
+      // Evitar pantalla en blanco: si el gap supera el viewport, lo limitamos
+      const maxGap = Math.max(containerWidth - 1, 0);
+      if (gapPx > maxGap) {
+        gapPx = maxGap;
+        gapVar = `${gapPx}px`;
+      }
+
       // Distancia total a recorrer antes de reiniciar (set + gap)
       const distance = baseWidth + gapPx;
 
@@ -364,7 +371,6 @@ export default function ImageTicker({ slice }: Props) {
           <div aria-hidden className="shrink-0" style={{ width: "var(--marquee-gap)" }} />
           <ul
             className="flex w-max items-center gap-6 md:gap-8"
-            aria-hidden
             role="list"
             style={imageGapStyle}
           >
@@ -377,21 +383,42 @@ export default function ImageTicker({ slice }: Props) {
               );
               return (
                 <li key={`clone-${idx}`} className="inline-flex flex-col items-center">
-                  <div className="inline-flex flex-col items-center">
-                    <PrismicNextImage
-                      field={I.image}
-                      className={classForImg}
-                      alt={I?.image?.alt || I?.subtitle || ""}
-                      priority={false}
-                      sizes="(min-width: 1024px) 128px, 20vw"
-                      quality={85}
-                    />
-                    {isFilled.keyText(I.subtitle) && (
-                      <span className="mt-2 text-xs md:text-sm text-slate-200/80" style={subtitleStyle}>
-                        {I.subtitle}
-                      </span>
-                    )}
-                  </div>
+                  {isFilled.link(I.link) ? (
+                    <PrismicNextLink
+                      field={I.link}
+                      className="inline-flex flex-col items-center no-underline"
+                    >
+                      <PrismicNextImage
+                        field={I.image}
+                        className={classForImg}
+                        alt={I?.image?.alt || I?.subtitle || ""}
+                        priority={false}
+                        sizes="(min-width: 1024px) 128px, 20vw"
+                        quality={85}
+                      />
+                      {isFilled.keyText(I.subtitle) && (
+                        <span className="mt-2 text-xs md:text-sm text-slate-200/80" style={subtitleStyle}>
+                          {I.subtitle}
+                        </span>
+                      )}
+                    </PrismicNextLink>
+                  ) : (
+                    <div className="inline-flex flex-col items-center">
+                      <PrismicNextImage
+                        field={I.image}
+                        className={classForImg}
+                        alt={I?.image?.alt || I?.subtitle || ""}
+                        priority={false}
+                        sizes="(min-width: 1024px) 128px, 20vw"
+                        quality={85}
+                      />
+                      {isFilled.keyText(I.subtitle) && (
+                        <span className="mt-2 text-xs md:text-sm text-slate-200/80" style={subtitleStyle}>
+                          {I.subtitle}
+                        </span>
+                      )}
+                    </div>
+                  )}
                 </li>
               );
             })}

@@ -1,49 +1,114 @@
-import { FC } from 'react';
-import { Content } from '@prismicio/client';
-import { SliceComponentProps } from '@prismicio/react';
+"use client";
+
+import { FC } from "react";
+import { type Content, isFilled } from "@prismicio/client";
+import { PrismicNextImage } from "@prismicio/next";
+import { type SliceComponentProps, type JSXMapSerializer } from "@prismicio/react";
+
+import { Bounded } from "@/components/Bounded";
+import { Heading } from "@/components/Heading";
+import { PrismicRichText } from "@/components/PrismicRichText";
 
 /**
  * Props for `CharacterProfile`.
  */
 export type CharacterProfileProps = SliceComponentProps<Content.CharacterProfileSlice>;
 
+const richComponents: JSXMapSerializer = {
+  heading3: ({ children }) => (
+    <Heading as="h3" size="sm" className="mb-3 mt-8 first:mt-0 last:mb-0">
+      {children}
+    </Heading>
+  ),
+};
+
 /**
  * Component for "CharacterProfile" Slices.
  */
 const CharacterProfile: FC<CharacterProfileProps> = ({ slice }) => {
-    return (
-        <section data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
-            Placeholder component for character_profile (variation: {slice.variation}) slices.
-            <br />
-            <strong>You can edit this slice directly in your code editor.</strong>
-            {/**
-             * 💡 Use Prismic MCP with your code editor
-             *
-             * Get AI-powered help to build your slice components — based on your actual model.
-             *
-             * ▶️ Setup:
-             * 1. Add a new MCP Server in your code editor:
-             *
-             * {
-             *   "mcpServers": {
-             *     "Prismic MCP": {
-             *       "command": "npx",
-             *       "args": ["-y", "@prismicio/mcp-server@latest"]
-             *     }
-             *   }
-             * }
-             *
-             * 2. Select a model optimized for coding (e.g. Claude 3.7 Sonnet or similar)
-             *
-             * ✅ Then open your slice file and ask your code editor:
-             *    "Code this slice"
-             *
-             * Your code editor reads your slice model and helps you code faster ⚡
-             * 🎙️ Give your feedback: https://community.prismic.io/t/help-us-shape-the-future-of-slice-creation/19505
-             * 📚 Documentation: https://prismic.io/docs/ai#code-with-prismics-mcp-server
-             */}
-        </section>
-    );
+  const p = slice.primary;
+  const header = Array.isArray(p.header) && p.header.length > 0 ? p.header[0] : undefined;
+
+  const name = header?.name;
+  const role = header?.role;
+  const portrait = header?.portrait;
+
+  const hasAttributes = Array.isArray(p.attributes) && p.attributes.some((a) => isFilled.keyText(a.label) || isFilled.keyText(a.value));
+  const hasGallery = Array.isArray(p.gallery) && p.gallery.some((g) => isFilled.image(g.image));
+
+  return (
+    <section
+      className="relative bg-slate-900 text-white"
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+    >
+      <Bounded as="section" className="relative py-16 md:py-24">
+        <div className="grid grid-cols-1 items-start gap-10 md:grid-cols-[280px,1fr] md:gap-14">
+          {/* Portrait */}
+          {isFilled.image(portrait) ? (
+            <div className="mx-auto w-full max-w-xs overflow-hidden rounded-sm bg-slate-800/50 shadow-md md:mx-0">
+              <PrismicNextImage
+                field={portrait}
+                fallbackAlt=""
+                className="h-auto w-full object-cover"
+                priority
+              />
+            </div>
+          ) : (
+            <div className="mx-auto aspect-[3/4] w-full max-w-xs rounded-sm bg-slate-800/50 md:mx-0" />
+          )}
+
+          {/* Content */}
+          <div className="flex min-w-0 flex-col gap-4">
+            <div>
+              {isFilled.keyText(name) && (
+                <Heading as="h1" size="lg" className="mb-2">
+                  {name}
+                </Heading>
+              )}
+              {isFilled.keyText(role) && (
+                <p className="text-slate-200/90">{role}</p>
+              )}
+            </div>
+
+            {isFilled.richText(p.bio) ? (
+              <PrismicRichText field={p.bio} components={richComponents} />
+            ) : null}
+
+            {hasAttributes && (
+              <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                {p.attributes.map((attr, i) => (
+                  <div key={i} className="rounded-sm bg-slate-800/60 p-3">
+                    {isFilled.keyText(attr.label) && (
+                      <div className="text-xs uppercase tracking-wide text-slate-300/80">{attr.label}</div>
+                    )}
+                    {isFilled.keyText(attr.value) && (
+                      <div className="text-lg text-slate-50">{attr.value}</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {hasGallery && (
+          <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {p.gallery.map((item, i) => (
+              <div key={i} className="overflow-hidden rounded-sm bg-slate-800/40">
+                {isFilled.image(item.image) && (
+                  <PrismicNextImage field={item.image} fallbackAlt="" className="h-auto w-full object-cover" />
+                )}
+                {isFilled.keyText(item.caption) && (
+                  <div className="p-2 text-sm text-slate-200/90">{item.caption}</div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+      </Bounded>
+    </section>
+  );
 };
 
 export default CharacterProfile;
