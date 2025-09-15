@@ -3726,12 +3726,12 @@ export interface ImageTickerSliceDefaultPrimaryItemsItem {
     /**
      * subtitle field in *ImageTicker → Default → Primary → Items*
      *
-     * - **Field Type**: Rich Text
+     * - **Field Type**: Text
      * - **Placeholder**: *None*
      * - **API ID Path**: image_ticker.default.primary.items[].subtitle
-     * - **Documentation**: https://prismic.io/docs/fields/rich-text
+     * - **Documentation**: https://prismic.io/docs/fields/text
      */
-    subtitle: prismic.RichTextField;
+    subtitle: prismic.KeyTextField;
 
     /**
      * Contain (no crop) field in *ImageTicker → Default → Primary → Items*
