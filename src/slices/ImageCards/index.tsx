@@ -49,7 +49,7 @@ type ImageCardsProps = SliceComponentProps<Content.ImageCardsSlice>;
 
 const ImageCards = ({ slice }: ImageCardsProps) => {
   return (
-    <Bounded as="section" className="bg-white">
+    <Bounded as="section" yPadding="sm" className="bg-white">
       <div className="grid gap-12">
         {isFilled.richText(slice.primary.heading) && (
           <Heading className="text-center">

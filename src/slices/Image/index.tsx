@@ -14,6 +14,7 @@ const Image: FC<ImageProps> = ({ slice, index }) => {
   return (
     <Bounded
       as="section"
+      yPadding="sm"
       className={clsx("bg-white", index === 0 && "pt-0 md:pt-0")}
     >
       {isFilled.image(image) && (
