@@ -37,7 +37,7 @@ export default async function EpisodesIndexPage() {
       {page.data.intro_richtext?.length ? (
         <Bounded yPadding="sm">
           <Heading as="h1">Episodes</Heading>
-          <div className="mt-4 text-slate-700">
+          <div className="mt-4 text-slate-700 dark:text-slate-300">
             <p>{asText(page.data.intro_richtext)}</p>
           </div>
         </Bounded>

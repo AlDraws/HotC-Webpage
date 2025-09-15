@@ -58,7 +58,7 @@ export default async function EpisodePage({ params }: { params: Promise<Params> 
           </div>
         ) : null}
         {page.data.summary?.length ? (
-          <div className="mt-6 text-slate-700">
+          <div className="mt-6 text-slate-700 dark:text-slate-300">
             <PrismicRichText field={page.data.summary} />
           </div>
         ) : null}
