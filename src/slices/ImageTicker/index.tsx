@@ -132,6 +132,7 @@ export default function ImageTicker({ slice }: Props) {
   const startVar0Ref = useRef(0);
   const endVar0Ref = useRef(0);
   const suppressClickRef = useRef(false);
+  const hoveredRef = useRef(false);
   const DRAG_THRESHOLD_PX = 12;
 
   // Recalcular en resize y cuando cambie el número de items o tamaños
@@ -238,7 +239,7 @@ export default function ImageTicker({ slice }: Props) {
       if (track.releasePointerCapture && pointerIdRef.current != null) {
         try { track.releasePointerCapture(pointerIdRef.current); } catch {}
       }
-      if (wasDragging) {
+      if (wasDragging && !hoveredRef.current) {
         (track.style as any).animationPlayState = "running";
       }
       track.style.cursor = "grab";
@@ -285,6 +286,14 @@ export default function ImageTicker({ slice }: Props) {
           onPointerMove={onPointerMove}
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
+          onPointerEnter={() => {
+            hoveredRef.current = true;
+            const t = trackRef.current; if (t) (t.style as any).animationPlayState = "paused";
+          }}
+          onPointerLeave={() => {
+            hoveredRef.current = false;
+            const t = trackRef.current; if (t && !draggingRef.current) (t.style as any).animationPlayState = "running";
+          }}
           onClickCapture={onClickCapture}
           style={{ touchAction: "pan-y", cursor: "grab" }}
           aria-hidden={false}
