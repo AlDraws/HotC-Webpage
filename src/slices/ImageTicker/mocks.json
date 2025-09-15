@@ -22,6 +22,30 @@
 				"__TYPE__": "FieldContent",
 				"value": "sm",
 				"type": "Select"
+			},
+			"items": {
+				"__TYPE__": "GroupContentType",
+				"value": [
+					{
+						"__TYPE__": "GroupItemContent",
+						"value": [
+							[
+								"subtitle",
+								{
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Magna labore aliquip dolor ut proident laboris ea laborum elit consequat exercitation laboris occaecat aute ex. Nostrud occaecat cupidatat officia nulla aute. Magna veniam commodo dolor reprehenderit commodo culpa aliquip minim ea adipisicing."
+											}
+										}
+									]
+								}
+							]
+						]
+					}
+				]
 			}
 		},
 		"items": []

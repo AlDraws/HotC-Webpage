@@ -17,6 +17,46 @@ const sizeClassByItem = (size: string | null | undefined) =>
     ? "h-24 w-24 md:h-28 md:w-28"
     : "h-20 w-20 md:h-24 md:w-24"; // md por defecto
 
+// Utils de color para modo "auto"
+const hexToRgb = (hex: string): { r: number; g: number; b: number } | null => {
+  const h = hex.trim().replace(/^#/, "");
+  if (h.length === 3) {
+    const r = parseInt(h[0] + h[0], 16);
+    const g = parseInt(h[1] + h[1], 16);
+    const b = parseInt(h[2] + h[2], 16);
+    return { r, g, b };
+  }
+  if (h.length === 6) {
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    return { r, g, b };
+  }
+  return null;
+};
+
+const rgbStringToRgb = (str: string): { r: number; g: number; b: number } | null => {
+  const m = str
+    .trim()
+    .match(/^rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})(?:\s*,\s*(0|0?\.\d+|1))?\s*\)$/i);
+  if (!m) return null;
+  const r = Math.max(0, Math.min(255, Number(m[1])));
+  const g = Math.max(0, Math.min(255, Number(m[2])));
+  const b = Math.max(0, Math.min(255, Number(m[3])));
+  return { r, g, b };
+};
+
+const getAutoTextColor = (bg: string | undefined | null): string | undefined => {
+  if (!bg || typeof bg !== "string") return undefined;
+  let rgb: { r: number; g: number; b: number } | null = null;
+  if (bg.startsWith("#")) rgb = hexToRgb(bg);
+  else if (bg.toLowerCase().startsWith("rgb")) rgb = rgbStringToRgb(bg);
+  // Si no se puede parsear, fallback a undefined
+  if (!rgb) return undefined;
+  const yiq = (rgb.r * 299 + rgb.g * 587 + rgb.b * 114) / 1000;
+  return yiq >= 128 ? "#111111" : "#FFFFFF";
+};
+
 export default function ImageTicker({ slice }: Props) {
   const p = slice.primary as any;
 
@@ -54,6 +94,22 @@ export default function ImageTicker({ slice }: Props) {
   const imageGapPxOverride = Number((p as any)?.image_gap_px);
   const imageGapStyle = Number.isFinite(imageGapPxOverride) && imageGapPxOverride > 0
     ? ({ gap: `${imageGapPxOverride}px` } as React.CSSProperties)
+    : undefined;
+
+  // Color del subtítulo: manual o auto en función del bg
+  // Campos soportados:
+  // - primary.text_color_mode = "auto" | "manual" (opcional)
+  // - primary.text_color / text_color_hex / subtitle_color (string CSS) para modo manual
+  const textColorMode = String((p as any)?.text_color_mode || (p as any)?.subtitle_color_mode || "").toLowerCase();
+  const textColorRaw = (p as any)?.text_color ?? (p as any)?.text_color_hex ?? (p as any)?.subtitle_color;
+  const preferAuto = textColorMode === "auto" || (typeof textColorRaw === "string" && textColorRaw.trim().toLowerCase() === "auto");
+  const manualColor = typeof textColorRaw === "string" && textColorRaw.trim() && textColorRaw.trim().toLowerCase() !== "auto"
+    ? textColorRaw.trim()
+    : undefined;
+  const autoColor = getAutoTextColor((p as any)?.bg_color);
+  const finalSubtitleColor = preferAuto ? autoColor : manualColor;
+  const subtitleStyle = finalSubtitleColor
+    ? ({ color: finalSubtitleColor } as React.CSSProperties)
     : undefined;
 
   // Permitir configurar el gap entre tiras desde Prismic
@@ -184,7 +240,7 @@ export default function ImageTicker({ slice }: Props) {
                       quality={85}
                     />
                     {isFilled.keyText(I.subtitle) && (
-                      <span className="mt-2 text-xs md:text-sm text-slate-200/80">
+                      <span className="mt-2 text-xs md:text-sm text-slate-200/80" style={subtitleStyle}>
                         {I.subtitle}
                       </span>
                     )}
@@ -200,7 +256,7 @@ export default function ImageTicker({ slice }: Props) {
                       quality={85}
                     />
                     {isFilled.keyText(I.subtitle) && (
-                      <span className="mt-2 text-xs md:text-sm text-slate-200/80">
+                      <span className="mt-2 text-xs md:text-sm text-slate-200/80" style={subtitleStyle}>
                         {I.subtitle}
                       </span>
                     )}
@@ -236,7 +292,7 @@ export default function ImageTicker({ slice }: Props) {
                       quality={85}
                     />
                     {isFilled.keyText(I.subtitle) && (
-                      <span className="mt-2 text-xs md:text-sm text-slate-200/80">
+                      <span className="mt-2 text-xs md:text-sm text-slate-200/80" style={subtitleStyle}>
                         {I.subtitle}
                       </span>
                     )}
