@@ -1,57 +1,59 @@
 import { Metadata } from "next";
-import { PrismicNextImage } from "@prismicio/next";
-import { asText } from "@prismicio/client";
 import Link from "next/link";
 import { createClient } from "@/prismicio";
 
-export const metadata: Metadata = { title: "Characters" };
+export const metadata: Metadata = {
+  title: "Characters — Heirs of the Collapse",
+  description: "Meet the cast of Heirs of the Collapse.",
+};
 
+/**
+ * Characters index — replicates the App.jsx "characters" route:
+ *   - Page head (kicker, h1, intro)
+ *   - CharacterGrid with hotc-cgrid__* classes from CharacterGrid.jsx
+ */
 export default async function CharactersPage() {
   const client = createClient();
   const characters = await client.getAllByType("character");
 
   return (
-    <div className="mx-auto max-w-6xl px-6 py-16">
-      <h1 className="mb-2 font-display text-5xl uppercase tracking-wide md:text-7xl">
-        Characters
-      </h1>
-      <p className="mb-12 text-on-ink-mute">Meet the cast.</p>
+    <>
+      {/* Page head */}
+      <section className="bounded hotc-page__head">
+        <span className="hotc-kicker">The Cast</span>
+        <h1 className="hotc-h1">Characters</h1>
+        <p className="hotc-page__intro">
+          The heirs, the lost, and the ones who stayed.
+        </p>
+      </section>
 
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {characters.map((ch) => (
-          <Link
-            key={ch.id}
-            href={`/characters/${ch.uid}`}
-            className="group relative overflow-hidden rounded-sm border-2 border-ink bg-slate-900"
-            style={{ boxShadow: "var(--hotc-shadow-panel-sm)" }}
-          >
-            <div className="relative aspect-[3/4] overflow-hidden">
-              {ch.data.portrait?.url ? (
-                <PrismicNextImage
-                  field={ch.data.portrait}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-                />
-              ) : (
-                <div className="flex h-full items-center justify-center bg-slate-800 text-on-ink-faint">
-                  ?
-                </div>
-              )}
-            </div>
-            <div className="p-3">
-              <h2 className="text-base font-bold leading-tight">
-                {ch.data.name}
-              </h2>
-              {ch.data.role ? (
-                <p className="mt-0.5 text-xs uppercase tracking-wider text-on-ink-faint">
-                  {ch.data.role}
-                </p>
-              ) : null}
-            </div>
-          </Link>
-        ))}
-      </div>
-    </div>
+      {/* Character grid — replicates CharacterGrid.jsx */}
+      <section className="bounded bounded--base" style={{ paddingTop: 0 }}>
+        <div className="hotc-cgrid__grid">
+          {characters.map((ch) => (
+            <Link
+              key={ch.id}
+              href={`/characters/${ch.uid}`}
+              className="hotc-cgrid__cell"
+            >
+              <div
+                className="hotc-cgrid__portrait"
+                style={
+                  ch.data.portrait?.url
+                    ? { backgroundImage: `url(${ch.data.portrait.url})` }
+                    : undefined
+                }
+              />
+              <div className="hotc-cgrid__meta">
+                {ch.data.role ? (
+                  <span className="hotc-cgrid__role">{ch.data.role}</span>
+                ) : null}
+                <span className="hotc-cgrid__name">{ch.data.name}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

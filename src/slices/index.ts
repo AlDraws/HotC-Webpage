@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 
 export const components = {
   callout: dynamic(() => import("./callout")),
+  character_grid: dynamic(() => import("./character_grid")),
   cta_block: dynamic(() => import("./cta_block")),
   episode_divider: dynamic(() => import("./episode_divider")),
   episode_panel: dynamic(() => import("./episode_panel")),
@@ -17,5 +18,6 @@ export const components = {
   lore_section: dynamic(() => import("./lore_section")),
   newsletter_embed: dynamic(() => import("./newsletter_embed")),
   parallax_hero: dynamic(() => import("./parallax_hero")),
+  quote: dynamic(() => import("./quote")),
   text_with_image: dynamic(() => import("./text_with_image")),
 };

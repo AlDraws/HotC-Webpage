@@ -13,20 +13,21 @@ export const repositoryName =
   process.env.NEXT_PUBLIC_PRISMIC_ENVIRONMENT || sm.repositoryName;
 
 /**
- * A list of Route Resolver objects that define how a document's `url` field is resolved.
+ * Route Resolver — maps Prismic document types to their URL paths.
+ * This allows Prismic to resolve the `url` field on link fields.
  *
  * {@link https://prismic.io/docs/route-resolver#route-resolver}
  */
-// TODO: Update the routes array to match your project's route structure.
 const routes: Route[] = [
-  // Examples:
-  // { type: "homepage", path: "/" },
-  // { type: "page", path: "/:uid" },
+  { type: "home", path: "/" },
+  { type: "page", path: "/:uid" },
+  { type: "episode", path: "/episodes/:uid" },
+  { type: "lore_entry", path: "/lore/:uid" },
+  { type: "character", path: "/characters/:uid" },
 ];
 
 /**
- * Creates a Prismic client for the project's repository. The client is used to
- * query content from the Prismic API.
+ * Creates a Prismic client for the project's repository.
  *
  * @param config - Configuration for the Prismic client.
  */

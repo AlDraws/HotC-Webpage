@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, SliceZone } from "@prismicio/react";
-import { asText } from "@prismicio/client";
 import { components } from "@/slices";
 import Link from "next/link";
 import { createClient } from "@/prismicio";
@@ -14,7 +13,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const client = createClient();
   const item = await client.getByUID("lore_entry", uid).catch(() => null);
   if (!item) return {};
-  return { title: item.data.title ?? uid };
+  return {
+    title: `${item.data.title ?? uid} — Worldbuilding — Heirs of the Collapse`,
+  };
 }
 
 export async function generateStaticParams() {
@@ -23,38 +24,88 @@ export async function generateStaticParams() {
   return items.map((i) => ({ uid: i.uid }));
 }
 
+/**
+ * Lore entry detail page — faithfully replicates LoreProfile.jsx
+ * from ui_kits/website using the hotc-cprofile__* CSS classes.
+ */
 export default async function LoreDetailPage({ params }: Props) {
   const { uid } = await params;
   const client = createClient();
   const item = await client.getByUID("lore_entry", uid).catch(() => null);
   if (!item) notFound();
 
+  const gallery = item.data.gallery ?? [];
+
   return (
     <article>
-      {/* Hero */}
-      <div className="relative isolate overflow-hidden bg-slate-900">
+      {/* Hero — replicates LoreProfile's hotc-cprofile__hero section */}
+      <section className="hotc-cprofile__hero">
         {item.data.cover?.url ? (
-          <div className="absolute inset-0 -z-10">
-            <PrismicNextImage field={item.data.cover} fill className="object-cover" sizes="100vw" quality={100} />
-            <div className="absolute inset-0 bg-black/55" />
-          </div>
+          <div
+            className="hotc-cprofile__bg"
+            style={{ backgroundImage: `url(${item.data.cover.url})` }}
+          />
         ) : null}
-        <div className="mx-auto max-w-4xl px-6 py-16 text-center md:py-24">
-          {item.data.category ? <p className="kicker mb-2">{item.data.category}</p> : null}
-          <h1 className="text-4xl font-bold tracking-tight md:text-6xl">{item.data.title}</h1>
-        </div>
-      </div>
+        <div className="hotc-cprofile__overlay" />
 
-      {/* Body */}
-      <div className="mx-auto max-w-3xl px-6 py-12">
-        <SliceZone slices={item.data.slices} components={components} />
-
-        <div className="mt-12">
-          <Link href="/lore" className="text-sm font-medium text-on-ink-mute transition-colors hover:text-ember">
-            &larr; All lore
+        <div className="bounded hotc-cprofile__hero-inner">
+          <Link href="/lore" className="hotc-cprofile__back">
+            ← Worldbuilding
           </Link>
+          {item.data.category ? (
+            <span
+              className="hotc-kicker"
+              style={{ color: "var(--hotc-ember)" }}
+            >
+              {item.data.category}
+            </span>
+          ) : null}
+          <h1 className="hotc-cprofile__name">{item.data.title}</h1>
+          {item.data.epithet ? (
+            <p className="hotc-cprofile__epithet">{item.data.epithet}</p>
+          ) : null}
         </div>
-      </div>
+      </section>
+
+      {/* Body — SliceZone for rich lore content */}
+      {item.data.slices && item.data.slices.length > 0 ? (
+        <section className="bounded bounded--base">
+          <div className="hotc-cprofile__bio">
+            <SliceZone slices={item.data.slices} components={components} />
+          </div>
+        </section>
+      ) : null}
+
+      {/* Portrait image as body if no slices */}
+      {(!item.data.slices || item.data.slices.length === 0) &&
+      item.data.portrait?.url ? (
+        <section className="bounded bounded--base">
+          <div className="hotc-cprofile__bio">
+            <PrismicNextImage
+              field={item.data.portrait}
+              className="hotc-twi__img"
+              fallbackAlt=""
+            />
+          </div>
+        </section>
+      ) : null}
+
+      {/* Gallery */}
+      {gallery.length > 0 ? (
+        <section className="bounded bounded--base" style={{ paddingTop: 0 }}>
+          <div className="hotc-cprofile__gallery-grid">
+            {gallery.map((g, i) =>
+              g.image?.url ? (
+                <div
+                  key={i}
+                  className="hotc-cprofile__gallery-tile"
+                  style={{ backgroundImage: `url(${g.image.url})` }}
+                />
+              ) : null,
+            )}
+          </div>
+        </section>
+      ) : null}
     </article>
   );
 }

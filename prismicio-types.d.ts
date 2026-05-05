@@ -1115,6 +1115,8 @@ export interface NavigationDocumentDataSecondaryLinksItem {
   link: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
 }
 
+type NavigationDocumentDataSlicesSlice = never;
+
 /**
  * Content for Navigation documents
  */
@@ -1143,7 +1145,18 @@ interface NavigationDocumentData {
    */
   secondary_links: prismic.GroupField<
     Simplify<NavigationDocumentDataSecondaryLinksItem>
-  >; /**
+  >;
+
+  /**
+   * `slices` field in *Navigation*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: navigation.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<NavigationDocumentDataSlicesSlice>; /**
    * meta_title field in *Navigation*
    *
    * - **Field Type**: Text
@@ -3623,6 +3636,7 @@ declare module "@prismicio/client" {
       NavigationDocumentData,
       NavigationDocumentDataPrimaryLinksItem,
       NavigationDocumentDataSecondaryLinksItem,
+      NavigationDocumentDataSlicesSlice,
       PageDocument,
       PageDocumentData,
       PageDocumentDataSlicesSlice,

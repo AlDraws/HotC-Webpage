@@ -2,6 +2,8 @@
   "id": "navigation",
   "label": "Navigation",
   "repeatable": false,
+  "status": true,
+  "format": "page",
   "json": {
     "Main": {
       "primary_links": {
@@ -90,6 +92,10 @@
             }
           }
         }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone"
       }
     },
     "SEO": {
@@ -127,7 +133,5 @@
         }
       }
     }
-  },
-  "status": true,
-  "format": "custom"
+  }
 }
