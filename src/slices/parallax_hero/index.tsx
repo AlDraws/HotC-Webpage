@@ -1,5 +1,6 @@
 "use client";
 
+import { isFilled } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { useEffect, useRef } from "react";
@@ -46,7 +47,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
       className={`hotc-hero hotc-phero hotc-hero--${slice.primary.size ?? "lg"}`}
     >
       <div ref={bgRef} className="hotc-phero__bg">
-        {slice.primary.bgVideo?.url ? (
+        {isFilled.linkToMedia(slice.primary.bgVideo) ? (
           <video
             className="hotc-phero__video"
             src={slice.primary.bgVideo.url}

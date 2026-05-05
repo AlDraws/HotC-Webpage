@@ -76,13 +76,13 @@ export default async function LoreDetailPage({ params }: Props) {
         </section>
       ) : null}
 
-      {/* Portrait image as body if no slices */}
+      {/* Cover image as body if no slices */}
       {(!item.data.slices || item.data.slices.length === 0) &&
-      item.data.portrait?.url ? (
+      item.data.cover?.url ? (
         <section className="bounded bounded--base">
           <div className="hotc-cprofile__bio">
             <PrismicNextImage
-              field={item.data.portrait}
+              field={item.data.cover}
               className="hotc-twi__img"
               fallbackAlt=""
             />

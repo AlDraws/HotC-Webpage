@@ -74,9 +74,9 @@ export default async function LorePage() {
                 <div
                   className="hotc-cgrid__portrait"
                   style={
-                    item.data.portrait?.url
+                    item.data.cover?.url
                       ? {
-                          backgroundImage: `url(${item.data.portrait.url})`,
+                          backgroundImage: `url(${item.data.cover.url})`,
                           aspectRatio:
                             category === "Illustration" ? "4 / 3" : undefined,
                         }
