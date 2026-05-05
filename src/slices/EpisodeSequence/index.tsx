@@ -13,7 +13,7 @@ const EpisodeSequence: FC<EpisodeSequenceProps> = ({ slice }) => {
       className="w-full max-w-[1080px] mx-auto bg-[#0B0B0E]"
     >
       <div className="flex flex-col w-full">
-        {slice.items.map((item, index) => {
+        {slice.items?.map((item: any, index: number) => {
           if (!isFilled.image(item.image)) return null;
           return (
             <PrismicNextImage
