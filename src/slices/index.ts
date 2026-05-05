@@ -9,6 +9,7 @@ export const components = {
     cta: dynamic(() => import('./Cta')),
     episode_divider: dynamic(() => import('./EpisodeDivider')),
     episode_panel: dynamic(() => import('./EpisodePanel')),
+    episode_sequence: dynamic(() => import('./EpisodeSequence')),
     episode_text_beat: dynamic(() => import('./EpisodeTextBeat')),
     feature_grid: dynamic(() => import('./FeatureGrid')),
     gallery: dynamic(() => import('./Gallery')),

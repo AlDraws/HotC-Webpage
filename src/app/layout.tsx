@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import { Inter } from "next/font/google";
+import { Inter, Comic_Neue, Bangers } from "next/font/google";
 import { isFilled } from "@prismicio/client";
 import type { RichTextField } from "@prismicio/client";
 import { PrismicText } from "@prismicio/react";
@@ -8,6 +8,7 @@ import { PrismicNextLink, PrismicPreview, PrismicNextImage } from "@prismicio/ne
 
 import { createClient, repositoryName } from "@/prismicio";
 import { Bounded } from "@/components/Bounded";
+import { Footer } from "@/components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,14 +16,31 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const comicNeue = Comic_Neue({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-comic-neue",
+});
+
+const bangers = Bangers({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-bangers",
+});
+
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="overflow-x-hidden antialiased">
+    <html lang="en" className={`${inter.variable} ${comicNeue.variable} ${bangers.variable}`}>
+      <body className="overflow-x-hidden antialiased bg-hotc-cream text-hotc-black font-inter selection:bg-hotc-magenta selection:text-white flex flex-col min-h-screen">
         <Header />
-        {children}
+        <main className="flex-grow">
+          {children}
+        </main>
+        <Footer />
         <PrismicPreview repositoryName={repositoryName} />
       </body>
     </html>
@@ -116,18 +134,20 @@ async function Header() {
           ) : (
             // Fallback si no has rellenado `brand`: intenta logo o site_title
             <>
-              {isFilled.image(settings.data.logo) ? (
-                <PrismicNextImage
-                  field={settings.data.logo}
-                  className="h-8 w-auto"
-                  fallbackAlt=""
-                  priority
-                />
-              ) : Array.isArray(settings.data.site_title) ? (
-                <PrismicText field={settings.data.site_title} />
-              ) : (
-                settings.data.site_title || "Site"
-              )}
+              <div 
+                className="w-48 h-16 bg-hotc-black hover:bg-hotc-orange transition-colors"
+                style={{
+                  WebkitMaskImage: "url('/assets/logo-heirs.png')",
+                  WebkitMaskSize: "contain",
+                  WebkitMaskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center left",
+                  maskImage: "url('/assets/logo-heirs.png')",
+                  maskSize: "contain",
+                  maskRepeat: "no-repeat",
+                  maskPosition: "center left"
+                }}
+              />
+              <span className="sr-only">Heirs of the Collapse</span>
             </>
           )}
         </PrismicNextLink>
