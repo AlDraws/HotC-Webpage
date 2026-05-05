@@ -1,0 +1,11 @@
+{
+  "id": "lore_section",
+  "type": "SharedSlice",
+  "name": "LoreSection",
+  "variations": [{ "id":"default","name":"Default","docURL":"...","version":"initial",
+    "primary": {
+      "title": { "type": "StructuredText", "config": { "label": "Title", "single": "heading2" } },
+      "body":  { "type": "StructuredText", "config": { "label": "Body", "multi": "paragraph" } },
+      "image": { "type": "Image", "config": { "label": "Image" } }
+    }, "items": {} }]
+}

@@ -1,0 +1,27 @@
+<!doctype html>
+<html><head><meta charset="utf-8"/><title>Shop product</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  body { margin: 0; background: #fff; font-family: var(--hotc-font-sans); color: #0F172A; padding: 20px; }
+  .label { font-size: 10px; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 14px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .card { display: flex; flex-direction: column; gap: 8px; }
+  .thumb { aspect-ratio: 4 / 5; background: #F1F5F9; position: relative; overflow: hidden; }
+  .thumb.book { background: linear-gradient(135deg, #2a1f18 0%, #0a0a08 80%); }
+  .thumb.book::after { content: "VOL. 01"; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #D97757; font-weight: 700; letter-spacing: 0.2em; font-size: 13px; }
+  .thumb.print { background: linear-gradient(180deg, #3a2a20, #0F172A); }
+  .thumb.tee { background: #0F172A; }
+  .thumb.tee::after { content: ""; position: absolute; left: 50%; top: 50%; width: 50%; height: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #D97757, transparent 60%); }
+  .badge { position: absolute; top: 8px; left: 8px; background: #fff; color: #0F172A; padding: 3px 8px; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .name { font-size: 13px; font-weight: 600; line-height: 1.25; }
+  .price { font-size: 12px; color: #475569; font-variant-numeric: tabular-nums; }
+  .meta { font-size: 10px; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+</style></head>
+<body>
+  <div class="label">Shop card — merchandise grid</div>
+  <div class="grid">
+    <div class="card"><div class="thumb book"><span class="badge">New</span></div><div class="meta">Print volume</div><div class="name">Heirs of the Collapse · Vol. 01</div><div class="price">$24.00</div></div>
+    <div class="card"><div class="thumb print"></div><div class="meta">Art print · A3</div><div class="name">Ash-Hollow at Dusk</div><div class="price">$32.00</div></div>
+    <div class="card"><div class="thumb tee"></div><div class="meta">Apparel · Unisex</div><div class="name">Ember-tongue Sigil Tee</div><div class="price">$28.00</div></div>
+  </div>
+</body></html>

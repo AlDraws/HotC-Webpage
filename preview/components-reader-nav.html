@@ -1,0 +1,33 @@
+<!doctype html>
+<html><head><meta charset="utf-8"/><title>Reader nav</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  body { margin: 0; background: #0F172A; font-family: var(--hotc-font-sans); color: #F1F5F9; padding: 24px; }
+  .label { font-size: 10px; color: #94A3B8; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-bottom: 14px; }
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: rgba(30,41,59,0.6); backdrop-filter: blur(12px); border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .group { display: flex; gap: 6px; align-items: center; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; font-family: inherit; font-size: 12px; font-weight: 500; padding: 8px 12px; background: rgba(255,255,255,0.04); color: #F1F5F9; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; }
+  .btn:hover { background: rgba(255,255,255,0.08); }
+  .btn[disabled] { opacity: 0.35; cursor: not-allowed; }
+  .progress { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 200px; }
+  .progress-meta { font-size: 11px; color: #94A3B8; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+  .bar { width: 200px; height: 2px; background: rgba(255,255,255,0.08); position: relative; }
+  .bar::after { content: ""; position: absolute; left: 0; top: 0; height: 100%; width: 32%; background: #D97757; }
+</style></head>
+<body>
+  <div class="label">Reader chrome — pinned bottom nav while reading</div>
+  <div class="nav">
+    <div class="group">
+      <button class="btn">← Prev</button>
+      <button class="btn">Archive</button>
+    </div>
+    <div class="progress">
+      <div class="progress-meta">CH. 12 · PAGE 08 / 24</div>
+      <div class="bar"></div>
+    </div>
+    <div class="group">
+      <button class="btn">⤓</button>
+      <button class="btn">Next →</button>
+    </div>
+  </div>
+</body></html>

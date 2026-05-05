@@ -1,0 +1,10 @@
+{
+  "id": "image_full",
+  "type": "SharedSlice",
+  "name": "ImageFull",
+  "variations": [{ "id":"default","name":"Default","docURL":"...","version":"initial",
+    "primary": {
+      "image": { "type": "Image", "config": { "label": "Full-bleed image" } },
+      "alt":   { "type": "Text",  "config": { "label": "Alt text" } }
+    }, "items": {} }]
+}

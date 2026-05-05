@@ -1,0 +1,52 @@
+<!doctype html>
+<html><head><meta charset="utf-8"/><title>Color · Paper & Ink</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  body { margin: 0; background: #F5EFE6; font-family: var(--hotc-font-sans); padding: 24px; }
+  .head { font-family: var(--hotc-font-display); font-size: 28px; color: #0B0B0E; letter-spacing: 0.02em; margin-bottom: 18px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .group h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; font-weight: 700; margin: 0 0 10px; color: #0B0B0E; }
+  .row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .chip { height: 84px; border: 3px solid #0B0B0E; border-radius: 6px; box-shadow: 3px 3px 0 #0B0B0E; position: relative; }
+  .chip .name { position: absolute; bottom: 6px; left: 8px; font-size: 10px; font-weight: 700; padding: 2px 6px; }
+  .chip.light .name { background: #0B0B0E; color: #F5EFE6; }
+  .chip.dark .name { background: #F5EFE6; color: #0B0B0E; }
+  .demo { margin-top: 22px; padding: 16px; border: 3px solid #0B0B0E; border-radius: 8px; background: #F5EFE6; box-shadow: 6px 6px 0 #0B0B0E; }
+  .demo h4 { margin: 0 0 6px; color: #0B0B0E; font-family: var(--hotc-font-display); font-size: 22px; letter-spacing: 0.02em; }
+  .demo p { margin: 0; font-size: 13px; line-height: 1.55; color: #4A4135; }
+  .note { font-size: 11px; color: #7A6F5E; margin-top: 12px; }
+</style></head>
+<body>
+  <div class="head">Paper & Ink · the canvas</div>
+  <div class="grid">
+    <div class="group">
+      <h3>Paper · warm cream (default site bg)</h3>
+      <div class="row">
+        <div class="chip light" style="background:#F5EFE6"><span class="name">paper</span></div>
+        <div class="chip light" style="background:#EBE3D5"><span class="name">paper-2</span></div>
+        <div class="chip light" style="background:#D9CFBC"><span class="name">paper-3</span></div>
+      </div>
+    </div>
+    <div class="group">
+      <h3>Ink · line & text</h3>
+      <div class="row">
+        <div class="chip dark" style="background:#0B0B0E"><span class="name">ink</span></div>
+        <div class="chip dark" style="background:#1B1C22"><span class="name">ink-soft</span></div>
+        <div class="chip dark" style="background:#2A2B33"><span class="name">ink-line</span></div>
+      </div>
+    </div>
+    <div class="group" style="grid-column: 1 / -1;">
+      <h3>Slate · cinema (chapter reader bg)</h3>
+      <div class="row">
+        <div class="chip dark" style="background:#07080B"><span class="name">slate-950</span></div>
+        <div class="chip dark" style="background:#0F1014"><span class="name">slate-900</span></div>
+        <div class="chip dark" style="background:#1C1E25"><span class="name">slate-800</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="demo">
+    <h4>Paper as default surface</h4>
+    <p>The site lives on warm cream. The chapter reader switches to slate-950 (cinema mode) so the comic pages — printed for cream — pop hard against deep ink. The two surfaces are deliberately separated.</p>
+  </div>
+  <p class="note">Slate is reserved for the EpisodeReader. Marketing pages, character profiles, lore, store all use paper.</p>
+</body></html>

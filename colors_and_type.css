@@ -1,0 +1,415 @@
+/* =========================================================
+   Heirs of the Collapse — Design Tokens (v2 · brand-true)
+   Paleta extraída de las viñetas reales del cómic:
+     - Naranja brasa (Sandra, FX, acento principal)
+     - Cyan eléctrico (escenas de tensión)
+     - Magenta brasa (FX, alertas, atardeceres)
+     - Amarillo SFX (onomatopeyas)
+     - Tinta negra (línea, texto)
+     - Crema papel (fondos cálidos del cómic publicado)
+     - Slate ink (fondo del visualizador, modo cinema)
+   ========================================================= */
+
+/* ---------- Inter (cuerpo / UI) ---------- */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/Inter-VariableFont_opsz_wght.ttf") format("truetype-variations");
+  font-variation-settings: "opsz" 14;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/Inter-Italic-VariableFont_opsz_wght.ttf") format("truetype-variations");
+  font-variation-settings: "opsz" 14;
+}
+
+/* ---------- Display (títulos) ----------
+   El logo "Heirs of the Collapse" es rotulado a mano. Como display secundario
+   para títulos de capítulo y kickers de tensión usamos una sustituta gratuita
+   con feel similar (peso bold, formas anchas, ligeramente irregular).
+   Bangers = condensed, todo caps; encaja con el carácter del cómic.
+   Si el creador tiene el typeface real del logo, sustituye este @import. */
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Bowlby+One&family=Permanent+Marker&display=swap");
+
+:root {
+  /* =========================================================
+     COLOR — Brand (extraído de las páginas)
+     ========================================================= */
+
+  /* Ember — naranja brasa, acento principal (Sandra, CTAs, FX) */
+  --hotc-ember-50:  #FFF1EA;
+  --hotc-ember-100: #FFD9C2;
+  --hotc-ember-300: #FFA974;
+  --hotc-ember:     #F26B2B;   /* canónico */
+  --hotc-ember-600: #D9531A;
+  --hotc-ember-700: #B23F12;
+
+  /* Cyan — escenas de tensión, contraste frío */
+  --hotc-cyan-50:   #E5F8FC;
+  --hotc-cyan-300:  #6FD9E8;
+  --hotc-cyan:      #1FB8D1;   /* canónico */
+  --hotc-cyan-600:  #1593AA;
+  --hotc-cyan-700:  #0E6E80;
+
+  /* Magenta — atardeceres, alertas, FX rojos */
+  --hotc-magenta-50:  #FCE8EE;
+  --hotc-magenta-300: #F1799C;
+  --hotc-magenta:     #E8336E;   /* canónico */
+  --hotc-magenta-600: #C71F58;
+  --hotc-magenta-700: #9B1644;
+
+  /* SFX yellow — exclusivo de onomatopeyas (FLOP, BLAM, KLICK) */
+  --hotc-sfx:        #FFC233;
+  --hotc-sfx-deep:   #E0A416;
+
+  /* Verde lima — vegetación, vida (huertos, plantas) */
+  --hotc-lime:       #7DBA3F;
+  --hotc-lime-deep:  #5A9128;
+
+  /* =========================================================
+     COLOR — Ink (línea, texto)
+     ========================================================= */
+  --hotc-ink:       #0B0B0E;   /* tinta del cómic */
+  --hotc-ink-soft:  #1B1C22;
+  --hotc-ink-line:  #2A2B33;
+
+  /* =========================================================
+     COLOR — Paper (fondos cálidos, modo "viñeta")
+     ========================================================= */
+  --hotc-paper:     #F5EFE6;   /* crema cálido — fondo de páginas de prosa */
+  --hotc-paper-2:   #EBE3D5;   /* crema más cargado — bordes, separadores */
+  --hotc-paper-3:   #D9CFBC;   /* crema oscuro — sombras planas */
+
+  /* =========================================================
+     COLOR — Slate (modo cinema: visualizador del cómic)
+     El user pidió fondo oscuro para el lector, mantenemos slate
+     para esa superficie específica.
+     ========================================================= */
+  --hotc-slate-950: #07080B;   /* fondo del lector — más profundo que negro */
+  --hotc-slate-900: #0F1014;
+  --hotc-slate-800: #1C1E25;
+  --hotc-slate-700: #2A2D37;
+
+  /* =========================================================
+     COLOR — Foreground sobre paper / sobre ink
+     ========================================================= */
+  --hotc-on-paper:        var(--hotc-ink);
+  --hotc-on-paper-mute:   #4A4135;     /* marrón cálido para body en paper */
+  --hotc-on-paper-faint:  #7A6F5E;     /* captions */
+
+  --hotc-on-ink:          #FFFFFF;
+  --hotc-on-ink-mute:     #DCD4C4;     /* crema apagada sobre ink */
+  --hotc-on-ink-faint:    #8E8676;
+
+  /* Translucent surfaces (cards sobre imágenes) */
+  --hotc-tint-ink-strong: rgba(11, 11, 14, 0.78);
+  --hotc-tint-ink-mid:    rgba(11, 11, 14, 0.55);
+  --hotc-tint-ink-soft:   rgba(11, 11, 14, 0.30);
+  --hotc-overlay-soft:    rgba(0, 0, 0, 0.35);
+  --hotc-overlay-strong:  rgba(0, 0, 0, 0.62);
+
+  /* =========================================================
+     COLOR — Episode tonal beats (sobre fondo del lector slate-950)
+     ========================================================= */
+  --hotc-tone-whisper: rgba(220, 212, 196, 0.55);    /* susurro: crema apagada */
+  --hotc-tone-neutral: var(--hotc-on-ink-mute);
+  --hotc-tone-shout:   #FFFFFF;
+  --hotc-tone-sfx:     var(--hotc-sfx);              /* amarillo onomatopeya */
+
+  /* =========================================================
+     TIPOGRAFÍA
+     ========================================================= */
+  --font-inter: "Inter", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --hotc-font-sans:    var(--font-inter);                    /* UI, body */
+  --hotc-font-display: "Bangers", "Bowlby One", Impact, system-ui, sans-serif;  /* títulos heroicos, FX */
+  --hotc-font-marker:  "Permanent Marker", "Bangers", system-ui, sans-serif;   /* notas, bocadillos */
+
+  /* Scale — display / hero */
+  --hotc-h-xl-min: 3rem;     /* 48px */
+  --hotc-h-xl-max: 5.5rem;   /* 88px — más grande para hero rotulado */
+  --hotc-h-lg-min: 2.25rem;
+  --hotc-h-lg-max: 3.5rem;
+  --hotc-h-md-min: 1.875rem;
+  --hotc-h-md-max: 2.5rem;
+  --hotc-h-sm-min: 1.25rem;
+  --hotc-h-sm-max: 1.5rem;
+
+  /* Body */
+  --hotc-text-xs: 0.75rem;
+  --hotc-text-sm: 0.875rem;
+  --hotc-text-base: 1rem;
+  --hotc-text-lg: 1.125rem;
+  --hotc-text-xl: 1.25rem;
+
+  --hotc-w-light: 300;
+  --hotc-w-regular: 400;
+  --hotc-w-medium: 500;
+  --hotc-w-semibold: 600;
+  --hotc-w-bold: 700;
+  --hotc-w-black: 900;
+
+  --hotc-tracking-tight: -0.02em;
+  --hotc-tracking-wide: 0.05em;
+  --hotc-tracking-wider: 0.12em;
+  --hotc-leading-tight: 1.05;
+  --hotc-leading-snug: 1.25;
+  --hotc-leading-normal: 1.5;
+  --hotc-leading-relaxed: 1.625;
+
+  /* =========================================================
+     SPACING / RADII / SHADOWS — estilo viñeta
+     ========================================================= */
+  --hotc-s-1: 0.25rem;
+  --hotc-s-2: 0.5rem;
+  --hotc-s-3: 0.75rem;
+  --hotc-s-4: 1rem;
+  --hotc-s-6: 1.5rem;
+  --hotc-s-8: 2rem;
+  --hotc-s-10: 2.5rem;
+  --hotc-s-12: 3rem;
+  --hotc-s-16: 4rem;
+  --hotc-s-20: 5rem;
+  --hotc-s-24: 6rem;
+
+  --hotc-container-max: 75rem;   /* 1200px — un poco más ancho que antes para que el lector quepa cómodo */
+  --hotc-reader-max: 1080px;     /* ancho EXACTO de las páginas del cómic */
+
+  --hotc-r-xs: 0.125rem;
+  --hotc-r-sm: 0.25rem;
+  --hotc-r-md: 0.5rem;
+  --hotc-r-lg: 0.75rem;
+
+  /* Bordes y sombras tipo viñeta — duros, desplazados, sin blur */
+  --hotc-border: 3px solid var(--hotc-ink);
+  --hotc-border-thick: 4px solid var(--hotc-ink);
+  --hotc-shadow-panel: 6px 6px 0 var(--hotc-ink);
+  --hotc-shadow-panel-sm: 3px 3px 0 var(--hotc-ink);
+  --hotc-shadow-panel-lg: 10px 10px 0 var(--hotc-ink);
+  --hotc-shadow-soft: 0 8px 24px -8px rgba(0,0,0,0.35);
+
+  /* Motion */
+  --hotc-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --hotc-ease-snap: cubic-bezier(0.5, 0, 0.1, 1);
+  --hotc-marquee-speed: 45s;
+
+  /* =========================================================
+     BREAKPOINTS — referencia para componentes
+       --bp-sm: 640px    móvil grande
+       --bp-md: 768px    tablet
+       --bp-lg: 1024px   laptop
+       --bp-xl: 1280px   desktop ancho
+     ========================================================= */
+}
+
+/* =========================================================
+   Logo masks — el logo es PNG blanco con outline, lo usamos como
+   máscara CSS para teñirlo del color que haga falta. Cualquier
+   elemento con .hotc-logo-mask hereda el color via background.
+   ========================================================= */
+.hotc-logo-mask {
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+.hotc-logo-mask--heirs {
+  -webkit-mask-image: url("assets/brand/logo-heirs.png");
+  mask-image: url("assets/brand/logo-heirs.png");
+  aspect-ratio: 1 / 1;        /* el PNG es 2048x2048 cuadrado */
+}
+.hotc-logo-mask--alvaro {
+  -webkit-mask-image: url("assets/brand/logo-alvaro-serrano.png");
+  mask-image: url("assets/brand/logo-alvaro-serrano.png");
+  aspect-ratio: 2446 / 466;   /* proporción real del wordmark */
+}
+
+/* =========================================================
+   Semantic mappings — drop-in para artefactos HotC
+   ========================================================= */
+html { font-family: var(--hotc-font-sans); }
+
+body.hotc, .hotc {
+  background: var(--hotc-paper);
+  color: var(--hotc-on-paper);
+  font-family: var(--hotc-font-sans);
+  font-size: var(--hotc-text-base);
+  line-height: var(--hotc-leading-normal);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.hotc--ink {       /* superficie inversa: ink sobre crema */
+  background: var(--hotc-ink);
+  color: var(--hotc-on-ink);
+}
+.hotc--cinema {    /* visualizador del cómic */
+  background: var(--hotc-slate-950);
+  color: var(--hotc-on-ink);
+}
+
+/* Headings */
+.hotc-h-display {
+  font-family: var(--hotc-font-display);
+  font-weight: var(--hotc-w-regular); /* Bangers ya es bold-by-default */
+  letter-spacing: 0.01em;
+  line-height: 0.95;
+  font-size: clamp(var(--hotc-h-xl-min), 8vw + 1rem, var(--hotc-h-xl-max));
+  text-transform: uppercase;
+}
+.hotc h1, .hotc-h1 {
+  font-family: var(--hotc-font-sans);
+  font-weight: var(--hotc-w-bold);
+  letter-spacing: var(--hotc-tracking-tight);
+  line-height: var(--hotc-leading-tight);
+  font-size: clamp(var(--hotc-h-lg-min), 4vw + 1rem, var(--hotc-h-lg-max));
+  margin: 0;
+}
+.hotc h2, .hotc-h2 {
+  font-family: var(--hotc-font-sans);
+  font-weight: var(--hotc-w-bold);
+  letter-spacing: var(--hotc-tracking-tight);
+  line-height: var(--hotc-leading-tight);
+  font-size: clamp(var(--hotc-h-md-min), 3vw + 0.75rem, var(--hotc-h-md-max));
+  margin: 0;
+}
+.hotc h3, .hotc-h3 {
+  font-family: var(--hotc-font-sans);
+  font-weight: var(--hotc-w-semibold);
+  letter-spacing: var(--hotc-tracking-tight);
+  line-height: var(--hotc-leading-snug);
+  font-size: clamp(var(--hotc-h-sm-min), 1.5vw + 0.75rem, var(--hotc-h-sm-max));
+  margin: 0;
+}
+
+.hotc p, .hotc-body { line-height: var(--hotc-leading-relaxed); }
+
+.hotc-kicker {
+  font-family: var(--hotc-font-display);
+  text-transform: uppercase;
+  letter-spacing: var(--hotc-tracking-wide);
+  font-size: var(--hotc-text-sm);
+  color: var(--hotc-ember);
+}
+.hotc-attr-label {
+  text-transform: uppercase;
+  letter-spacing: var(--hotc-tracking-wider);
+  font-size: var(--hotc-text-xs);
+  font-weight: var(--hotc-w-bold);
+  color: currentColor;
+  opacity: 0.65;
+}
+.hotc-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--hotc-ember);
+}
+.hotc-link:hover { color: var(--hotc-ember); }
+
+/* =========================================================
+   Episode tonal beats (en el visualizador / cinema)
+   ========================================================= */
+.hotc-tone-whisper {
+  color: var(--hotc-tone-whisper);
+  font-style: italic;
+  font-weight: var(--hotc-w-light);
+  font-family: var(--hotc-font-sans);
+}
+.hotc-tone-neutral {
+  color: var(--hotc-tone-neutral);
+  font-family: var(--hotc-font-sans);
+}
+.hotc-tone-shout {
+  color: var(--hotc-tone-shout);
+  font-weight: var(--hotc-w-black);
+  font-size: 1.5em;
+  letter-spacing: 0.01em;
+  font-family: var(--hotc-font-sans);
+}
+.hotc-tone-sfx {
+  color: var(--hotc-tone-sfx);
+  font-family: var(--hotc-font-display);
+  font-weight: var(--hotc-w-regular);
+  font-size: 2em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  -webkit-text-stroke: 2px var(--hotc-ink);
+  text-shadow: 4px 4px 0 var(--hotc-ink);
+}
+
+/* =========================================================
+   CTA primitive — estilo cómic (borde negro grueso, sombra desplazada)
+   ========================================================= */
+.hotc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--hotc-r-sm);
+  font-family: var(--hotc-font-sans);
+  font-weight: var(--hotc-w-bold);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: var(--hotc-border);
+  background: var(--hotc-paper);
+  color: var(--hotc-ink);
+  box-shadow: var(--hotc-shadow-panel-sm);
+  transition: transform 120ms var(--hotc-ease-snap), box-shadow 120ms var(--hotc-ease-snap);
+}
+.hotc-btn:hover  { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--hotc-ink); }
+.hotc-btn:active { transform: translate(2px, 2px);   box-shadow: 0 0 0 var(--hotc-ink); }
+.hotc-btn--ember   { background: var(--hotc-ember);   color: #fff; }
+.hotc-btn--cyan    { background: var(--hotc-cyan);    color: #fff; }
+.hotc-btn--magenta { background: var(--hotc-magenta); color: #fff; }
+.hotc-btn--ink     { background: var(--hotc-ink);     color: #fff; }
+.hotc-btn--ghost {
+  background: transparent;
+  border-color: currentColor;
+  box-shadow: none;
+}
+.hotc-btn--ghost:hover { transform: none; box-shadow: none; background: rgba(0,0,0,0.06); }
+
+/* Card primitive — estilo viñeta (borde negro grueso, sombra desplazada) */
+.hotc-card {
+  background: var(--hotc-paper);
+  border: var(--hotc-border);
+  border-radius: var(--hotc-r-md);
+  box-shadow: var(--hotc-shadow-panel);
+  padding: var(--hotc-s-4);
+}
+.hotc-card--cinema {
+  background: var(--hotc-slate-800);
+  border-color: var(--hotc-ink);
+  color: var(--hotc-on-ink);
+}
+
+/* Hero overlay helpers */
+.hotc-overlay--soft   { background: var(--hotc-overlay-soft); }
+.hotc-overlay--strong { background: var(--hotc-overlay-strong); }
+
+/* =========================================================
+   Marquee animation
+   ========================================================= */
+@keyframes hotc-marquee {
+  from { transform: translateX(var(--marquee-start, 0px)); }
+  to   { transform: translateX(var(--marquee-end, -300%)); }
+}
+.hotc-marquee {
+  animation: hotc-marquee var(--marquee-speed, 45s) linear infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hotc-marquee { animation: none !important; transform: none !important; }
+}
+.hotc-hover-pause .hotc-marquee:hover { animation-play-state: paused; }

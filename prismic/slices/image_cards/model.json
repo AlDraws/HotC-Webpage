@@ -1,0 +1,16 @@
+{
+  "id": "image_cards",
+  "type": "SharedSlice",
+  "name": "ImageCards",
+  "variations": [{ "id":"default","name":"Default","docURL":"...","version":"initial",
+    "primary": {
+      "kicker": { "type": "Text", "config": { "label": "Kicker" } },
+      "title":  { "type": "StructuredText", "config": { "label": "Title", "single": "heading2" } }
+    },
+    "items": {
+      "image":   { "type": "Image", "config": { "label": "Image (4:3)" } },
+      "title":   { "type": "Text",  "config": { "label": "Title" } },
+      "caption": { "type": "Text",  "config": { "label": "Caption" } }
+    }
+  }]
+}

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1100" width="800" height="1100">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a3026"></stop>
+      <stop offset="1" stop-color="#1c1814"></stop>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2a2620"></stop>
+      <stop offset="1" stop-color="#0a0a08"></stop>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="700" fill="url(#sky)"></rect>
+  <rect y="700" width="800" height="400" fill="url(#ground)"></rect>
+  
+  <polygon points="0,700 80,560 140,700" fill="#181410" opacity="0.8"></polygon>
+  <polygon points="120,700 220,500 320,700" fill="#1a1612" opacity="0.7"></polygon>
+  <polygon points="280,700 380,460 480,700" fill="#1c1814" opacity="0.6"></polygon>
+  <polygon points="450,700 560,520 660,700" fill="#1a1612" opacity="0.7"></polygon>
+  <polygon points="620,700 720,580 800,700" fill="#181410" opacity="0.8"></polygon>
+  
+  <ellipse cx="400" cy="780" rx="14" ry="8" fill="#0a0908" opacity="0.6"></ellipse>
+  <rect x="394" y="730" width="12" height="50" fill="#26201a"></rect>
+  <circle cx="400" cy="722" r="9" fill="#3a3128"></circle>
+  
+  <circle cx="180" cy="220" r="2" fill="#D97757"></circle>
+  <circle cx="240" cy="180" r="1.5" fill="#D97757" opacity="0.8"></circle>
+  <circle cx="320" cy="290" r="1.8" fill="#D97757" opacity="0.6"></circle>
+  <circle cx="560" cy="240" r="2" fill="#D97757" opacity="0.7"></circle>
+  <circle cx="620" cy="320" r="1.5" fill="#D97757" opacity="0.5"></circle>
+  <text x="400" y="1050" text-anchor="middle" font-family="Inter, sans-serif" font-size="14" fill="#64748B" letter-spacing="0.2em">PLACEHOLDER PANEL</text>
+</svg>

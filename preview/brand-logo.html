@@ -1,0 +1,70 @@
+<!doctype html>
+<html><head><meta charset="utf-8"/><title>Brand · Logo (mask-tinted)</title>
+<link rel="stylesheet" href="../colors_and_type.css"/>
+<style>
+  body { margin: 0; background: #F5EFE6; font-family: var(--hotc-font-sans); padding: 28px; color: #0B0B0E; }
+  .head { font-family: var(--hotc-font-display); font-size: 28px; letter-spacing: 0.02em; margin-bottom: 6px; }
+  .sub { font-size: 13px; color: #4A4135; max-width: 70ch; line-height: 1.55; margin-bottom: 22px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .tile { border: 3px solid #0B0B0E; border-radius: 8px; padding: 24px; box-shadow: 6px 6px 0 #0B0B0E; display: flex; flex-direction: column; align-items: center; gap: 14px; min-height: 220px; justify-content: center; }
+  .logo { width: 160px; height: 160px; }
+  .logo--small { width: 120px; height: 120px; }
+  .label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; }
+  .tile--paper { background: #F5EFE6; }
+  .tile--paper .label { color: #4A4135; }
+  .tile--ink { background: #0B0B0E; }
+  .tile--ink .label { color: #DCD4C4; }
+  .tile--ember { background: #F26B2B; }
+  .tile--cyan { background: #1FB8D1; }
+  .tile--magenta { background: #E8336E; }
+  .tile--gradient { background: linear-gradient(140deg, #FFC233 0%, #F26B2B 35%, #E8336E 70%, #6B2B7E 100%); }
+  .tile--gradient .label, .tile--ember .label, .tile--cyan .label, .tile--magenta .label { color: #fff; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+  .alvaro { width: 220px; height: 42px; }
+  .alvaro--small { width: 140px; height: 27px; }
+  code { background: #EBE3D5; padding: 1px 5px; border-radius: 3px; font-size: 11px; font-family: ui-monospace, monospace; }
+</style></head>
+<body>
+  <div class="head">Brand · Logo system</div>
+  <p class="sub">Both the HotC wordmark and the Álvaro Serrano signature are PNGs with transparent backgrounds, used as <code>mask-image</code>. The element's <code>color</code> (or <code>background-color</code> via the helper class <code>.hotc-logo-mask</code>) tints the glyph — the logo adapts to any context without needing colored variants of the file.</p>
+
+  <div class="grid">
+    <div class="tile tile--paper">
+      <div class="hotc-logo-mask hotc-logo-mask--heirs logo" style="color:#0B0B0E"></div>
+      <span class="label">on paper · ink</span>
+    </div>
+    <div class="tile tile--ink">
+      <div class="hotc-logo-mask hotc-logo-mask--heirs logo" style="color:#fff"></div>
+      <span class="label">on ink · white</span>
+    </div>
+    <div class="tile tile--gradient">
+      <div class="hotc-logo-mask hotc-logo-mask--heirs logo" style="color:#fff"></div>
+      <span class="label">over keyart gradient</span>
+    </div>
+    <div class="tile tile--ember">
+      <div class="hotc-logo-mask hotc-logo-mask--heirs logo--small" style="color:#fff"></div>
+      <span class="label">on ember</span>
+    </div>
+    <div class="tile tile--cyan">
+      <div class="hotc-logo-mask hotc-logo-mask--heirs logo--small" style="color:#fff"></div>
+      <span class="label">on cyan</span>
+    </div>
+    <div class="tile tile--magenta">
+      <div class="hotc-logo-mask hotc-logo-mask--heirs logo--small" style="color:#fff"></div>
+      <span class="label">on magenta</span>
+    </div>
+  </div>
+
+  <div class="head" style="margin-top: 28px">Author signature · Álvaro Serrano</div>
+  <p class="sub">Personal mark of the author. <strong>Never placed next to the HotC logo</strong>; lives in the footer attribution and links to <code>www.alvaro-serrano.com</code>. Uses the same mask technique.</p>
+  <div class="row2">
+    <div class="tile tile--paper">
+      <div class="hotc-logo-mask hotc-logo-mask--alvaro alvaro" style="color:#0B0B0E"></div>
+      <span class="label">on paper · ink</span>
+    </div>
+    <div class="tile tile--ink">
+      <div class="hotc-logo-mask hotc-logo-mask--alvaro alvaro--small" style="color:#DCD4C4"></div>
+      <span class="label">on ink · cream</span>
+    </div>
+  </div>
+</body></html>

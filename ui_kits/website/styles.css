@@ -1,0 +1,43 @@
+/* HotC website UI kit shell */
+@import url("../../colors_and_type.css");
+
+/* Re-declare @font-face locally because url()s in colors_and_type.css resolve relative to that file's location. */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../../fonts/Inter-VariableFont_opsz_wght.ttf") format("truetype-variations");
+  font-variation-settings: "opsz" 14;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../../fonts/Inter-Italic-VariableFont_opsz_wght.ttf") format("truetype-variations");
+  font-variation-settings: "opsz" 14;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--hotc-font-sans);
+  background: var(--hotc-ink-900);
+  color: var(--hotc-fg-2);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; border: none; background: transparent; color: inherit; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+
+.bounded { max-width: 72rem; margin: 0 auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+.bounded--sm { padding-top: 2rem; padding-bottom: 2rem; }
+.bounded--base { padding-top: 5rem; padding-bottom: 5rem; }
+.bounded--lg { padding-top: 8rem; padding-bottom: 8rem; }
+
+@media (min-width: 768px) {
+  .bounded--base { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+  .bounded--lg { padding-top: 12rem; padding-bottom: 12rem; }
+}
