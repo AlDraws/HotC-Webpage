@@ -1,0 +1,17 @@
+{
+  "id": "image_gallery",
+  "type": "SharedSlice",
+  "name": "ImageGallery",
+  "description": "Grid of images (replaces legacy 'Gallery' slice).",
+  "variations": [{
+    "id": "default",
+    "name": "Default",
+    "docURL": "...",
+    "version": "initial",
+    "description": "Standard image grid.",
+    "primary": {},
+    "items": {
+      "image": { "type": "Image", "config": { "label": "Image (1:1 or 4:3)" } }
+    }
+  }]
+}

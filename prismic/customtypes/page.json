@@ -6,36 +6,39 @@
   "status": true,
   "json": {
     "Main": {
-      "uid": { "type": "UID", "config": { "label": "UID", "placeholder": "page-slug" } },
-      "title": { "type": "StructuredText", "config": { "label": "Title", "single": "heading1" } },
+      "uid":    { "type": "UID",  "config": { "label": "UID", "placeholder": "page-slug" } },
+      "title":  { "type": "StructuredText", "config": { "label": "Title", "single": "heading1" } },
+      "parent": { "type": "Link", "config": { "label": "Parent", "select": "document", "customtypes": ["page"] } },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "parallax_hero":   { "type": "SharedSlice" },
-            "image_ticker":    { "type": "SharedSlice" },
-            "text_with_image": { "type": "SharedSlice" },
-            "character_grid":  { "type": "SharedSlice" },
-            "item_grid":       { "type": "SharedSlice" },
-            "store_grid":      { "type": "SharedSlice" },
-            "callout":         { "type": "SharedSlice" },
-            "quote":           { "type": "SharedSlice" },
-            "cta_block":       { "type": "SharedSlice" },
-            "newsletter":      { "type": "SharedSlice" },
-            "gallery":         { "type": "SharedSlice" },
-            "image_cards":     { "type": "SharedSlice" },
-            "feature_grid":    { "type": "SharedSlice" },
-            "image_full":      { "type": "SharedSlice" },
-            "lore_section":    { "type": "SharedSlice" }
+            "hero":             { "type": "SharedSlice" },
+            "parallax_hero":    { "type": "SharedSlice" },
+            "image_ticker":     { "type": "SharedSlice" },
+            "text_with_image":  { "type": "SharedSlice" },
+            "character_grid":   { "type": "SharedSlice" },
+            "callout":          { "type": "SharedSlice" },
+            "quote":            { "type": "SharedSlice" },
+            "cta_block":        { "type": "SharedSlice" },
+            "newsletter_embed": { "type": "SharedSlice" },
+            "image_gallery":    { "type": "SharedSlice" },
+            "image_cards":      { "type": "SharedSlice" },
+            "feature_grid":     { "type": "SharedSlice" },
+            "image_full":       { "type": "SharedSlice" },
+            "lore_section":     { "type": "SharedSlice" },
+            "external_support": { "type": "SharedSlice" }
           }
         }
       }
     },
     "SEO": {
-      "meta_title":       { "type": "Text", "config": { "label": "Meta title" } },
-      "meta_description": { "type": "Text", "config": { "label": "Meta description" } },
-      "og_image":         { "type": "Image", "config": { "label": "OG image" } }
+      "meta_title":       { "type": "Text",  "config": { "label": "Meta title" } },
+      "meta_description": { "type": "Text",  "config": { "label": "Meta description" } },
+      "meta_image":       { "type": "Image", "config": { "label": "OG image", "constraint": {} } },
+      "og_image_override":{ "type": "Image", "config": { "label": "OG image override (2400×1260)", "constraint": { "width": 2400, "height": 1260 } } },
+      "noindex":          { "type": "Boolean", "config": { "label": "No index", "default_value": false } }
     }
   }
 }

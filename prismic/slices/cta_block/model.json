@@ -2,11 +2,20 @@
   "id": "cta_block",
   "type": "SharedSlice",
   "name": "CtaBlock",
-  "variations": [{ "id":"default","name":"Default","docURL":"...","version":"initial",
+  "description": "A simple call-to-action block.",
+  "variations": [{
+    "id": "default",
+    "name": "Default",
+    "docURL": "...",
+    "version": "initial",
+    "description": "Standard CTA block.",
     "primary": {
-      "title": { "type": "StructuredText", "config": { "label": "Title", "single": "heading2" } },
-      "body":  { "type": "StructuredText", "config": { "label": "Body", "multi": "paragraph" } },
-      "ctaLabel":  { "type": "Text", "config": { "label": "CTA label" } },
-      "ctaTarget": { "type": "Text", "config": { "label": "CTA target route" } }
-    }, "items": {} }]
+      "title":            { "type": "Text",  "config": { "label": "Title" } },
+      "description":      { "type": "Text",  "config": { "label": "Description" } },
+      "cta_label":        { "type": "Text",  "config": { "label": "CTA Label" } },
+      "cta_link":         { "type": "Link",  "config": { "label": "CTA Link", "select": null, "allowTargetBlank": false } },
+      "background_image": { "type": "Image", "config": { "label": "Background Image" } }
+    },
+    "items": {}
+  }]
 }

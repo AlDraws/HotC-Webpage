@@ -2,11 +2,18 @@
   "id": "quote",
   "type": "SharedSlice",
   "name": "Quote",
+  "description": "A blockquote section.",
   "variations": [{
-    "id": "default", "name": "Default", "docURL": "...", "version": "initial",
+    "id": "default",
+    "name": "Default",
+    "docURL": "...",
+    "version": "initial",
+    "description": "Standard quote.",
     "primary": {
-      "text":   { "type": "StructuredText", "config": { "label": "Text", "multi": "paragraph" } },
-      "source": { "type": "Text", "config": { "label": "Source / character" } }
-    }, "items": {}
+      "text":        { "type": "StructuredText", "config": { "label": "Quote Text", "multi": "paragraph,strong,em" } },
+      "author":      { "type": "Text",           "config": { "label": "Author" } },
+      "author_role": { "type": "Text",           "config": { "label": "Author Role" } }
+    },
+    "items": {}
   }]
 }

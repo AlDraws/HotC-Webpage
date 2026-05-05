@@ -13,6 +13,7 @@ export const components = {
   feature_grid: dynamic(() => import("./feature_grid")),
   hero: dynamic(() => import("./hero")),
   image_cards: dynamic(() => import("./image_cards")),
+  image_full: dynamic(() => import("./image_full")),
   image_gallery: dynamic(() => import("./image_gallery")),
   image_ticker: dynamic(() => import("./image_ticker")),
   lore_section: dynamic(() => import("./lore_section")),

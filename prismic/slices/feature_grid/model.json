@@ -2,15 +2,21 @@
   "id": "feature_grid",
   "type": "SharedSlice",
   "name": "FeatureGrid",
-  "variations": [{ "id":"default","name":"Default","docURL":"...","version":"initial",
+  "description": "Grid of icons/features.",
+  "variations": [{
+    "id": "default",
+    "name": "Default",
+    "docURL": "...",
+    "version": "initial",
+    "description": "Standard feature grid.",
     "primary": {
       "kicker": { "type": "Text", "config": { "label": "Kicker" } },
-      "title":  { "type": "StructuredText", "config": { "label": "Title", "single": "heading2" } }
+      "title":  { "type": "Text", "config": { "label": "Title" } }
     },
     "items": {
-      "glyph": { "type": "Text", "config": { "label": "Glyph (single char)" } },
-      "title": { "type": "Text", "config": { "label": "Title" } },
-      "body":  { "type": "StructuredText", "config": { "label": "Body", "multi": "paragraph" } }
+      "icon":        { "type": "Image", "config": { "label": "Icon / glyph image (square, transparent)" } },
+      "title":       { "type": "Text",  "config": { "label": "Feature title" } },
+      "description": { "type": "Text",  "config": { "label": "Feature description" } }
     }
   }]
 }

@@ -10,17 +10,21 @@
     "version": "initial",
     "description": "Hero with kicker, title, subtitle, CTAs, and parallax bg/fg.",
     "primary": {
-      "kicker":     { "type": "Text",   "config": { "label": "Kicker" } },
-      "title":      { "type": "StructuredText", "config": { "label": "Title", "single": "heading1" } },
-      "subtitle":   { "type": "StructuredText", "config": { "label": "Subtitle", "multi": "paragraph" } },
+      "kicker":     { "type": "Text",   "config": { "label": "Kicker", "placeholder": "Updates Sundays" } },
+      "title":      { "type": "Text",   "config": { "label": "Title", "placeholder": "Heirs of the Collapse" } },
+      "subtitle":   { "type": "Text",   "config": { "label": "Subtitle", "placeholder": "A webcomic about what remains after the gods left." } },
       "bgImage":    { "type": "Image",  "config": { "label": "Background image" } },
       "bgVideo":    { "type": "Link",   "config": { "label": "Background video URL (mp4)", "select": "media" } },
+      "bgPoster":   { "type": "Image",  "config": { "label": "Background video poster" } },
       "foreground": { "type": "Image",  "config": { "label": "Foreground PNG (alpha)" } },
-      "primaryCtaLabel":  { "type": "Text", "config": { "label": "Primary CTA label" } },
-      "primaryCtaTarget": { "type": "Text", "config": { "label": "Primary CTA target (latest / episodes / store / lore)" } },
-      "secondaryCtaLabel":  { "type": "Text", "config": { "label": "Secondary CTA label" } },
-      "secondaryCtaTarget": { "type": "Text", "config": { "label": "Secondary CTA target" } },
-      "size": { "type": "Select", "config": { "label": "Size", "options": ["md","lg"], "default_value": "lg" } }
+      "bgStrength": { "type": "Number", "config": { "label": "Background parallax strength", "placeholder": "0.18" } },
+      "fgStrength": { "type": "Number", "config": { "label": "Foreground parallax strength", "placeholder": "0.42" } },
+      "primaryCtaLabel":   { "type": "Text", "config": { "label": "Primary CTA label", "placeholder": "Read latest" } },
+      "primaryCtaLink":    { "type": "Link", "config": { "label": "Primary CTA link", "select": null, "allowTargetBlank": false } },
+      "secondaryCtaLabel": { "type": "Text", "config": { "label": "Secondary CTA label", "placeholder": "Archive" } },
+      "secondaryCtaLink":  { "type": "Link", "config": { "label": "Secondary CTA link", "select": null, "allowTargetBlank": false } },
+      "size":    { "type": "Select", "config": { "label": "Size", "options": ["md", "lg"], "default_value": "lg" } },
+      "overlay": { "type": "Select", "config": { "label": "Overlay opacity", "options": ["none", "subtle", "strong"], "default_value": "strong" } }
     },
     "items": {}
   }]

@@ -4,15 +4,19 @@
   "name": "TextWithImage",
   "description": "Editorial block: headline + body + image. Reversible.",
   "variations": [{
-    "id": "default", "name": "Default", "docURL": "...", "version": "initial",
+    "id": "default",
+    "name": "Default",
+    "docURL": "...",
+    "version": "initial",
+    "description": "Editorial block: headline + body + image. Reversible.",
     "primary": {
-      "kicker":  { "type": "Text", "config": { "label": "Kicker" } },
-      "title":   { "type": "StructuredText", "config": { "label": "Title", "single": "heading2" } },
-      "body":    { "type": "StructuredText", "config": { "label": "Body", "multi": "paragraph" } },
-      "image":   { "type": "Image", "config": { "label": "Image (4:3)" } },
-      "reverse": { "type": "Boolean", "config": { "label": "Reverse layout", "default_value": false } },
-      "ctaLabel":  { "type": "Text", "config": { "label": "CTA label" } },
-      "ctaTarget": { "type": "Text", "config": { "label": "CTA target route" } }
+      "kicker":    { "type": "Text",          "config": { "label": "Kicker", "placeholder": "The World" } },
+      "title":     { "type": "Text",          "config": { "label": "Title", "placeholder": "Where the gods left" } },
+      "text":      { "type": "StructuredText","config": { "label": "Text content", "placeholder": "Detailed description...", "multi": "paragraph,strong,em,hyperlink" } },
+      "image":     { "type": "Image",         "config": { "label": "Featured Image (4:3)" } },
+      "layout":    { "type": "Select",        "config": { "label": "Layout side", "options": ["left", "right"], "default_value": "left" } },
+      "cta_label": { "type": "Text",          "config": { "label": "CTA Label", "placeholder": "Learn more" } },
+      "cta_link":  { "type": "Link",          "config": { "label": "CTA Link", "select": null, "allowTargetBlank": false } }
     },
     "items": {}
   }]

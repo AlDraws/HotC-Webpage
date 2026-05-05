@@ -1231,7 +1231,9 @@ type PageDocumentDataSlicesSlice =
   | LoreSectionSlice
   | ExternalSupportSlice
   | ImageTickerSlice
-  | ParallaxHeroSlice;
+  | ParallaxHeroSlice
+  | CharacterGridSlice
+  | ImageFullSlice;
 
 /**
  * Content for Page documents
@@ -3401,6 +3403,61 @@ export type ParallaxHeroSliceDefault = prismic.SharedSliceVariation<
 type ParallaxHeroSliceVariation = ParallaxHeroSliceDefault;
 
 /**
+ * Primary content in *ImageFull → Default → Primary*
+ */
+export interface ImageFullSliceDefaultPrimary {
+  /**
+   * Full-bleed image field in *ImageFull → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_full.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * Alt text override field in *ImageFull → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_full.default.primary.alt
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  alt: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for ImageFull Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Full-bleed image.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageFullSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ImageFullSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ImageFull*
+ */
+type ImageFullSliceVariation = ImageFullSliceDefault;
+
+/**
+ * ImageFull Shared Slice
+ *
+ * - **API ID**: `image_full`
+ * - **Description**: Full-bleed image block from ui_kits/website/Slices.jsx::ImageFull.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageFullSlice = prismic.SharedSlice<
+  "image_full",
+  ImageFullSliceVariation
+>;
+
+/**
  * ParallaxHero Shared Slice
  *
  * - **API ID**: `parallax_hero`
@@ -3717,6 +3774,10 @@ declare module "@prismicio/client" {
       ImageTickerSliceDefaultItem,
       ImageTickerSliceVariation,
       ImageTickerSliceDefault,
+      ImageFullSlice,
+      ImageFullSliceDefaultPrimary,
+      ImageFullSliceVariation,
+      ImageFullSliceDefault,
       LoreSectionSlice,
       LoreSectionSliceDefaultPrimary,
       LoreSectionSliceDefaultItem,

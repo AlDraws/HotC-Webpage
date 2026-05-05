@@ -6,25 +6,61 @@
   "status": true,
   "json": {
     "Main": {
-      "uid":      { "type": "UID",  "config": { "label": "Slug", "placeholder": "mira" } },
-      "name":     { "type": "StructuredText", "config": { "label": "Name", "single": "heading1" } },
-      "role":     { "type": "Text", "config": { "label": "Role / lineage tag" } },
-      "epithet":  { "type": "StructuredText", "config": { "label": "Epithet (1 line)", "single": "paragraph" } },
-      "portrait": { "type": "Image", "config": { "label": "Portrait (3:4)", "constraint": { "width": 900, "height": 1200 } } },
-      "cover":    { "type": "Image", "config": { "label": "Hero background (16:9)", "constraint": { "width": 2400 } } },
+      "uid":       { "type": "UID",    "config": { "label": "Slug", "placeholder": "mira" } },
+      "name":      { "type": "Text",   "config": { "label": "Name (display)" } },
+      "role":      { "type": "Select", "config": { "label": "Role", "options": ["Protagonist", "Ally", "Antagonist", "Neutral", "Other"] } },
+      "epithet":   { "type": "Text",   "config": { "label": "Epithet (1 line)", "placeholder": "The last to remember its names." } },
+      "portrait":  { "type": "Image",  "config": { "label": "Portrait (3:4)", "constraint": { "width": 900, "height": 1200 } } },
+      "cover":     { "type": "Image",  "config": { "label": "Hero background (16:9)" } },
+      "short_bio": { "type": "StructuredText", "config": { "label": "Short Bio", "multi": "paragraph,strong,em" } },
       "attributes": {
         "type": "Group",
         "config": {
           "label": "Attributes",
           "fields": {
-            "label": { "type": "Text", "config": { "label": "Label" } },
-            "value": { "type": "Text", "config": { "label": "Value" } }
+            "label": { "type": "Text", "config": { "label": "Label", "placeholder": "Lineage" } },
+            "value": { "type": "Text", "config": { "label": "Value", "placeholder": "Ember-tongue" } }
           }
         }
       },
-      "bio":     { "type": "StructuredText", "config": { "label": "Bio", "multi": "paragraph" } },
-      "gallery": { "type": "Group", "config": { "label": "Gallery",
-                    "fields": { "image": { "type": "Image", "config": { "label": "Image" } } } } }
+      "gallery": {
+        "type": "Group",
+        "config": {
+          "label": "Gallery",
+          "fields": {
+            "image":   { "type": "Image", "config": { "label": "Image" } },
+            "caption": { "type": "Text",  "config": { "label": "Caption" } }
+          }
+        }
+      },
+      "relations": {
+        "type": "Group",
+        "config": {
+          "label": "Relations",
+          "fields": {
+            "character_ref": { "type": "Link", "config": { "label": "Character", "select": "document", "customtypes": ["character"] } },
+            "note":          { "type": "Text", "config": { "label": "Relationship note" } }
+          }
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "parallax_hero":   { "type": "SharedSlice" },
+            "text_with_image": { "type": "SharedSlice" },
+            "quote":           { "type": "SharedSlice" },
+            "lore_section":    { "type": "SharedSlice" }
+          }
+        }
+      }
+    },
+    "SEO": {
+      "meta_title":       { "type": "Text",  "config": { "label": "Meta title" } },
+      "meta_description": { "type": "StructuredText", "config": { "label": "Meta description", "multi": "paragraph" } },
+      "meta_image":       { "type": "Image", "config": { "label": "OG image" } },
+      "noindex":          { "type": "Boolean", "config": { "label": "No index", "default_value": false } }
     }
   }
 }

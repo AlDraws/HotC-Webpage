@@ -2,10 +2,28 @@
   "id": "lore_section",
   "type": "SharedSlice",
   "name": "LoreSection",
-  "variations": [{ "id":"default","name":"Default","docURL":"...","version":"initial",
+  "description": "Grid or section for worldbuilding/lore entries.",
+  "variations": [{
+    "id": "default",
+    "name": "Default",
+    "docURL": "...",
+    "version": "initial",
+    "description": "A list of lore entries.",
     "primary": {
-      "title": { "type": "StructuredText", "config": { "label": "Title", "single": "heading2" } },
-      "body":  { "type": "StructuredText", "config": { "label": "Body", "multi": "paragraph" } },
-      "image": { "type": "Image", "config": { "label": "Image" } }
-    }, "items": {} }]
+      "kicker":         { "type": "Text",   "config": { "label": "Kicker", "placeholder": "Archive" } },
+      "title":          { "type": "Text",   "config": { "label": "Title", "placeholder": "Worldbuilding" } },
+      "default_filter": { "type": "Select", "config": { "label": "Default Filter", "options": ["All", "Environment", "Prop", "Illustration"], "default_value": "All" } }
+    },
+    "items": {
+      "entry": {
+        "type": "Link",
+        "config": {
+          "label": "Lore Entry",
+          "placeholder": "Link to a lore entry document",
+          "select": "document",
+          "customtypes": ["lore_entry"]
+        }
+      }
+    }
+  }]
 }
