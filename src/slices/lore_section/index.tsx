@@ -1,5 +1,4 @@
 "use client";
-import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { LoreSectionSlice } from "@/../prismicio-types";
 
@@ -20,16 +19,17 @@ const LoreSection = ({ slice }: LoreSectionProps) => {
     >
       <div className="hotc-lore__inner">
         <div>
-          <h2>{slice.primary.title}</h2>
-          <p style={{ marginTop: "1rem" }}>{slice.primary.body}</p>
+          {slice.primary.kicker && (
+            <span
+              className="hotc-kicker"
+              style={{ display: "block", marginBottom: "0.5rem" }}
+            >
+              {slice.primary.kicker}
+            </span>
+          )}
+          <h2 className="hotc-h2">{slice.primary.title}</h2>
         </div>
-        {slice.primary.image.url && (
-          <PrismicNextImage
-            field={slice.primary.image}
-            className="hotc-lore__img"
-            fallbackAlt=""
-          />
-        )}
+        {/* Note: 'body' and 'image' fields were removed as they are not present in the LoreSection model. */}
       </div>
     </section>
   );

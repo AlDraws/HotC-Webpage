@@ -1,5 +1,5 @@
 "use client";
-import { SliceComponentProps } from "@prismicio/react";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { NewsletterEmbedSlice } from "@/../prismicio-types";
 
@@ -20,7 +20,12 @@ const NewsletterEmbed = ({ slice }: NewsletterEmbedProps) => {
     >
       <div className="hotc-newsletter">
         <h3>{slice.primary.title || "Sundays in your inbox."}</h3>
-        <p>{slice.primary.body || "One email when a new chapter drops."}</p>
+        <div className="hotc-newsletter__body">
+          <PrismicRichText
+            field={slice.primary.description}
+            fallback={<p>One email when a new chapter drops.</p>}
+          />
+        </div>
         <form
           className="hotc-newsletter__form"
           onSubmit={(e) => e.preventDefault()}
