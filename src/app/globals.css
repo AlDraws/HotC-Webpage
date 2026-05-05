@@ -1519,3 +1519,349 @@ body.hotc, .hotc {
 }
 
 /* FIN DE LA PARTE 3. */
+
+/* =========================================================
+   PARTE 4 — Slices: Hero, TextWithImage, Callout, Quote,
+   CtaBlock, Newsletter, Gallery, ImageCards, FeatureGrid,
+   LoreSection, EpisodePanel
+   Fuente: ui_kits/website/components.css líneas 183–645
+   ========================================================= */
+
+/* =========================================================
+   HERO — keyart full-bleed, título display rotulado
+   ========================================================= */
+.hotc-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--hotc-ink);
+}
+.hotc-hero__bg {
+  position: absolute;
+  inset: -5%;
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+.hotc-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.75) 100%);
+}
+.hotc-hero__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  color: #fff;
+}
+@media (min-width: 768px) {
+  .hotc-hero__inner { padding-top: 6rem; padding-bottom: 6rem; gap: 1.25rem; }
+}
+@media (min-width: 1024px) {
+  .hotc-hero--lg .hotc-hero__inner { padding-top: 9rem; padding-bottom: 9rem; }
+}
+.hotc-hero__kicker { color: var(--hotc-ember); font-size: 0.9375rem; }
+.hotc-hero__title {
+  font-family: var(--hotc-font-display);
+  margin: 0;
+  max-width: 18ch;
+  font-size: clamp(2.75rem, 9vw + 1rem, 5.5rem);
+  line-height: 0.92;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #fff;
+  -webkit-text-stroke: 2px var(--hotc-ink);
+  text-shadow: 5px 5px 0 var(--hotc-ink);
+}
+.hotc-hero__subtitle {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--hotc-on-ink-mute);
+  max-width: 50ch;
+  margin: 0;
+}
+@media (min-width: 768px) { .hotc-hero__subtitle { font-size: 1.125rem; } }
+.hotc-hero__ctas { display: flex; gap: 0.75rem; margin-top: 0.5rem; flex-wrap: wrap; }
+
+/* =========================================================
+   TextWithImage — bloque editorial
+   ========================================================= */
+.hotc-twi { padding: 3rem 0; }
+.hotc-twi__inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .hotc-twi { padding: 4rem 0; }
+  .hotc-twi__inner { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .hotc-twi--reverse .hotc-twi__media { order: 2; }
+  .hotc-twi--reverse .hotc-twi__copy  { order: 1; }
+}
+.hotc-twi__img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 3px solid var(--hotc-ink);
+  border-radius: var(--hotc-r-lg);
+  box-shadow: var(--hotc-shadow-panel);
+}
+.hotc-twi__copy { display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+.hotc-twi__copy h2 { color: var(--hotc-ink); }
+.hotc-twi__body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--hotc-on-paper-mute);
+  margin: 0;
+  max-width: 50ch;
+}
+
+/* =========================================================
+   SLICES — Callout / Quote / CtaBlock / Newsletter /
+   Gallery / ImageCards / FeatureGrid / ImageFull / LoreSection
+   ========================================================= */
+
+/* Callout */
+.hotc-callout {
+  border: 3px solid var(--hotc-ink);
+  border-radius: var(--hotc-r-md);
+  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+  box-shadow: var(--hotc-shadow-panel-sm);
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.hotc-callout--default { background: var(--hotc-paper-2); }
+.hotc-callout--lore    { background: var(--hotc-cyan);    color: #fff; }
+.hotc-callout--warning { background: var(--hotc-ember);   color: #fff; }
+.hotc-callout__bar { width: 6px; align-self: stretch; background: var(--hotc-ink); border-radius: 3px; }
+.hotc-callout__body h4 {
+  font-family: var(--hotc-font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  margin: 0 0 0.25rem;
+}
+.hotc-callout__body p { margin: 0; font-size: 0.9375rem; line-height: 1.55; }
+
+/* Quote */
+.hotc-quote {
+  background: var(--hotc-paper);
+  padding: 2.5rem 1.5rem;
+  border-top: 3px solid var(--hotc-ink);
+  border-bottom: 3px solid var(--hotc-ink);
+  text-align: center;
+}
+.hotc-quote__text {
+  font-family: var(--hotc-font-display);
+  font-size: clamp(1.5rem, 4vw + 0.5rem, 2.5rem);
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  color: var(--hotc-ink);
+  margin: 0 auto 1rem;
+  max-width: 24ch;
+  text-transform: uppercase;
+}
+.hotc-quote__source {
+  font-family: var(--hotc-font-marker);
+  font-size: 0.9375rem;
+  color: var(--hotc-on-paper-mute);
+  display: inline-block;
+}
+.hotc-quote__source::before { content: "— "; }
+
+/* CtaBlock */
+.hotc-cta-block {
+  background: var(--hotc-ember);
+  color: #fff;
+  border: 3px solid var(--hotc-ink);
+  border-radius: var(--hotc-r-lg);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--hotc-shadow-panel-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+.hotc-cta-block h2 {
+  font-family: var(--hotc-font-display);
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0;
+  -webkit-text-stroke: 2px var(--hotc-ink);
+  text-shadow: 3px 3px 0 var(--hotc-ink);
+}
+.hotc-cta-block p { margin: 0; font-size: 1rem; max-width: 50ch; line-height: 1.55; }
+
+/* Newsletter */
+.hotc-newsletter {
+  background: var(--hotc-paper-2);
+  border: 3px solid var(--hotc-ink);
+  border-radius: var(--hotc-r-lg);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--hotc-shadow-panel);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.hotc-newsletter h3 {
+  font-family: var(--hotc-font-display);
+  font-size: 1.75rem;
+  margin: 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--hotc-ink);
+}
+.hotc-newsletter p { margin: 0; color: var(--hotc-on-paper-mute); font-size: 0.9375rem; line-height: 1.55; }
+.hotc-newsletter__form { display: flex; flex-direction: column; gap: 0.625rem; }
+@media (min-width: 640px) { .hotc-newsletter__form { flex-direction: row; } }
+.hotc-newsletter input {
+  flex: 1;
+  font: inherit;
+  padding: 0.75rem 1rem;
+  background: var(--hotc-paper);
+  color: var(--hotc-ink);
+  border: 3px solid var(--hotc-ink);
+  border-radius: var(--hotc-r-sm);
+  outline: none;
+}
+.hotc-newsletter input:focus { box-shadow: 3px 3px 0 var(--hotc-ember); }
+
+/* Gallery */
+.hotc-gallery { display: grid; gap: 0.75rem; grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 640px)  { .hotc-gallery { grid-template-columns: repeat(3, 1fr); gap: 1rem; } }
+@media (min-width: 1024px) { .hotc-gallery { grid-template-columns: repeat(4, 1fr); } }
+.hotc-gallery__tile {
+  aspect-ratio: 1;
+  background-size: cover;
+  background-position: center;
+  border: 3px solid var(--hotc-ink);
+  border-radius: var(--hotc-r-sm);
+  background-color: var(--hotc-paper-2);
+}
+
+/* ImageCards */
+.hotc-icards { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+@media (min-width: 640px)  { .hotc-icards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .hotc-icards { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
+.hotc-icard { display: flex; flex-direction: column; gap: 0.625rem; }
+.hotc-icard__img {
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  border: 3px solid var(--hotc-ink);
+  border-radius: var(--hotc-r-md);
+  box-shadow: var(--hotc-shadow-panel-sm);
+}
+.hotc-icard__title {
+  font-family: var(--hotc-font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0;
+}
+.hotc-icard__caption { font-size: 0.875rem; color: var(--hotc-on-paper-mute); line-height: 1.55; margin: 0; }
+
+/* FeatureGrid */
+.hotc-fgrid { display: grid; gap: 1.25rem; grid-template-columns: 1fr; }
+@media (min-width: 768px) { .hotc-fgrid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; } }
+.hotc-fcard {
+  background: var(--hotc-paper-2);
+  border: 3px solid var(--hotc-ink);
+  border-radius: var(--hotc-r-md);
+  padding: 1.25rem;
+  box-shadow: var(--hotc-shadow-panel-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.hotc-fcard__icon {
+  width: 48px;
+  height: 48px;
+  background: var(--hotc-ember);
+  border: 3px solid var(--hotc-ink);
+  border-radius: var(--hotc-r-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  overflow: hidden;
+}
+.hotc-fcard h4 {
+  font-family: var(--hotc-font-display);
+  font-size: 1.25rem;
+  margin: 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--hotc-ink);
+}
+.hotc-fcard p { margin: 0; font-size: 0.9375rem; line-height: 1.55; color: var(--hotc-on-paper-mute); }
+
+/* ImageFull */
+.hotc-image-full {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  border-top: 3px solid var(--hotc-ink);
+  border-bottom: 3px solid var(--hotc-ink);
+}
+.hotc-image-full img { display: block; width: 100%; height: auto; }
+
+/* LoreSection */
+.hotc-lore {
+  background: var(--hotc-cyan);
+  color: #fff;
+  padding: 2.5rem 1rem;
+  border-top: 3px solid var(--hotc-ink);
+  border-bottom: 3px solid var(--hotc-ink);
+}
+@media (min-width: 768px) { .hotc-lore { padding: 4rem 2rem; } }
+.hotc-lore__inner {
+  max-width: var(--hotc-container-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+@media (min-width: 768px) {
+  .hotc-lore__inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+}
+.hotc-lore h2 {
+  font-family: var(--hotc-font-display);
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin: 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  -webkit-text-stroke: 2px var(--hotc-ink);
+  text-shadow: 4px 4px 0 var(--hotc-ink);
+}
+.hotc-lore p { margin: 0; line-height: 1.65; font-size: 1rem; }
+.hotc-lore img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border: 3px solid var(--hotc-ink);
+  border-radius: var(--hotc-r-md);
+  box-shadow: var(--hotc-shadow-panel);
+}
+
+/* EpisodePanel — página individual del visor */
+.hotc-ep-panel {
+  width: 100%;
+  max-width: var(--hotc-reader-max);
+  margin: 0 auto;
+  line-height: 0;
+  font-size: 0;
+}
+.hotc-ep-panel img,
+.hotc-ep-panel picture { display: block; width: 100%; height: auto; border: 0; margin: 0; vertical-align: top; }
+
+/* FIN DE LA PARTE 4. */
+
