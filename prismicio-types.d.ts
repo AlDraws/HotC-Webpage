@@ -2938,6 +2938,61 @@ export type ImageGallerySlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *ImageFull → Default → Primary*
+ */
+export interface ImageFullSliceDefaultPrimary {
+  /**
+   * image field in *ImageFull → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_full.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+
+  /**
+   * alt field in *ImageFull → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: image_full.default.primary.alt
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  alt: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for ImageFull Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Full-bleed image.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageFullSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<ImageFullSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *ImageFull*
+ */
+type ImageFullSliceVariation = ImageFullSliceDefault;
+
+/**
+ * ImageFull Shared Slice
+ *
+ * - **API ID**: `image_full`
+ * - **Description**: Full-bleed image.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ImageFullSlice = prismic.SharedSlice<
+  "image_full",
+  ImageFullSliceVariation
+>;
+
+/**
  * Primary content in *ImageTicker → Default → Primary*
  */
 export interface ImageTickerSliceDefaultPrimary {
@@ -3659,6 +3714,10 @@ declare module "@prismicio/client" {
       ImageCardsSliceDefaultItem,
       ImageCardsSliceVariation,
       ImageCardsSliceDefault,
+      ImageFullSlice,
+      ImageFullSliceDefaultPrimary,
+      ImageFullSliceVariation,
+      ImageFullSliceDefault,
       ImageGallerySlice,
       ImageGallerySliceDefaultItem,
       ImageGallerySliceVariation,
