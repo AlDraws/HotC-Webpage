@@ -1721,6 +1721,8 @@ body.hotc, .hotc {
   color: var(--hotc-ink);
 }
 .hotc-newsletter p { margin: 0; color: var(--hotc-on-paper-mute); font-size: 0.9375rem; line-height: 1.55; }
+.hotc-newsletter__body { margin: 0; }
+.hotc-newsletter__body p { margin: 0; color: var(--hotc-on-paper-mute); font-size: 0.9375rem; line-height: 1.55; }
 .hotc-newsletter__form { display: flex; flex-direction: column; gap: 0.625rem; }
 @media (min-width: 640px) { .hotc-newsletter__form { flex-direction: row; } }
 .hotc-newsletter input {

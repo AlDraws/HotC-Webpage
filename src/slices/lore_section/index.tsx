@@ -1,4 +1,6 @@
 "use client";
+import { asLink, isFilled } from "@prismicio/client";
+import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { LoreSectionSlice } from "@/../prismicio-types";
 
@@ -11,6 +13,8 @@ export type LoreSectionProps = SliceComponentProps<LoreSectionSlice>;
  * Component for "LoreSection" Slices.
  */
 const LoreSection = ({ slice }: LoreSectionProps) => {
+  const items = slice.items ?? [];
+
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -29,7 +33,30 @@ const LoreSection = ({ slice }: LoreSectionProps) => {
           )}
           <h2 className="hotc-h2">{slice.primary.title}</h2>
         </div>
-        {/* Note: 'body' and 'image' fields were removed as they are not present in the LoreSection model. */}
+
+        {items.length > 0 && (
+          <ul className="hotc-lore__grid" role="list">
+            {items.map((item, i) => {
+              const entry = item.entry;
+              if (!isFilled.contentRelationship(entry)) return null;
+
+              return (
+                <li key={i} className="hotc-lore__card">
+                  <PrismicNextLink
+                    href={asLink(entry) ?? "#"}
+                    className="hotc-lore__card-link"
+                  >
+                    {/* Si la página padre pasa data enriched vía graphQuery,
+                        aquí aparecerán title/cover. Sin graphQuery, solo el uid. */}
+                    {"data" in entry && (entry as any).data?.title
+                      ? (entry as any).data.title
+                      : entry.uid ?? "—"}
+                  </PrismicNextLink>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
     </section>
   );

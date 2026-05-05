@@ -63,47 +63,29 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
   const doubled = [...items, ...items];
 
   return (
-    <section
+    <div
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
-      // Full-bleed: stretch beyond the parent's max-width.
-      className="relative w-screen overflow-hidden bg-slate-900 py-8"
-      style={{ marginLeft: "calc(50% - 50vw)" }}
-      onMouseEnter={() => {
-        pausedRef.current = true;
-      }}
-      onMouseLeave={() => {
-        pausedRef.current = false;
-      }}
+      className="hotc-ticker"
+      onMouseEnter={() => { pausedRef.current = true; }}
+      onMouseLeave={() => { pausedRef.current = false; }}
     >
-      <div
-        ref={railRef}
-        className="flex gap-4 will-change-transform"
-        // Disable any CSS transition on the rail itself — only rAF moves it.
-        style={{ transition: "none" }}
-      >
+      <div ref={railRef} className="hotc-ticker__rail" style={{ transition: "none" }}>
         {doubled.map((item: any, i: number) => (
-          <div
-            key={i}
-            // Fixed frame: no scale here, no margin shifts on hover.
-            className="relative h-48 w-48 shrink-0 overflow-hidden rounded-md md:h-64 md:w-64"
-          >
-            {/* Hover scale lives on the INNER element. The frame above
-                stays the same size, so the rail never reflows. */}
-            <div className="absolute inset-0 transition-transform duration-300 ease-out hover:scale-[1.04]">
-              {item.image?.url ? (
-                <PrismicNextImage
-                  field={item.image}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 768px) 256px, 192px"
-                />
-              ) : null}
-            </div>
+          <div key={i} className="hotc-ticker__cell" style={{ position: "relative" }}>
+            {item.image?.url ? (
+              <PrismicNextImage
+                field={item.image}
+                fill
+                className="object-cover"
+                sizes="(min-width: 768px) 260px, 200px"
+                fallbackAlt=""
+              />
+            ) : null}
           </div>
         ))}
       </div>
-    </section>
+    </div>
   );
 };
 
