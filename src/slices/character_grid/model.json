@@ -1,0 +1,14 @@
+{
+  "id": "character_grid",
+  "type": "SharedSlice",
+  "name": "CharacterGrid",
+  "variations": [{ "id":"default","name":"Default","docURL":"...","version":"initial",
+    "primary": {
+      "kicker": { "type": "Text", "config": { "label": "Kicker" } },
+      "title":  { "type": "StructuredText", "config": { "label": "Title", "single": "heading2" } }
+    },
+    "items": {
+      "character": { "type": "Link", "config": { "label": "Character", "select": "document", "customtypes": ["character"] } }
+    }
+  }]
+}

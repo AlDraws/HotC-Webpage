@@ -1,0 +1,19 @@
+{
+  "id": "text_with_image",
+  "type": "SharedSlice",
+  "name": "TextWithImage",
+  "description": "Editorial block: headline + body + image. Reversible.",
+  "variations": [{
+    "id": "default", "name": "Default", "docURL": "...", "version": "initial",
+    "primary": {
+      "kicker":  { "type": "Text", "config": { "label": "Kicker" } },
+      "title":   { "type": "StructuredText", "config": { "label": "Title", "single": "heading2" } },
+      "body":    { "type": "StructuredText", "config": { "label": "Body", "multi": "paragraph" } },
+      "image":   { "type": "Image", "config": { "label": "Image (4:3)" } },
+      "reverse": { "type": "Boolean", "config": { "label": "Reverse layout", "default_value": false } },
+      "ctaLabel":  { "type": "Text", "config": { "label": "CTA label" } },
+      "ctaTarget": { "type": "Text", "config": { "label": "CTA target route" } }
+    },
+    "items": {}
+  }]
+}

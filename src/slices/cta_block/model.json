@@ -1,0 +1,12 @@
+{
+  "id": "cta_block",
+  "type": "SharedSlice",
+  "name": "CtaBlock",
+  "variations": [{ "id":"default","name":"Default","docURL":"...","version":"initial",
+    "primary": {
+      "title": { "type": "StructuredText", "config": { "label": "Title", "single": "heading2" } },
+      "body":  { "type": "StructuredText", "config": { "label": "Body", "multi": "paragraph" } },
+      "ctaLabel":  { "type": "Text", "config": { "label": "CTA label" } },
+      "ctaTarget": { "type": "Text", "config": { "label": "CTA target route" } }
+    }, "items": {} }]
+}

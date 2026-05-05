@@ -1,0 +1,9 @@
+{
+  "id": "image_ticker",
+  "type": "SharedSlice",
+  "name": "ImageTicker",
+  "variations": [{ "id":"default","name":"Default","docURL":"...","version":"initial",
+    "primary": { "speed": { "type": "Number", "config": { "label": "Loop speed (s)" } } },
+    "items":   { "image": { "type": "Image",  "config": { "label": "Image" } } }
+  }]
+}

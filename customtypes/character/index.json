@@ -1,0 +1,30 @@
+{
+  "id": "character",
+  "label": "Character",
+  "format": "page",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid":      { "type": "UID",  "config": { "label": "Slug", "placeholder": "mira" } },
+      "name":     { "type": "StructuredText", "config": { "label": "Name", "single": "heading1" } },
+      "role":     { "type": "Text", "config": { "label": "Role / lineage tag" } },
+      "epithet":  { "type": "StructuredText", "config": { "label": "Epithet (1 line)", "single": "paragraph" } },
+      "portrait": { "type": "Image", "config": { "label": "Portrait (3:4)", "constraint": { "width": 900, "height": 1200 } } },
+      "cover":    { "type": "Image", "config": { "label": "Hero background (16:9)", "constraint": { "width": 2400 } } },
+      "attributes": {
+        "type": "Group",
+        "config": {
+          "label": "Attributes",
+          "fields": {
+            "label": { "type": "Text", "config": { "label": "Label" } },
+            "value": { "type": "Text", "config": { "label": "Value" } }
+          }
+        }
+      },
+      "bio":     { "type": "StructuredText", "config": { "label": "Bio", "multi": "paragraph" } },
+      "gallery": { "type": "Group", "config": { "label": "Gallery",
+                    "fields": { "image": { "type": "Image", "config": { "label": "Image" } } } } }
+    }
+  }
+}
