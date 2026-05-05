@@ -1786,6 +1786,93 @@ interface TestDocumentData {
 export type TestDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<TestDocumentData>, "test", Lang>;
 
+/**
+ * Item in *test → sdsds*
+ */
+export interface Test2DocumentDataSdsdsItem {
+  /**
+   * ddsds field in *test → sdsds*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: test2.sdsds[].ddsds
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  ddsds: prismic.ImageField<never>;
+}
+
+type Test2DocumentDataSlicesSlice = never;
+
+/**
+ * Content for test documents
+ */
+interface Test2DocumentData {
+  /**
+   * sdsds field in *test*
+   *
+   * - **Field Type**: Group
+   * - **Placeholder**: *None*
+   * - **API ID Path**: test2.sdsds[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
+   */
+  sdsds: prismic.GroupField<Simplify<Test2DocumentDataSdsdsItem>>;
+
+  /**
+   * Slice Zone field in *test*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: test2.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<Test2DocumentDataSlicesSlice>; /**
+   * Meta Title field in *test*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: test2.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *test*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: test2.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *test*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: test2.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * test document from Prismic
+ *
+ * - **API ID**: `test2`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type Test2Document<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<Simplify<Test2DocumentData>, "test2", Lang>;
+
 export type AllDocumentTypes =
   | CharacterDocument
   | EpisodeDocument
@@ -1796,7 +1883,8 @@ export type AllDocumentTypes =
   | NavigationDocument
   | PageDocument
   | SettingsDocument
-  | TestDocument;
+  | TestDocument
+  | Test2Document;
 
 /**
  * Primary content in *Callout → Default → Primary*
@@ -2026,6 +2114,52 @@ export type CtaBlockSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *EpisodeDivider → Default → Primary*
+ */
+export interface EpisodeDividerSliceDefaultPrimary {
+  /**
+   * Size field in *EpisodeDivider → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: md
+   * - **API ID Path**: episode_divider.default.primary.size
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  size: prismic.SelectField<"sm" | "md" | "lg", "filled">;
+}
+
+/**
+ * Default variation for EpisodeDivider Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Standard divider.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EpisodeDividerSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<EpisodeDividerSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *EpisodeDivider*
+ */
+type EpisodeDividerSliceVariation = EpisodeDividerSliceDefault;
+
+/**
+ * EpisodeDivider Shared Slice
+ *
+ * - **API ID**: `episode_divider`
+ * - **Description**: Visual separator for the comic reader.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EpisodeDividerSlice = prismic.SharedSlice<
+  "episode_divider",
+  EpisodeDividerSliceVariation
+>;
+
+/**
  * Primary content in *EpisodePanel → Default → Primary*
  */
 export interface EpisodePanelSliceDefaultPrimary {
@@ -2078,6 +2212,124 @@ type EpisodePanelSliceVariation = EpisodePanelSliceDefault;
 export type EpisodePanelSlice = prismic.SharedSlice<
   "episode_panel",
   EpisodePanelSliceVariation
+>;
+
+/**
+ * Primary content in *EpisodeTextBeat → Default → Primary*
+ */
+export interface EpisodeTextBeatSliceDefaultPrimary {
+  /**
+   * Text field in *EpisodeTextBeat → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: episode_text_beat.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+
+  /**
+   * Tone field in *EpisodeTextBeat → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: neutral
+   * - **API ID Path**: episode_text_beat.default.primary.tone
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  tone: prismic.SelectField<
+    "neutral" | "thought" | "action" | "shout",
+    "filled"
+  >;
+}
+
+/**
+ * Default variation for EpisodeTextBeat Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Text beat.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EpisodeTextBeatSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<EpisodeTextBeatSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *EpisodeTextBeat*
+ */
+type EpisodeTextBeatSliceVariation = EpisodeTextBeatSliceDefault;
+
+/**
+ * EpisodeTextBeat Shared Slice
+ *
+ * - **API ID**: `episode_text_beat`
+ * - **Description**: Short text snippets for dramatic beats in the comic reader.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EpisodeTextBeatSlice = prismic.SharedSlice<
+  "episode_text_beat",
+  EpisodeTextBeatSliceVariation
+>;
+
+/**
+ * Primary content in *EpisodeTextBeat → Default → Primary*
+ */
+export interface EpisodeTextBeatSliceDefaultPrimary {
+  /**
+   * Text field in *EpisodeTextBeat → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: episode_text_beat.default.primary.text
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  text: prismic.RichTextField;
+
+  /**
+   * Tone field in *EpisodeTextBeat → Default → Primary*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **Default Value**: neutral
+   * - **API ID Path**: episode_text_beat.default.primary.tone
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  tone: prismic.SelectField<
+    "neutral" | "thought" | "action" | "shout",
+    "filled"
+  >;
+}
+
+/**
+ * Default variation for EpisodeTextBeat Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Text beat.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EpisodeTextBeatSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<EpisodeTextBeatSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *EpisodeTextBeat*
+ */
+type EpisodeTextBeatSliceVariation = EpisodeTextBeatSliceDefault;
+
+/**
+ * EpisodeTextBeat Shared Slice
+ *
+ * - **API ID**: `episode_text_beat`
+ * - **Description**: Short text snippets for dramatic beats in the comic reader.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type EpisodeTextBeatSlice = prismic.SharedSlice<
+  "episode_text_beat",
+  EpisodeTextBeatSliceVariation
 >;
 
 /**
@@ -3383,6 +3635,10 @@ declare module "@prismicio/client" {
       TestDocument,
       TestDocumentData,
       TestDocumentDataSlicesSlice,
+      Test2Document,
+      Test2DocumentData,
+      Test2DocumentDataSdsdsItem,
+      Test2DocumentDataSlicesSlice,
       AllDocumentTypes,
       CalloutSlice,
       CalloutSliceDefaultPrimary,
@@ -3397,10 +3653,22 @@ declare module "@prismicio/client" {
       CtaBlockSliceDefaultPrimary,
       CtaBlockSliceVariation,
       CtaBlockSliceDefault,
+      EpisodeDividerSlice,
+      EpisodeDividerSliceDefaultPrimary,
+      EpisodeDividerSliceVariation,
+      EpisodeDividerSliceDefault,
       EpisodePanelSlice,
       EpisodePanelSliceDefaultPrimary,
       EpisodePanelSliceVariation,
       EpisodePanelSliceDefault,
+      EpisodeTextBeatSlice,
+      EpisodeTextBeatSliceDefaultPrimary,
+      EpisodeTextBeatSliceVariation,
+      EpisodeTextBeatSliceDefault,
+      EpisodeTextBeatSlice,
+      EpisodeTextBeatSliceDefaultPrimary,
+      EpisodeTextBeatSliceVariation,
+      EpisodeTextBeatSliceDefault,
       ExternalSupportSlice,
       ExternalSupportSliceRowPrimary,
       ExternalSupportSliceRowItem,
