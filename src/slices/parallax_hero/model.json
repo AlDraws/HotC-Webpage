@@ -1,0 +1,140 @@
+{
+  "id": "parallax_hero",
+  "type": "SharedSlice",
+  "name": "ParallaxHero",
+  "description": "Full-bleed hero with parallax background (image or video) + optional foreground PNG.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Hero with kicker, title, subtitle, CTAs, and parallax bg/fg.",
+      "primary": {
+        "kicker": {
+          "type": "Text",
+          "config": {
+            "label": "Kicker",
+            "placeholder": "Updates Sundays"
+          }
+        },
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": "Heirs of the Collapse"
+          }
+        },
+        "subtitle": {
+          "type": "Text",
+          "config": {
+            "label": "Subtitle",
+            "placeholder": "A webcomic about what remains after the gods left."
+          }
+        },
+        "bgImage": {
+          "type": "Image",
+          "config": {
+            "label": "Background image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "bgVideo": {
+          "type": "Link",
+          "config": {
+            "label": "Background video URL (mp4)",
+            "placeholder": "",
+            "select": "media"
+          }
+        },
+        "bgPoster": {
+          "type": "Image",
+          "config": {
+            "label": "Background video poster",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "foreground": {
+          "type": "Image",
+          "config": {
+            "label": "Foreground PNG (alpha)",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "bgStrength": {
+          "type": "Number",
+          "config": {
+            "label": "Background parallax strength",
+            "placeholder": "0.18"
+          }
+        },
+        "fgStrength": {
+          "type": "Number",
+          "config": {
+            "label": "Foreground parallax strength",
+            "placeholder": "0.42"
+          }
+        },
+        "primaryCtaLabel": {
+          "type": "Text",
+          "config": {
+            "label": "Primary CTA label",
+            "placeholder": "Read latest"
+          }
+        },
+        "primaryCtaLink": {
+          "type": "Link",
+          "config": {
+            "label": "Primary CTA link",
+            "placeholder": "",
+            "select": null
+          }
+        },
+        "secondaryCtaLabel": {
+          "type": "Text",
+          "config": {
+            "label": "Secondary CTA label",
+            "placeholder": "Archive"
+          }
+        },
+        "secondaryCtaLink": {
+          "type": "Link",
+          "config": {
+            "label": "Secondary CTA link",
+            "placeholder": "",
+            "select": null
+          }
+        },
+        "size": {
+          "type": "Select",
+          "config": {
+            "label": "Size",
+            "placeholder": "lg",
+            "options": [
+              "md",
+              "lg"
+            ],
+            "default_value": "lg"
+          }
+        },
+        "overlay": {
+          "type": "Select",
+          "config": {
+            "label": "Overlay opacity",
+            "placeholder": "strong",
+            "options": [
+              "none",
+              "subtle",
+              "strong"
+            ],
+            "default_value": "strong"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

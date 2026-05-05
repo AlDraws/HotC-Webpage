@@ -2,6 +2,8 @@
   "id": "episode",
   "label": "episode",
   "repeatable": true,
+  "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "title": {
@@ -99,13 +101,16 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "episode_text_beat": {
-              "type": "SharedSlice"
-            },
             "episode_panel": {
               "type": "SharedSlice"
             },
             "episode_divider": {
+              "type": "SharedSlice"
+            },
+            "episode_text_beat": {
+              "type": "SharedSlice"
+            },
+            "external_support": {
               "type": "SharedSlice"
             }
           }
@@ -147,7 +152,5 @@
         }
       }
     }
-  },
-  "status": true,
-  "format": "custom"
+  }
 }

@@ -2,6 +2,8 @@
   "id": "lore_entry",
   "label": "lore_entry",
   "repeatable": true,
+  "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "title": {
@@ -32,16 +34,28 @@
         "type": "Select",
         "config": {
           "label": "category",
-          "placeholder": "",
+          "placeholder": "Environment, Prop, or Illustration",
           "options": [
-            "Locations",
-            "Factions",
-            "Tech",
-            "Creatures",
+            "Environment",
+            "Prop",
+            "Illustration",
             "History",
-            "Culture",
-            "Systems"
+            "Culture"
           ]
+        }
+      },
+      "epithet": {
+        "type": "Text",
+        "config": {
+          "label": "epithet",
+          "placeholder": "e.g. Built on the bones of the second pantheon."
+        }
+      },
+      "role": {
+        "type": "Text",
+        "config": {
+          "label": "role",
+          "placeholder": "e.g. Town · South"
         }
       },
       "short_intro": {
@@ -61,16 +75,10 @@
             "text_with_image": {
               "type": "SharedSlice"
             },
-            "callout": {
+            "image_gallery": {
               "type": "SharedSlice"
             },
             "quote": {
-              "type": "SharedSlice"
-            },
-            "image_full": {
-              "type": "SharedSlice"
-            },
-            "gallery": {
               "type": "SharedSlice"
             }
           }
@@ -112,7 +120,5 @@
         }
       }
     }
-  },
-  "status": true,
-  "format": "custom"
+  }
 }

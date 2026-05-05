@@ -1,0 +1,60 @@
+"use client";
+import { Content } from "@prismicio/client";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import Bounded from "@/components/Bounded";
+
+/**
+ * Props for `TextWithImage`.
+ */
+export type TextWithImageProps = SliceComponentProps<Content.TextWithImageSlice>;
+
+/**
+ * Component for "TextWithImage" Slices.
+ */
+const TextWithImage = ({ slice }: TextWithImageProps): JSX.Element => {
+  return (
+    <Bounded
+      data-slice-type={slice.slice_type}
+      data-slice-variation={slice.variation}
+      as="section"
+      className={`hotc-twi ${slice.primary.reverse ? "hotc-twi--reverse" : ""}`}
+    >
+      <div className="hotc-twi__inner">
+        <div className="hotc-twi__media">
+          <PrismicNextImage
+            field={slice.primary.image}
+            className="hotc-twi__img"
+            fallbackAlt=""
+          />
+        </div>
+        <div className="hotc-twi__copy">
+          {slice.primary.kicker && (
+            <span className="hotc-kicker">{slice.primary.kicker}</span>
+          )}
+          <PrismicRichText
+            field={slice.primary.title}
+            components={{
+              heading2: ({ children }) => (
+                <h2 className="hotc-h2">{children}</h2>
+              ),
+            }}
+          />
+          <div className="hotc-twi__body">
+            <PrismicRichText field={slice.primary.body} />
+          </div>
+          {slice.primary.cta_label && (
+            <PrismicNextLink
+              field={slice.primary.cta_link}
+              className="hotc-btn hotc-btn--ink"
+            >
+              {slice.primary.cta_label}
+            </PrismicNextLink>
+          )}
+        </div>
+      </div>
+    </Bounded>
+  );
+};
+
+export default TextWithImage;

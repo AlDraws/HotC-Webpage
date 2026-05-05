@@ -1,0 +1,24 @@
+{
+  "id": "image_cards",
+  "type": "SharedSlice",
+  "name": "ImageCards",
+  "description": "Grid of cards with image, title and caption.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Standard image cards grid.",
+      "primary": {
+        "kicker": { "type": "Text", "config": { "label": "Kicker (Optional)" } },
+        "title": { "type": "Text", "config": { "label": "Main Title (Optional)" } }
+      },
+      "items": {
+        "image": { "type": "Image", "config": { "label": "Card Image" } },
+        "title": { "type": "Text", "config": { "label": "Card Title" } },
+        "caption": { "type": "Text", "config": { "label": "Card Caption" } }
+      }
+    }
+  ]
+}

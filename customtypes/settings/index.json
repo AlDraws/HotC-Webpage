@@ -146,6 +146,43 @@
           }
         }
       },
+      "tagline": {
+        "type": "Text",
+        "config": {
+          "label": "tagline",
+          "placeholder": "Website tagline"
+        }
+      },
+      "copyright": {
+        "type": "StructuredText",
+        "config": {
+          "label": "copyright",
+          "placeholder": "Copyright text",
+          "multi": "paragraph,strong,em,hyperlink"
+        }
+      },
+      "site_by_text": {
+        "type": "Text",
+        "config": {
+          "label": "site_by_text",
+          "placeholder": "Site by text (e.g. Design & Dev by)"
+        }
+      },
+      "site_by_logo": {
+        "type": "Image",
+        "config": {
+          "label": "site_by_logo",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "site_by_link": {
+        "type": "Link",
+        "config": {
+          "label": "site_by_link",
+          "placeholder": "Link to creator's website"
+        }
+      },
       "store_links": {
         "type": "Group",
         "config": {

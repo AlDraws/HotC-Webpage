@@ -1,0 +1,44 @@
+{
+  "id": "character_grid",
+  "type": "SharedSlice",
+  "name": "CharacterGrid",
+  "description": "Grid of character portraits linked to their profiles.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Standard character grid with kicker and title.",
+      "primary": {
+        "kicker": {
+          "type": "Text",
+          "config": {
+            "label": "Kicker",
+            "placeholder": "The Heirs"
+          }
+        },
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": "Characters"
+          }
+        }
+      },
+      "items": {
+        "character": {
+          "type": "Link",
+          "config": {
+            "label": "Character",
+            "placeholder": "Link to a character document",
+            "select": "document",
+            "customtypes": [
+              "character"
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

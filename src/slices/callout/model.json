@@ -1,0 +1,21 @@
+{
+  "id": "callout",
+  "type": "SharedSlice",
+  "name": "Callout",
+  "description": "Highlighted text box for important notes or lore tips.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Standard callout.",
+      "primary": {
+        "title": { "type": "Text", "config": { "label": "Title (Optional)" } },
+        "body": { "type": "Text", "config": { "label": "Body" } },
+        "variant": { "type": "Select", "config": { "label": "Variant", "options": ["default", "lore", "warning"], "default_value": "default" } }
+      },
+      "items": {}
+    }
+  ]
+}

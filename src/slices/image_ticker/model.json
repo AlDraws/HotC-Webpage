@@ -1,0 +1,41 @@
+{
+  "id": "image_ticker",
+  "type": "SharedSlice",
+  "name": "ImageTicker",
+  "description": "Infinite scrolling ticker of images.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Scrolling row of panels or sketches.",
+      "primary": {
+        "speed": {
+          "type": "Number",
+          "config": {
+            "label": "Animation Speed (seconds)",
+            "placeholder": "40"
+          }
+        },
+        "reverse": {
+          "type": "Boolean",
+          "config": {
+            "label": "Reverse direction",
+            "default_value": false
+          }
+        }
+      },
+      "items": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
+      }
+    }
+  ]
+}

@@ -2,6 +2,8 @@
   "id": "home",
   "label": "home",
   "repeatable": false,
+  "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "title": {
@@ -76,34 +78,31 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "parallax_hero": {
+              "type": "SharedSlice"
+            },
             "image_ticker": {
+              "type": "SharedSlice"
+            },
+            "character_grid": {
               "type": "SharedSlice"
             },
             "text_with_image": {
               "type": "SharedSlice"
             },
-            "quote": {
-              "type": "SharedSlice"
-            },
-            "gallery": {
-              "type": "SharedSlice"
-            },
-            "image_full": {
-              "type": "SharedSlice"
-            },
-            "text": {
+            "cta_block": {
               "type": "SharedSlice"
             },
             "newsletter_embed": {
               "type": "SharedSlice"
             },
-            "cta": {
-              "type": "SharedSlice"
-            },
             "feature_grid": {
               "type": "SharedSlice"
             },
-            "hero_project": {
+            "hero": {
+              "type": "SharedSlice"
+            },
+            "quote": {
               "type": "SharedSlice"
             }
           }
@@ -145,7 +144,5 @@
         }
       }
     }
-  },
-  "status": true,
-  "format": "custom"
+  }
 }

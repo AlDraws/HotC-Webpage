@@ -1,0 +1,19 @@
+{
+  "id": "image_gallery",
+  "type": "SharedSlice",
+  "name": "ImageGallery",
+  "description": "Grid of images.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Standard image grid.",
+      "primary": {},
+      "items": {
+        "image": { "type": "Image", "config": { "label": "Image" } }
+      }
+    }
+  ]
+}

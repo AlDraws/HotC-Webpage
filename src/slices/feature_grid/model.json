@@ -1,0 +1,51 @@
+{
+  "id": "feature_grid",
+  "type": "SharedSlice",
+  "name": "FeatureGrid",
+  "description": "Grid of icons/features.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Standard feature grid.",
+      "primary": {
+        "kicker": {
+          "type": "Text",
+          "config": {
+            "label": "Kicker"
+          }
+        },
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title"
+          }
+        }
+      },
+      "items": {
+        "icon": {
+          "type": "Image",
+          "config": {
+            "label": "Icon",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title"
+          }
+        },
+        "description": {
+          "type": "Text",
+          "config": {
+            "label": "Description"
+          }
+        }
+      }
+    }
+  ]
+}

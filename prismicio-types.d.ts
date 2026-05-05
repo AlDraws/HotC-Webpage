@@ -119,27 +119,7 @@ export interface CharacterDocumentDataRelationsItem {
   note: prismic.KeyTextField;
 }
 
-type CharacterDocumentDataSlicesSlice =
-  | CtaSlice
-  | CharacterGridSlice
-  | CalloutSlice
-  | EpisodeDividerSlice
-  | EpisodePanelSlice
-  | EpisodeTextBeatSlice
-  | LoreSectionSlice
-  | HeroProjectSlice
-  | FeatureGridSlice
-  | NewsletterEmbedSlice
-  | ImageTickerSlice
-  | ImageCardsSlice
-  | QuoteSlice
-  | HeroSlice
-  | TextWithImageSlice
-  | ImageSlice
-  | GallerySlice
-  | ImageFullSlice
-  | TextSlice
-  | CharacterProfileSlice;
+type CharacterDocumentDataSlicesSlice = never;
 
 /**
  * Content for character documents
@@ -314,10 +294,7 @@ export interface EpisodeDocumentDataCharactersItem {
   character_ref: prismic.ContentRelationshipField<"character">;
 }
 
-type EpisodeDocumentDataSlicesSlice =
-  | EpisodeTextBeatSlice
-  | EpisodePanelSlice
-  | EpisodeDividerSlice;
+type EpisodeDocumentDataSlicesSlice = ExternalSupportSlice;
 
 /**
  * Content for episode documents
@@ -483,7 +460,7 @@ export type EpisodeDocument<Lang extends string = string> =
     Lang
   >;
 
-type EpisodesIndexDocumentDataSlicesSlice = FeatureGridSlice | TextSlice;
+type EpisodesIndexDocumentDataSlicesSlice = never;
 
 /**
  * Content for episodes_index documents
@@ -634,17 +611,7 @@ export interface HomeDocumentDataFeaturedEpisodesItem {
   episode_ref: prismic.ContentRelationshipField<"episode">;
 }
 
-type HomeDocumentDataSlicesSlice =
-  | ImageTickerSlice
-  | TextWithImageSlice
-  | QuoteSlice
-  | GallerySlice
-  | ImageFullSlice
-  | TextSlice
-  | NewsletterEmbedSlice
-  | CtaSlice
-  | FeatureGridSlice
-  | HeroProjectSlice;
+type HomeDocumentDataSlicesSlice = never;
 
 /**
  * Content for home documents
@@ -774,12 +741,7 @@ interface HomeDocumentData {
 export type HomeDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithoutUID<Simplify<HomeDocumentData>, "home", Lang>;
 
-type LoreEntryDocumentDataSlicesSlice =
-  | TextWithImageSlice
-  | CalloutSlice
-  | QuoteSlice
-  | ImageFullSlice
-  | GallerySlice;
+type LoreEntryDocumentDataSlicesSlice = never;
 
 /**
  * Content for lore_entry documents
@@ -907,6 +869,67 @@ export type LoreEntryDocument<Lang extends string = string> =
     "lore_entry",
     Lang
   >;
+
+type NavDocumentDataSlicesSlice = never;
+
+/**
+ * Content for Nav documents
+ */
+interface NavDocumentData {
+  /**
+   * Slice Zone field in *Nav*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: nav.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<NavDocumentDataSlicesSlice>; /**
+   * Meta Title field in *Nav*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: nav.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Nav*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: nav.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Nav*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: nav.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Nav document from Prismic
+ *
+ * - **API ID**: `nav`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type NavDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<Simplify<NavDocumentData>, "nav", Lang>;
 
 /**
  * Item in *Navigation → primary_links*
@@ -1089,20 +1112,7 @@ export type NavigationDocument<Lang extends string = string> =
     Lang
   >;
 
-type PageDocumentDataSlicesSlice =
-  | ImageTickerSlice
-  | CtaSlice
-  | FeatureGridSlice
-  | NewsletterEmbedSlice
-  | GallerySlice
-  | ImageFullSlice
-  | CalloutSlice
-  | HeroSlice
-  | QuoteSlice
-  | TextSlice
-  | ImageSlice
-  | ImageCardsSlice
-  | TextWithImageSlice;
+type PageDocumentDataSlicesSlice = never;
 
 /**
  * Content for Page documents
@@ -1548,15 +1558,393 @@ export type SettingsDocument<Lang extends string = string> =
     Lang
   >;
 
+type TestDocumentDataSlicesSlice = ExternalSupportSlice;
+
+/**
+ * Content for Test documents
+ */
+interface TestDocumentData {
+  /**
+   * Slice Zone field in *Test*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: test.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<TestDocumentDataSlicesSlice>; /**
+   * Meta Title field in *Test*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: test.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_title: prismic.KeyTextField;
+
+  /**
+   * Meta Description field in *Test*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: test.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *Test*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: test.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  meta_image: prismic.ImageField<never>;
+}
+
+/**
+ * Test document from Prismic
+ *
+ * - **API ID**: `test`
+ * - **Repeatable**: `false`
+ * - **Documentation**: https://prismic.io/docs/content-modeling
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type TestDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithoutUID<Simplify<TestDocumentData>, "test", Lang>;
+
 export type AllDocumentTypes =
   | CharacterDocument
   | EpisodeDocument
   | EpisodesIndexDocument
   | HomeDocument
   | LoreEntryDocument
+  | NavDocument
   | NavigationDocument
   | PageDocument
-  | SettingsDocument;
+  | SettingsDocument
+  | TestDocument;
+
+/**
+ * Primary content in *ExternalSupport → Row of buttons → Primary*
+ */
+export interface ExternalSupportSliceRowPrimary {
+  /**
+   * Title (optional) field in *ExternalSupport → Row of buttons → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.row.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Intro (optional) field in *ExternalSupport → Row of buttons → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.row.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *ExternalSupport → Items*
+ */
+export interface ExternalSupportSliceRowItem {
+  /**
+   * Platform field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].platform
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  platform: prismic.SelectField<
+    "Patreon" | "Kickstarter" | "Ko-fi" | "Discord" | "YouTube" | "Other"
+  >;
+
+  /**
+   * Button label (e.g. 'Back us on Kickstarter') field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Short description (used in 'cards' variation) field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].description
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Destination URL field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].url
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Icon / mark (square, transparent) field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].icon
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Accent color (overrides ember) field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].accent
+   * - **Documentation**: https://prismic.io/docs/fields/color
+   */
+  accent: prismic.ColorField;
+}
+
+/**
+ * Row of buttons variation for ExternalSupport Slice
+ *
+ * - **API ID**: `row`
+ * - **Description**: Horizontal strip of platform buttons.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ExternalSupportSliceRow = prismic.SharedSliceVariation<
+  "row",
+  Simplify<ExternalSupportSliceRowPrimary>,
+  Simplify<ExternalSupportSliceRowItem>
+>;
+
+/**
+ * Primary content in *ExternalSupport → Cards → Primary*
+ */
+export interface ExternalSupportSliceCardsPrimary {
+  /**
+   * Title field in *ExternalSupport → Cards → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.cards.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Intro field in *ExternalSupport → Cards → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.cards.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *ExternalSupport → Items*
+ */
+export interface ExternalSupportSliceCardsItem {
+  /**
+   * Platform field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].platform
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  platform: prismic.SelectField<
+    "Patreon" | "Kickstarter" | "Ko-fi" | "Discord" | "YouTube" | "Other"
+  >;
+
+  /**
+   * Button label field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Short description field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].description
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  description: prismic.KeyTextField;
+
+  /**
+   * Destination URL field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].url
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Icon / mark field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].icon
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  icon: prismic.ImageField<never>;
+
+  /**
+   * Accent color (overrides ember) field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].accent
+   * - **Documentation**: https://prismic.io/docs/fields/color
+   */
+  accent: prismic.ColorField;
+}
+
+/**
+ * Cards variation for ExternalSupport Slice
+ *
+ * - **API ID**: `cards`
+ * - **Description**: Card grid with icon, description and CTA per platform.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ExternalSupportSliceCards = prismic.SharedSliceVariation<
+  "cards",
+  Simplify<ExternalSupportSliceCardsPrimary>,
+  Simplify<ExternalSupportSliceCardsItem>
+>;
+
+/**
+ * Primary content in *ExternalSupport → Banner → Primary*
+ */
+export interface ExternalSupportSliceBannerPrimary {
+  /**
+   * Title field in *ExternalSupport → Banner → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.banner.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Body field in *ExternalSupport → Banner → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.banner.primary.body
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  body: prismic.RichTextField;
+}
+
+/**
+ * Primary content in *ExternalSupport → Items*
+ */
+export interface ExternalSupportSliceBannerItem {
+  /**
+   * Platform field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Select
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].platform
+   * - **Documentation**: https://prismic.io/docs/fields/select
+   */
+  platform: prismic.SelectField<
+    "Patreon" | "Kickstarter" | "Ko-fi" | "Discord" | "YouTube" | "Other"
+  >;
+
+  /**
+   * Button label field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].label
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  label: prismic.KeyTextField;
+
+  /**
+   * Destination URL field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Link
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].url
+   * - **Documentation**: https://prismic.io/docs/fields/link
+   */
+  url: prismic.LinkField<string, string, unknown, prismic.FieldState, never>;
+
+  /**
+   * Accent color (overrides ember) field in *ExternalSupport → Items*
+   *
+   * - **Field Type**: Color
+   * - **Placeholder**: *None*
+   * - **API ID Path**: external_support.items[].accent
+   * - **Documentation**: https://prismic.io/docs/fields/color
+   */
+  accent: prismic.ColorField;
+}
+
+/**
+ * Banner variation for ExternalSupport Slice
+ *
+ * - **API ID**: `banner`
+ * - **Description**: Single full-width banner with one or two prominent CTAs.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ExternalSupportSliceBanner = prismic.SharedSliceVariation<
+  "banner",
+  Simplify<ExternalSupportSliceBannerPrimary>,
+  Simplify<ExternalSupportSliceBannerItem>
+>;
+
+/**
+ * Slice variation for *ExternalSupport*
+ */
+type ExternalSupportSliceVariation =
+  | ExternalSupportSliceRow
+  | ExternalSupportSliceCards
+  | ExternalSupportSliceBanner;
+
+/**
+ * ExternalSupport Shared Slice
+ *
+ * - **API ID**: `external_support`
+ * - **Description**: Modular block of external CTAs (Patreon, Kickstarter, Ko-fi, Discord, ...). Add platforms over time without touching code.
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type ExternalSupportSlice = prismic.SharedSlice<
+  "external_support",
+  ExternalSupportSliceVariation
+>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -1600,6 +1988,9 @@ declare module "@prismicio/client" {
       LoreEntryDocument,
       LoreEntryDocumentData,
       LoreEntryDocumentDataSlicesSlice,
+      NavDocument,
+      NavDocumentData,
+      NavDocumentDataSlicesSlice,
       NavigationDocument,
       NavigationDocumentData,
       NavigationDocumentDataPrimaryLinksItem,
@@ -1613,7 +2004,21 @@ declare module "@prismicio/client" {
       SettingsDocumentDataSocialLinksItem,
       SettingsDocumentDataStoreLinksItem,
       SettingsDocumentDataNewsletterItem,
+      TestDocument,
+      TestDocumentData,
+      TestDocumentDataSlicesSlice,
       AllDocumentTypes,
+      ExternalSupportSlice,
+      ExternalSupportSliceRowPrimary,
+      ExternalSupportSliceRowItem,
+      ExternalSupportSliceCardsPrimary,
+      ExternalSupportSliceCardsItem,
+      ExternalSupportSliceBannerPrimary,
+      ExternalSupportSliceBannerItem,
+      ExternalSupportSliceVariation,
+      ExternalSupportSliceRow,
+      ExternalSupportSliceCards,
+      ExternalSupportSliceBanner,
     };
   }
 }

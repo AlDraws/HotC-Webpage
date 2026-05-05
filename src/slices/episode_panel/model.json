@@ -1,0 +1,35 @@
+{
+  "id": "episode_panel",
+  "type": "SharedSlice",
+  "name": "EpisodePanel",
+  "description": "A single comic page or panel for the vertical reader.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Full-width comic page.",
+      "primary": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Page Image",
+            "constraint": {
+              "width": 1080
+            },
+            "thumbnails": []
+          }
+        },
+        "label": {
+          "type": "Text",
+          "config": {
+            "label": "Accessibility Label",
+            "placeholder": "e.g. Page 1"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

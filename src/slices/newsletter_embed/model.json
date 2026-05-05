@@ -1,0 +1,47 @@
+{
+  "id": "newsletter_embed",
+  "type": "SharedSlice",
+  "name": "NewsletterEmbed",
+  "description": "Newsletter signup section.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Standard newsletter signup.",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": "Join the Collapse"
+          }
+        },
+        "description": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Description",
+            "placeholder": "Get updates every Sunday.",
+            "multi": "paragraph"
+          }
+        },
+        "placeholder": {
+          "type": "Text",
+          "config": {
+            "label": "Input Placeholder",
+            "placeholder": "your@email.com"
+          }
+        },
+        "cta_label": {
+          "type": "Text",
+          "config": {
+            "label": "CTA Label",
+            "placeholder": "Subscribe"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

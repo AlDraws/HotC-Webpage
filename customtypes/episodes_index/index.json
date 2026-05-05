@@ -2,6 +2,8 @@
   "id": "episodes_index",
   "label": "episodes_index",
   "repeatable": false,
+  "status": true,
+  "format": "custom",
   "json": {
     "Main": {
       "intro_richtext": {
@@ -34,14 +36,7 @@
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
-          "choices": {
-            "feature_grid": {
-              "type": "SharedSlice"
-            },
-            "text": {
-              "type": "SharedSlice"
-            }
-          }
+          "choices": {}
         }
       }
     },
@@ -80,7 +75,5 @@
         }
       }
     }
-  },
-  "status": true,
-  "format": "custom"
+  }
 }
