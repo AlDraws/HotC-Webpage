@@ -14,8 +14,11 @@ const inter = Inter({
 
 export async function generateMetadata(): Promise<Metadata> {
   const client = createClient();
-  const settings = await client.getSingle("settings");
-  const siteTitle = asText(settings.data.site_title) ?? "Heirs of the Collapse";
+  const settings = await client.getSingle("settings").catch(() => null);
+  const siteTitle = settings
+    ? asText(settings.data.site_title) || "Heirs of the Collapse"
+    : "Heirs of the Collapse";
+
   return {
     title: {
       template: `%s — ${siteTitle}`,
@@ -33,14 +36,16 @@ export default async function RootLayout({
   const settings = await client.getSingle("settings").catch(() => null);
   const navigation = await client.getSingle("navigation").catch(() => null);
 
-  if (!settings) return <>{children}</>;
-
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-slate-950 font-sans text-on-ink">
-        <Header settings={settings} navigation={navigation} />
+        {settings && navigation ? (
+          <Header settings={settings} navigation={navigation} />
+        ) : null}
         <main className="flex-1">{children}</main>
-        <Footer settings={settings} navigation={navigation} />
+        {settings && navigation ? (
+          <Footer settings={settings} navigation={navigation} />
+        ) : null}
       </body>
     </html>
   );
