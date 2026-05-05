@@ -34,7 +34,7 @@ export default async function LoreDetailPage({ params }: Props) {
   const item = await client.getByUID("lore_entry", uid).catch(() => null);
   if (!item) notFound();
 
-  const gallery = item.data.gallery ?? [];
+
 
   return (
     <article>
@@ -90,22 +90,7 @@ export default async function LoreDetailPage({ params }: Props) {
         </section>
       ) : null}
 
-      {/* Gallery */}
-      {gallery.length > 0 ? (
-        <section className="bounded bounded--base" style={{ paddingTop: 0 }}>
-          <div className="hotc-cprofile__gallery-grid">
-            {gallery.map((g, i) =>
-              g.image?.url ? (
-                <div
-                  key={i}
-                  className="hotc-cprofile__gallery-tile"
-                  style={{ backgroundImage: `url(${g.image.url})` }}
-                />
-              ) : null,
-            )}
-          </div>
-        </section>
-      ) : null}
+
     </article>
   );
 }
