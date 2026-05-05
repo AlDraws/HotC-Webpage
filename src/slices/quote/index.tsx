@@ -1,4 +1,5 @@
 "use client";
+import { asText } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { QuoteSlice } from "@/../prismicio-types";
 
@@ -17,9 +18,15 @@ const Quote = ({ slice }: QuoteProps) => {
       data-slice-variation={slice.variation}
       className="hotc-quote"
     >
-      <p className="hotc-quote__text">&ldquo;{slice.primary.text}&rdquo;</p>
-      {slice.primary.source && (
-        <span className="hotc-quote__source">{slice.primary.source}</span>
+      <p className="hotc-quote__text">
+        &ldquo;{asText(slice.primary.text)}&rdquo;
+      </p>
+      {(slice.primary.author || slice.primary.author_role) && (
+        <span className="hotc-quote__source">
+          {slice.primary.author}
+          {slice.primary.author && slice.primary.author_role && " — "}
+          {slice.primary.author_role}
+        </span>
       )}
     </section>
   );
