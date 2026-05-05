@@ -57,7 +57,8 @@
           "choices": {
             "episode_text_beat": { "type": "SharedSlice" },
             "episode_panel": { "type": "SharedSlice" },
-            "episode_divider": { "type": "SharedSlice" }
+            "episode_divider": { "type": "SharedSlice" },
+            "episode_sequence": { "type": "SharedSlice" }
           }
         }
       }
