@@ -12,7 +12,14 @@
       "description": "Standard image grid.",
       "primary": {},
       "items": {
-        "image": { "type": "Image", "config": { "label": "Image" } }
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        }
       }
     }
   ]

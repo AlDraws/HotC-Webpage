@@ -109,6 +109,9 @@
             },
             "external_support": {
               "type": "SharedSlice"
+            },
+            "episode_text_beat": {
+              "type": "SharedSlice"
             }
           }
         }

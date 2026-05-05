@@ -11,13 +11,20 @@
       "version": "initial",
       "description": "Standard image cards grid.",
       "primary": {
-        "kicker": { "type": "Text", "config": { "label": "Kicker (Optional)" } },
-        "title": { "type": "Text", "config": { "label": "Main Title (Optional)" } }
+        "kicker": { "type": "Text", "config": { "label": "Kicker (Optional)", "placeholder": "" } },
+        "title": { "type": "Text", "config": { "label": "Main Title (Optional)", "placeholder": "" } }
       },
       "items": {
-        "image": { "type": "Image", "config": { "label": "Card Image" } },
-        "title": { "type": "Text", "config": { "label": "Card Title" } },
-        "caption": { "type": "Text", "config": { "label": "Card Caption" } }
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "Card Image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "title": { "type": "Text", "config": { "label": "Card Title", "placeholder": "" } },
+        "caption": { "type": "Text", "config": { "label": "Card Caption", "placeholder": "" } }
       }
     }
   ]
