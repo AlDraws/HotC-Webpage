@@ -18,7 +18,7 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       as="section"
-      className={`hotc-twi ${slice.primary.reverse ? "hotc-twi--reverse" : ""}`}
+      className={`hotc-twi ${slice.primary.layout === "right" ? "hotc-twi--reverse" : ""}`}
     >
       <div className="hotc-twi__inner">
         <div className="hotc-twi__media">
@@ -32,16 +32,9 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
           {slice.primary.kicker && (
             <span className="hotc-kicker">{slice.primary.kicker}</span>
           )}
-          <PrismicRichText
-            field={slice.primary.title}
-            components={{
-              heading2: ({ children }) => (
-                <h2 className="hotc-h2">{children}</h2>
-              ),
-            }}
-          />
+          {slice.primary.title && <h2 className="hotc-h2">{slice.primary.title}</h2>}
           <div className="hotc-twi__body">
-            <PrismicRichText field={slice.primary.body} />
+            <PrismicRichText field={slice.primary.text} />
           </div>
           {slice.primary.cta_label && (
             <PrismicNextLink

@@ -21,7 +21,7 @@ const CtaBlock = ({ slice }: CtaBlockProps) => {
     >
       <div className="hotc-cta-block">
         <h2>{slice.primary.title}</h2>
-        {slice.primary.body && <p>{slice.primary.body}</p>}
+        {slice.primary.description && <p>{slice.primary.description}</p>}
         {slice.primary.cta_label && (
           <PrismicNextLink
             field={slice.primary.cta_link}

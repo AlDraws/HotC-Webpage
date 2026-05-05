@@ -1,4 +1,5 @@
 "use client";
+import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { FeatureGridSlice } from "@/../prismicio-types";
@@ -29,9 +30,13 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
       <div className="hotc-fgrid">
         {slice.items.map((item, index) => (
           <article key={index} className="hotc-fcard">
-            <div className="hotc-fcard__icon">{item.glyph || "★"}</div>
+            {item.icon.url && (
+              <div className="hotc-fcard__icon">
+                <PrismicNextImage field={item.icon} fallbackAlt="" />
+              </div>
+            )}
             <h4>{item.title}</h4>
-            <p>{item.body}</p>
+            <p>{item.description}</p>
           </article>
         ))}
       </div>
