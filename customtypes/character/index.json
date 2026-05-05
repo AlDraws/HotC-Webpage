@@ -3,7 +3,7 @@
   "label": "character",
   "repeatable": true,
   "status": true,
-  "format": "custom",
+  "format": "page",
   "json": {
     "Main": {
       "name": {

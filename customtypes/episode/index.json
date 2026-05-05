@@ -3,7 +3,7 @@
   "label": "episode",
   "repeatable": true,
   "status": true,
-  "format": "custom",
+  "format": "page",
   "json": {
     "Main": {
       "title": {

@@ -3,7 +3,7 @@
   "label": "lore_entry",
   "repeatable": true,
   "status": true,
-  "format": "custom",
+  "format": "page",
   "json": {
     "Main": {
       "title": {

@@ -3,7 +3,7 @@
   "label": "episodes_index",
   "repeatable": false,
   "status": true,
-  "format": "custom",
+  "format": "page",
   "json": {
     "Main": {
       "intro_richtext": {

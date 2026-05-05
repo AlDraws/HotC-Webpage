@@ -2,6 +2,8 @@
   "id": "settings",
   "label": "Settings",
   "repeatable": false,
+  "status": true,
+  "format": "page",
   "json": {
     "Main": {
       "site_title": {
@@ -180,7 +182,8 @@
         "type": "Link",
         "config": {
           "label": "site_by_link",
-          "placeholder": "Link to creator's website"
+          "placeholder": "Link to creator's website",
+          "select": null
         }
       },
       "store_links": {
@@ -247,6 +250,10 @@
             }
           }
         }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone"
       }
     },
     "SEO": {
@@ -284,7 +291,5 @@
         }
       }
     }
-  },
-  "status": true,
-  "format": "custom"
+  }
 }

@@ -359,7 +359,8 @@ export interface EpisodeDocumentDataCharactersItem {
 type EpisodeDocumentDataSlicesSlice =
   | EpisodePanelSlice
   | EpisodeDividerSlice
-  | ExternalSupportSlice;
+  | ExternalSupportSlice
+  | EpisodeTextBeatSlice;
 
 /**
  * Content for episode documents
@@ -1523,6 +1524,8 @@ export interface SettingsDocumentDataNewsletterItem {
   cta_label: prismic.KeyTextField;
 }
 
+type SettingsDocumentDataSlicesSlice = never;
+
 /**
  * Content for Settings documents
  */
@@ -1676,9 +1679,18 @@ interface SettingsDocumentData {
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/repeatable-group
    */
-  newsletter: prismic.GroupField<
-    Simplify<SettingsDocumentDataNewsletterItem>
-  >; /**
+  newsletter: prismic.GroupField<Simplify<SettingsDocumentDataNewsletterItem>>;
+
+  /**
+   * `slices` field in *Settings*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: settings.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/slices
+   */
+  slices: prismic.SliceZone<SettingsDocumentDataSlicesSlice>; /**
    * meta_title field in *Settings*
    *
    * - **Field Type**: Text
@@ -2227,65 +2239,6 @@ type EpisodePanelSliceVariation = EpisodePanelSliceDefault;
 export type EpisodePanelSlice = prismic.SharedSlice<
   "episode_panel",
   EpisodePanelSliceVariation
->;
-
-/**
- * Primary content in *EpisodeTextBeat → Default → Primary*
- */
-export interface EpisodeTextBeatSliceDefaultPrimary {
-  /**
-   * Text field in *EpisodeTextBeat → Default → Primary*
-   *
-   * - **Field Type**: Rich Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: episode_text_beat.default.primary.text
-   * - **Documentation**: https://prismic.io/docs/fields/rich-text
-   */
-  text: prismic.RichTextField;
-
-  /**
-   * Tone field in *EpisodeTextBeat → Default → Primary*
-   *
-   * - **Field Type**: Select
-   * - **Placeholder**: *None*
-   * - **Default Value**: neutral
-   * - **API ID Path**: episode_text_beat.default.primary.tone
-   * - **Documentation**: https://prismic.io/docs/fields/select
-   */
-  tone: prismic.SelectField<
-    "neutral" | "thought" | "action" | "shout",
-    "filled"
-  >;
-}
-
-/**
- * Default variation for EpisodeTextBeat Slice
- *
- * - **API ID**: `default`
- * - **Description**: Text beat.
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type EpisodeTextBeatSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<EpisodeTextBeatSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *EpisodeTextBeat*
- */
-type EpisodeTextBeatSliceVariation = EpisodeTextBeatSliceDefault;
-
-/**
- * EpisodeTextBeat Shared Slice
- *
- * - **API ID**: `episode_text_beat`
- * - **Description**: Short text snippets for dramatic beats in the comic reader.
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type EpisodeTextBeatSlice = prismic.SharedSlice<
-  "episode_text_beat",
-  EpisodeTextBeatSliceVariation
 >;
 
 /**
@@ -3403,61 +3356,6 @@ export type ParallaxHeroSliceDefault = prismic.SharedSliceVariation<
 type ParallaxHeroSliceVariation = ParallaxHeroSliceDefault;
 
 /**
- * Primary content in *ImageFull → Default → Primary*
- */
-export interface ImageFullSliceDefaultPrimary {
-  /**
-   * Full-bleed image field in *ImageFull → Default → Primary*
-   *
-   * - **Field Type**: Image
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image_full.default.primary.image
-   * - **Documentation**: https://prismic.io/docs/fields/image
-   */
-  image: prismic.ImageField<never>;
-
-  /**
-   * Alt text override field in *ImageFull → Default → Primary*
-   *
-   * - **Field Type**: Text
-   * - **Placeholder**: *None*
-   * - **API ID Path**: image_full.default.primary.alt
-   * - **Documentation**: https://prismic.io/docs/fields/text
-   */
-  alt: prismic.KeyTextField;
-}
-
-/**
- * Default variation for ImageFull Slice
- *
- * - **API ID**: `default`
- * - **Description**: Full-bleed image.
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type ImageFullSliceDefault = prismic.SharedSliceVariation<
-  "default",
-  Simplify<ImageFullSliceDefaultPrimary>,
-  never
->;
-
-/**
- * Slice variation for *ImageFull*
- */
-type ImageFullSliceVariation = ImageFullSliceDefault;
-
-/**
- * ImageFull Shared Slice
- *
- * - **API ID**: `image_full`
- * - **Description**: Full-bleed image block from ui_kits/website/Slices.jsx::ImageFull.
- * - **Documentation**: https://prismic.io/docs/slices
- */
-export type ImageFullSlice = prismic.SharedSlice<
-  "image_full",
-  ImageFullSliceVariation
->;
-
-/**
  * ParallaxHero Shared Slice
  *
  * - **API ID**: `parallax_hero`
@@ -3703,6 +3601,7 @@ declare module "@prismicio/client" {
       SettingsDocumentDataSocialLinksItem,
       SettingsDocumentDataStoreLinksItem,
       SettingsDocumentDataNewsletterItem,
+      SettingsDocumentDataSlicesSlice,
       TestDocument,
       TestDocumentData,
       TestDocumentDataSlicesSlice,
@@ -3732,10 +3631,6 @@ declare module "@prismicio/client" {
       EpisodePanelSliceDefaultPrimary,
       EpisodePanelSliceVariation,
       EpisodePanelSliceDefault,
-      EpisodeTextBeatSlice,
-      EpisodeTextBeatSliceDefaultPrimary,
-      EpisodeTextBeatSliceVariation,
-      EpisodeTextBeatSliceDefault,
       EpisodeTextBeatSlice,
       EpisodeTextBeatSliceDefaultPrimary,
       EpisodeTextBeatSliceVariation,
@@ -3774,10 +3669,6 @@ declare module "@prismicio/client" {
       ImageTickerSliceDefaultItem,
       ImageTickerSliceVariation,
       ImageTickerSliceDefault,
-      ImageFullSlice,
-      ImageFullSliceDefaultPrimary,
-      ImageFullSliceVariation,
-      ImageFullSliceDefault,
       LoreSectionSlice,
       LoreSectionSliceDefaultPrimary,
       LoreSectionSliceDefaultItem,
