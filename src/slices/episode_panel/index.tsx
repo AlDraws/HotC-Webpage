@@ -13,7 +13,7 @@ const EpisodePanel = ({ slice }: EpisodePanelProps) => {
           quality={100}
           className="block w-full"
           sizes="(min-width: 1080px) 1080px, 100vw"
-          alt={slice.primary.label ?? ""}
+          fallbackAlt={slice.primary.label ?? ""}
         />
       ) : null}
     </div>
