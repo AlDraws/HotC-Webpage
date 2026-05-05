@@ -30,29 +30,56 @@
           "customtypes": ["page"]
         }
       },
-        "slices": {
-          "type": "Slices",
-          "fieldset": "Slice Zone",
-          "config": {
-            "choices": {
-              "hero": { "type": "SharedSlice" },
-              "text_with_image": { "type": "SharedSlice" },
-              "callout": { "type": "SharedSlice" },
-              "quote": { "type": "SharedSlice" },
-              "cta_block": { "type": "SharedSlice" },
-              "newsletter_embed": { "type": "SharedSlice" },
-              "image_gallery": { "type": "SharedSlice" },
-              "image_cards": { "type": "SharedSlice" },
-              "feature_grid": { "type": "SharedSlice" },
-              "lore_section": { "type": "SharedSlice" },
-              "external_support": { "type": "SharedSlice" },
-              "image_ticker": { "type": "SharedSlice" },
-              "parallax_hero": { "type": "SharedSlice" },
-              "character_grid": { "type": "SharedSlice" },
-              "image_full": { "type": "SharedSlice" }
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "hero": {
+              "type": "SharedSlice"
+            },
+            "text_with_image": {
+              "type": "SharedSlice"
+            },
+            "callout": {
+              "type": "SharedSlice"
+            },
+            "quote": {
+              "type": "SharedSlice"
+            },
+            "cta_block": {
+              "type": "SharedSlice"
+            },
+            "newsletter_embed": {
+              "type": "SharedSlice"
+            },
+            "image_gallery": {
+              "type": "SharedSlice"
+            },
+            "image_cards": {
+              "type": "SharedSlice"
+            },
+            "feature_grid": {
+              "type": "SharedSlice"
+            },
+            "lore_section": {
+              "type": "SharedSlice"
+            },
+            "external_support": {
+              "type": "SharedSlice"
+            },
+            "image_ticker": {
+              "type": "SharedSlice"
+            },
+            "parallax_hero": {
+              "type": "SharedSlice"
+            },
+            "character_grid": {
+              "type": "SharedSlice"
             }
           }
         }
+      }
     },
     "SEO": {
       "meta_title": {

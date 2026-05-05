@@ -1233,8 +1233,7 @@ type PageDocumentDataSlicesSlice =
   | ExternalSupportSlice
   | ImageTickerSlice
   | ParallaxHeroSlice
-  | CharacterGridSlice
-  | ImageFullSlice;
+  | CharacterGridSlice;
 
 /**
  * Content for Page documents
