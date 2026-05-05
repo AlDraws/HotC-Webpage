@@ -1,11 +1,11 @@
 "use client";
-import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
+import { QuoteSlice } from "@/../prismicio-types";
 
 /**
  * Props for `Quote`.
  */
-export type QuoteProps = SliceComponentProps<Content.QuoteSlice>;
+export type QuoteProps = SliceComponentProps<QuoteSlice>;
 
 /**
  * Component for "Quote" Slices.

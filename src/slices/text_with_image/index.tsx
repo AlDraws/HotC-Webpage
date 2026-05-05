@@ -1,13 +1,13 @@
 "use client";
-import { Content } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import { TextWithImageSlice } from "@/../prismicio-types";
 
 /**
  * Props for `TextWithImage`.
  */
-export type TextWithImageProps = SliceComponentProps<Content.TextWithImageSlice>;
+export type TextWithImageProps = SliceComponentProps<TextWithImageSlice>;
 
 /**
  * Component for "TextWithImage" Slices.

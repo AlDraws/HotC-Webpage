@@ -1,8 +1,8 @@
-import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
+import { EpisodePanelSlice } from "@/../prismicio-types";
 
-export type EpisodePanelProps = SliceComponentProps<any>;
+export type EpisodePanelProps = SliceComponentProps<EpisodePanelSlice>;
 
 const EpisodePanel = ({ slice }: EpisodePanelProps) => {
   return (

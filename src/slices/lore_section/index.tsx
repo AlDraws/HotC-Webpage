@@ -1,12 +1,12 @@
 "use client";
-import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
+import { LoreSectionSlice } from "@/../prismicio-types";
 
 /**
  * Props for `LoreSection`.
  */
-export type LoreSectionProps = SliceComponentProps<Content.LoreSectionSlice>;
+export type LoreSectionProps = SliceComponentProps<LoreSectionSlice>;
 
 /**
  * Component for "LoreSection" Slices.

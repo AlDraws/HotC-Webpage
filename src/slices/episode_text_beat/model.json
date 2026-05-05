@@ -1,0 +1,38 @@
+{
+  "id": "episode_text_beat",
+  "type": "SharedSlice",
+  "name": "EpisodeTextBeat",
+  "description": "Short text snippets for dramatic beats in the comic reader.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Text beat.",
+      "primary": {
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Text",
+            "multi": "paragraph,strong,em"
+          }
+        },
+        "tone": {
+          "type": "Select",
+          "config": {
+            "label": "Tone",
+            "options": [
+              "neutral",
+              "thought",
+              "action",
+              "shout"
+            ],
+            "default_value": "neutral"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

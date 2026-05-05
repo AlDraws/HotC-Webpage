@@ -1,12 +1,12 @@
 "use client";
-import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import { CalloutSlice } from "@/../prismicio-types";
 
 /**
  * Props for `Callout`.
  */
-export type CalloutProps = SliceComponentProps<Content.CalloutSlice>;
+export type CalloutProps = SliceComponentProps<CalloutSlice>;
 
 /**
  * Component for "Callout" Slices.

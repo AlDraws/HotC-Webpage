@@ -1,12 +1,12 @@
 "use client";
 
-import { Content } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import { useEffect, useRef } from "react";
 import Bounded from "@/components/Bounded";
+import { ParallaxHeroSlice } from "@/../prismicio-types";
 
-export type ParallaxHeroProps = SliceComponentProps<any>;
+export type ParallaxHeroProps = SliceComponentProps<ParallaxHeroSlice>;
 
 /**
  * ParallaxHero

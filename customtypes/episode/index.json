@@ -107,9 +107,6 @@
             "episode_divider": {
               "type": "SharedSlice"
             },
-            "episode_text_beat": {
-              "type": "SharedSlice"
-            },
             "external_support": {
               "type": "SharedSlice"
             }

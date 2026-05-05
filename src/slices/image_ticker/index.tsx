@@ -1,11 +1,11 @@
 "use client";
 
-import { Content } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { useEffect, useRef } from "react";
+import { ImageTickerSlice } from "@/../prismicio-types";
 
-export type ImageTickerProps = SliceComponentProps<any>;
+export type ImageTickerProps = SliceComponentProps<ImageTickerSlice>;
 
 /**
  * ImageTicker — horizontal marquee of images.

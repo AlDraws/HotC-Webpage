@@ -1,13 +1,13 @@
 "use client";
-import { Content } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import { CtaBlockSlice } from "@/../prismicio-types";
 
 /**
  * Props for `CtaBlock`.
  */
-export type CtaBlockProps = SliceComponentProps<Content.CtaBlockSlice>;
+export type CtaBlockProps = SliceComponentProps<CtaBlockSlice>;
 
 /**
  * Component for "CtaBlock" Slices.

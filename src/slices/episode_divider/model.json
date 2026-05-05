@@ -1,0 +1,30 @@
+{
+  "id": "episode_divider",
+  "type": "SharedSlice",
+  "name": "EpisodeDivider",
+  "description": "Visual separator for the comic reader.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Standard divider.",
+      "primary": {
+        "size": {
+          "type": "Select",
+          "config": {
+            "label": "Size",
+            "options": [
+              "sm",
+              "md",
+              "lg"
+            ],
+            "default_value": "md"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

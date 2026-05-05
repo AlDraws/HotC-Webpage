@@ -1,12 +1,12 @@
 "use client";
-import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import { NewsletterEmbedSlice } from "@/../prismicio-types";
 
 /**
  * Props for `NewsletterEmbed`.
  */
-export type NewsletterEmbedProps = SliceComponentProps<Content.NewsletterEmbedSlice>;
+export type NewsletterEmbedProps = SliceComponentProps<NewsletterEmbedSlice>;
 
 /**
  * Component for "NewsletterEmbed" Slices.

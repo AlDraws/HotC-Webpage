@@ -1,12 +1,12 @@
 "use client";
 
-import { Content } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import { ExternalSupportSlice } from "@/../prismicio-types";
 
 export type ExternalSupportProps =
-  SliceComponentProps<any>;
+  SliceComponentProps<ExternalSupportSlice>;
 
 /**
  * ExternalSupport — modular block of external CTAs.

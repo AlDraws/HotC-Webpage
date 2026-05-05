@@ -1,13 +1,13 @@
 "use client";
-import { Content } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import { HeroSlice } from "@/../prismicio-types";
 
 /**
  * Props for `Hero`.
  */
-export type HeroProps = SliceComponentProps<Content.HeroSlice>;
+export type HeroProps = SliceComponentProps<HeroSlice>;
 
 /**
  * Component for "Hero" Slices.

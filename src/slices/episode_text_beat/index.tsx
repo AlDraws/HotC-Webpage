@@ -1,4 +1,3 @@
-import { Content } from "@prismicio/client";
 import { SliceComponentProps, PrismicRichText } from "@prismicio/react";
 
 export type EpisodeTextBeatProps = SliceComponentProps<any>;

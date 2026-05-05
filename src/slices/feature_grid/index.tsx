@@ -1,12 +1,12 @@
 "use client";
-import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import { FeatureGridSlice } from "@/../prismicio-types";
 
 /**
  * Props for `FeatureGrid`.
  */
-export type FeatureGridProps = SliceComponentProps<Content.FeatureGridSlice>;
+export type FeatureGridProps = SliceComponentProps<FeatureGridSlice>;
 
 /**
  * Component for "FeatureGrid" Slices.
