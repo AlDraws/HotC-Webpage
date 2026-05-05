@@ -12,7 +12,7 @@ export type CtaBlockProps = SliceComponentProps<CtaBlockSlice>;
 /**
  * Component for "CtaBlock" Slices.
  */
-const CtaBlock = ({ slice }: CtaBlockProps): JSX.Element => {
+const CtaBlock = ({ slice }: CtaBlockProps) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}

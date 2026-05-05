@@ -11,7 +11,7 @@ export type ImageCardsProps = SliceComponentProps<Content.ImageCardsSlice>;
 /**
  * Component for "ImageCards" Slices.
  */
-const ImageCards = ({ slice }: ImageCardsProps): JSX.Element => {
+const ImageCards = ({ slice }: ImageCardsProps) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}

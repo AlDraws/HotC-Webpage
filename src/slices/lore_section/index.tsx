@@ -11,7 +11,7 @@ export type LoreSectionProps = SliceComponentProps<LoreSectionSlice>;
 /**
  * Component for "LoreSection" Slices.
  */
-const LoreSection = ({ slice }: LoreSectionProps): JSX.Element => {
+const LoreSection = ({ slice }: LoreSectionProps) => {
   return (
     <section
       data-slice-type={slice.slice_type}

@@ -10,7 +10,7 @@ export type QuoteProps = SliceComponentProps<QuoteSlice>;
 /**
  * Component for "Quote" Slices.
  */
-const Quote = ({ slice }: QuoteProps): JSX.Element => {
+const Quote = ({ slice }: QuoteProps) => {
   return (
     <section
       data-slice-type={slice.slice_type}

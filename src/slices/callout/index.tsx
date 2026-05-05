@@ -11,7 +11,7 @@ export type CalloutProps = SliceComponentProps<CalloutSlice>;
 /**
  * Component for "Callout" Slices.
  */
-const Callout = ({ slice }: CalloutProps): JSX.Element => {
+const Callout = ({ slice }: CalloutProps) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}

@@ -11,7 +11,7 @@ export type ImageGalleryProps = SliceComponentProps<Content.ImageGallerySlice>;
 /**
  * Component for "ImageGallery" Slices.
  */
-const ImageGallery = ({ slice }: ImageGalleryProps): JSX.Element => {
+const ImageGallery = ({ slice }: ImageGalleryProps) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}

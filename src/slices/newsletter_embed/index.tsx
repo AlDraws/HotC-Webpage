@@ -11,7 +11,7 @@ export type NewsletterEmbedProps = SliceComponentProps<NewsletterEmbedSlice>;
 /**
  * Component for "NewsletterEmbed" Slices.
  */
-const NewsletterEmbed = ({ slice }: NewsletterEmbedProps): JSX.Element => {
+const NewsletterEmbed = ({ slice }: NewsletterEmbedProps) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}

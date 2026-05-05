@@ -11,7 +11,7 @@ export type FeatureGridProps = SliceComponentProps<FeatureGridSlice>;
 /**
  * Component for "FeatureGrid" Slices.
  */
-const FeatureGrid = ({ slice }: FeatureGridProps): JSX.Element => {
+const FeatureGrid = ({ slice }: FeatureGridProps) => {
   return (
     <Bounded
       data-slice-type={slice.slice_type}
