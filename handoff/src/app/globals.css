@@ -1,0 +1,93 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&display=swap");
+
+:root {
+  /* Brand colors */
+  --hotc-ember: #F26B2B;
+  --hotc-ember-600: #D9531A;
+  --hotc-cyan: #1FB8D1;
+  --hotc-magenta: #E8336E;
+  --hotc-sfx: #FFC233;
+  --hotc-lime: #7DBA3F;
+
+  /* Ink / Paper */
+  --hotc-ink: #0B0B0E;
+  --hotc-ink-soft: #1B1C22;
+  --hotc-paper: #F5EFE6;
+  --hotc-paper-2: #EBE3D5;
+
+  /* Slate (cinema mode) */
+  --hotc-slate-950: #07080B;
+  --hotc-slate-900: #0F1014;
+  --hotc-slate-800: #1C1E25;
+  --hotc-slate-700: #2A2D37;
+
+  /* Foreground */
+  --hotc-on-ink: #FFFFFF;
+  --hotc-on-ink-mute: #DCD4C4;
+  --hotc-on-ink-faint: #8E8676;
+  --hotc-on-paper: var(--hotc-ink);
+  --hotc-on-paper-mute: #4A4135;
+
+  /* Overlays */
+  --hotc-overlay-soft: rgba(0, 0, 0, 0.35);
+  --hotc-overlay-strong: rgba(0, 0, 0, 0.62);
+
+  /* Type */
+  --hotc-font-display: "Bangers", Impact, system-ui, sans-serif;
+  --hotc-font-marker: "Permanent Marker", system-ui, sans-serif;
+
+  /* Layout */
+  --hotc-container-max: 75rem;
+  --hotc-reader-max: 1080px;
+
+  /* Borders / shadows — comic style */
+  --hotc-border: 3px solid var(--hotc-ink);
+  --hotc-shadow-panel: 6px 6px 0 var(--hotc-ink);
+  --hotc-shadow-panel-sm: 3px 3px 0 var(--hotc-ink);
+
+  /* Radii */
+  --hotc-r-sm: 0.25rem;
+  --hotc-r-md: 0.5rem;
+
+  /* Motion */
+  --hotc-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --hotc-ease-snap: cubic-bezier(0.5, 0, 0.1, 1);
+}
+
+@theme inline {
+  --color-background: var(--hotc-slate-950);
+  --color-foreground: var(--hotc-on-ink);
+  --color-ember: var(--hotc-ember);
+  --color-ember-600: var(--hotc-ember-600);
+  --color-cyan: var(--hotc-cyan);
+  --color-magenta: var(--hotc-magenta);
+  --color-sfx: var(--hotc-sfx);
+  --color-ink: var(--hotc-ink);
+  --color-paper: var(--hotc-paper);
+  --color-paper-2: var(--hotc-paper-2);
+  --color-slate-950: var(--hotc-slate-950);
+  --color-slate-900: var(--hotc-slate-900);
+  --color-slate-800: var(--hotc-slate-800);
+  --color-slate-700: var(--hotc-slate-700);
+  --color-on-ink: var(--hotc-on-ink);
+  --color-on-ink-mute: var(--hotc-on-ink-mute);
+  --color-on-ink-faint: var(--hotc-on-ink-faint);
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--hotc-font-display);
+}
+
+body {
+  background: var(--hotc-slate-950);
+  color: var(--hotc-on-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Utility: kicker eyebrow */
+.kicker {
+  font-family: var(--hotc-font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.875rem;
+  color: var(--hotc-ember);
+}

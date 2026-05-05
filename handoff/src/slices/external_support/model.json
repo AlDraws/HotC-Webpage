@@ -1,0 +1,63 @@
+{
+  "id": "external_support",
+  "type": "SharedSlice",
+  "name": "ExternalSupport",
+  "description": "Modular block of external CTAs (Patreon, Kickstarter, Ko-fi, Discord, ...). Add platforms over time without touching code.",
+  "variations": [
+    {
+      "id": "row",
+      "name": "Row of buttons",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Horizontal strip of platform buttons.",
+      "primary": {
+        "title": { "type": "StructuredText", "config": { "label": "Title (optional)", "single": "heading2" } },
+        "body":  { "type": "StructuredText", "config": { "label": "Intro (optional)", "multi": "paragraph" } }
+      },
+      "items": {
+        "platform":    { "type": "Select", "config": { "label": "Platform", "options": ["Patreon","Kickstarter","Ko-fi","Discord","YouTube","Other"] } },
+        "label":       { "type": "Text",   "config": { "label": "Button label (e.g. 'Back us on Kickstarter')" } },
+        "description": { "type": "Text",   "config": { "label": "Short description (used in 'cards' variation)" } },
+        "url":         { "type": "Link",   "config": { "label": "Destination URL" } },
+        "icon":        { "type": "Image",  "config": { "label": "Icon / mark (square, transparent)" } },
+        "accent":      { "type": "Color",  "config": { "label": "Accent color (overrides ember)" } }
+      }
+    },
+    {
+      "id": "cards",
+      "name": "Cards",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Card grid with icon, description and CTA per platform.",
+      "primary": {
+        "title": { "type": "StructuredText", "config": { "label": "Title", "single": "heading2" } },
+        "body":  { "type": "StructuredText", "config": { "label": "Intro", "multi": "paragraph" } }
+      },
+      "items": {
+        "platform":    { "type": "Select", "config": { "label": "Platform", "options": ["Patreon","Kickstarter","Ko-fi","Discord","YouTube","Other"] } },
+        "label":       { "type": "Text",   "config": { "label": "Button label" } },
+        "description": { "type": "Text",   "config": { "label": "Short description" } },
+        "url":         { "type": "Link",   "config": { "label": "Destination URL" } },
+        "icon":        { "type": "Image",  "config": { "label": "Icon / mark" } },
+        "accent":      { "type": "Color",  "config": { "label": "Accent color (overrides ember)" } }
+      }
+    },
+    {
+      "id": "banner",
+      "name": "Banner",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Single full-width banner with one or two prominent CTAs.",
+      "primary": {
+        "title": { "type": "StructuredText", "config": { "label": "Title", "single": "heading2" } },
+        "body":  { "type": "StructuredText", "config": { "label": "Body", "multi": "paragraph" } }
+      },
+      "items": {
+        "platform": { "type": "Select", "config": { "label": "Platform", "options": ["Patreon","Kickstarter","Ko-fi","Discord","YouTube","Other"] } },
+        "label":    { "type": "Text",   "config": { "label": "Button label" } },
+        "url":      { "type": "Link",   "config": { "label": "Destination URL" } },
+        "accent":   { "type": "Color",  "config": { "label": "Accent color (overrides ember)" } }
+      }
+    }
+  ]
+}
