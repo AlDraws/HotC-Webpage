@@ -1,0 +1,86 @@
+{
+  "id": "episodes_index",
+  "label": "episodes_index",
+  "repeatable": false,
+  "json": {
+    "Main": {
+      "intro_richtext": {
+        "type": "StructuredText",
+        "config": {
+          "label": "intro_richtext",
+          "placeholder": "",
+          "multi": "paragraph,heading2",
+          "allowTargetBlank": true
+        }
+      },
+      "filter_toggle": {
+        "type": "Boolean",
+        "config": {
+          "label": "filter_toggle",
+          "default_value": false,
+          "placeholder_true": "true",
+          "placeholder_false": "false"
+        }
+      },
+      "grid_layout": {
+        "type": "Select",
+        "config": {
+          "label": "grid_layout",
+          "placeholder": "",
+          "options": ["threeCols", "fourCols", "masonry"]
+        }
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone",
+        "config": {
+          "choices": {
+            "feature_grid": {
+              "type": "SharedSlice"
+            },
+            "text": {
+              "type": "SharedSlice"
+            }
+          }
+        }
+      }
+    },
+    "SEO": {
+      "meta_title": {
+        "type": "Text",
+        "config": {
+          "label": "meta_title",
+          "placeholder": ""
+        }
+      },
+      "meta_description": {
+        "type": "StructuredText",
+        "config": {
+          "label": "meta_description",
+          "placeholder": "",
+          "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl",
+          "allowTargetBlank": true
+        }
+      },
+      "meta_image": {
+        "type": "Image",
+        "config": {
+          "label": "meta_image",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "noindex": {
+        "type": "Boolean",
+        "config": {
+          "label": "noindex",
+          "default_value": false,
+          "placeholder_true": "true",
+          "placeholder_false": "false"
+        }
+      }
+    }
+  },
+  "status": true,
+  "format": "custom"
+}
