@@ -1,0 +1,140 @@
+{
+  "id": "episode_text_beat",
+  "type": "SharedSlice",
+  "name": "EpisodeTextBeat",
+  "description": "EpisodeTextBeat",
+  "variations": [
+    {
+      "id": "default",
+      "name": "narrator",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "align": {
+          "type": "Select",
+          "config": {
+            "label": "align",
+            "placeholder": "",
+            "options": [
+              "left",
+              "center"
+            ]
+          }
+        },
+        "tone": {
+          "type": "Select",
+          "config": {
+            "label": "tone",
+            "placeholder": "",
+            "options": [
+              "neutral",
+              "whisper",
+              "shout"
+            ],
+            "default_value": "neutral"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "dialogue",
+      "name": "dialogue",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "align": {
+          "type": "Select",
+          "config": {
+            "label": "align",
+            "placeholder": "",
+            "options": [
+              "left",
+              "center"
+            ]
+          }
+        },
+        "tone": {
+          "type": "Select",
+          "config": {
+            "label": "tone",
+            "placeholder": "",
+            "options": [
+              "neutral",
+              "whisper",
+              "shout"
+            ],
+            "default_value": "neutral"
+          }
+        }
+      },
+      "items": {}
+    },
+    {
+      "id": "sfx",
+      "name": "sfx",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "text": {
+          "type": "StructuredText",
+          "config": {
+            "label": "text",
+            "placeholder": "",
+            "allowTargetBlank": true,
+            "multi": "paragraph,preformatted,heading1,heading2,heading3,heading4,heading5,heading6,strong,em,hyperlink,image,embed,list-item,o-list-item,rtl"
+          }
+        },
+        "align": {
+          "type": "Select",
+          "config": {
+            "label": "align",
+            "placeholder": "",
+            "options": [
+              "left",
+              "center"
+            ]
+          }
+        },
+        "tone": {
+          "type": "Select",
+          "config": {
+            "label": "tone",
+            "placeholder": "",
+            "options": [
+              "neutral",
+              "whisper",
+              "shout"
+            ],
+            "default_value": "neutral"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

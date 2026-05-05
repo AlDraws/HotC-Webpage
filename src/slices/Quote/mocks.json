@@ -1,0 +1,86 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"quote": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Commodo occaecat adipisicing cillum sunt. Magna culpa pariatur cillum excepteur dolore reprehenderit non nostrud minim consequat adipisicing id ex ex reprehenderit."
+						}
+					}
+				]
+			},
+			"source_link": {
+				"key": "dac64e78-8715-470e-8be8-d7672089f999",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "http://google.com",
+					"text": "your"
+				}
+			},
+			"accent": {
+				"__TYPE__": "FieldContent",
+				"value": "largeMarks",
+				"type": "Select"
+			},
+			"source": {
+				"__TYPE__": "FieldContent",
+				"value": "rise",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	},
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "block",
+		"primary": {
+			"quote": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "heading3",
+						"content": {
+							"text": "Probably"
+						}
+					}
+				]
+			},
+			"source_link": {
+				"key": "b5f93a99-fe4c-4186-9b9a-e685e508932f",
+				"__TYPE__": "LinkContent",
+				"value": {
+					"__TYPE__": "ExternalLink",
+					"url": "https://prismic.io",
+					"text": "other"
+				}
+			},
+			"accent": {
+				"__TYPE__": "FieldContent",
+				"value": "largeMarks",
+				"type": "Select"
+			},
+			"source": {
+				"__TYPE__": "FieldContent",
+				"value": "constantly",
+				"type": "Text"
+			}
+		},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": []
+			}
+		]
+	}
+]

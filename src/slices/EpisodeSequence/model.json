@@ -1,0 +1,29 @@
+{
+  "id": "episode_sequence",
+  "type": "SharedSlice",
+  "name": "EpisodeSequence",
+  "description": "EpisodeSequence",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {},
+      "items": {
+        "image": {
+          "type": "Image",
+          "config": {
+            "label": "image",
+            "constraint": {
+              "width": 1080
+            },
+            "thumbnails": []
+          }
+        }
+      }
+    }
+  ]
+}
