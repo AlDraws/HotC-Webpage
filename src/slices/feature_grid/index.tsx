@@ -1,28 +1,20 @@
 "use client";
-import type { LinkField } from "@prismicio/client";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import Link from "next/link";
+import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { useLightbox } from "@/components/LightboxProvider";
 import { FeatureGridSlice } from "@/../prismicio-types";
+import {
+  getLinkTarget,
+  isExternalHref,
+  resolveLinkHref,
+} from "@/lib/links";
 
 /**
  * Props for `FeatureGrid`.
  */
 export type FeatureGridProps = SliceComponentProps<FeatureGridSlice>;
-
-function getLinkHref(linkField: unknown): string | null {
-  if (
-    linkField &&
-    typeof linkField === "object" &&
-    "url" in linkField &&
-    typeof (linkField as { url?: unknown }).url === "string" &&
-    (linkField as { url: string }).url
-  ) {
-    return (linkField as { url: string }).url;
-  }
-  return null;
-}
 
 /**
  * Component for "FeatureGrid" Slices.
@@ -52,61 +44,23 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
           };
           const hasDedicatedCover = Boolean(typedItem.cover_image?.url);
           const coverImage = hasDedicatedCover ? typedItem.cover_image : item.icon;
-          const coverHref = getLinkHref(typedItem.cover_link);
-          const coverLinkField = typedItem.cover_link as LinkField | undefined;
+          const coverHref = resolveLinkHref(typedItem.cover_link);
+          const coverTarget = getLinkTarget(typedItem.cover_link);
+          const isExternal = coverHref ? isExternalHref(coverHref) : false;
+          const rel =
+            coverTarget === "_blank" || isExternal
+              ? "noopener noreferrer"
+              : undefined;
 
-          return (
-            <article key={index} className="hotc-fcard">
+          const content = (
+            <>
               {coverImage?.url ? (
                 <div className="hotc-fcard__cover-wrap">
-                  {coverHref ? (
-                    <PrismicNextLink
-                      field={coverLinkField}
-                      className="hotc-btn hotc-btn--ghost hotc-fcard__cover-link"
-                    >
-                      <PrismicNextImage
-                        field={coverImage}
-                        fallbackAlt=""
-                        className="hotc-fcard__cover"
-                      />
-                    </PrismicNextLink>
-                  ) : (
-                    <button
-                      type="button"
-                      className="hotc-btn hotc-btn--ghost hotc-fcard__cover-link"
-                      onClick={() =>
-                        openLightbox([
-                          {
-                            src: coverImage.url || "",
-                            alt: coverImage.alt || "",
-                          },
-                        ])
-                      }
-                      aria-label={`Open ${item.title || "feature"} cover`}
-                    >
-                      <PrismicNextImage
-                        field={coverImage}
-                        fallbackAlt=""
-                        className="hotc-fcard__cover"
-                      />
-                    </button>
-                  )}
-
-                  <button
-                    type="button"
-                    className="hotc-fcard__zoom"
-                    onClick={() =>
-                      openLightbox([
-                        {
-                          src: coverImage.url || "",
-                          alt: coverImage.alt || "",
-                        },
-                      ])
-                    }
-                    aria-label={`Open ${item.title || "feature"} image`}
-                  >
-                    View
-                  </button>
+                  <PrismicNextImage
+                    field={coverImage}
+                    fallbackAlt=""
+                    className="hotc-fcard__cover"
+                  />
                 </div>
               ) : null}
 
@@ -121,6 +75,57 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
               ) : null}
               <h4>{item.title}</h4>
               <p>{item.description}</p>
+            </>
+          );
+
+          return (
+            <article
+              key={index}
+              className={`hotc-fcard hotc-fcard--interactive${
+                coverHref ? " hotc-fcard--linked" : ""
+              }`}
+            >
+              {coverHref ? (
+                isExternal ? (
+                  <a
+                    href={coverHref}
+                    className="hotc-fcard__main-link"
+                    target={coverTarget ?? "_blank"}
+                    rel={rel}
+                  >
+                    {content}
+                  </a>
+                ) : (
+                  <Link
+                    href={coverHref}
+                    className="hotc-fcard__main-link"
+                    target={coverTarget}
+                    rel={rel}
+                  >
+                    {content}
+                  </Link>
+                )
+              ) : (
+                <div className="hotc-fcard__main-link">{content}</div>
+              )}
+
+              {coverImage?.url ? (
+                <button
+                  type="button"
+                  className="hotc-fcard__zoom hotc-pressable"
+                  onClick={() =>
+                    openLightbox([
+                      {
+                        src: coverImage.url || "",
+                        alt: coverImage.alt || "",
+                      },
+                    ])
+                  }
+                  aria-label={`Open ${item.title || "feature"} image`}
+                >
+                  View
+                </button>
+              ) : null}
             </article>
           );
         })}

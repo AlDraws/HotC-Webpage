@@ -4,6 +4,7 @@ import { SliceZone } from "@prismicio/react";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { asText } from "@prismicio/client";
 import { components } from "@/slices";
+import { normalizeSlices } from "@/lib/prismic-slices";
 import { getRequestPrismicLang } from "@/lib/server-locale";
 
 type Params = { uid: string };
@@ -49,5 +50,5 @@ export default async function GenericPage({
     .catch(() => null);
   if (!page) notFound();
 
-  return <SliceZone slices={page.data.slices} components={components} />;
+  return <SliceZone slices={normalizeSlices(page.data.slices)} components={components} />;
 }

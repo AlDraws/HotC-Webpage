@@ -1,9 +1,11 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PrismicNextImage } from "@prismicio/next";
-import { PrismicRichText } from "@prismicio/react";
+import { PrismicRichText, SliceZone } from "@prismicio/react";
 import Link from "next/link";
-import { createClient } from "@/prismicio";
+import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
+import { components } from "@/slices";
+import { normalizeSlices } from "@/lib/prismic-slices";
 import { getRequestPrismicLang } from "@/lib/server-locale";
 
 type Props = { params: Promise<{ uid: string }> };
@@ -31,11 +33,14 @@ export default async function CharacterProfilePage({ params }: Props) {
   const { uid } = await params;
   const lang = await getRequestPrismicLang();
   const client = createClient();
-  const ch = await client.getByUID("character", uid, { lang }).catch(() => null);
+  const ch = await client
+    .getByUID("character", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
+    .catch(() => null);
   if (!ch) notFound();
 
   const attributes = ch.data.attributes ?? [];
   const gallery = ch.data.gallery ?? [];
+  const slices = normalizeSlices(ch.data.slices);
 
   return (
     <article>
@@ -128,6 +133,10 @@ export default async function CharacterProfilePage({ params }: Props) {
             </div>
           </div>
         </section>
+      ) : null}
+
+      {slices.length > 0 ? (
+        <SliceZone slices={slices} components={components} />
       ) : null}
     </article>
   );

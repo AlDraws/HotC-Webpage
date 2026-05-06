@@ -11,6 +11,7 @@
       "image":   { "type": "Image", "config": { "label": "Image (4:3)" } },
       "title":   { "type": "Text",  "config": { "label": "Title" } },
       "caption": { "type": "Text",  "config": { "label": "Caption" } },
+      "badge":   { "type": "Text",  "config": { "label": "Badge (Optional)", "placeholder": "Nuevo" } },
       "enlace": {
         "type": "Link",
         "config": {

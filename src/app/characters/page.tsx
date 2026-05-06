@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SliceZone } from "@prismicio/react";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import { normalizeSlices } from "@/lib/prismic-slices";
 import { getRequestPrismicLang } from "@/lib/server-locale";
 
 export const metadata: Metadata = {
@@ -18,14 +19,15 @@ export const metadata: Metadata = {
 export default async function CharactersPage() {
   const lang = await getRequestPrismicLang();
   const client = createClient();
-  const charactersPage = await client.getByUID("page", "characters", { lang }).catch(() => null);
+  const charactersPage = await client
+    .getByUID("page", "characters", { lang })
+    .catch(() => null);
   const characters = await client.getAllByType("character", { lang });
-  const firstCover = characters.find((item) => item.data.cover?.url)?.data.cover?.url;
+  const normalizedPageSlices = normalizeSlices(charactersPage?.data.slices);
 
   const heroSliceFromPage =
-    charactersPage?.data.slices?.find(
-      (slice) => slice.slice_type === "parallax_hero"
-    ) ?? null;
+    normalizedPageSlices.find((slice) => slice.slice_type === "parallax_hero") ??
+    null;
 
   const fallbackHeroSlice = {
     id: "characters-default-parallax",
@@ -37,7 +39,7 @@ export default async function CharactersPage() {
       kicker: "The Cast",
       title: "Characters",
       subtitle: "The heirs, the lost, and the ones who stayed.",
-      bgImage: firstCover ? { url: firstCover, alt: "Characters cover" } : {},
+      bgImage: {},
       bgVideo: {},
       bgPoster: {},
       foreground: {},
@@ -66,7 +68,7 @@ export default async function CharactersPage() {
             <Link
               key={ch.id}
               href={`/characters/${ch.uid}`}
-              className="hotc-cgrid__cell"
+              className="hotc-cgrid__cell hotc-pressable"
             >
               <div
                 className="hotc-cgrid__portrait"

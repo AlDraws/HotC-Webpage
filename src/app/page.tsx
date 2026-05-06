@@ -3,6 +3,7 @@ import { SliceZone } from "@prismicio/react";
 import { asText } from "@prismicio/client";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { components } from "@/slices";
+import { normalizeSlices } from "@/lib/prismic-slices";
 import { getRequestPrismicLang } from "@/lib/server-locale";
 
 export default async function Home() {
@@ -20,7 +21,7 @@ export default async function Home() {
     );
   }
 
-  return <SliceZone slices={page.data.slices} components={components} />;
+  return <SliceZone slices={normalizeSlices(page.data.slices)} components={components} />;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -31,16 +32,11 @@ export async function generateMetadata(): Promise<Metadata> {
     .catch(() => null);
 
   if (!page) return {};
-  const siteTitle = "Heirs of the Collapse";
-  const rawTitle = page.data.meta_title?.trim();
-  const looksLikeUrl = rawTitle
-    ? /^https?:\/\//i.test(rawTitle) || /^[\w.-]+\.[a-z]{2,}(\/|$)/i.test(rawTitle)
-    : false;
-  const pageTitle =
-    rawTitle && !looksLikeUrl && rawTitle !== siteTitle ? rawTitle : undefined;
 
   return {
-    title: pageTitle,
+    title: {
+      absolute: "Heirs of the Collapse",
+    },
     description: page.data.meta_description
       ? asText(page.data.meta_description)
       : undefined,

@@ -32,7 +32,7 @@ const ImageGallery = ({ slice }: ImageGalleryProps) => {
           <button
             key={index}
             type="button"
-            className="hotc-gallery__tile"
+            className="hotc-gallery__tile hotc-pressable"
             aria-label={`Open image ${index + 1}`}
             onClick={() => openLightbox(images, index)}
             style={

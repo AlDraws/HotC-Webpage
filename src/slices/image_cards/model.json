@@ -25,6 +25,7 @@
         },
         "title": { "type": "Text", "config": { "label": "Card Title", "placeholder": "" } },
         "caption": { "type": "Text", "config": { "label": "Card Caption", "placeholder": "" } },
+        "badge": { "type": "Text", "config": { "label": "Badge (Optional)", "placeholder": "Nuevo" } },
         "enlace": {
           "type": "Link",
           "config": {

@@ -960,6 +960,19 @@ body.hotc,
   box-shadow: none;
 }
 
+.hotc-pressable {
+  transition: transform 150ms var(--hotc-ease-snap);
+  transform-origin: center;
+}
+
+.hotc-pressable:hover {
+  transform: translate(-2px, -2px);
+}
+
+.hotc-pressable:active {
+  transform: translate(2px, 2px);
+}
+
 /* =========================================================
    TARJETAS — .hotc-card
    Primitivo estilo viñeta: borde negro grueso, sombra desplazada.
@@ -2607,6 +2620,30 @@ body.hotc,
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.hotc-icard__img-wrap {
+  position: relative;
+}
+
+.hotc-icard__badge {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 2;
+  background: #f97316;
+  color: #fff;
+  border: 2px solid var(--hotc-ink);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.625rem;
+  font-family: var(--hotc-font-display);
+  font-size: 0.8rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  box-shadow: var(--hotc-shadow-panel-sm);
 }
 
 .hotc-icard__img {
@@ -2656,17 +2693,33 @@ body.hotc,
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
+  position: relative;
+}
+
+.hotc-fcard--interactive {
+  transition: transform 150ms var(--hotc-ease-snap);
+}
+
+.hotc-fcard--interactive:hover,
+.hotc-fcard--interactive:focus-within {
+  transform: translate(-2px, -2px);
+}
+
+.hotc-fcard--interactive:has(.hotc-fcard__main-link:active),
+.hotc-fcard--interactive:has(.hotc-fcard__zoom:active) {
+  transform: translate(2px, 2px);
+}
+
+.hotc-fcard__main-link {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  color: inherit;
+  text-decoration: none;
 }
 
 .hotc-fcard__cover-wrap {
   position: relative;
-}
-
-.hotc-fcard__cover-link {
-  display: block;
-  width: 100%;
-  padding: 0;
-  overflow: hidden;
 }
 
 .hotc-fcard__cover {
@@ -2679,8 +2732,8 @@ body.hotc,
 
 .hotc-fcard__zoom {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 1.75rem;
+  right: 1.75rem;
   z-index: 2;
   border: 2px solid var(--hotc-ink);
   border-radius: 999px;

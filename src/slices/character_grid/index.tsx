@@ -55,7 +55,7 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
             <PrismicNextLink
               key={index}
               field={character}
-              className="hotc-cgrid__cell"
+              className="hotc-cgrid__cell hotc-pressable"
             >
               <div
                 className="hotc-cgrid__portrait"
