@@ -3,6 +3,7 @@ import { PrismicNextImage } from "@prismicio/next";
 import { asText } from "@prismicio/client";
 import Link from "next/link";
 import { createClient } from "@/prismicio";
+import { getRequestPrismicLang } from "@/lib/server-locale";
 
 export const metadata: Metadata = {
   title: "Episodes",
@@ -10,9 +11,13 @@ export const metadata: Metadata = {
 };
 
 export default async function EpisodesPage() {
+  const lang = await getRequestPrismicLang();
   const client = createClient();
-  const episodesIndex = await client.getSingle("episodes_index").catch(() => null);
+  const episodesIndex = await client
+    .getSingle("episodes_index", { lang })
+    .catch(() => null);
   const episodes = await client.getAllByType("episode", {
+    lang,
     orderings: [{ field: "my.episode.chapter_number", direction: "desc" }],
   });
   const arcs = ["Prologue", "Arc I", "Arc II", "Arc III", "Epilogue"] as const;

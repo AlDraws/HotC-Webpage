@@ -10,7 +10,15 @@
     "items": {
       "image":   { "type": "Image", "config": { "label": "Image (4:3)" } },
       "title":   { "type": "Text",  "config": { "label": "Title" } },
-      "caption": { "type": "Text",  "config": { "label": "Caption" } }
+      "caption": { "type": "Text",  "config": { "label": "Caption" } },
+      "enlace": {
+        "type": "Link",
+        "config": {
+          "label": "Enlace",
+          "select": "document",
+          "allowTargetBlank": true
+        }
+      }
     }
   }]
 }

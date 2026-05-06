@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/prismicio";
+import { getRequestPrismicLang } from "@/lib/server-locale";
 
 export const metadata: Metadata = {
   title: "Worldbuilding",
@@ -14,8 +15,9 @@ export const metadata: Metadata = {
  *   - Uses hotc-cgrid__* classes from Worldbuilding.jsx
  */
 export default async function LorePage() {
+  const lang = await getRequestPrismicLang();
   const client = createClient();
-  const items = await client.getAllByType("lore_entry");
+  const items = await client.getAllByType("lore_entry", { lang });
 
   // Group by category field (select: Environment | Prop | Illustration)
   const order = ["Environment", "Prop", "Illustration"];

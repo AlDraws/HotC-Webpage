@@ -5,13 +5,17 @@ import { PrismicRichText, SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
 import Link from "next/link";
 import { createClient } from "@/prismicio";
+import { getRequestPrismicLang } from "@/lib/server-locale";
 
 type Props = { params: Promise<{ uid: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { uid } = await params;
+  const lang = await getRequestPrismicLang();
   const client = createClient();
-  const item = await client.getByUID("lore_entry", uid).catch(() => null);
+  const item = await client
+    .getByUID("lore_entry", uid, { lang })
+    .catch(() => null);
   if (!item) return {};
   return {
     title: `${item.data.title ?? uid} — Worldbuilding — Heirs of the Collapse`,
@@ -30,8 +34,11 @@ export async function generateStaticParams() {
  */
 export default async function LoreDetailPage({ params }: Props) {
   const { uid } = await params;
+  const lang = await getRequestPrismicLang();
   const client = createClient();
-  const item = await client.getByUID("lore_entry", uid).catch(() => null);
+  const item = await client
+    .getByUID("lore_entry", uid, { lang })
+    .catch(() => null);
   if (!item) notFound();
 
 

@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/prismicio";
+import { getRequestPrismicLang } from "@/lib/server-locale";
 
 export const metadata: Metadata = {
   title: "Characters",
@@ -13,8 +14,9 @@ export const metadata: Metadata = {
  *   - CharacterGrid with hotc-cgrid__* classes from CharacterGrid.jsx
  */
 export default async function CharactersPage() {
+  const lang = await getRequestPrismicLang();
   const client = createClient();
-  const characters = await client.getAllByType("character");
+  const characters = await client.getAllByType("character", { lang });
 
   return (
     <>

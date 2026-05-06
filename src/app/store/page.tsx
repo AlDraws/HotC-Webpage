@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { PrismicRichText } from "@prismicio/react";
 import { asText, type RichTextField } from "@prismicio/client";
 import { createClient } from "@/prismicio";
+import { getRequestPrismicLang } from "@/lib/server-locale";
 
 export const metadata: Metadata = { title: "Store" };
 
@@ -33,9 +34,10 @@ function getLinkHref(linkField: unknown): string | null {
 }
 
 export default async function StorePage() {
+  const lang = await getRequestPrismicLang();
   const client = createClient();
   const products = await client
-    .getAllByType("product" as never)
+    .getAllByType("product" as never, { lang })
     .then((result) => result as unknown as ProductDocument[])
     .catch(() => [] as ProductDocument[]);
 

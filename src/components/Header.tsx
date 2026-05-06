@@ -3,12 +3,14 @@
 import { Content, asText } from "@prismicio/client";
 import Link from "next/link";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import BrandLogo from "@/components/BrandLogo";
+import { LOCALE_COOKIE_NAME, type AppLocale } from "@/lib/locale";
 
 type Props = {
   settings: Content.SettingsDocument;
   navigation: Content.NavigationDocument | null;
+  currentLocale: AppLocale;
 };
 
 function getLinkHref(linkField: unknown): string {
@@ -24,15 +26,18 @@ function getLinkHref(linkField: unknown): string {
   return "#";
 }
 
-export default function Header({ settings, navigation }: Props) {
+export default function Header({ settings, navigation, currentLocale }: Props) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const router = useRouter();
   const nav = navigation?.data.primary_links ?? [];
   const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
-  const brand = settings.data.brand?.[0];
-  const brandLabel = brand?.hide_label ? "" : brand?.label;
-  const brandIcon = brand?.icon_image?.url;
-  const isIconLeft = (brand?.icon_position || "left") === "left";
+
+  function switchLocale(locale: AppLocale) {
+    if (locale === currentLocale) return;
+    document.cookie = `${LOCALE_COOKIE_NAME}=${locale}; path=/; max-age=31536000; samesite=lax`;
+    router.refresh();
+  }
 
   return (
     <header className="hotc-header">
@@ -64,25 +69,28 @@ export default function Header({ settings, navigation }: Props) {
         </nav>
 
         <div className="hotc-header__actions">
-          {brand?.label || brandIcon ? (
-            <Link href={getLinkHref(brand.link)} className="hotc-btn hotc-btn--ghost">
-              {isIconLeft && brandIcon ? (
-                <img
-                  src={brandIcon}
-                  alt={brand?.icon_alt_override || brand?.label || "Brand"}
-                  className="h-4 w-4 object-contain"
-                />
-              ) : null}
-              {brandLabel}
-              {!isIconLeft && brandIcon ? (
-                <img
-                  src={brandIcon}
-                  alt={brand?.icon_alt_override || brand?.label || "Brand"}
-                  className="h-4 w-4 object-contain"
-                />
-              ) : null}
-            </Link>
-          ) : null}
+          <div className="hotc-header__lang" role="group" aria-label="Language">
+            <button
+              type="button"
+              className={`hotc-btn hotc-btn--ghost hotc-header__lang-btn${
+                currentLocale === "en" ? " is-active" : ""
+              }`}
+              onClick={() => switchLocale("en")}
+              aria-pressed={currentLocale === "en"}
+            >
+              EN
+            </button>
+            <button
+              type="button"
+              className={`hotc-btn hotc-btn--ghost hotc-header__lang-btn${
+                currentLocale === "es" ? " is-active" : ""
+              }`}
+              onClick={() => switchLocale("es")}
+              aria-pressed={currentLocale === "es"}
+            >
+              ES
+            </button>
+          </div>
           <button
             onClick={() => setOpen(!open)}
             className="hotc-header__burger"

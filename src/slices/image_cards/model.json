@@ -24,7 +24,15 @@
           }
         },
         "title": { "type": "Text", "config": { "label": "Card Title", "placeholder": "" } },
-        "caption": { "type": "Text", "config": { "label": "Card Caption", "placeholder": "" } }
+        "caption": { "type": "Text", "config": { "label": "Card Caption", "placeholder": "" } },
+        "enlace": {
+          "type": "Link",
+          "config": {
+            "label": "Enlace",
+            "select": "document",
+            "allowTargetBlank": true
+          }
+        }
       }
     }
   ]

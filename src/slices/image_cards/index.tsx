@@ -8,6 +8,19 @@ import Bounded from "@/components/Bounded";
  */
 export type ImageCardsProps = SliceComponentProps<Content.ImageCardsSlice>;
 
+function getLinkHref(linkField: unknown): string | null {
+  if (
+    linkField &&
+    typeof linkField === "object" &&
+    "url" in linkField &&
+    typeof (linkField as { url?: unknown }).url === "string" &&
+    (linkField as { url: string }).url
+  ) {
+    return (linkField as { url: string }).url;
+  }
+  return null;
+}
+
 /**
  * Component for "ImageCards" Slices.
  */
@@ -27,22 +40,40 @@ const ImageCards = ({ slice }: ImageCardsProps) => {
         </div>
       )}
       <div className="hotc-icards">
-        {slice.items.map((item, index) => (
-          <article key={index} className="hotc-icard">
-            <div
-              className="hotc-icard__img"
-              style={
-                item.image.url
-                  ? { backgroundImage: `url(${item.image.url})` }
-                  : undefined
-              }
-            />
-            {item.title && <h3 className="hotc-icard__title">{item.title}</h3>}
-            {item.caption && (
-              <p className="hotc-icard__caption">{item.caption}</p>
-            )}
-          </article>
-        ))}
+        {slice.items.map((item, index) => {
+          const href = getLinkHref((item as { enlace?: unknown }).enlace);
+
+          const card = (
+            <>
+              <div
+                className="hotc-icard__img"
+                style={
+                  item.image.url
+                    ? { backgroundImage: `url(${item.image.url})` }
+                    : undefined
+                }
+              />
+              {item.title && <h3 className="hotc-icard__title">{item.title}</h3>}
+              {item.caption && (
+                <p className="hotc-icard__caption">{item.caption}</p>
+              )}
+            </>
+          );
+
+          if (href) {
+            return (
+              <a key={index} href={href} className="hotc-icard">
+                {card}
+              </a>
+            );
+          }
+
+          return (
+            <article key={index} className="hotc-icard">
+              {card}
+            </article>
+          );
+        })}
       </div>
     </Bounded>
   );

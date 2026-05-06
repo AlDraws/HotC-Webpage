@@ -4,13 +4,15 @@ import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText } from "@prismicio/react";
 import Link from "next/link";
 import { createClient } from "@/prismicio";
+import { getRequestPrismicLang } from "@/lib/server-locale";
 
 type Props = { params: Promise<{ uid: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { uid } = await params;
+  const lang = await getRequestPrismicLang();
   const client = createClient();
-  const ch = await client.getByUID("character", uid).catch(() => null);
+  const ch = await client.getByUID("character", uid, { lang }).catch(() => null);
   if (!ch) return {};
   return { title: `${ch.data.name ?? uid} — Heirs of the Collapse` };
 }
@@ -27,8 +29,9 @@ export async function generateStaticParams() {
  */
 export default async function CharacterProfilePage({ params }: Props) {
   const { uid } = await params;
+  const lang = await getRequestPrismicLang();
   const client = createClient();
-  const ch = await client.getByUID("character", uid).catch(() => null);
+  const ch = await client.getByUID("character", uid, { lang }).catch(() => null);
   if (!ch) notFound();
 
   const attributes = ch.data.attributes ?? [];

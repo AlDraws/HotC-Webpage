@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { asText } from "@prismicio/client";
 import { createClient } from "@/prismicio";
+import { getRequestLocale, getRequestPrismicLang } from "@/lib/server-locale";
 
 const inter = localFont({
   src: [
@@ -22,8 +23,9 @@ const inter = localFont({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
+  const lang = await getRequestPrismicLang();
   const client = createClient();
-  const settings = await client.getSingle("settings").catch(() => null);
+  const settings = await client.getSingle("settings", { lang }).catch(() => null);
   const siteTitle =
     settings?.data.meta_title ||
     asText(settings?.data.site_title) ||
@@ -57,15 +59,21 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getRequestLocale();
+  const lang = await getRequestPrismicLang();
   const client = createClient();
-  const settings = await client.getSingle("settings").catch(() => null);
-  const navigation = await client.getSingle("navigation").catch(() => null);
+  const settings = await client.getSingle("settings", { lang }).catch(() => null);
+  const navigation = await client.getSingle("navigation", { lang }).catch(() => null);
 
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang={locale} className={`${inter.variable} h-full antialiased`}>
       <body className="hotc flex min-h-full flex-col">
         {settings && navigation ? (
-          <Header settings={settings} navigation={navigation} />
+          <Header
+            settings={settings}
+            navigation={navigation}
+            currentLocale={locale}
+          />
         ) : null}
         <main className="flex-1">{children}</main>
         {settings && navigation ? (
