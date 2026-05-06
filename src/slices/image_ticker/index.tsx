@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { useEffect, useRef, useState } from "react";
@@ -79,11 +80,6 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
   const backgroundStyle: Record<string, string> = {};
   if (primary.background_color) {
     backgroundStyle.backgroundColor = primary.background_color;
-  }
-  if (primary.background_image?.url) {
-    backgroundStyle.backgroundImage = `url(${primary.background_image.url})`;
-    backgroundStyle.backgroundSize = "cover";
-    backgroundStyle.backgroundPosition = "center";
   }
 
   useEffect(() => {
@@ -180,6 +176,15 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
       className="hotc-ticker"
       style={backgroundStyle}
     >
+      {primary.background_image?.url ? (
+        <Image
+          src={primary.background_image.url}
+          alt=""
+          fill
+          sizes="100vw"
+          className="hotc-ticker__bg"
+        />
+      ) : null}
       <div
         ref={viewportRef}
         className="hotc-ticker__viewport"

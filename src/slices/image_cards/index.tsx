@@ -1,4 +1,5 @@
 import { Content } from "@prismicio/client";
+import { PrismicNextImage } from "@prismicio/next";
 import Link from "next/link";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
@@ -51,12 +52,17 @@ const ImageCards = ({ slice }: ImageCardsProps) => {
                 {badge ? <span className="hotc-icard__badge">{badge}</span> : null}
                 <div
                   className="hotc-icard__img"
-                  style={
-                    item.image.url
-                      ? { backgroundImage: `url(${item.image.url})` }
-                      : undefined
-                  }
-                />
+                >
+                  {item.image.url ? (
+                    <PrismicNextImage
+                      field={item.image}
+                      fallbackAlt=""
+                      fill
+                      sizes="(max-width: 767px) 100vw, 33vw"
+                      className="hotc-icard__image"
+                    />
+                  ) : null}
+                </div>
               </div>
               {item.title && <h3 className="hotc-icard__title">{item.title}</h3>}
               {item.caption && (

@@ -112,10 +112,15 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
             playsInline
           />
         ) : slice.primary.bgImage?.url ? (
-          <div
-            className="hotc-phero__img"
-            style={{ backgroundImage: `url(${slice.primary.bgImage.url})` }}
-          />
+          <div className="hotc-phero__img">
+            <PrismicNextImage
+              field={slice.primary.bgImage}
+              fallbackAlt=""
+              fill
+              sizes="100vw"
+              className="hotc-phero__bg-img"
+            />
+          </div>
         ) : null}
       </div>
 

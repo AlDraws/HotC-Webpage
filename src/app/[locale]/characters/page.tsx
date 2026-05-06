@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { PrismicNextImage } from "@prismicio/next";
 import { asText, type RichTextField } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
 import { createClient } from "@/prismicio";
@@ -78,14 +79,17 @@ export default async function CharactersPage({ params }: Props) {
               href={`/${locale}/characters/${ch.uid}`}
               className="hotc-cgrid__cell hotc-pressable"
             >
-              <div
-                className="hotc-cgrid__portrait"
-                style={
-                  ch.data.portrait?.url
-                    ? { backgroundImage: `url(${ch.data.portrait.url})` }
-                    : undefined
-                }
-              />
+              <div className="hotc-cgrid__portrait">
+                {ch.data.portrait?.url ? (
+                  <PrismicNextImage
+                    field={ch.data.portrait}
+                    fallbackAlt=""
+                    fill
+                    sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
+                    className="hotc-cgrid__portrait-img"
+                  />
+                ) : null}
+              </div>
               <div className="hotc-cgrid__meta">
                 <span className="hotc-cgrid__name">{ch.data.name}</span>
                 {ch.data.role ? (

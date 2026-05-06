@@ -1,7 +1,5 @@
-import type { Metadata } from "next";
 import { Bangers, Bowlby_One, Permanent_Marker } from "next/font/google";
 import localFont from "next/font/local";
-import "./globals.css";
 
 const inter = localFont({
   src: [
@@ -41,26 +39,19 @@ const permanentMarker = Permanent_Marker({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-  },
-};
-
-export default function RootLayout({
+export function RootDocument({
   children,
+  lang,
 }: {
   children: React.ReactNode;
+  lang: string;
 }) {
   return (
     <html
-      lang="en"
+      lang={lang}
       className={`${inter.variable} ${bangers.variable} ${bowlbyOne.variable} ${permanentMarker.variable} h-full antialiased`}
     >
-      <body className="hotc flex min-h-full flex-col">
-        {children}
-      </body>
+      <body className="hotc flex min-h-full flex-col">{children}</body>
     </html>
   );
 }

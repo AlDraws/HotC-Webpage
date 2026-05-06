@@ -44,9 +44,15 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   });
   const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
   const brandData = settings.data as typeof settings.data & {
-    header_logo?: { url?: string | null } | null;
+    header_logo?: {
+      url?: string | null;
+      dimensions?: { width?: number | null; height?: number | null } | null;
+    } | null;
   };
-  const headerLogoUrl = brandData.header_logo?.url || settings.data.logo?.url;
+  const headerLogo = brandData.header_logo?.url
+    ? brandData.header_logo
+    : settings.data.logo;
+  const headerLogoUrl = headerLogo?.url;
 
   function switchLocale(locale: AppLocale) {
     if (locale === currentLocale) return;
@@ -69,6 +75,9 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
               src={headerLogoUrl}
               alt={siteTitle}
               className="h-full w-auto object-contain"
+              width={headerLogo?.dimensions?.width}
+              height={headerLogo?.dimensions?.height}
+              sizes="(max-width: 767px) 180px, 220px"
             />
           ) : (
             <span className="hotc-logo-mask hotc-logo-mask--heirs" />
@@ -162,6 +171,9 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
                   src={headerLogoUrl}
                   alt={siteTitle}
                   className="h-full w-auto object-contain"
+                  width={headerLogo?.dimensions?.width}
+                  height={headerLogo?.dimensions?.height}
+                  sizes="180px"
                 />
               ) : (
                 <span className="hotc-logo-mask hotc-logo-mask--heirs" />

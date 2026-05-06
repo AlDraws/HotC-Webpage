@@ -47,10 +47,15 @@ export default async function CharacterProfilePage({ params }: Props) {
       {/* Hero — hotc-cprofile__hero with cover background */}
       <section className="hotc-cprofile__hero">
         {ch.data.cover?.url ? (
-          <div
-            className="hotc-cprofile__bg"
-            style={{ backgroundImage: `url(${ch.data.cover.url})` }}
-          />
+          <div className="hotc-cprofile__bg">
+            <PrismicNextImage
+              field={ch.data.cover}
+              fallbackAlt=""
+              fill
+              sizes="100vw"
+              className="hotc-cprofile__bg-img"
+            />
+          </div>
         ) : null}
         <div className="hotc-cprofile__overlay" />
 
@@ -126,8 +131,15 @@ export default async function CharacterProfilePage({ params }: Props) {
                   <div
                     key={i}
                     className="hotc-cprofile__gallery-tile"
-                    style={{ backgroundImage: `url(${g.image.url})` }}
-                  />
+                  >
+                    <PrismicNextImage
+                      field={g.image}
+                      fallbackAlt=""
+                      fill
+                      sizes="(max-width: 639px) 100vw, 33vw"
+                      className="hotc-cprofile__gallery-img"
+                    />
+                  </div>
                 ) : null,
               )}
             </div>

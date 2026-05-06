@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import { PrismicRichText } from "@prismicio/react";
 import { asText, type RichTextField } from "@prismicio/client";
 import { createClient } from "@/prismicio";
@@ -81,12 +82,16 @@ export default async function StorePage({ params }: Props) {
                       >
                         <div
                           className="hotc-store__cover"
-                          style={
-                            p.data.image?.url
-                              ? { backgroundImage: `url(${p.data.image.url})` }
-                              : undefined
-                          }
                         >
+                          {p.data.image?.url ? (
+                            <Image
+                              src={p.data.image.url}
+                              alt={asText(p.data.title) || "Product image"}
+                              fill
+                              sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                              className="hotc-store__image"
+                            />
+                          ) : null}
                           {p.data.tag ? (
                             <span className="hotc-store__tag">{p.data.tag}</span>
                           ) : null}
@@ -95,12 +100,12 @@ export default async function StorePage({ params }: Props) {
                     ) : (
                       <div className="hotc-store__cover">
                         {p.data.image?.url ? (
-                          <img
+                          <Image
                             src={p.data.image.url}
                             alt={asText(p.data.title) || "Product image"}
-                            className="h-full w-full object-cover"
-                            loading="lazy"
-                            decoding="async"
+                            fill
+                            sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+                            className="hotc-store__image"
                           />
                         ) : null}
                         {p.data.tag ? (

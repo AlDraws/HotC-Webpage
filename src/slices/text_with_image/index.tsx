@@ -34,6 +34,8 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
                   {
                     src: slice.primary.image.url || "",
                     alt: slice.primary.image.alt || "",
+                    width: slice.primary.image.dimensions?.width,
+                    height: slice.primary.image.dimensions?.height,
                   },
                 ])
               }

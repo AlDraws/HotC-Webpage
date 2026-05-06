@@ -1025,6 +1025,8 @@ body.hotc,
    IMAGE TICKER — marquee horizontal full-bleed
    ========================================================= */
 .hotc-ticker {
+  position: relative;
+  isolation: isolate;
   width: 100vw;
   margin-left: calc(50% - 50vw);
   padding: 1rem 0;
@@ -1033,7 +1035,15 @@ body.hotc,
   border-bottom: 3px solid var(--hotc-ink);
 }
 
+.hotc-ticker__bg {
+  z-index: -1;
+  object-fit: cover;
+  object-position: center;
+}
+
 .hotc-ticker__viewport {
+  position: relative;
+  z-index: 1;
   overflow: hidden;
   cursor: grab;
   touch-action: pan-y;
@@ -1249,13 +1259,18 @@ body.hotc,
 }
 
 .hotc-cgrid__portrait {
+  position: relative;
   aspect-ratio: 3 / 4;
-  background-size: cover;
-  background-position: center top;
   border: 3px solid var(--hotc-ink);
   border-radius: var(--hotc-r-md);
   background-color: var(--hotc-paper-2);
   box-shadow: var(--hotc-shadow-panel);
+  overflow: hidden;
+}
+
+.hotc-cgrid__portrait-img {
+  object-fit: cover;
+  object-position: center top;
 }
 
 .hotc-cgrid__name {
@@ -1295,12 +1310,15 @@ body.hotc,
 .hotc-cprofile__bg {
   position: absolute;
   inset: -5%;
-  background-size: cover;
-  background-position: center;
   z-index: 0;
   filter: saturate(0.92);
   will-change: transform;
   /* parallax fix */
+}
+
+.hotc-cprofile__bg-img {
+  object-fit: cover;
+  object-position: center;
 }
 
 .hotc-cprofile__overlay {
@@ -1484,12 +1502,17 @@ body.hotc,
 }
 
 .hotc-cprofile__gallery-tile {
+  position: relative;
   aspect-ratio: 1;
-  background-size: cover;
-  background-position: center;
   background-color: var(--hotc-paper-2);
   border: 3px solid var(--hotc-ink);
   border-radius: var(--hotc-r-sm);
+  overflow: hidden;
+}
+
+.hotc-cprofile__gallery-img {
+  object-fit: cover;
+  object-position: center;
 }
 
 /* =========================================================
@@ -1927,10 +1950,15 @@ body.hotc,
 }
 
 .hotc-phero__img {
+  position: relative;
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
+  overflow: hidden;
+}
+
+.hotc-phero__bg-img {
+  object-fit: cover;
+  object-position: center;
 }
 
 .hotc-phero__video {
@@ -2006,10 +2034,14 @@ body.hotc,
 .hotc-store__cover {
   position: relative;
   aspect-ratio: 4 / 3;
-  background-size: cover;
-  background-position: center;
   background-color: var(--hotc-paper-2);
   border-bottom: 3px solid var(--hotc-ink);
+  overflow: hidden;
+}
+
+.hotc-store__image {
+  object-fit: cover;
+  object-position: center;
 }
 
 .hotc-store__tag {
@@ -2121,9 +2153,12 @@ body.hotc,
 .hotc-hero__bg {
   position: absolute;
   inset: -5%;
-  background-size: cover;
-  background-position: center;
   z-index: 0;
+}
+
+.hotc-hero__bg-img {
+  object-fit: cover;
+  object-position: center;
 }
 
 .hotc-hero__overlay {
@@ -2382,9 +2417,13 @@ body.hotc,
   position: absolute;
   inset: 0;
   z-index: 0;
-  background-size: cover;
-  background-position: center;
   opacity: 0.24;
+  overflow: hidden;
+}
+
+.hotc-cta-block__bg-img {
+  object-fit: cover;
+  object-position: center;
 }
 
 .hotc-cta-block__content {
@@ -2599,6 +2638,7 @@ body.hotc,
 }
 
 .hotc-gallery__tile {
+  position: relative;
   width: 100%;
   cursor: zoom-in;
   border: 3px solid var(--hotc-ink);
@@ -2609,6 +2649,12 @@ body.hotc,
   background-position: center;
   border-radius: var(--hotc-r-sm);
   background-color: var(--hotc-paper-2);
+  overflow: hidden;
+}
+
+.hotc-gallery__image {
+  object-fit: cover;
+  object-position: center;
 }
 
 /* ImageCards */
@@ -2662,12 +2708,17 @@ body.hotc,
 }
 
 .hotc-icard__img {
+  position: relative;
   aspect-ratio: 4 / 3;
-  background-size: cover;
-  background-position: center;
   border: 3px solid var(--hotc-ink);
   border-radius: var(--hotc-r-md);
   box-shadow: var(--hotc-shadow-panel-sm);
+  overflow: hidden;
+}
+
+.hotc-icard__image {
+  object-fit: cover;
+  object-position: center;
 }
 
 .hotc-icard__title {

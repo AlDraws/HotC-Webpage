@@ -1,4 +1,5 @@
 import { SliceComponentProps } from "@prismicio/react";
+import Image from "next/image";
 import { PrismicNextLink } from "@prismicio/next";
 import { isFilled } from "@prismicio/client";
 import { CharacterGridSlice } from "@/../prismicio-types";
@@ -48,6 +49,10 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
             undefined;
           const portraitUrl =
             portrait?.url ?? "/assets/character-portrait-placeholder.svg";
+          const portraitAlt =
+            typeof (portrait as { alt?: unknown } | undefined)?.alt === "string"
+              ? (portrait as { alt: string }).alt
+              : "";
 
           return (
             <PrismicNextLink
@@ -55,10 +60,15 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
               field={character}
               className="hotc-cgrid__cell hotc-pressable"
             >
-              <div
-                className="hotc-cgrid__portrait"
-                style={{ backgroundImage: `url(${portraitUrl})` }}
-              />
+              <div className="hotc-cgrid__portrait">
+                <Image
+                  src={portraitUrl}
+                  alt={portraitAlt}
+                  fill
+                  sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
+                  className="hotc-cgrid__portrait-img"
+                />
+              </div>
               <div className="hotc-cgrid__meta">
                 <span className="hotc-cgrid__name">
                   {data?.name ?? character.uid ?? "Unknown"}

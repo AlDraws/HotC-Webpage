@@ -5,7 +5,7 @@ import {
 } from "@prismicio/next";
 import { SliceZone } from "@prismicio/react";
 
-import { components } from "../../slices";
+import { components } from "@/slices";
 
 export default async function SliceSimulatorPage({
   searchParams,

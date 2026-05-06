@@ -48,10 +48,15 @@ export default async function LoreDetailPage({ params }: Props) {
       {/* Hero — replicates LoreProfile's hotc-cprofile__hero section */}
       <section className="hotc-cprofile__hero">
         {item.data.cover?.url ? (
-          <div
-            className="hotc-cprofile__bg"
-            style={{ backgroundImage: `url(${item.data.cover.url})` }}
-          />
+          <div className="hotc-cprofile__bg">
+            <PrismicNextImage
+              field={item.data.cover}
+              fallbackAlt=""
+              fill
+              sizes="100vw"
+              className="hotc-cprofile__bg-img"
+            />
+          </div>
         ) : null}
         <div className="hotc-cprofile__overlay" />
 

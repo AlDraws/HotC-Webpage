@@ -1,4 +1,4 @@
-import { PrismicNextLink } from "@prismicio/next";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { HeroSlice } from "@/../prismicio-types";
@@ -30,10 +30,17 @@ const Hero = ({ slice }: HeroProps) => {
       className="hotc-hero hotc-hero--lg"
     >
       {heroImage?.url && (
-        <div
-          className="hotc-hero__bg"
-          style={{ backgroundImage: `url(${heroImage.url})` }}
-        />
+        <div className="hotc-hero__bg">
+          <PrismicNextImage
+            field={heroImage}
+            fallbackAlt=""
+            fill
+            sizes="100vw"
+            loading="eager"
+            fetchPriority="high"
+            className="hotc-hero__bg-img"
+          />
+        </div>
       )}
       <div className="hotc-hero__overlay" />
       <Bounded className="hotc-hero__inner" yPadding="none">

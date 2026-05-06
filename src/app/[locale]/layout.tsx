@@ -5,6 +5,7 @@ import { asText } from "@prismicio/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { LightboxProvider } from "@/components/LightboxProvider";
+import { RootDocument } from "../root-document";
 import { createClient } from "@/prismicio";
 import {
   isAppLocale,
@@ -12,6 +13,7 @@ import {
   toPrismicLang,
   type AppLocale,
 } from "@/lib/locale";
+import "../globals.css";
 
 type LocaleParams = {
   locale: string;
@@ -52,6 +54,10 @@ export async function generateMetadata({
     settings?.data.og_default?.url || settings?.data.meta_image?.url || undefined;
 
   return {
+    icons: {
+      icon: "/favicon.ico",
+      shortcut: "/favicon.ico",
+    },
     title: {
       template: `%s — ${siteTitle}`,
       default: siteTitle,
@@ -81,22 +87,24 @@ export default async function LocaleLayout({
   ]);
 
   return (
-    <LightboxProvider>
-      {settings && navigation ? (
-        <Header
-          settings={settings}
-          navigation={navigation}
-          currentLocale={locale}
-        />
-      ) : null}
-      <main className="flex-1">{children}</main>
-      {settings && navigation ? (
-        <Footer
-          settings={settings}
-          navigation={navigation}
-          currentLocale={locale}
-        />
-      ) : null}
-    </LightboxProvider>
+    <RootDocument lang={locale}>
+      <LightboxProvider>
+        {settings && navigation ? (
+          <Header
+            settings={settings}
+            navigation={navigation}
+            currentLocale={locale}
+          />
+        ) : null}
+        <main className="flex-1">{children}</main>
+        {settings && navigation ? (
+          <Footer
+            settings={settings}
+            navigation={navigation}
+            currentLocale={locale}
+          />
+        ) : null}
+      </LightboxProvider>
+    </RootDocument>
   );
 }

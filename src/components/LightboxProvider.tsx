@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   createContext,
   type ReactNode,
@@ -13,6 +14,8 @@ import {
 type LightboxImage = {
   src: string;
   alt?: string;
+  width?: number | null;
+  height?: number | null;
 };
 
 type LightboxContextValue = {
@@ -132,12 +135,15 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
               </button>
             ) : null}
 
-            <img
+            <Image
               src={activeImage.src}
               alt={activeImage.alt || ""}
+              width={activeImage.width || 1600}
+              height={activeImage.height || 1000}
               className="hotc-lightbox__image"
               loading="eager"
               decoding="async"
+              sizes="100vw"
             />
 
             {hasMultiple ? (

@@ -118,6 +118,8 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
                       {
                         src: coverImage.url || "",
                         alt: coverImage.alt || "",
+                        width: coverImage.dimensions?.width,
+                        height: coverImage.dimensions?.height,
                       },
                     ])
                   }

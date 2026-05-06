@@ -33,9 +33,15 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
   const siteByText = settings.data.site_by_text || "Site by";
   const fallbackCopyright = `© ${new Date().getFullYear()} ${siteTitle}. All rights reserved.`;
   const brandData = settings.data as typeof settings.data & {
-    footer_logo?: { url?: string | null } | null;
+    footer_logo?: {
+      url?: string | null;
+      dimensions?: { width?: number | null; height?: number | null } | null;
+    } | null;
   };
-  const footerLogoUrl = brandData.footer_logo?.url || settings.data.logo?.url;
+  const footerLogo = brandData.footer_logo?.url
+    ? brandData.footer_logo
+    : settings.data.logo;
+  const footerLogoUrl = footerLogo?.url;
 
   return (
     <footer className="hotc-footer">
@@ -51,6 +57,9 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
                 src={footerLogoUrl}
                 alt={siteTitle}
                 className="h-20 w-auto object-contain"
+                width={footerLogo?.dimensions?.width}
+                height={footerLogo?.dimensions?.height}
+                sizes="220px"
               />
             ) : (
               <span className="hotc-logo-mask hotc-logo-mask--heirs" />
@@ -135,6 +144,9 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
               src={settings.data.site_by_logo.url}
               alt={siteByText}
               className="h-[18px] w-auto object-contain"
+              width={settings.data.site_by_logo.dimensions?.width}
+              height={settings.data.site_by_logo.dimensions?.height}
+              sizes="120px"
             />
           ) : (
             <span className="hotc-logo-mask hotc-logo-mask--alvaro" />

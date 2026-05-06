@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { PrismicNextImage } from "@prismicio/next";
 import { createClient } from "@/prismicio";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
 
@@ -79,15 +80,21 @@ export default async function LorePage({ params }: Props) {
                 <div
                   className="hotc-cgrid__portrait"
                   style={
-                    item.data.cover?.url
-                      ? {
-                          backgroundImage: `url(${item.data.cover.url})`,
-                          aspectRatio:
-                            category === "Illustration" ? "4 / 3" : undefined,
-                        }
+                    category === "Illustration"
+                      ? { aspectRatio: "4 / 3" }
                       : undefined
                   }
-                />
+                >
+                  {item.data.cover?.url ? (
+                    <PrismicNextImage
+                      field={item.data.cover}
+                      fallbackAlt=""
+                      fill
+                      sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
+                      className="hotc-cgrid__portrait-img"
+                    />
+                  ) : null}
+                </div>
                 <div className="hotc-cgrid__meta">
                   {item.data.role ? (
                     <span className="hotc-cgrid__role">{item.data.role}</span>
