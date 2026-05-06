@@ -1,4 +1,3 @@
-"use client";
 import { Content } from "@prismicio/client";
 import Link from "next/link";
 import { SliceComponentProps } from "@prismicio/react";

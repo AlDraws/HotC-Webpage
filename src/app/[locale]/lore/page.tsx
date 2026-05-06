@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/prismicio";
-import { getRequestPrismicLang } from "@/lib/server-locale";
+import { toPrismicLang, type AppLocale } from "@/lib/locale";
 
 export const metadata: Metadata = {
   title: "Worldbuilding",
@@ -14,8 +14,11 @@ export const metadata: Metadata = {
  *   - ItemGrid sections grouped by category (Environment / Prop / Illustration)
  *   - Uses hotc-cgrid__* classes from Worldbuilding.jsx
  */
-export default async function LorePage() {
-  const lang = await getRequestPrismicLang();
+type Props = { params: Promise<{ locale: AppLocale }> };
+
+export default async function LorePage({ params }: Props) {
+  const { locale } = await params;
+  const lang = toPrismicLang(locale);
   const client = createClient();
   const items = await client.getAllByType("lore_entry", { lang });
 
@@ -70,7 +73,7 @@ export default async function LorePage() {
             {groups[category].map((item) => (
               <Link
                 key={item.id}
-                href={`/lore/${item.uid}`}
+                href={`/${locale}/lore/${item.uid}`}
                 className="hotc-cgrid__cell"
               >
                 <div

@@ -1,6 +1,7 @@
 import { SliceComponentProps } from "@prismicio/react";
+import { EpisodeDividerSlice } from "@/../prismicio-types";
 
-export type EpisodeDividerProps = SliceComponentProps<any>;
+export type EpisodeDividerProps = SliceComponentProps<EpisodeDividerSlice>;
 
 const EpisodeDivider = ({ slice }: EpisodeDividerProps) => {
   const size = slice.primary.size || "md";

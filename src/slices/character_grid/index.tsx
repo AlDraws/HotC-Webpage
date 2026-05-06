@@ -1,5 +1,3 @@
-"use client";
-
 import { SliceComponentProps } from "@prismicio/react";
 import { PrismicNextLink } from "@prismicio/next";
 import { isFilled } from "@prismicio/client";

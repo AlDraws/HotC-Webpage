@@ -1,4 +1,5 @@
 "use client";
+
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { NewsletterEmbedSlice } from "@/../prismicio-types";

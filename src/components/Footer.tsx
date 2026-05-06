@@ -3,10 +3,13 @@ import { PrismicRichText } from "@prismicio/react";
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
+import type { AppLocale } from "@/lib/locale";
+import { localizeHref } from "@/lib/links";
 
 type Props = {
   settings: Content.SettingsDocument;
   navigation: Content.NavigationDocument | null;
+  currentLocale: AppLocale;
 };
 
 function getLinkHref(linkField: unknown): string {
@@ -22,7 +25,7 @@ function getLinkHref(linkField: unknown): string {
   return "#";
 }
 
-export default function Footer({ settings, navigation }: Props) {
+export default function Footer({ settings, navigation, currentLocale }: Props) {
   const socials = settings.data.social_links ?? [];
   const nav = navigation?.data.primary_links ?? [];
   const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
@@ -38,7 +41,11 @@ export default function Footer({ settings, navigation }: Props) {
     <footer className="hotc-footer">
       <div className="bounded hotc-footer__inner">
         <div className="hotc-footer__brand">
-          <Link href="/" className="hotc-footer__logo" aria-label={siteTitle}>
+          <Link
+            href={`/${currentLocale}`}
+            className="hotc-footer__logo"
+            aria-label={siteTitle}
+          >
             {footerLogoUrl ? (
               <BrandLogo
                 src={footerLogoUrl}
@@ -62,7 +69,10 @@ export default function Footer({ settings, navigation }: Props) {
           <div className="hotc-footer__col">
             <h4>Navigate</h4>
             {nav.map((n, i) => (
-              <Link key={i} href={getLinkHref(n.link)}>
+              <Link
+                key={i}
+                href={localizeHref(getLinkHref(n.link), currentLocale)}
+              >
                 {asText(n.label)}
               </Link>
             ))}

@@ -1,4 +1,3 @@
-"use client";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { CalloutSlice } from "@/../prismicio-types";

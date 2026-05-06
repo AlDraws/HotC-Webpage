@@ -5,17 +5,25 @@ import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { asText } from "@prismicio/client";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
-import { getRequestPrismicLang } from "@/lib/server-locale";
+import { toPrismicLang, type AppLocale } from "@/lib/locale";
 
-type Params = { uid: string };
+type Params = { locale: AppLocale; uid: string };
+const RESERVED_PAGE_UIDS = new Set([
+  "home",
+  "characters",
+  "episode_index",
+  "episodes",
+  "lore",
+  "store",
+]);
 
 export async function generateMetadata({
   params,
 }: {
   params: Promise<Params>;
 }): Promise<Metadata> {
-  const { uid } = await params;
-  const lang = await getRequestPrismicLang();
+  const { locale, uid } = await params;
+  const lang = toPrismicLang(locale);
   const client = createClient();
   const page = await client
     .getByUID("page", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
@@ -30,7 +38,9 @@ export async function generateMetadata({
 export async function generateStaticParams() {
   const client = createClient();
   const pages = await client.getAllByType("page");
-  return pages.filter((p) => p.uid !== "home").map((p) => ({ uid: p.uid }));
+  return pages
+    .filter((p) => !RESERVED_PAGE_UIDS.has(p.uid))
+    .map((p) => ({ uid: p.uid }));
 }
 
 /**
@@ -42,8 +52,8 @@ export default async function GenericPage({
 }: {
   params: Promise<Params>;
 }) {
-  const { uid } = await params;
-  const lang = await getRequestPrismicLang();
+  const { locale, uid } = await params;
+  const lang = toPrismicLang(locale);
   const client = createClient();
   const page = await client
     .getByUID("page", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })

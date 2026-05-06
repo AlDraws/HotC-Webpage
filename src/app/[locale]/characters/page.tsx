@@ -5,7 +5,7 @@ import { SliceZone } from "@prismicio/react";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
-import { getRequestPrismicLang } from "@/lib/server-locale";
+import { toPrismicLang, type AppLocale } from "@/lib/locale";
 
 export const metadata: Metadata = {
   title: "Characters",
@@ -32,8 +32,11 @@ function getSliceText(value: unknown): string | null {
  *   - Uses CharacterGrid primary fields as the grid heading
  *   - Always lists the current character documents
  */
-export default async function CharactersPage() {
-  const lang = await getRequestPrismicLang();
+type Props = { params: Promise<{ locale: AppLocale }> };
+
+export default async function CharactersPage({ params }: Props) {
+  const { locale } = await params;
+  const lang = toPrismicLang(locale);
   const client = createClient();
   const charactersPage = await client
     .getByUID("page", "characters", { lang })
@@ -72,7 +75,7 @@ export default async function CharactersPage() {
           {characters.map((ch) => (
             <Link
               key={ch.id}
-              href={`/characters/${ch.uid}`}
+              href={`/${locale}/characters/${ch.uid}`}
               className="hotc-cgrid__cell hotc-pressable"
             >
               <div

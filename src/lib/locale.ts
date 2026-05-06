@@ -7,9 +7,17 @@ export const PRISMIC_LANG_BY_LOCALE = {
 
 export type AppLocale = keyof typeof PRISMIC_LANG_BY_LOCALE;
 export type PrismicLang = (typeof PRISMIC_LANG_BY_LOCALE)[AppLocale];
+export const SUPPORTED_LOCALES = Object.keys(
+  PRISMIC_LANG_BY_LOCALE,
+) as AppLocale[];
+export const DEFAULT_LOCALE: AppLocale = "en";
+
+export function isAppLocale(value: string | null | undefined): value is AppLocale {
+  return Boolean(value && value in PRISMIC_LANG_BY_LOCALE);
+}
 
 export function normalizeAppLocale(value: string | null | undefined): AppLocale {
-  if (!value) return "en";
+  if (!value) return DEFAULT_LOCALE;
   const normalized = value.toLowerCase();
   return normalized.startsWith("es") ? "es" : "en";
 }

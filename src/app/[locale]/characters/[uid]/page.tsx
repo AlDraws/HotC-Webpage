@@ -6,13 +6,13 @@ import Link from "next/link";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
-import { getRequestPrismicLang } from "@/lib/server-locale";
+import { toPrismicLang, type AppLocale } from "@/lib/locale";
 
-type Props = { params: Promise<{ uid: string }> };
+type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { uid } = await params;
-  const lang = await getRequestPrismicLang();
+  const { locale, uid } = await params;
+  const lang = toPrismicLang(locale);
   const client = createClient();
   const ch = await client.getByUID("character", uid, { lang }).catch(() => null);
   if (!ch) return {};
@@ -30,8 +30,8 @@ export async function generateStaticParams() {
  * from ui_kits/website using the hotc-cprofile__* CSS classes.
  */
 export default async function CharacterProfilePage({ params }: Props) {
-  const { uid } = await params;
-  const lang = await getRequestPrismicLang();
+  const { locale, uid } = await params;
+  const lang = toPrismicLang(locale);
   const client = createClient();
   const ch = await client
     .getByUID("character", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
@@ -55,7 +55,7 @@ export default async function CharacterProfilePage({ params }: Props) {
         <div className="hotc-cprofile__overlay" />
 
         <div className="bounded hotc-cprofile__hero-inner">
-          <Link href="/characters" className="hotc-cprofile__back">
+          <Link href={`/${locale}/characters`} className="hotc-cprofile__back">
             ← Cast
           </Link>
           <div className="hotc-cprofile__hero-grid">

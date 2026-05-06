@@ -1,4 +1,3 @@
-"use client";
 import { asText } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { QuoteSlice } from "@/../prismicio-types";

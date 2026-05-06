@@ -4,32 +4,9 @@
    ========================================================= */
 
 /* =========================================================
-   IMPORTS — Tailwind + Google Fonts (display / marker)
+   IMPORTS — Tailwind
    ========================================================= */
-@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Bowlby+One&family=Permanent+Marker&display=swap");
 @import "tailwindcss";
-
-/* =========================================================
-   @font-face — Inter Variable (local, /public/fonts/)
-   En Next.js los archivos en /public se sirven desde la raíz.
-   ========================================================= */
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/fonts/Inter-VariableFont_opsz_wght.ttf") format("truetype-variations");
-  font-variation-settings: "opsz" 14;
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: italic;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("/fonts/Inter-Italic-VariableFont_opsz_wght.ttf") format("truetype-variations");
-  font-variation-settings: "opsz" 14;
-}
 
 /* =========================================================
    DESIGN TOKENS — :root
@@ -110,11 +87,12 @@
   /* =========================================================
      TIPOGRAFÍA
      ========================================================= */
-  --font-inter: "Inter", ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --hotc-font-sans: var(--font-inter);
-  --hotc-font-display: "Bangers", "Bowlby One", Impact, system-ui, sans-serif;
-  --hotc-font-marker: "Permanent Marker", "Bangers", system-ui, sans-serif;
+  --hotc-font-sans: var(--font-inter, ui-sans-serif, system-ui, -apple-system,
+      BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+  --hotc-font-display: var(--font-bangers, "Bangers"),
+    var(--font-bowlby-one, "Bowlby One"), Impact, system-ui, sans-serif;
+  --hotc-font-marker: var(--font-permanent-marker, "Permanent Marker"),
+    var(--font-bangers, "Bangers"), system-ui, sans-serif;
 
   /* Scale — display / hero */
   --hotc-h-xl-min: 3rem;

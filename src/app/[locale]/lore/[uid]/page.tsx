@@ -5,13 +5,13 @@ import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
 import Link from "next/link";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
-import { getRequestPrismicLang } from "@/lib/server-locale";
+import { toPrismicLang, type AppLocale } from "@/lib/locale";
 
-type Props = { params: Promise<{ uid: string }> };
+type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { uid } = await params;
-  const lang = await getRequestPrismicLang();
+  const { locale, uid } = await params;
+  const lang = toPrismicLang(locale);
   const client = createClient();
   const item = await client
     .getByUID("lore_entry", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
@@ -33,8 +33,8 @@ export async function generateStaticParams() {
  * from ui_kits/website using the hotc-cprofile__* CSS classes.
  */
 export default async function LoreDetailPage({ params }: Props) {
-  const { uid } = await params;
-  const lang = await getRequestPrismicLang();
+  const { locale, uid } = await params;
+  const lang = toPrismicLang(locale);
   const client = createClient();
   const item = await client
     .getByUID("lore_entry", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
@@ -56,7 +56,7 @@ export default async function LoreDetailPage({ params }: Props) {
         <div className="hotc-cprofile__overlay" />
 
         <div className="bounded hotc-cprofile__hero-inner">
-          <Link href="/lore" className="hotc-cprofile__back">
+          <Link href={`/${locale}/lore`} className="hotc-cprofile__back">
             ← Worldbuilding
           </Link>
           {item.data.category ? (

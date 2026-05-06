@@ -1,12 +1,27 @@
-"use client";
-
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
+import type { CSSProperties } from "react";
 import Bounded from "@/components/Bounded";
-import { ExternalSupportSlice } from "@/../prismicio-types";
+import {
+  ExternalSupportSlice,
+  ExternalSupportSliceBannerItem,
+  ExternalSupportSliceCardsItem,
+  ExternalSupportSliceRowItem,
+} from "@/../prismicio-types";
 
 export type ExternalSupportProps =
   SliceComponentProps<ExternalSupportSlice>;
+type ExternalSupportItem =
+  | ExternalSupportSliceRowItem
+  | ExternalSupportSliceCardsItem
+  | (ExternalSupportSliceBannerItem & {
+      description?: ExternalSupportSliceRowItem["description"];
+      icon?: ExternalSupportSliceRowItem["icon"];
+    });
+type ExternalSupportItemWithOptionalMedia = ExternalSupportItem & {
+  description?: ExternalSupportSliceRowItem["description"];
+  icon?: ExternalSupportSliceRowItem["icon"];
+};
 
 /**
  * ExternalSupport — modular block of external CTAs.
@@ -22,7 +37,7 @@ export type ExternalSupportProps =
  */
 const ExternalSupport = ({ slice }: ExternalSupportProps) => {
   const variation = slice.variation;
-  const items = slice.items ?? [];
+  const items = (slice.items ?? []) as ExternalSupportItemWithOptionalMedia[];
 
   return (
     <section
@@ -51,13 +66,13 @@ const ExternalSupport = ({ slice }: ExternalSupportProps) => {
 
         {variation === "cards" ? (
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {items.map((it: any, i: number) => (
+            {items.map((it: ExternalSupportItem, i: number) => (
               <li
                 key={i}
                 className="flex flex-col gap-3 rounded-sm bg-slate-800/60 p-5"
                 style={
                   it.accent
-                    ? ({ borderTop: `2px solid ${it.accent}` } as React.CSSProperties)
+                    ? ({ borderTop: `2px solid ${it.accent}` } as CSSProperties)
                     : undefined
                 }
               >
@@ -91,7 +106,7 @@ const ExternalSupport = ({ slice }: ExternalSupportProps) => {
 
         {variation === "row" ? (
           <ul className="flex flex-wrap gap-3">
-            {items.map((it: any, i: number) => (
+            {items.map((it: ExternalSupportItem, i: number) => (
               <li key={i}>
                 <PrismicNextLink
                   field={it.url}
@@ -118,7 +133,7 @@ const ExternalSupport = ({ slice }: ExternalSupportProps) => {
         {variation === "banner" ? (
           <div className="flex flex-col items-start justify-between gap-4 rounded-sm bg-slate-800/60 p-6 md:flex-row md:items-center">
             <div className="flex flex-wrap gap-3">
-              {items.map((it: any, i: number) => (
+              {items.map((it: ExternalSupportItem, i: number) => (
                 <PrismicNextLink
                   key={i}
                   field={it.url}

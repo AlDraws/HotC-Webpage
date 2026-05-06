@@ -1,3 +1,5 @@
+import { isAppLocale, type AppLocale } from "@/lib/locale";
+
 export function getLinkHref(linkField: unknown): string | null {
   if (
     linkField &&
@@ -51,4 +53,16 @@ export function isExternalHref(href: string): boolean {
   if (/^(mailto:|tel:|sms:)/i.test(value)) return true;
 
   return /^[a-z][a-z0-9+.-]*:/i.test(value);
+}
+
+export function localizeHref(href: string, locale: AppLocale): string {
+  if (!href || href === "#" || href.startsWith("#")) return href;
+  if (!href.startsWith("/")) return href;
+
+  const [pathname, suffix = ""] = href.split(/(?=[?#])/, 2);
+  const firstSegment = pathname.split("/")[1];
+  if (isAppLocale(firstSegment)) return href;
+
+  const localizedPath = pathname === "/" ? `/${locale}` : `/${locale}${pathname}`;
+  return `${localizedPath}${suffix}`;
 }

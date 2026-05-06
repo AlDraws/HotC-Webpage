@@ -3,15 +3,18 @@ import { PrismicNextImage } from "@prismicio/next";
 import { asText } from "@prismicio/client";
 import Link from "next/link";
 import { createClient } from "@/prismicio";
-import { getRequestPrismicLang } from "@/lib/server-locale";
+import { toPrismicLang, type AppLocale } from "@/lib/locale";
 
 export const metadata: Metadata = {
   title: "Episodes",
   description: "Read every chapter of Heirs of the Collapse, a webcomic updating every Sunday.",
 };
 
-export default async function EpisodesPage() {
-  const lang = await getRequestPrismicLang();
+type Props = { params: Promise<{ locale: AppLocale }> };
+
+export default async function EpisodesPage({ params }: Props) {
+  const { locale } = await params;
+  const lang = toPrismicLang(locale);
   const client = createClient();
   const episodesIndex = await client
     .getSingle("episodes_index", { lang })
@@ -45,7 +48,7 @@ export default async function EpisodesPage() {
           {episodes.map((ep) => (
             <Link
               key={ep.id}
-              href={`/episodes/${ep.uid}`}
+              href={`/${locale}/episodes/${ep.uid}`}
               className="hotc-ep-card"
             >
               {/* Cover */}

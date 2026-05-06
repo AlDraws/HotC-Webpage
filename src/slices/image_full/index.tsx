@@ -1,4 +1,3 @@
-"use client";
 import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { ImageFullSlice } from "@/../prismicio-types";

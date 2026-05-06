@@ -5,13 +5,13 @@ import { asText } from "@prismicio/client";
 import { components } from "@/slices";
 import Link from "next/link";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
-import { getRequestPrismicLang } from "@/lib/server-locale";
+import { toPrismicLang, type AppLocale } from "@/lib/locale";
 
-type Props = { params: Promise<{ uid: string }> };
+type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { uid } = await params;
-  const lang = await getRequestPrismicLang();
+  const { locale, uid } = await params;
+  const lang = toPrismicLang(locale);
   const client = createClient();
   const ep = await client
     .getByUID("episode", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
@@ -42,8 +42,8 @@ export async function generateStaticParams() {
  *  - Sticky prev/next nav
  */
 export default async function EpisodeReaderPage({ params }: Props) {
-  const { uid } = await params;
-  const lang = await getRequestPrismicLang();
+  const { locale, uid } = await params;
+  const lang = toPrismicLang(locale);
   const client = createClient();
   const ep = await client
     .getByUID("episode", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
@@ -63,7 +63,7 @@ export default async function EpisodeReaderPage({ params }: Props) {
     <article className="hotc-ereader hotc--cinema">
       {/* Episode header — replicates EpisodeReader.__head */}
       <div className="hotc-ereader__head">
-        <Link href="/episodes" className="hotc-ereader__back">
+        <Link href={`/${locale}/episodes`} className="hotc-ereader__back">
           ← Archive
         </Link>
         <span className="hotc-ereader__chapter">
@@ -87,7 +87,7 @@ export default async function EpisodeReaderPage({ params }: Props) {
       <nav className="hotc-ereader__nav">
         <div className="hotc-ereader__nav-inner">
           <Link
-            href={prev ? `/episodes/${prev.uid}` : "#"}
+            href={prev ? `/${locale}/episodes/${prev.uid}` : "#"}
             aria-disabled={!prev}
             className="hotc-btn hotc-btn--ghost"
           >
@@ -99,7 +99,7 @@ export default async function EpisodeReaderPage({ params }: Props) {
           </div>
 
           <Link
-            href={next ? `/episodes/${next.uid}` : "#"}
+            href={next ? `/${locale}/episodes/${next.uid}` : "#"}
             aria-disabled={!next}
             className="hotc-btn hotc-btn--ember"
           >

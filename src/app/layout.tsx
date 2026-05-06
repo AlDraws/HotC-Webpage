@@ -1,84 +1,65 @@
 import type { Metadata } from "next";
+import { Bangers, Bowlby_One, Permanent_Marker } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { LightboxProvider } from "@/components/LightboxProvider";
-import { asText } from "@prismicio/client";
-import { createClient } from "@/prismicio";
-import { getRequestLocale, getRequestPrismicLang } from "@/lib/server-locale";
 
 const inter = localFont({
   src: [
     {
-      path: "../../fonts/Inter-VariableFont_opsz_wght.ttf",
+      path: "../../fonts/Inter-VariableFont_opsz_wght.woff2",
       style: "normal",
+      weight: "100 900",
     },
     {
-      path: "../../fonts/Inter-Italic-VariableFont_opsz_wght.ttf",
+      path: "../../fonts/Inter-Italic-VariableFont_opsz_wght.woff2",
       style: "italic",
+      weight: "100 900",
     },
   ],
   variable: "--font-inter",
   display: "swap",
 });
 
-export async function generateMetadata(): Promise<Metadata> {
-  const siteTitle = "Heirs of the Collapse";
-  const lang = await getRequestPrismicLang();
-  const client = createClient();
-  const settings = await client.getSingle("settings", { lang }).catch(() => null);
-  const siteDescription = settings?.data.meta_description
-    ? asText(settings.data.meta_description)
-    : undefined;
-  const ogImage =
-    settings?.data.og_default?.url || settings?.data.meta_image?.url || undefined;
+const bangers = Bangers({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-bangers",
+  display: "swap",
+});
 
-  return {
-    title: {
-      template: `%s — ${siteTitle}`,
-      default: siteTitle,
-    },
-    description: siteDescription,
-    icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon.ico",
-    },
-    openGraph: ogImage
-      ? {
-          images: [{ url: ogImage }],
-        }
-      : undefined,
-  };
-}
+const bowlbyOne = Bowlby_One({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-bowlby-one",
+  display: "swap",
+});
 
-export default async function RootLayout({
+const permanentMarker = Permanent_Marker({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-permanent-marker",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
+};
+
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const locale = await getRequestLocale();
-  const lang = await getRequestPrismicLang();
-  const client = createClient();
-  const settings = await client.getSingle("settings", { lang }).catch(() => null);
-  const navigation = await client.getSingle("navigation", { lang }).catch(() => null);
-
   return (
-    <html lang={locale} className={`${inter.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      className={`${inter.variable} ${bangers.variable} ${bowlbyOne.variable} ${permanentMarker.variable} h-full antialiased`}
+    >
       <body className="hotc flex min-h-full flex-col">
-        <LightboxProvider>
-          {settings && navigation ? (
-            <Header
-              settings={settings}
-              navigation={navigation}
-              currentLocale={locale}
-            />
-          ) : null}
-          <main className="flex-1">{children}</main>
-          {settings && navigation ? (
-            <Footer settings={settings} navigation={navigation} />
-          ) : null}
-        </LightboxProvider>
+        {children}
       </body>
     </html>
   );

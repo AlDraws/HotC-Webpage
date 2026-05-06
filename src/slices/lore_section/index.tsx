@@ -1,4 +1,3 @@
-"use client";
 import { asLink, isFilled } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
@@ -8,6 +7,13 @@ import { LoreSectionSlice } from "@/../prismicio-types";
  * Props for `LoreSection`.
  */
 export type LoreSectionProps = SliceComponentProps<LoreSectionSlice>;
+type LoreEntryWithData = NonNullable<
+  LoreSectionSlice["items"][number]["entry"]
+> & {
+  data?: {
+    title?: string | null;
+  };
+};
 
 /**
  * Component for "LoreSection" Slices.
@@ -39,6 +45,8 @@ const LoreSection = ({ slice }: LoreSectionProps) => {
             {items.map((item, i) => {
               const entry = item.entry;
               if (!isFilled.contentRelationship(entry)) return null;
+              const enrichedEntry = entry as LoreEntryWithData;
+              const title = enrichedEntry.data?.title;
 
               return (
                 <li key={i} className="hotc-lore__card">
@@ -48,9 +56,7 @@ const LoreSection = ({ slice }: LoreSectionProps) => {
                   >
                     {/* Si la página padre pasa data enriched vía graphQuery,
                         aquí aparecerán title/cover. Sin graphQuery, solo el uid. */}
-                    {"data" in entry && (entry as any).data?.title
-                      ? (entry as any).data.title
-                      : entry.uid ?? "—"}
+                    {title || entry.uid || "—"}
                   </PrismicNextLink>
                 </li>
               );

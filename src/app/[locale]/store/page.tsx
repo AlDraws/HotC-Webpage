@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { PrismicRichText } from "@prismicio/react";
 import { asText, type RichTextField } from "@prismicio/client";
 import { createClient } from "@/prismicio";
-import { getRequestPrismicLang } from "@/lib/server-locale";
+import { toPrismicLang, type AppLocale } from "@/lib/locale";
 
 export const metadata: Metadata = { title: "Store" };
 
@@ -33,8 +33,11 @@ function getLinkHref(linkField: unknown): string | null {
   return null;
 }
 
-export default async function StorePage() {
-  const lang = await getRequestPrismicLang();
+type Props = { params: Promise<{ locale: AppLocale }> };
+
+export default async function StorePage({ params }: Props) {
+  const { locale } = await params;
+  const lang = toPrismicLang(locale);
   const client = createClient();
   const products = await client
     .getAllByType("product" as never, { lang })

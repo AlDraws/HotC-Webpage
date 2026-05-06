@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
 import { LOCALE_COOKIE_NAME, type AppLocale } from "@/lib/locale";
+import { localizeHref } from "@/lib/links";
 
 type Props = {
   settings: Content.SettingsDocument;
@@ -50,13 +51,19 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   function switchLocale(locale: AppLocale) {
     if (locale === currentLocale) return;
     document.cookie = `${LOCALE_COOKIE_NAME}=${locale}; path=/; max-age=31536000; samesite=lax`;
-    router.refresh();
+    const parts = (pathname || "/").split("/");
+    parts[1] = locale;
+    router.push(parts.join("/") || `/${locale}`);
   }
 
   return (
     <header className="hotc-header">
       <div className="bounded hotc-header__inner">
-        <Link href="/" className="hotc-header__logo" aria-label={siteTitle}>
+        <Link
+          href={`/${currentLocale}`}
+          className="hotc-header__logo"
+          aria-label={siteTitle}
+        >
           {headerLogoUrl ? (
             <BrandLogo
               src={headerLogoUrl}
@@ -72,9 +79,12 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
           {nav.map((n, i) => (
             <Link
               key={i}
-              href={getLinkHref(n.link)}
+              href={localizeHref(getLinkHref(n.link), currentLocale)}
               className={`hotc-header__nav-item${
-                pathname && getLinkHref(n.link) === pathname ? " is-active" : ""
+                pathname &&
+                localizeHref(getLinkHref(n.link), currentLocale) === pathname
+                  ? " is-active"
+                  : ""
               }`}
             >
               {asText(n.label)}
@@ -142,7 +152,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
         <div className="hotc-header__drawer" role="dialog" aria-modal="true">
           <div className="hotc-header__drawer-head">
             <Link
-              href="/"
+              href={`/${currentLocale}`}
               className="hotc-header__logo"
               aria-label={siteTitle}
               onClick={() => setOpen(false)}
@@ -170,7 +180,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
 
           <nav className="hotc-header__drawer-nav">
             {nav.map((n, i) => {
-              const href = getLinkHref(n.link);
+              const href = localizeHref(getLinkHref(n.link), currentLocale);
               return (
                 <Link
                   key={i}
