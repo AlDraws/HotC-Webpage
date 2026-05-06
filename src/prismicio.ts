@@ -27,6 +27,13 @@ const routes: Route[] = [
   { type: "character", path: "/characters/:uid" },
 ];
 
+export const SLICE_FETCH_LINKS = [
+  "character.name",
+  "character.role",
+  "character.portrait",
+  "character.cover",
+];
+
 /**
  * Creates a Prismic client for the project's repository.
  *

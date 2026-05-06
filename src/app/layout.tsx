@@ -23,13 +23,10 @@ const inter = localFont({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
+  const siteTitle = "Heirs of the Collapse";
   const lang = await getRequestPrismicLang();
   const client = createClient();
   const settings = await client.getSingle("settings", { lang }).catch(() => null);
-  const siteTitle =
-    settings?.data.meta_title ||
-    asText(settings?.data.site_title) ||
-    "Heirs of the Collapse";
   const siteDescription = settings?.data.meta_description
     ? asText(settings.data.meta_description)
     : undefined;
@@ -43,8 +40,8 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     description: siteDescription,
     icons: {
-      icon: [{ url: "/favicon.ico" }],
-      shortcut: ["/favicon.ico"],
+      icon: "/favicon.ico",
+      shortcut: "/favicon.ico",
     },
     openGraph: ogImage
       ? {

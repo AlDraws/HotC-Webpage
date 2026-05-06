@@ -2,8 +2,42 @@
   "id": "image_ticker",
   "type": "SharedSlice",
   "name": "ImageTicker",
-  "variations": [{ "id":"default","name":"Default","docURL":"...","version":"initial",
-    "primary": { "speed": { "type": "Number", "config": { "label": "Loop speed (s)" } } },
-    "items":   { "image": { "type": "Image",  "config": { "label": "Image" } } }
-  }]
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "primary": {
+        "speed": { "type": "Number", "config": { "label": "Loop speed (s)" } },
+        "reverse": {
+          "type": "Boolean",
+          "config": { "label": "Reverse direction", "default_value": false }
+        },
+        "background_color": {
+          "type": "Text",
+          "config": {
+            "label": "Background color (CSS value)",
+            "placeholder": "#0B0B0E"
+          }
+        },
+        "background_image": {
+          "type": "Image",
+          "config": { "label": "Background image", "constraint": {}, "thumbnails": [] }
+        }
+      },
+      "items": {
+        "image": { "type": "Image", "config": { "label": "Image" } },
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Image link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true
+          }
+        }
+      }
+    }
+  ]
 }

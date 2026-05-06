@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PrismicNextImage } from "@prismicio/next";
-import { PrismicRichText, SliceZone } from "@prismicio/react";
+import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
 import Link from "next/link";
-import { createClient } from "@/prismicio";
+import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { getRequestPrismicLang } from "@/lib/server-locale";
 
 type Props = { params: Promise<{ uid: string }> };
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const lang = await getRequestPrismicLang();
   const client = createClient();
   const item = await client
-    .getByUID("lore_entry", uid, { lang })
+    .getByUID("lore_entry", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
     .catch(() => null);
   if (!item) return {};
   return {
@@ -37,7 +37,7 @@ export default async function LoreDetailPage({ params }: Props) {
   const lang = await getRequestPrismicLang();
   const client = createClient();
   const item = await client
-    .getByUID("lore_entry", uid, { lang })
+    .getByUID("lore_entry", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
     .catch(() => null);
   if (!item) notFound();
 

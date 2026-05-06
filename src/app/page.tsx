@@ -1,14 +1,16 @@
 import { Metadata } from "next";
 import { SliceZone } from "@prismicio/react";
 import { asText } from "@prismicio/client";
-import { createClient } from "@/prismicio";
+import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { components } from "@/slices";
 import { getRequestPrismicLang } from "@/lib/server-locale";
 
 export default async function Home() {
   const lang = await getRequestPrismicLang();
   const client = createClient();
-  const page = await client.getSingle("home", { lang }).catch(() => null);
+  const page = await client
+    .getSingle("home", { lang, fetchLinks: SLICE_FETCH_LINKS })
+    .catch(() => null);
 
   if (!page) {
     return (
@@ -24,12 +26,21 @@ export default async function Home() {
 export async function generateMetadata(): Promise<Metadata> {
   const lang = await getRequestPrismicLang();
   const client = createClient();
-  const page = await client.getSingle("home", { lang }).catch(() => null);
+  const page = await client
+    .getSingle("home", { lang, fetchLinks: SLICE_FETCH_LINKS })
+    .catch(() => null);
 
   if (!page) return {};
+  const siteTitle = "Heirs of the Collapse";
+  const rawTitle = page.data.meta_title?.trim();
+  const looksLikeUrl = rawTitle
+    ? /^https?:\/\//i.test(rawTitle) || /^[\w.-]+\.[a-z]{2,}(\/|$)/i.test(rawTitle)
+    : false;
+  const pageTitle =
+    rawTitle && !looksLikeUrl && rawTitle !== siteTitle ? rawTitle : undefined;
 
   return {
-    title: page.data.meta_title ?? undefined,
+    title: pageTitle,
     description: page.data.meta_description
       ? asText(page.data.meta_description)
       : undefined,

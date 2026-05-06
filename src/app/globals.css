@@ -636,15 +636,9 @@ body.hotc,
 
 /* Socials */
 .hotc-header__socials {
-  display: none;
+  display: flex;
   gap: 0.25rem;
   align-items: center;
-}
-
-@media (min-width: 768px) {
-  .hotc-header__socials {
-    display: flex;
-  }
 }
 
 .hotc-header__icon {
@@ -1042,17 +1036,28 @@ body.hotc,
 .hotc-ticker {
   width: 100vw;
   margin-left: calc(50% - 50vw);
-  overflow: hidden;
   padding: 1rem 0;
   background: var(--hotc-ink);
   border-top: 3px solid var(--hotc-ink);
   border-bottom: 3px solid var(--hotc-ink);
 }
 
+.hotc-ticker__viewport {
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.hotc-ticker__viewport:active {
+  cursor: grabbing;
+}
+
 .hotc-ticker__rail {
   display: flex;
   gap: 0.75rem;
   width: max-content;
+  will-change: transform;
 }
 
 .hotc-ticker__cell {
@@ -1063,6 +1068,12 @@ body.hotc,
   background-position: center;
   border: 3px solid var(--hotc-paper);
   border-radius: var(--hotc-r-md);
+}
+
+.hotc-ticker__link {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -1804,11 +1815,17 @@ body.hotc,
    PARALLAX HERO — extensión del .hotc-hero
    ========================================================= */
 .hotc-phero {
-  min-height: 70vh;
+  min-height: var(--hotc-phero-height, clamp(420px, 62vh, 760px));
 }
 
 .hotc-phero.hotc-hero--md {
-  min-height: 50vh;
+  --hotc-phero-height: clamp(340px, 48vh, 620px);
+  min-height: var(--hotc-phero-height);
+}
+
+.hotc-phero.hotc-hero--lg {
+  --hotc-phero-height: clamp(460px, 68vh, 860px);
+  min-height: var(--hotc-phero-height);
 }
 
 .hotc-phero__bg {
@@ -2434,8 +2451,8 @@ body.hotc,
 }
 
 .hotc-fcard__icon {
-  width: 48px;
-  height: 48px;
+  width: 64px;
+  height: 64px;
   background: var(--hotc-ember);
   border: 3px solid var(--hotc-ink);
   border-radius: var(--hotc-r-sm);

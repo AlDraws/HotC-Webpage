@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import BrandLogo from "@/components/BrandLogo";
+import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
 import { LOCALE_COOKIE_NAME, type AppLocale } from "@/lib/locale";
 
 type Props = {
@@ -31,6 +32,15 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const nav = navigation?.data.primary_links ?? [];
+  const socials = settings.data.social_links ?? [];
+  const headerSocials = socials.filter((s) => {
+    const iconLabel =
+      s.icon_key && getSocialKey(s.icon_key) !== "other"
+        ? s.icon_key
+        : s.label || s.icon_key || "";
+    const key = getSocialKey(iconLabel);
+    return key === "instagram" || key === "tiktok" || key === "patreon";
+  });
   const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
 
   function switchLocale(locale: AppLocale) {
@@ -90,6 +100,26 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
             >
               ES
             </button>
+          </div>
+          <div className="hotc-header__socials" aria-label="Social links">
+            {headerSocials.map((s, i) => {
+              const iconLabel =
+                s.icon_key && getSocialKey(s.icon_key) !== "other"
+                  ? s.icon_key
+                  : s.label || s.icon_key || "";
+              return (
+                <a
+                  key={i}
+                  href={getLinkHref(s.url)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hotc-header__icon"
+                  aria-label={s.label || "Social"}
+                >
+                  <SocialIcon label={iconLabel} />
+                </a>
+              );
+            })}
           </div>
           <button
             onClick={() => setOpen(!open)}

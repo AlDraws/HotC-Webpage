@@ -24,6 +24,21 @@
             "label": "Reverse direction",
             "default_value": false
           }
+        },
+        "background_color": {
+          "type": "Text",
+          "config": {
+            "label": "Background color (CSS value)",
+            "placeholder": "#0B0B0E"
+          }
+        },
+        "background_image": {
+          "type": "Image",
+          "config": {
+            "label": "Background image",
+            "constraint": {},
+            "thumbnails": []
+          }
         }
       },
       "items": {
@@ -33,6 +48,15 @@
             "label": "Image",
             "constraint": {},
             "thumbnails": []
+          }
+        },
+        "link": {
+          "type": "Link",
+          "config": {
+            "label": "Image link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true
           }
         }
       }

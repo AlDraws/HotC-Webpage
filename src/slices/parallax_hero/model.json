@@ -78,6 +78,13 @@
             "placeholder": "0.42"
           }
         },
+        "height_vh": {
+          "type": "Number",
+          "config": {
+            "label": "Custom height (vh)",
+            "placeholder": "62"
+          }
+        },
         "primaryCtaLabel": {
           "type": "Text",
           "config": {

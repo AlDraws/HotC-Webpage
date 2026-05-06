@@ -15,7 +15,7 @@
         "type": "Link",
         "config": {
           "label": "Enlace",
-          "select": "document",
+          "select": null,
           "allowTargetBlank": true
         }
       }

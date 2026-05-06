@@ -62,7 +62,13 @@ const ImageCards = ({ slice }: ImageCardsProps) => {
 
           if (href) {
             return (
-              <a key={index} href={href} className="hotc-icard">
+              <a
+                key={index}
+                href={href}
+                className="hotc-icard"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {card}
               </a>
             );

@@ -32,7 +32,11 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
           <article key={index} className="hotc-fcard">
             {item.icon.url && (
               <div className="hotc-fcard__icon">
-                <PrismicNextImage field={item.icon} fallbackAlt="" />
+                <PrismicNextImage
+                  field={item.icon}
+                  fallbackAlt=""
+                  className="h-full w-full object-cover"
+                />
               </div>
             )}
             <h4>{item.title}</h4>

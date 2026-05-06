@@ -19,6 +19,7 @@
       "foreground": { "type": "Image",  "config": { "label": "Foreground PNG (alpha)" } },
       "bgStrength": { "type": "Number", "config": { "label": "Background parallax strength", "placeholder": "0.18" } },
       "fgStrength": { "type": "Number", "config": { "label": "Foreground parallax strength", "placeholder": "0.42" } },
+      "height_vh":  { "type": "Number", "config": { "label": "Custom height (vh)", "placeholder": "62" } },
       "primaryCtaLabel":   { "type": "Text", "config": { "label": "Primary CTA label", "placeholder": "Read latest" } },
       "primaryCtaLink":    { "type": "Link", "config": { "label": "Primary CTA link", "select": null, "allowTargetBlank": false } },
       "secondaryCtaLabel": { "type": "Text", "config": { "label": "Secondary CTA label", "placeholder": "Archive" } },

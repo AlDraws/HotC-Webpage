@@ -3,7 +3,7 @@
 import { isFilled } from "@prismicio/client";
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
-import { useEffect, useRef } from "react";
+import { CSSProperties, useEffect, useRef } from "react";
 import { ParallaxHeroSlice } from "@/../prismicio-types";
 
 export type ParallaxHeroProps = SliceComponentProps<ParallaxHeroSlice>;
@@ -13,6 +13,16 @@ export type ParallaxHeroProps = SliceComponentProps<ParallaxHeroSlice>;
  */
 const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
   const bgRef = useRef<HTMLDivElement | null>(null);
+  const primary = slice.primary as { height_vh?: number | null };
+  const customHeightVh =
+    typeof primary.height_vh === "number" &&
+    Number.isFinite(primary.height_vh) &&
+    primary.height_vh > 0
+      ? Math.min(primary.height_vh, 100)
+      : null;
+  const style: CSSProperties | undefined = customHeightVh
+    ? ({ "--hotc-phero-height": `${customHeightVh}vh` } as CSSProperties)
+    : undefined;
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -45,6 +55,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className={`hotc-hero hotc-phero hotc-hero--${slice.primary.size ?? "lg"}`}
+      style={style}
     >
       <div ref={bgRef} className="hotc-phero__bg">
         {isFilled.linkToMedia(slice.primary.bgVideo) ? (

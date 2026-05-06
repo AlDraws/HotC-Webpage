@@ -4,7 +4,7 @@ import { SliceZone } from "@prismicio/react";
 import { asText } from "@prismicio/client";
 import { components } from "@/slices";
 import Link from "next/link";
-import { createClient } from "@/prismicio";
+import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { getRequestPrismicLang } from "@/lib/server-locale";
 
 type Props = { params: Promise<{ uid: string }> };
@@ -13,7 +13,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { uid } = await params;
   const lang = await getRequestPrismicLang();
   const client = createClient();
-  const ep = await client.getByUID("episode", uid, { lang }).catch(() => null);
+  const ep = await client
+    .getByUID("episode", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
+    .catch(() => null);
   if (!ep) return {};
   return {
     title:
@@ -43,7 +45,9 @@ export default async function EpisodeReaderPage({ params }: Props) {
   const { uid } = await params;
   const lang = await getRequestPrismicLang();
   const client = createClient();
-  const ep = await client.getByUID("episode", uid, { lang }).catch(() => null);
+  const ep = await client
+    .getByUID("episode", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
+    .catch(() => null);
   if (!ep) notFound();
 
   // Prev / next for chapter navigation (ascending order → prev is lower number)

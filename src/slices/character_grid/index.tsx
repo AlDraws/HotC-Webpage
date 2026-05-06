@@ -33,7 +33,7 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
         {slice.items.map((item, index) => {
           const character = item.character;
           if (!isFilled.contentRelationship(character)) return null;
-          const data = character.data as
+          const data = (character.data ?? {}) as
             | {
                 name?: string;
                 role?: string;
@@ -44,8 +44,12 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
                 };
               }
             | undefined;
+          const portrait =
+            data?.portrait ||
+            (data as { image?: { url?: string } } | undefined)?.image ||
+            undefined;
           const portraitUrl =
-            data?.portrait?.url ?? "/assets/character-portrait-placeholder.svg";
+            portrait?.url ?? "/assets/character-portrait-placeholder.svg";
 
           return (
             <PrismicNextLink
@@ -61,7 +65,9 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
                 {data?.role && (
                   <span className="hotc-cgrid__role">{data?.role}</span>
                 )}
-                <span className="hotc-cgrid__name">{data?.name ?? "Unknown"}</span>
+                <span className="hotc-cgrid__name">
+                  {data?.name ?? character.uid ?? "Unknown"}
+                </span>
               </div>
             </PrismicNextLink>
           );
