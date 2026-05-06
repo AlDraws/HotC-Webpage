@@ -72,7 +72,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
           <div className="hotc-header__lang" role="group" aria-label="Language">
             <button
               type="button"
-              className={`hotc-btn hotc-btn--ghost hotc-header__lang-btn${
+              className={`hotc-header__lang-btn${
                 currentLocale === "en" ? " is-active" : ""
               }`}
               onClick={() => switchLocale("en")}
@@ -82,7 +82,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
             </button>
             <button
               type="button"
-              className={`hotc-btn hotc-btn--ghost hotc-header__lang-btn${
+              className={`hotc-header__lang-btn${
                 currentLocale === "es" ? " is-active" : ""
               }`}
               onClick={() => switchLocale("es")}

@@ -604,23 +604,34 @@ body.hotc,
 /* Language switch */
 .hotc-header__lang {
   display: inline-flex;
-  gap: 0.35rem;
+  align-items: center;
+  border: var(--hotc-border);
+  border-radius: var(--hotc-r-sm);
+  background: transparent;
+  overflow: hidden;
 }
 
 .hotc-header__lang-btn {
-  min-width: 52px;
+  min-width: 50px;
   justify-content: center;
-  padding: 0.5rem 0.7rem;
+  padding: 0.5rem 0.65rem;
   font-family: var(--hotc-font-display);
   font-size: 0.8125rem;
   letter-spacing: 0.06em;
   line-height: 1;
+  border: 0;
+  background: transparent;
+  color: var(--hotc-ink);
+  cursor: pointer;
+}
+
+.hotc-header__lang-btn + .hotc-header__lang-btn {
+  border-left: 2px solid var(--hotc-ink);
 }
 
 .hotc-header__lang-btn.is-active {
   background: var(--hotc-ink);
   color: var(--hotc-on-ink);
-  border-color: var(--hotc-ink);
 }
 
 /* Socials */
