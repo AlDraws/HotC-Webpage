@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { asText, type RichTextField } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
@@ -11,10 +12,25 @@ export const metadata: Metadata = {
   description: "Meet the cast of Heirs of the Collapse.",
 };
 
+function getSliceText(value: unknown): string | null {
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    return trimmed || null;
+  }
+
+  if (Array.isArray(value)) {
+    const text = asText(value as RichTextField).trim();
+    return text || null;
+  }
+
+  return null;
+}
+
 /**
- * Characters index — replicates the App.jsx "characters" route:
- *   - Page head (kicker, h1, intro)
- *   - CharacterGrid with hotc-cgrid__* classes from CharacterGrid.jsx
+ * Characters index:
+ *   - Renders any non-grid slices configured on the "characters" page
+ *   - Uses CharacterGrid primary fields as the grid heading
+ *   - Always lists the current character documents
  */
 export default async function CharactersPage() {
   const lang = await getRequestPrismicLang();
@@ -24,45 +40,34 @@ export default async function CharactersPage() {
     .catch(() => null);
   const characters = await client.getAllByType("character", { lang });
   const normalizedPageSlices = normalizeSlices(charactersPage?.data.slices);
-
-  const heroSliceFromPage =
-    normalizedPageSlices.find((slice) => slice.slice_type === "parallax_hero") ??
-    null;
-
-  const fallbackHeroSlice = {
-    id: "characters-default-parallax",
-    slice_type: "parallax_hero",
-    slice_label: null,
-    variation: "default",
-    version: "initial",
-    primary: {
-      kicker: "The Cast",
-      title: "Characters",
-      subtitle: "The heirs, the lost, and the ones who stayed.",
-      bgImage: {},
-      bgVideo: {},
-      bgPoster: {},
-      foreground: {},
-      bgStrength: null,
-      fgStrength: null,
-      height_vh: 56,
-      primaryCtaLabel: "",
-      primaryCtaLink: {},
-      secondaryCtaLabel: "",
-      secondaryCtaLink: {},
-      size: "lg",
-      overlay: "strong",
-    },
-    items: [],
-  };
-  const heroSlice = heroSliceFromPage ?? fallbackHeroSlice;
+  const pageSlices = normalizedPageSlices.filter(
+    (slice) => slice.slice_type !== "character_grid",
+  );
+  const characterGridSlice = normalizedPageSlices.find(
+    (slice) => slice.slice_type === "character_grid",
+  ) as
+    | {
+        primary?: {
+          kicker?: unknown;
+          title?: unknown;
+        };
+      }
+    | undefined;
+  const gridKicker = getSliceText(characterGridSlice?.primary?.kicker);
+  const gridTitle = getSliceText(characterGridSlice?.primary?.title);
 
   return (
     <>
-      <SliceZone slices={[heroSlice]} components={components} />
+      <SliceZone slices={pageSlices} components={components} />
 
       {/* Character grid — replicates CharacterGrid.jsx */}
       <section className="bounded bounded--base" style={{ paddingTop: 0 }}>
+        {(gridKicker || gridTitle) && (
+          <div className="hotc-cgrid__head">
+            {gridKicker && <span className="hotc-kicker">{gridKicker}</span>}
+            {gridTitle && <h2 className="hotc-h2">{gridTitle}</h2>}
+          </div>
+        )}
         <div className="hotc-cgrid__grid">
           {characters.map((ch) => (
             <Link
