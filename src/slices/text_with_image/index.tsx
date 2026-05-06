@@ -2,6 +2,7 @@
 import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import { useLightbox } from "@/components/LightboxProvider";
 import { TextWithImageSlice } from "@/../prismicio-types";
 
 /**
@@ -13,6 +14,8 @@ export type TextWithImageProps = SliceComponentProps<TextWithImageSlice>;
  * Component for "TextWithImage" Slices.
  */
 const TextWithImage = ({ slice }: TextWithImageProps) => {
+  const { openLightbox } = useLightbox();
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -22,11 +25,33 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
     >
       <div className="hotc-twi__inner">
         <div className="hotc-twi__media">
-          <PrismicNextImage
-            field={slice.primary.image}
-            className="hotc-twi__img"
-            fallbackAlt=""
-          />
+          {slice.primary.image.url ? (
+            <button
+              type="button"
+              className="hotc-twi__img-trigger"
+              onClick={() =>
+                openLightbox([
+                  {
+                    src: slice.primary.image.url || "",
+                    alt: slice.primary.image.alt || "",
+                  },
+                ])
+              }
+              aria-label="Open image"
+            >
+              <PrismicNextImage
+                field={slice.primary.image}
+                className="hotc-twi__img"
+                fallbackAlt=""
+              />
+            </button>
+          ) : (
+            <PrismicNextImage
+              field={slice.primary.image}
+              className="hotc-twi__img"
+              fallbackAlt=""
+            />
+          )}
         </div>
         <div className="hotc-twi__copy">
           {slice.primary.kicker && (

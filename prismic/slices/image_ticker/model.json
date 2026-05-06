@@ -28,6 +28,14 @@
       },
       "items": {
         "image": { "type": "Image", "config": { "label": "Image" } },
+        "show_badge": {
+          "type": "Boolean",
+          "config": { "label": "Show badge", "default_value": false }
+        },
+        "badge_text": {
+          "type": "Text",
+          "config": { "label": "Badge text", "placeholder": "Offer" }
+        },
         "link": {
           "type": "Link",
           "config": {

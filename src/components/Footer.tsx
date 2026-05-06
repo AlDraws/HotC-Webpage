@@ -29,15 +29,19 @@ export default function Footer({ settings, navigation }: Props) {
   const siteByHref = getLinkHref(settings.data.site_by_link);
   const siteByText = settings.data.site_by_text || "Site by";
   const fallbackCopyright = `© ${new Date().getFullYear()} ${siteTitle}. All rights reserved.`;
+  const brandData = settings.data as typeof settings.data & {
+    footer_logo?: { url?: string | null } | null;
+  };
+  const footerLogoUrl = brandData.footer_logo?.url || settings.data.logo?.url;
 
   return (
     <footer className="hotc-footer">
       <div className="bounded hotc-footer__inner">
         <div className="hotc-footer__brand">
           <Link href="/" className="hotc-footer__logo" aria-label={siteTitle}>
-            {settings.data.logo?.url ? (
+            {footerLogoUrl ? (
               <BrandLogo
-                src={settings.data.logo.url}
+                src={footerLogoUrl}
                 alt={siteTitle}
                 className="h-20 w-auto object-contain"
               />

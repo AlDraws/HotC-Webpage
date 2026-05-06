@@ -77,10 +77,18 @@
           }
         }
       },
-      "logo": {
+      "header_logo": {
         "type": "Image",
         "config": {
-          "label": "logo",
+          "label": "header_logo",
+          "constraint": {},
+          "thumbnails": []
+        }
+      },
+      "footer_logo": {
+        "type": "Image",
+        "config": {
+          "label": "footer_logo",
           "constraint": {},
           "thumbnails": []
         }

@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
+import { SliceZone } from "@prismicio/react";
 import { createClient } from "@/prismicio";
+import { components } from "@/slices";
 import { getRequestPrismicLang } from "@/lib/server-locale";
 
 export const metadata: Metadata = {
@@ -16,18 +18,46 @@ export const metadata: Metadata = {
 export default async function CharactersPage() {
   const lang = await getRequestPrismicLang();
   const client = createClient();
+  const charactersPage = await client.getByUID("page", "characters", { lang }).catch(() => null);
   const characters = await client.getAllByType("character", { lang });
+  const firstCover = characters.find((item) => item.data.cover?.url)?.data.cover?.url;
+
+  const heroSliceFromPage =
+    charactersPage?.data.slices?.find(
+      (slice) => slice.slice_type === "parallax_hero"
+    ) ?? null;
+
+  const fallbackHeroSlice = {
+    id: "characters-default-parallax",
+    slice_type: "parallax_hero",
+    slice_label: null,
+    variation: "default",
+    version: "initial",
+    primary: {
+      kicker: "The Cast",
+      title: "Characters",
+      subtitle: "The heirs, the lost, and the ones who stayed.",
+      bgImage: firstCover ? { url: firstCover, alt: "Characters cover" } : {},
+      bgVideo: {},
+      bgPoster: {},
+      foreground: {},
+      bgStrength: null,
+      fgStrength: null,
+      height_vh: 56,
+      primaryCtaLabel: "",
+      primaryCtaLink: {},
+      secondaryCtaLabel: "",
+      secondaryCtaLink: {},
+      size: "lg",
+      overlay: "strong",
+    },
+    items: [],
+  };
+  const heroSlice = heroSliceFromPage ?? fallbackHeroSlice;
 
   return (
     <>
-      {/* Page head */}
-      <section className="bounded hotc-page__head">
-        <span className="hotc-kicker">The Cast</span>
-        <h1 className="hotc-h1">Characters</h1>
-        <p className="hotc-page__intro">
-          The heirs, the lost, and the ones who stayed.
-        </p>
-      </section>
+      <SliceZone slices={[heroSlice]} components={components} />
 
       {/* Character grid — replicates CharacterGrid.jsx */}
       <section className="bounded bounded--base" style={{ paddingTop: 0 }}>

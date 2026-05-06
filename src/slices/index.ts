@@ -21,4 +21,5 @@ export const components = {
   parallax_hero: dynamic(() => import("./parallax_hero")),
   quote: dynamic(() => import("./quote")),
   text_with_image: dynamic(() => import("./text_with_image")),
+  youtube_embed: dynamic(() => import("./youtube_embed")),
 };

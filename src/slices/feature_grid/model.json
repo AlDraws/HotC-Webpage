@@ -25,6 +25,23 @@
         }
       },
       "items": {
+        "cover_image": {
+          "type": "Image",
+          "config": {
+            "label": "Cover image",
+            "constraint": {},
+            "thumbnails": []
+          }
+        },
+        "cover_link": {
+          "type": "Link",
+          "config": {
+            "label": "Cover link",
+            "placeholder": "",
+            "select": null,
+            "allowTargetBlank": true
+          }
+        },
         "icon": {
           "type": "Image",
           "config": {

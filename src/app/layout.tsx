@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { LightboxProvider } from "@/components/LightboxProvider";
 import { asText } from "@prismicio/client";
 import { createClient } from "@/prismicio";
 import { getRequestLocale, getRequestPrismicLang } from "@/lib/server-locale";
@@ -65,17 +66,19 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${inter.variable} h-full antialiased`}>
       <body className="hotc flex min-h-full flex-col">
-        {settings && navigation ? (
-          <Header
-            settings={settings}
-            navigation={navigation}
-            currentLocale={locale}
-          />
-        ) : null}
-        <main className="flex-1">{children}</main>
-        {settings && navigation ? (
-          <Footer settings={settings} navigation={navigation} />
-        ) : null}
+        <LightboxProvider>
+          {settings && navigation ? (
+            <Header
+              settings={settings}
+              navigation={navigation}
+              currentLocale={locale}
+            />
+          ) : null}
+          <main className="flex-1">{children}</main>
+          {settings && navigation ? (
+            <Footer settings={settings} navigation={navigation} />
+          ) : null}
+        </LightboxProvider>
       </body>
     </html>
   );

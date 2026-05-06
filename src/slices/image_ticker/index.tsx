@@ -22,6 +22,32 @@ function getLinkHref(linkField: unknown): string | null {
   return null;
 }
 
+function normalizeHref(rawHref: string): string {
+  const value = rawHref.trim();
+  if (!value) return value;
+
+  if (/^(mailto:|tel:|sms:)/i.test(value)) return value;
+  if (value.startsWith("//")) return `https:${value}`;
+  if (/^https?:\/\//i.test(value)) return value;
+  if (value.startsWith("/")) return value;
+  if (/^[a-z][a-z0-9+.-]*:/i.test(value)) return value;
+
+  return `https://${value.replace(/^\/+/, "")}`;
+}
+
+function isExternalHref(href: string): boolean {
+  if (!href || href.startsWith("/")) return false;
+  if (/^(mailto:|tel:|sms:)/i.test(href)) return true;
+  if (typeof window === "undefined") return /^https?:\/\//i.test(href);
+
+  try {
+    const resolved = new URL(href, window.location.origin);
+    return resolved.origin !== window.location.origin;
+  } catch {
+    return false;
+  }
+}
+
 function wrapOffset(value: number, span: number): number {
   if (!Number.isFinite(span) || span <= 0) return 0;
   return ((value % span) + span) % span;
@@ -226,9 +252,15 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
               const typedItem = item as typeof item & {
                 link?: unknown;
                 image_link?: unknown;
+                show_badge?: boolean | null;
+                badge_text?: string | null;
               };
-              const href =
+              const rawHref =
                 getLinkHref(typedItem.link) ?? getLinkHref(typedItem.image_link);
+              const href = rawHref ? normalizeHref(rawHref) : null;
+              const isExternal = href ? isExternalHref(href) : false;
+              const showBadge =
+                Boolean(typedItem.show_badge) && Boolean(typedItem.badge_text);
               return (
                 <div
                   key={`${copyIndex}-${itemIndex}`}
@@ -240,8 +272,8 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
                       <a
                         href={href}
                         className="hotc-ticker__link"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noopener noreferrer" : undefined}
                         draggable={false}
                       >
                         <PrismicNextImage
@@ -252,16 +284,28 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
                           fallbackAlt=""
                           draggable={false}
                         />
+                        {showBadge ? (
+                          <span className="hotc-ticker__badge">
+                            {typedItem.badge_text}
+                          </span>
+                        ) : null}
                       </a>
                     ) : (
-                      <PrismicNextImage
-                        field={item.image}
-                        fill
-                        className="object-cover"
-                        sizes="(min-width: 768px) 260px, 200px"
-                        fallbackAlt=""
-                        draggable={false}
-                      />
+                      <>
+                        <PrismicNextImage
+                          field={item.image}
+                          fill
+                          className="object-cover"
+                          sizes="(min-width: 768px) 260px, 200px"
+                          fallbackAlt=""
+                          draggable={false}
+                        />
+                        {showBadge ? (
+                          <span className="hotc-ticker__badge">
+                            {typedItem.badge_text}
+                          </span>
+                        ) : null}
+                      </>
                     )
                   ) : null}
                 </div>

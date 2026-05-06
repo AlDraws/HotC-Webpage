@@ -42,6 +42,10 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
     return key === "instagram" || key === "tiktok" || key === "patreon";
   });
   const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
+  const brandData = settings.data as typeof settings.data & {
+    header_logo?: { url?: string | null } | null;
+  };
+  const headerLogoUrl = brandData.header_logo?.url || settings.data.logo?.url;
 
   function switchLocale(locale: AppLocale) {
     if (locale === currentLocale) return;
@@ -53,9 +57,9 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
     <header className="hotc-header">
       <div className="bounded hotc-header__inner">
         <Link href="/" className="hotc-header__logo" aria-label={siteTitle}>
-          {settings.data.logo?.url ? (
+          {headerLogoUrl ? (
             <BrandLogo
-              src={settings.data.logo.url}
+              src={headerLogoUrl}
               alt={siteTitle}
               className="h-full w-auto object-contain"
             />
@@ -143,9 +147,9 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
               aria-label={siteTitle}
               onClick={() => setOpen(false)}
             >
-              {settings.data.logo?.url ? (
+              {headerLogoUrl ? (
                 <BrandLogo
-                  src={settings.data.logo.url}
+                  src={headerLogoUrl}
                   alt={siteTitle}
                   className="h-full w-auto object-contain"
                 />

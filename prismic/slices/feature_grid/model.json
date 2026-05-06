@@ -14,6 +14,8 @@
       "title":  { "type": "Text", "config": { "label": "Title" } }
     },
     "items": {
+      "cover_image":  { "type": "Image", "config": { "label": "Cover image", "constraint": {}, "thumbnails": [] } },
+      "cover_link":   { "type": "Link", "config": { "label": "Cover link", "placeholder": "", "select": null, "allowTargetBlank": true } },
       "icon":        { "type": "Image", "config": { "label": "Icon / glyph image (square, transparent)" } },
       "title":       { "type": "Text",  "config": { "label": "Feature title" } },
       "description": { "type": "Text",  "config": { "label": "Feature description" } }

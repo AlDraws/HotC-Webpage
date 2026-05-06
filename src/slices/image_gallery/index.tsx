@@ -2,6 +2,7 @@
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import { useLightbox } from "@/components/LightboxProvider";
 
 /**
  * Props for `ImageGallery`.
@@ -12,6 +13,14 @@ export type ImageGalleryProps = SliceComponentProps<Content.ImageGallerySlice>;
  * Component for "ImageGallery" Slices.
  */
 const ImageGallery = ({ slice }: ImageGalleryProps) => {
+  const { openLightbox } = useLightbox();
+  const images = slice.items
+    .map((item) => ({
+      src: item.image.url || "",
+      alt: item.image.alt || "",
+    }))
+    .filter((image) => Boolean(image.src));
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -19,13 +28,16 @@ const ImageGallery = ({ slice }: ImageGalleryProps) => {
       as="section"
     >
       <div className="hotc-gallery">
-        {slice.items.map((item, index) => (
-          <div
+        {images.map((image, index) => (
+          <button
             key={index}
+            type="button"
             className="hotc-gallery__tile"
+            aria-label={`Open image ${index + 1}`}
+            onClick={() => openLightbox(images, index)}
             style={
-              item.image.url
-                ? { backgroundImage: `url(${item.image.url})` }
+              image.src
+                ? { backgroundImage: `url(${image.src})` }
                 : undefined
             }
           />

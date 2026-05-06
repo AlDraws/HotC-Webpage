@@ -1,0 +1,47 @@
+{
+  "id": "youtube_embed",
+  "type": "SharedSlice",
+  "name": "YouTubeEmbed",
+  "description": "YouTube video embed inside a branded comic-style panel.",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Embedded YouTube video with optional heading and caption.",
+      "primary": {
+        "kicker": {
+          "type": "Text",
+          "config": {
+            "label": "Kicker (optional)",
+            "placeholder": "Watch"
+          }
+        },
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title (optional)",
+            "placeholder": "Official trailer"
+          }
+        },
+        "youtube_url": {
+          "type": "Text",
+          "config": {
+            "label": "YouTube URL",
+            "placeholder": "https://www.youtube.com/watch?v=..."
+          }
+        },
+        "caption": {
+          "type": "StructuredText",
+          "config": {
+            "label": "Caption (optional)",
+            "placeholder": "Optional context under the video",
+            "multi": "paragraph,strong,em,hyperlink"
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

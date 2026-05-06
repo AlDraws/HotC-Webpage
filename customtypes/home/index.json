@@ -104,6 +104,9 @@
             },
             "quote": {
               "type": "SharedSlice"
+            },
+            "youtube_embed": {
+              "type": "SharedSlice"
             }
           }
         }

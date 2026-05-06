@@ -76,6 +76,9 @@
             },
             "character_grid": {
               "type": "SharedSlice"
+            },
+            "youtube_embed": {
+              "type": "SharedSlice"
             }
           }
         }
