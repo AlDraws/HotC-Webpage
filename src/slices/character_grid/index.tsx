@@ -1,7 +1,7 @@
 "use client";
 
 import { SliceComponentProps } from "@prismicio/react";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@prismicio/next";
 import { isFilled } from "@prismicio/client";
 import { CharacterGridSlice } from "@/../prismicio-types";
 
@@ -33,11 +33,19 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
         {slice.items.map((item, index) => {
           const character = item.character;
           if (!isFilled.contentRelationship(character)) return null;
-          const data = character.data as {
-            name?: string;
-            role?: string;
-            portrait?: { url?: string; alt?: string; dimensions?: { width: number; height: number } };
-          };
+          const data = character.data as
+            | {
+                name?: string;
+                role?: string;
+                portrait?: {
+                  url?: string;
+                  alt?: string;
+                  dimensions?: { width: number; height: number };
+                };
+              }
+            | undefined;
+          const portraitUrl =
+            data?.portrait?.url ?? "/assets/character-portrait-placeholder.svg";
 
           return (
             <PrismicNextLink
@@ -47,17 +55,13 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
             >
               <div
                 className="hotc-cgrid__portrait"
-                style={
-                  data.portrait?.url
-                    ? { backgroundImage: `url(${data.portrait.url})` }
-                    : undefined
-                }
+                style={{ backgroundImage: `url(${portraitUrl})` }}
               />
               <div className="hotc-cgrid__meta">
-                {data.role && (
-                  <span className="hotc-cgrid__role">{data.role}</span>
+                {data?.role && (
+                  <span className="hotc-cgrid__role">{data?.role}</span>
                 )}
-                <span className="hotc-cgrid__name">{data.name}</span>
+                <span className="hotc-cgrid__name">{data?.name ?? "Unknown"}</span>
               </div>
             </PrismicNextLink>
           );

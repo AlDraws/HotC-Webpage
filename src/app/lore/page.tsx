@@ -3,7 +3,7 @@ import Link from "next/link";
 import { createClient } from "@/prismicio";
 
 export const metadata: Metadata = {
-  title: "Worldbuilding — Heirs of the Collapse",
+  title: "Worldbuilding",
   description: "Explore the environments, props, and illustrations of Heirs of the Collapse.",
 };
 

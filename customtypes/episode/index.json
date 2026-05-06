@@ -75,7 +75,13 @@
           "label": "arc",
           "placeholder": "",
           "default_value": "Prologue",
-          "options": ["Prologue", "Arc I"]
+          "options": [
+            "Prologue",
+            "Arc I",
+            "Arc II",
+            "Arc III",
+            "Epilogue"
+          ]
         }
       },
       "characters": {
@@ -89,7 +95,9 @@
               "config": {
                 "label": "character_ref",
                 "select": "document",
-                "customtypes": ["character"],
+                "customtypes": [
+                  "character"
+                ],
                 "repeat": false
               }
             }

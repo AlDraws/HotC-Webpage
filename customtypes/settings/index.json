@@ -59,7 +59,10 @@
               "config": {
                 "label": "icon_position",
                 "placeholder": "",
-                "options": ["left", "right"]
+                "options": [
+                  "left",
+                  "right"
+                ]
               }
             },
             "hide_label": {
@@ -224,7 +227,12 @@
               "config": {
                 "label": "provider",
                 "placeholder": "",
-                "options": ["Beehiiv", "Mailchimp", "Buttondown", "Netlify"]
+                "options": [
+                  "Beehiiv",
+                  "Mailchimp",
+                  "Buttondown",
+                  "Netlify"
+                ]
               }
             },
             "embed": {

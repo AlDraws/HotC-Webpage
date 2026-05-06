@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PrismicRichText, SliceZone } from "@prismicio/react";
+import { SliceZone } from "@prismicio/react";
 import { asText } from "@prismicio/client";
 import { components } from "@/slices";
 import Link from "next/link";
@@ -78,29 +78,25 @@ export default async function EpisodeReaderPage({ params }: Props) {
       {/* Sticky prev/next nav — replicates EpisodeReader.__nav */}
       <nav className="hotc-ereader__nav">
         <div className="hotc-ereader__nav-inner">
-          {prev ? (
-            <Link href={`/episodes/${prev.uid}`} className="hotc-btn hotc-btn--ghost">
-              ← Prev
-            </Link>
-          ) : (
-            <button className="hotc-btn hotc-btn--ghost" disabled>
-              ← Prev
-            </button>
-          )}
+          <Link
+            href={prev ? `/episodes/${prev.uid}` : "#"}
+            aria-disabled={!prev}
+            className="hotc-btn hotc-btn--ghost"
+          >
+            ← Episodio Anterior
+          </Link>
 
           <div className="hotc-ereader__progress">
             <span className="hotc-attr-label">CH. {ep.data.chapter_number}</span>
           </div>
 
-          {next ? (
-            <Link href={`/episodes/${next.uid}`} className="hotc-btn hotc-btn--ember">
-              Next →
-            </Link>
-          ) : (
-            <button className="hotc-btn hotc-btn--ember" disabled>
-              Next →
-            </button>
-          )}
+          <Link
+            href={next ? `/episodes/${next.uid}` : "#"}
+            aria-disabled={!next}
+            className="hotc-btn hotc-btn--ember"
+          >
+            Próximo Episodio →
+          </Link>
         </div>
       </nav>
     </article>

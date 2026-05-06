@@ -12,7 +12,7 @@
       "publish_date":   { "type": "Date",   "config": { "label": "Publish date" } },
       "cover":          { "type": "Image",  "config": { "label": "Cover (4:5)", "constraint": { "width": 1080, "height": 1350 } } },
       "summary":        { "type": "StructuredText", "config": { "label": "Summary", "multi": "paragraph" } },
-      "arc":            { "type": "Select", "config": { "label": "Arc", "options": ["Prologue", "Arc I"], "default_value": "Prologue" } },
+      "arc":            { "type": "Select", "config": { "label": "Arc", "options": ["Prologue", "Arc I", "Arc II", "Arc III", "Epilogue"], "default_value": "Prologue" } },
       "tags": {
         "type": "Group",
         "config": {

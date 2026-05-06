@@ -5,29 +5,37 @@ import Link from "next/link";
 import { createClient } from "@/prismicio";
 
 export const metadata: Metadata = {
-  title: "Episodes — Heirs of the Collapse",
+  title: "Episodes",
   description: "Read every chapter of Heirs of the Collapse, a webcomic updating every Sunday.",
 };
 
 export default async function EpisodesPage() {
   const client = createClient();
+  const episodesIndex = await client.getSingle("episodes_index").catch(() => null);
   const episodes = await client.getAllByType("episode", {
     orderings: [{ field: "my.episode.chapter_number", direction: "desc" }],
   });
+  const arcs = ["Prologue", "Arc I", "Arc II", "Arc III", "Epilogue"] as const;
+  const intro = episodesIndex?.data.intro_richtext
+    ? asText(episodesIndex.data.intro_richtext)
+    : "Read the story from the beginning, or jump to the latest chapter.";
 
   return (
     <>
-      {/* Page head — replicates EpisodeIndex.jsx header */}
       <section className="bounded hotc-page__head">
         <span className="hotc-kicker">Archive</span>
         <h1 className="hotc-h1">Episodes</h1>
-        <p className="hotc-page__intro">
-          Read the story from the beginning, or jump to the latest chapter.
-        </p>
+        <p className="hotc-page__intro">{intro}</p>
       </section>
 
-      {/* Episode grid — replicates EpisodeIndex.jsx grid */}
       <section className="bounded bounded--base" style={{ paddingTop: 0 }}>
+        <div className="mb-6 flex flex-wrap gap-2">
+          {arcs.map((arc) => (
+            <span key={arc} className="hotc-btn hotc-btn--ghost">
+              {arc}
+            </span>
+          ))}
+        </div>
         <div className="hotc-eidx__grid">
           {episodes.map((ep) => (
             <Link
