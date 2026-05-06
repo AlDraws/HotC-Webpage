@@ -2,10 +2,12 @@
 
 import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ImageTickerSlice } from "@/../prismicio-types";
 
 export type ImageTickerProps = SliceComponentProps<ImageTickerSlice>;
+
+const MIN_TICKER_COPIES = 3;
 
 function getLinkHref(linkField: unknown): string | null {
   if (
@@ -30,14 +32,20 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
   const railRef = useRef<HTMLDivElement | null>(null);
   const offsetRef = useRef(0);
   const pausedRef = useRef(false);
-  const halfRef = useRef(0);
+  const cycleWidthRef = useRef(0);
   const draggingRef = useRef(false);
   const pointerXRef = useRef(0);
-  const centeredRef = useRef(false);
+  const dragStartXRef = useRef(0);
+  const didDragRef = useRef(false);
+  const hoveringRef = useRef(false);
+  const suppressClickRef = useRef(false);
+  const wasPausedBeforeDragRef = useRef(false);
   const reduceMotionRef = useRef(false);
+  const [copyCount, setCopyCount] = useState(MIN_TICKER_COPIES);
 
   const speed = slice.primary.speed || 30;
   const isReverse = Boolean(slice.primary.reverse);
+  const items = slice.items ?? [];
   const primary = slice.primary as {
     background_color?: string | null;
     background_image?: { url?: string | null } | null;
@@ -55,29 +63,45 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
   useEffect(() => {
     const viewport = viewportRef.current;
     const rail = railRef.current;
-    if (!rail || !viewport) return;
+    if (!rail || !viewport || items.length === 0) return;
     reduceMotionRef.current = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
 
-    const measure = (recenter = false) => {
-      const half = rail.scrollWidth / 2;
-      halfRef.current = half;
-      if (recenter || !centeredRef.current) {
-        const centered = Math.max((half - viewport.clientWidth) / 2, 0);
-        offsetRef.current = wrapOffset(centered, half);
-        rail.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
-        centeredRef.current = true;
+    const renderPosition = () => {
+      rail.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
+    };
+
+    const measure = () => {
+      const firstCell = rail.children[0] as HTMLElement | undefined;
+      const firstRepeatedCell = rail.children[items.length] as
+        | HTMLElement
+        | undefined;
+      if (!firstCell || !firstRepeatedCell) return;
+
+      const cycleWidth = firstRepeatedCell.offsetLeft - firstCell.offsetLeft;
+      if (!Number.isFinite(cycleWidth) || cycleWidth <= 0) return;
+
+      cycleWidthRef.current = cycleWidth;
+      offsetRef.current = wrapOffset(offsetRef.current, cycleWidth);
+      renderPosition();
+
+      const requiredCopies = Math.max(
+        MIN_TICKER_COPIES,
+        Math.ceil(viewport.clientWidth / cycleWidth) + 2
+      );
+      if (requiredCopies !== copyCount) {
+        setCopyCount(requiredCopies);
       }
     };
 
-    measure(true);
+    measure();
 
     const images = Array.from(rail.querySelectorAll("img"));
     let pending = 0;
     const onAssetReady = () => {
       pending -= 1;
-      if (pending <= 0) measure(true);
+      if (pending <= 0) measure();
     };
     for (const img of images) {
       if (!img.complete) {
@@ -86,53 +110,42 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
         img.addEventListener("error", onAssetReady, { once: true });
       }
     }
-    if (pending === 0) measure(true);
+    if (pending === 0) measure();
 
     let last = performance.now();
     let raf = 0;
     const tick = (now: number) => {
       const dt = (now - last) / 1000;
       last = now;
-      if (!pausedRef.current && !draggingRef.current && !reduceMotionRef.current) {
-        const half = halfRef.current;
-        const pxPerSecond = half > 0 ? half / Math.max(speed, 1) : 0;
+      if (
+        !pausedRef.current &&
+        !draggingRef.current &&
+        !reduceMotionRef.current
+      ) {
+        const cycleWidth = cycleWidthRef.current;
+        const pxPerSecond =
+          cycleWidth > 0 ? cycleWidth / Math.max(speed, 1) : 0;
         const delta = pxPerSecond * dt * (isReverse ? -1 : 1);
-        offsetRef.current = wrapOffset(offsetRef.current + delta, half);
-        rail.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
+        offsetRef.current = wrapOffset(offsetRef.current + delta, cycleWidth);
+        renderPosition();
       }
       raf = requestAnimationFrame(tick);
     };
 
     raf = requestAnimationFrame(tick);
-    const resizeObserver = new ResizeObserver(() => measure(false));
+    const resizeObserver = new ResizeObserver(() => measure());
     resizeObserver.observe(rail);
     resizeObserver.observe(viewport);
-
-    const handleWheel = (event: WheelEvent) => {
-      const delta =
-        Math.abs(event.deltaX) > Math.abs(event.deltaY)
-          ? event.deltaX
-          : event.deltaY;
-      if (!delta) return;
-      event.preventDefault();
-      offsetRef.current = wrapOffset(offsetRef.current + delta, halfRef.current);
-      rail.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
-    };
-    viewport.addEventListener("wheel", handleWheel, { passive: false });
 
     return () => {
       cancelAnimationFrame(raf);
       resizeObserver.disconnect();
-      viewport.removeEventListener("wheel", handleWheel);
       for (const img of images) {
         img.removeEventListener("load", onAssetReady);
         img.removeEventListener("error", onAssetReady);
       }
     };
-  }, [isReverse, speed]);
-
-  const items = slice.items ?? [];
-  const doubled = [...items, ...items];
+  }, [copyCount, isReverse, items.length, speed]);
 
   return (
     <div
@@ -145,79 +158,116 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
         ref={viewportRef}
         className="hotc-ticker__viewport"
         onMouseEnter={() => {
+          hoveringRef.current = true;
           pausedRef.current = true;
         }}
         onMouseLeave={() => {
-          pausedRef.current = false;
-          draggingRef.current = false;
+          hoveringRef.current = false;
+          if (!draggingRef.current) {
+            pausedRef.current = false;
+          }
         }}
         onPointerDown={(event) => {
+          if (event.pointerType === "mouse" && event.button !== 0) return;
           draggingRef.current = true;
           pointerXRef.current = event.clientX;
-          (event.currentTarget as HTMLDivElement).setPointerCapture(event.pointerId);
+          dragStartXRef.current = event.clientX;
+          didDragRef.current = false;
+          suppressClickRef.current = false;
+          wasPausedBeforeDragRef.current = pausedRef.current;
+          pausedRef.current = true;
+          event.currentTarget.setPointerCapture(event.pointerId);
         }}
         onPointerMove={(event) => {
           if (!draggingRef.current) return;
           const dx = event.clientX - pointerXRef.current;
+          if (dx === 0) return;
+          event.preventDefault();
           pointerXRef.current = event.clientX;
-          offsetRef.current = wrapOffset(offsetRef.current - dx, halfRef.current);
+          if (Math.abs(event.clientX - dragStartXRef.current) > 4) {
+            didDragRef.current = true;
+          }
+          offsetRef.current = wrapOffset(
+            offsetRef.current - dx,
+            cycleWidthRef.current
+          );
           if (railRef.current) {
             railRef.current.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
           }
         }}
         onPointerUp={(event) => {
           draggingRef.current = false;
-          (event.currentTarget as HTMLDivElement).releasePointerCapture(
-            event.pointerId
-          );
+          suppressClickRef.current = didDragRef.current;
+          pausedRef.current =
+            event.pointerType === "mouse"
+              ? hoveringRef.current
+              : wasPausedBeforeDragRef.current;
+          if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+            event.currentTarget.releasePointerCapture(event.pointerId);
+          }
         }}
-        onPointerCancel={() => {
+        onPointerCancel={(event) => {
           draggingRef.current = false;
+          pausedRef.current =
+            event.pointerType === "mouse"
+              ? hoveringRef.current
+              : wasPausedBeforeDragRef.current;
+        }}
+        onClickCapture={(event) => {
+          if (!suppressClickRef.current) return;
+          event.preventDefault();
+          event.stopPropagation();
+          suppressClickRef.current = false;
         }}
       >
         <div ref={railRef} className="hotc-ticker__rail" style={{ transition: "none" }}>
-          {doubled.map((item, i) => {
-            const typedItem = item as typeof item & {
-              link?: unknown;
-              image_link?: unknown;
-            };
-            const href =
-              getLinkHref(typedItem.link) ?? getLinkHref(typedItem.image_link);
-            return (
-              <div
-                key={i}
-                className="hotc-ticker__cell"
-                style={{ position: "relative" }}
-              >
-                {item.image?.url ? (
-                  href ? (
-                    <a
-                      href={href}
-                      className="hotc-ticker__link"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
+          {Array.from({ length: copyCount }, (_, copyIndex) =>
+            items.map((item, itemIndex) => {
+              const typedItem = item as typeof item & {
+                link?: unknown;
+                image_link?: unknown;
+              };
+              const href =
+                getLinkHref(typedItem.link) ?? getLinkHref(typedItem.image_link);
+              return (
+                <div
+                  key={`${copyIndex}-${itemIndex}`}
+                  className="hotc-ticker__cell"
+                  style={{ position: "relative" }}
+                >
+                  {item.image?.url ? (
+                    href ? (
+                      <a
+                        href={href}
+                        className="hotc-ticker__link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        draggable={false}
+                      >
+                        <PrismicNextImage
+                          field={item.image}
+                          fill
+                          className="object-cover"
+                          sizes="(min-width: 768px) 260px, 200px"
+                          fallbackAlt=""
+                          draggable={false}
+                        />
+                      </a>
+                    ) : (
                       <PrismicNextImage
                         field={item.image}
                         fill
                         className="object-cover"
                         sizes="(min-width: 768px) 260px, 200px"
                         fallbackAlt=""
+                        draggable={false}
                       />
-                    </a>
-                  ) : (
-                    <PrismicNextImage
-                      field={item.image}
-                      fill
-                      className="object-cover"
-                      sizes="(min-width: 768px) 260px, 200px"
-                      fallbackAlt=""
-                    />
-                  )
-                ) : null}
-              </div>
-            );
-          })}
+                    )
+                  ) : null}
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
     </div>

@@ -1074,6 +1074,13 @@ body.hotc,
   display: block;
   width: 100%;
   height: 100%;
+  -webkit-user-drag: none;
+}
+
+.hotc-ticker__cell img {
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 @media (min-width: 768px) {
