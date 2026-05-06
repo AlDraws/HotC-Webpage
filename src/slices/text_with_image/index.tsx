@@ -28,7 +28,7 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
           {slice.primary.image.url ? (
             <button
               type="button"
-              className="hotc-twi__img-trigger"
+              className="hotc-twi__img-trigger hotc-pressable"
               onClick={() =>
                 openLightbox([
                   {

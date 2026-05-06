@@ -507,13 +507,13 @@ body.hotc,
 
 @media (min-width: 1024px) {
   .bounded--base {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
   }
 
   .bounded--lg {
-    padding-top: 8rem;
-    padding-bottom: 8rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
   }
 }
 
@@ -1304,7 +1304,7 @@ body.hotc,
   overflow: hidden;
   isolation: isolate;
   background: var(--hotc-ink);
-  min-height: 70vh;
+  min-height: clamp(420px, 56vh, 680px);
   /* parallax fix (extras.css) */
 }
 
@@ -1922,7 +1922,7 @@ body.hotc,
    PARALLAX HERO — extensión del .hotc-hero
    ========================================================= */
 .hotc-phero {
-  min-height: var(--hotc-phero-height, clamp(420px, 62vh, 760px));
+  min-height: var(--hotc-phero-height, clamp(420px, 58vh, 720px));
 }
 
 .hotc-phero.hotc-hero--md {
@@ -1931,7 +1931,7 @@ body.hotc,
 }
 
 .hotc-phero.hotc-hero--lg {
-  --hotc-phero-height: clamp(460px, 68vh, 860px);
+  --hotc-phero-height: clamp(440px, 62vh, 760px);
   min-height: var(--hotc-phero-height);
 }
 
@@ -1961,7 +1961,7 @@ body.hotc,
   inset: 0;
   z-index: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: flex-end;
   pointer-events: none;
   will-change: transform;
@@ -1969,9 +1969,11 @@ body.hotc,
 
 .hotc-phero__fg img {
   max-height: 90%;
-  max-width: 60%;
+  max-width: min(68%, 820px);
   width: auto;
   height: auto;
+  display: block;
+  margin-inline: auto;
 }
 
 .hotc-phero__inner {
@@ -2252,6 +2254,10 @@ body.hotc,
   border: 3px solid var(--hotc-ink);
   border-radius: var(--hotc-r-lg);
   box-shadow: var(--hotc-shadow-panel);
+  transition:
+    transform 150ms var(--hotc-ease-snap),
+    filter 150ms var(--hotc-ease-snap),
+    box-shadow 150ms var(--hotc-ease-snap);
 }
 
 .hotc-twi__img-trigger {
@@ -2261,6 +2267,16 @@ body.hotc,
   padding: 0;
   background: transparent;
   cursor: zoom-in;
+}
+
+.hotc-twi__img-trigger:hover .hotc-twi__img {
+  transform: scale(1.01);
+  filter: brightness(1.05);
+}
+
+.hotc-twi__img-trigger:active .hotc-twi__img {
+  transform: scale(0.99);
+  filter: brightness(0.96);
 }
 
 .hotc-twi__copy {

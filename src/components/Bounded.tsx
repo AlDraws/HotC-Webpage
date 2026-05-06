@@ -10,9 +10,9 @@ type BoundedProps = {
 
 const yPad = {
   none: "",
-  sm: "py-8 md:py-10",
-  base: "py-16 md:py-20",
-  lg: "py-32 md:py-48",
+  sm: "py-8 md:py-10 lg:py-5",
+  base: "py-16 md:py-20 lg:py-10",
+  lg: "py-32 md:py-48 lg:py-24",
 };
 
 /**

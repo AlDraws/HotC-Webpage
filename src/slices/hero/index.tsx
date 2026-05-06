@@ -13,40 +13,51 @@ export type HeroProps = SliceComponentProps<HeroSlice>;
  * Component for "Hero" Slices.
  */
 const Hero = ({ slice }: HeroProps) => {
+  const primary = slice.primary as HeroSlice["primary"] & {
+    background_image?: HeroSlice["primary"]["image"];
+    bgImage?: HeroSlice["primary"]["image"];
+    hero_image?: HeroSlice["primary"]["image"];
+  };
+  const heroImage =
+    (primary.image?.url ? primary.image : null) ??
+    (primary.background_image?.url ? primary.background_image : null) ??
+    (primary.bgImage?.url ? primary.bgImage : null) ??
+    (primary.hero_image?.url ? primary.hero_image : null);
+
   return (
     <section
       data-slice-type={slice.slice_type}
       data-slice-variation={slice.variation}
       className="hotc-hero hotc-hero--lg"
     >
-      {slice.primary.image.url && (
+      {heroImage?.url && (
         <div
           className="hotc-hero__bg"
-          style={{ backgroundImage: `url(${slice.primary.image.url})` }}
+          style={{ backgroundImage: `url(${heroImage.url})` }}
         />
       )}
       <div className="hotc-hero__overlay" />
       <Bounded className="hotc-hero__inner" yPadding="none">
-        {slice.primary.kicker && (
+        {primary.kicker && (
           <span className="hotc-kicker hotc-hero__kicker">
-            {slice.primary.kicker}
+            {primary.kicker}
           </span>
         )}
-        {slice.primary.title && (
-          <h1 className="hotc-hero__title">{slice.primary.title}</h1>
+        {primary.title && (
+          <h1 className="hotc-hero__title">{primary.title}</h1>
         )}
-        {slice.primary.subtitle && (
+        {primary.subtitle && (
           <div className="hotc-hero__subtitle">
-            <p>{slice.primary.subtitle}</p>
+            <p>{primary.subtitle}</p>
           </div>
         )}
-        {slice.primary.cta_label && (
+        {primary.cta_label && (
           <div className="hotc-hero__ctas">
             <PrismicNextLink
-              field={slice.primary.cta_link}
+              field={primary.cta_link}
               className="hotc-btn hotc-btn--ember"
             >
-              {slice.primary.cta_label}
+              {primary.cta_label}
             </PrismicNextLink>
           </div>
         )}

@@ -79,10 +79,10 @@ export default async function CharactersPage() {
                 }
               />
               <div className="hotc-cgrid__meta">
+                <span className="hotc-cgrid__name">{ch.data.name}</span>
                 {ch.data.role ? (
                   <span className="hotc-cgrid__role">{ch.data.role}</span>
                 ) : null}
-                <span className="hotc-cgrid__name">{ch.data.name}</span>
               </div>
             </Link>
           ))}

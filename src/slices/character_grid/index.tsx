@@ -62,12 +62,12 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
                 style={{ backgroundImage: `url(${portraitUrl})` }}
               />
               <div className="hotc-cgrid__meta">
-                {data?.role && (
-                  <span className="hotc-cgrid__role">{data?.role}</span>
-                )}
                 <span className="hotc-cgrid__name">
                   {data?.name ?? character.uid ?? "Unknown"}
                 </span>
+                {data?.role && (
+                  <span className="hotc-cgrid__role">{data?.role}</span>
+                )}
               </div>
             </PrismicNextLink>
           );
