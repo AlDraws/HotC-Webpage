@@ -9,7 +9,7 @@ import {
   isAppLocale,
   SUPPORTED_LOCALES,
 } from "@/lib/locale";
-import { metadataBase, SITE_NAME } from "@/lib/seo";
+import { buildStaticAlternates, metadataBase, SITE_NAME } from "@/lib/seo";
 import { getNavigation, getSettings } from "@/lib/server-locale";
 import "../globals.css";
 
@@ -35,9 +35,11 @@ export async function generateMetadata({
     : undefined;
   const ogImage =
     settings?.data.og_default?.url || settings?.data.meta_image?.url || undefined;
+  const alternates = buildStaticAlternates(locale, "/");
 
   return {
     metadataBase,
+    alternates,
     icons: {
       icon: "/favicon.ico",
       shortcut: "/favicon.ico",
@@ -51,6 +53,13 @@ export async function generateMetadata({
       type: "website",
       siteName: SITE_NAME,
       locale: locale === "es" ? "es_ES" : "en_US",
+      alternateLocale: SUPPORTED_LOCALES
+        .filter((supportedLocale) => supportedLocale !== locale)
+        .map((supportedLocale) => (supportedLocale === "es" ? "es_ES" : "en_US")),
+      url:
+        typeof alternates.canonical === "string" || alternates.canonical instanceof URL
+          ? alternates.canonical
+          : alternates.canonical?.url,
       title: SITE_NAME,
       description: siteDescription,
       images: ogImage ? [{ url: ogImage, alt: SITE_NAME }] : undefined,

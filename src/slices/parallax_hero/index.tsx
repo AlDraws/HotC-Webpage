@@ -136,6 +136,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
               fallbackAlt={heroTitle}
               fill
               sizes="100vw"
+              decoding="sync"
               preload={true}
               fetchPriority="high"
               loading="eager"
@@ -155,6 +156,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
             field={slice.primary.foreground}
             fallbackAlt={`${heroTitle} foreground artwork`}
             loading="lazy"
+            sizes="(max-width: 767px) 72vw, 68vw"
           />
         </div>
       )}

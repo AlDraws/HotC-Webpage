@@ -5,6 +5,11 @@ export const PRISMIC_LANG_BY_LOCALE = {
   es: "es-es",
 } as const;
 
+export const HREFLANG_BY_LOCALE = {
+  en: "en-US",
+  es: "es-ES",
+} as const;
+
 export type AppLocale = keyof typeof PRISMIC_LANG_BY_LOCALE;
 export type PrismicLang = (typeof PRISMIC_LANG_BY_LOCALE)[AppLocale];
 export const SUPPORTED_LOCALES = Object.keys(

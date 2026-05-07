@@ -49,9 +49,11 @@ const PrismicImage = forwardRef<HTMLImageElement, PrismicImageProps>(
       fallbackAlt,
       decorative = false,
       decoding = "async",
+      loader = null,
       loading,
       preload,
       fetchPriority,
+      sizes,
       ...restProps
     },
     ref,
@@ -71,15 +73,18 @@ const PrismicImage = forwardRef<HTMLImageElement, PrismicImageProps>(
     };
     const resolvedLoading =
       loading ?? (preload || fetchPriority === "high" ? "eager" : "lazy");
+    const resolvedSizes = sizes ?? (restProps.fill ? "100vw" : undefined);
 
     return (
       <PrismicNextImage
         ref={ref}
         field={resolvedField}
+        loader={loader}
         decoding={decoding}
         loading={resolvedLoading}
         preload={preload}
         fetchPriority={fetchPriority}
+        sizes={resolvedSizes}
         {...(decorative ? { alt: "" as const } : {})}
         {...restProps}
       />

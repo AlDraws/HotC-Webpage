@@ -122,10 +122,8 @@ export default function SequentialEpisodeImage({
   const width = resolvedField.dimensions?.width ?? 1080;
   const height = resolvedField.dimensions?.height ?? width;
   const isFirstPanel = panelIndex === 0;
-  const isSecondPanel = panelIndex === 1;
-  const loading = isFirstPanel || isUnlocked ? "eager" : "lazy";
-  const fetchPriority =
-    isFirstPanel || (isSecondPanel && isUnlocked) ? "high" : "auto";
+  const loading = isFirstPanel ? "eager" : "lazy";
+  const fetchPriority = isFirstPanel ? "high" : "auto";
 
   return (
     <PrismicImage
@@ -136,7 +134,8 @@ export default function SequentialEpisodeImage({
       height={height}
       quality={100}
       className="block h-auto w-full"
-      sizes="(min-width: 1080px) 1080px, 100vw"
+      sizes="(max-width: 1080px) 100vw, 1080px"
+      decoding={isFirstPanel ? "sync" : "async"}
       preload={isFirstPanel}
       loading={loading}
       fetchPriority={fetchPriority}

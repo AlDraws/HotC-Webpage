@@ -38,6 +38,7 @@ const Hero = ({ slice }: HeroProps) => {
             fallbackAlt={heroTitle}
             fill
             sizes="100vw"
+            decoding="sync"
             preload={true}
             fetchPriority="high"
             loading="eager"

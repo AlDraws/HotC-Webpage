@@ -39,7 +39,8 @@ export default function BrandLogo({
         height={getDimension(height, 120)}
         className={className}
         sizes={sizes}
-        loading="eager"
+        loading="lazy"
+        fetchPriority="low"
       />
     );
   }
@@ -53,7 +54,8 @@ export default function BrandLogo({
       className={className}
       sizes={sizes}
       decoding="async"
-      loading="eager"
+      loading="lazy"
+      fetchPriority="low"
     />
   );
 }

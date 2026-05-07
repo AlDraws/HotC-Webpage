@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   DEFAULT_LOCALE,
+  HREFLANG_BY_LOCALE,
   SUPPORTED_LOCALES,
   normalizeAppLocale,
   type AppLocale,
@@ -34,6 +35,16 @@ const OG_LOCALE_BY_APP_LOCALE: Record<AppLocale, string> = {
   en: "en_US",
   es: "es_ES",
 };
+
+function getOpenGraphLocale(locale: AppLocale) {
+  return OG_LOCALE_BY_APP_LOCALE[locale];
+}
+
+function getAlternateOpenGraphLocales(locale: AppLocale) {
+  return SUPPORTED_LOCALES.filter((supportedLocale) => supportedLocale !== locale).map(
+    getOpenGraphLocale,
+  );
+}
 
 function normalizeOrigin(value: string) {
   if (!value) {
@@ -99,7 +110,7 @@ function buildAlternatesFromPaths(
   const defaultPath = languagePaths[DEFAULT_LOCALE] ?? currentPath;
   const languages = Object.fromEntries(
     Object.entries(languagePaths).map(([locale, path]) => [
-      locale,
+      HREFLANG_BY_LOCALE[locale as AppLocale],
       ensureAbsoluteUrl(path),
     ]),
   ) as Record<string, string>;
@@ -176,6 +187,7 @@ export function buildPageMetadata({
       : alternates.canonical?.url || ensureAbsoluteUrl(resolveLocalizedStaticPath(locale, pathname));
   const socialImage = imageUrl ? ensureAbsoluteUrl(imageUrl) : undefined;
   const socialImageAlt = imageAlt?.trim() || title;
+  const alternateLocales = getAlternateOpenGraphLocales(locale);
 
   return {
     metadataBase,
@@ -186,7 +198,8 @@ export function buildPageMetadata({
       type,
       url: canonicalUrl,
       siteName: SITE_NAME,
-      locale: OG_LOCALE_BY_APP_LOCALE[locale],
+      locale: getOpenGraphLocale(locale),
+      alternateLocale: alternateLocales.length ? alternateLocales : undefined,
       title,
       description,
       images: socialImage
