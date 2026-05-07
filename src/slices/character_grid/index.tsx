@@ -58,7 +58,7 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
                     fallbackAlt={`Portrait of ${data?.name ?? character.uid ?? "character"}`}
                     fill
                     sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
-                    quality={75}
+                    quality={65}
                     className="hotc-cgrid__portrait-img"
                   />
                 ) : (

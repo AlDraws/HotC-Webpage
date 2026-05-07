@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { asText, type RichTextField } from "@prismicio/client";
 import {
   DEFAULT_LOCALE,
   HREFLANG_BY_LOCALE,
@@ -33,6 +34,10 @@ type MetadataInput = {
 const SITE_NAME = "Heirs of the Collapse";
 const DEFAULT_SITE_DESCRIPTION =
   "Heirs of the Collapse is a cinematic sci-fi webcomic exploring survival, memory, and collapse.";
+const HOME_SITE_DESCRIPTION_BY_LOCALE: Record<AppLocale, string> = {
+  en: "Heirs of the Collapse is a post-apocalyptic sci-fi webcomic set in a transformed Valencia, where memory, technology and hope collide after the collapse.",
+  es: "Heirs of the Collapse es un webcómic de ciencia ficción postapocalíptica ambientado en una Valencia transformada, donde memoria, tecnología y esperanza chocan tras el colapso.",
+};
 const OG_LOCALE_BY_APP_LOCALE: Record<AppLocale, string> = {
   en: "en_US",
   es: "es_ES",
@@ -50,10 +55,33 @@ function getAlternateOpenGraphLocales(locale: AppLocale) {
 
 function normalizeOrigin(value: string) {
   if (!value) {
-    return "http://localhost:3000";
+    return process.env.NODE_ENV === "production"
+      ? "https://heirsofthecollapse.com"
+      : "http://localhost:3000";
   }
 
   return /^https?:\/\//i.test(value) ? value : `https://${value}`;
+}
+
+export function getDefaultSiteDescription(locale?: AppLocale) {
+  return locale ? HOME_SITE_DESCRIPTION_BY_LOCALE[locale] : DEFAULT_SITE_DESCRIPTION;
+}
+
+export function getMetaDescriptionText(
+  value: unknown,
+  fallback = DEFAULT_SITE_DESCRIPTION,
+) {
+  if (typeof value === "string") {
+    const text = value.trim();
+    return text || fallback;
+  }
+
+  if (Array.isArray(value)) {
+    const text = asText(value as RichTextField).trim();
+    return text || fallback;
+  }
+
+  return fallback;
 }
 
 function normalizePathname(pathname: string) {
@@ -222,4 +250,4 @@ export function buildPageMetadata({
   };
 }
 
-export { DEFAULT_SITE_DESCRIPTION, SITE_NAME };
+export { DEFAULT_SITE_DESCRIPTION, HOME_SITE_DESCRIPTION_BY_LOCALE, SITE_NAME };

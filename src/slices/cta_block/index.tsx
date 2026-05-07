@@ -2,7 +2,8 @@ import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import PrismicImage from "@/components/PrismicImage";
-import { getContextualCtaAriaLabel } from "@/lib/a11y";
+import { getContextualCtaAriaLabel, getDescriptiveCtaLabel } from "@/lib/a11y";
+import { resolveLinkHref } from "@/lib/links";
 import { CtaBlockSlice } from "@/../prismicio-types";
 
 /**
@@ -18,6 +19,10 @@ const CtaBlock = ({ slice }: CtaBlockProps) => {
     slice.primary.cta_label,
     slice.primary.title,
   );
+  const ctaLabel = getDescriptiveCtaLabel(
+    slice.primary.cta_label,
+    resolveLinkHref(slice.primary.cta_link),
+  );
 
   return (
     <Bounded
@@ -32,8 +37,8 @@ const CtaBlock = ({ slice }: CtaBlockProps) => {
               field={slice.primary.background_image}
               decorative
               fill
-              sizes="100vw"
-              quality={75}
+              sizes="(max-width: 767px) 100vw, 960px"
+              quality={60}
               className="hotc-cta-block__bg-img"
             />
           </div>
@@ -49,9 +54,9 @@ const CtaBlock = ({ slice }: CtaBlockProps) => {
               <PrismicNextLink
                 field={slice.primary.cta_link}
                 className="hotc-btn hotc-btn--ink"
-                aria-label={ctaAriaLabel}
+                aria-label={ctaLabel === slice.primary.cta_label ? ctaAriaLabel : undefined}
               >
-                {slice.primary.cta_label}
+                {ctaLabel}
               </PrismicNextLink>
             </div>
           )}

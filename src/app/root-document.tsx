@@ -4,18 +4,13 @@ import localFont from "next/font/local";
 const inter = localFont({
   src: [
     {
-      path: "../../fonts/Inter-VariableFont_opsz_wght.woff2",
+      path: "../../fonts/Inter-Latin-Variable.woff2",
       style: "normal",
-      weight: "100 900",
-    },
-    {
-      path: "../../fonts/Inter-Italic-VariableFont_opsz_wght.woff2",
-      style: "italic",
       weight: "100 900",
     },
   ],
   variable: "--font-inter",
-  display: "swap",
+  display: "optional",
 });
 
 const bangers = Bangers({
@@ -54,6 +49,9 @@ export function RootDocument({
       lang={lang}
       className={`${inter.variable} ${bangers.variable} ${bowlbyOne.variable} ${permanentMarker.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="preconnect" href="https://images.prismic.io" />
+      </head>
       <body className="hotc flex min-h-full flex-col">{children}</body>
     </html>
   );

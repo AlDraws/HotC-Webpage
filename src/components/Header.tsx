@@ -8,7 +8,12 @@ import { usePathname, useRouter } from "next/navigation";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
 import { LOCALE_COOKIE_NAME, type AppLocale } from "@/lib/locale";
-import { localizeHref } from "@/lib/links";
+import {
+  getLinkTarget,
+  isExternalHref,
+  localizeHref,
+  resolveLinkHref,
+} from "@/lib/links";
 
 type Props = {
   settings: Content.SettingsDocument;
@@ -33,13 +38,25 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
     link: n.link,
   }));
   const socials = settings.data.social_links ?? [];
-  const headerSocials = socials.filter((s) => {
+  const headerSocials = socials.flatMap((s) => {
     const iconLabel =
       s.icon_key && getSocialKey(s.icon_key) !== "other"
         ? s.icon_key
         : s.label || s.icon_key || "";
     const key = getSocialKey(iconLabel);
-    return key === "instagram" || key === "tiktok" || key === "patreon";
+    const href = resolveLinkHref(s.url);
+    if (!href || (key !== "instagram" && key !== "tiktok" && key !== "patreon")) {
+      return [];
+    }
+
+    return [
+      {
+        href,
+        iconLabel,
+        label: s.label || iconLabel || "Social",
+        target: getLinkTarget(s.url),
+      },
+    ];
   });
   const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
   const brandData = settings.data as typeof settings.data & {
@@ -83,10 +100,10 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
               className="h-full w-auto object-contain"
               width={headerLogo?.dimensions?.width}
               height={headerLogo?.dimensions?.height}
-              sizes="(max-width: 767px) 180px, 220px"
-              preload
+              sizes="(max-width: 767px) 96px, 140px"
               loading="eager"
-              fetchPriority="high"
+              fetchPriority="low"
+              quality={60}
             />
           ) : (
             <span className="hotc-logo-mask hotc-logo-mask--heirs" />
@@ -143,21 +160,18 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
           </div>
           <nav className="hotc-header__socials" aria-label={labels.socialNav}>
             {headerSocials.map((s, i) => {
-              const iconLabel =
-                s.icon_key && getSocialKey(s.icon_key) !== "other"
-                  ? s.icon_key
-                  : s.label || s.icon_key || "";
+              const target = s.target ?? (isExternalHref(s.href) ? "_blank" : undefined);
               return (
-                <PrismicNextLink
+                <a
                   key={i}
-                  field={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={s.href}
+                  target={target}
+                  rel={target === "_blank" ? "noopener noreferrer" : undefined}
                   className="hotc-header__icon"
-                  aria-label={s.label || "Social"}
+                  aria-label={s.label}
                 >
-                  <SocialIcon label={iconLabel} />
-                </PrismicNextLink>
+                  <SocialIcon label={s.iconLabel} />
+                </a>
               );
             })}
           </nav>
@@ -198,9 +212,10 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
                   className="h-full w-auto object-contain"
                   width={headerLogo?.dimensions?.width}
                   height={headerLogo?.dimensions?.height}
-                  sizes="180px"
-                  loading="eager"
-                  fetchPriority="high"
+                  sizes="96px"
+                  loading="lazy"
+                  fetchPriority="low"
+                  quality={60}
                 />
               ) : (
                 <span className="hotc-logo-mask hotc-logo-mask--heirs" />

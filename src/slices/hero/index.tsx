@@ -2,7 +2,8 @@ import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import PrismicImage from "@/components/PrismicImage";
-import { getContextualCtaAriaLabel } from "@/lib/a11y";
+import { getContextualCtaAriaLabel, getDescriptiveCtaLabel } from "@/lib/a11y";
+import { resolveLinkHref } from "@/lib/links";
 import { HeroSlice } from "@/../prismicio-types";
 
 /**
@@ -26,6 +27,8 @@ const Hero = ({ slice }: HeroProps) => {
     (primary.hero_image?.url ? primary.hero_image : null);
   const heroTitle = primary.title?.trim() || "Heirs of the Collapse hero artwork";
   const ctaAriaLabel = getContextualCtaAriaLabel(primary.cta_label, heroTitle);
+  const ctaHref = resolveLinkHref(primary.cta_link);
+  const ctaLabel = getDescriptiveCtaLabel(primary.cta_label, ctaHref);
 
   return (
     <section
@@ -44,7 +47,7 @@ const Hero = ({ slice }: HeroProps) => {
             preload={true}
             fetchPriority="high"
             loading="eager"
-            quality={75}
+            quality={65}
             className="hotc-hero__bg-img"
           />
         </div>
@@ -69,9 +72,9 @@ const Hero = ({ slice }: HeroProps) => {
             <PrismicNextLink
               field={primary.cta_link}
               className="hotc-btn hotc-btn--ember"
-              aria-label={ctaAriaLabel}
+              aria-label={ctaLabel === primary.cta_label ? ctaAriaLabel : undefined}
             >
-              {primary.cta_label}
+              {ctaLabel}
             </PrismicNextLink>
           </div>
         )}

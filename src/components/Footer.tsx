@@ -1,10 +1,11 @@
-import { Content, asLink, asText } from "@prismicio/client";
+import { Content, asText } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText } from "@prismicio/react";
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
 import type { AppLocale } from "@/lib/locale";
+import { getLinkTarget, isExternalHref, resolveLinkHref } from "@/lib/links";
 
 type Props = {
   settings: Content.SettingsDocument;
@@ -20,7 +21,7 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
     link: n.link,
   }));
   const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
-  const siteByHref = asLink(settings.data.site_by_link) ?? "";
+  const siteByHref = resolveLinkHref(settings.data.site_by_link) ?? "";
   const siteByText = settings.data.site_by_text || "Site by";
   const fallbackCopyright = `© ${new Date().getFullYear()} ${siteTitle}. All rights reserved.`;
   const brandData = settings.data as typeof settings.data & {
@@ -35,6 +36,26 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
     socialLinks: currentLocale === "es" ? "Enlaces sociales" : "Social links",
     socialIcons: currentLocale === "es" ? "Iconos sociales" : "Social icons",
   };
+  const socialLinks = socials.flatMap((s) => {
+    const href = resolveLinkHref(s.url);
+    if (!href) return [];
+
+    const target = getLinkTarget(s.url) ?? (isExternalHref(href) ? "_blank" : undefined);
+    const iconLabel =
+      s.icon_key && getSocialKey(s.icon_key) !== "other"
+        ? s.icon_key
+        : s.label || s.icon_key || "";
+
+    return [
+      {
+        href,
+        target,
+        rel: target === "_blank" ? "noopener noreferrer" : undefined,
+        label: s.label || iconLabel || "Social",
+        iconLabel,
+      },
+    ];
+  });
 
   return (
     <footer className="hotc-footer">
@@ -78,36 +99,32 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
           </nav>
           <nav className="hotc-footer__col" aria-label={labels.socialLinks}>
             <p className="hotc-footer__title">Follow</p>
-            {socials.map((s, i) => (
-              <PrismicNextLink
+            {socialLinks.map((s, i) => (
+              <a
                 key={i}
-                field={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={s.href}
+                target={s.target}
+                rel={s.rel}
               >
-                {s.label || "Social"}
-              </PrismicNextLink>
+                {s.label}
+              </a>
             ))}
           </nav>
           <nav className="hotc-footer__col" aria-label={labels.socialIcons}>
             <p className="hotc-footer__title">Social</p>
             <div className="flex gap-2 pt-1">
-              {socials.map((s, i) => {
-                const iconLabel =
-                  s.icon_key && getSocialKey(s.icon_key) !== "other"
-                    ? s.icon_key
-                    : s.label || s.icon_key || "";
+              {socialLinks.map((s, i) => {
                 return (
-                  <PrismicNextLink
+                  <a
                     key={i}
-                    field={s.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    href={s.href}
+                    target={s.target}
+                    rel={s.rel}
                     className="hotc-header__icon"
-                    aria-label={s.label || "Social"}
+                    aria-label={s.label}
                   >
-                    <SocialIcon label={iconLabel} />
-                  </PrismicNextLink>
+                    <SocialIcon label={s.iconLabel} />
+                  </a>
                 );
               })}
             </div>
@@ -121,27 +138,47 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
         ) : (
           <span>{fallbackCopyright}</span>
         )}
-        <PrismicNextLink
-          className="hotc-footer__attr"
-          field={settings.data.site_by_link}
-          target={siteByHref.startsWith("http") ? "_blank" : undefined}
-          rel={siteByHref.startsWith("http") ? "noopener noreferrer" : undefined}
-          aria-label={siteByText}
-        >
-          <span className="hotc-footer__attr-by">{siteByText}</span>
-          {brandData.site_by_logo?.url ? (
-            <BrandLogo
-              field={brandData.site_by_logo}
-              alt={siteByText}
-              className="h-[18px] w-auto object-contain"
-              width={brandData.site_by_logo.dimensions?.width}
-              height={brandData.site_by_logo.dimensions?.height}
-              sizes="120px"
-            />
-          ) : (
-            <span className="hotc-logo-mask hotc-logo-mask--alvaro" />
-          )}
-        </PrismicNextLink>
+        {siteByHref ? (
+          <a
+            className="hotc-footer__attr"
+            href={siteByHref}
+            target={siteByHref.startsWith("http") ? "_blank" : undefined}
+            rel={siteByHref.startsWith("http") ? "noopener noreferrer" : undefined}
+            aria-label={siteByText}
+          >
+            <span className="hotc-footer__attr-by">{siteByText}</span>
+            {brandData.site_by_logo?.url ? (
+              <BrandLogo
+                field={brandData.site_by_logo}
+                decorative
+                className="h-[18px] w-auto object-contain"
+                width={brandData.site_by_logo.dimensions?.width}
+                height={brandData.site_by_logo.dimensions?.height}
+                sizes="100px"
+                quality={60}
+              />
+            ) : (
+              <span className="hotc-logo-mask hotc-logo-mask--alvaro" />
+            )}
+          </a>
+        ) : (
+          <span className="hotc-footer__attr" aria-label={siteByText}>
+            <span className="hotc-footer__attr-by">{siteByText}</span>
+            {brandData.site_by_logo?.url ? (
+              <BrandLogo
+                field={brandData.site_by_logo}
+                decorative
+                className="h-[18px] w-auto object-contain"
+                width={brandData.site_by_logo.dimensions?.width}
+                height={brandData.site_by_logo.dimensions?.height}
+                sizes="100px"
+                quality={60}
+              />
+            ) : (
+              <span className="hotc-logo-mask hotc-logo-mask--alvaro" />
+            )}
+          </span>
+        )}
       </div>
     </footer>
   );

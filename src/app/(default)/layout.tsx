@@ -5,8 +5,8 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
   },
   title: SITE_NAME,
   description: DEFAULT_SITE_DESCRIPTION,

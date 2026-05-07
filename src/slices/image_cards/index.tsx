@@ -58,8 +58,8 @@ const ImageCards = ({ slice }: ImageCardsProps) => {
                       field={item.image}
                       fallbackAlt={item.title || item.caption || `Card image ${index + 1}`}
                       fill
-                      sizes="(max-width: 767px) 100vw, 33vw"
-                      quality={75}
+                      sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1023px) 45vw, 360px"
+                      quality={65}
                       className="hotc-icard__image"
                     />
                   ) : null}

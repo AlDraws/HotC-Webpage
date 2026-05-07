@@ -252,6 +252,11 @@ a {
   text-decoration: none;
 }
 
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid var(--hotc-sfx);
+  outline-offset: 3px;
+}
+
 /* =========================================================
    LOGO MASKS
    Cualquier elemento con .hotc-logo-mask toma el color via background.
@@ -354,7 +359,7 @@ body.hotc,
   text-transform: uppercase;
   letter-spacing: var(--hotc-tracking-wide);
   font-size: var(--hotc-text-sm);
-  color: var(--hotc-ember-600);
+  color: var(--hotc-ember-700);
 }
 
 /* Legacy alias — some slices use .kicker without the hotc- prefix */
@@ -363,7 +368,7 @@ body.hotc,
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 0.875rem;
-  color: var(--hotc-ember-600);
+  color: var(--hotc-ember-700);
 }
 
 .hotc-attr-label {
@@ -1040,6 +1045,15 @@ body.hotc,
 }
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .hotc-marquee {
     animation: none !important;
     transform: none !important;
@@ -1331,7 +1345,7 @@ body.hotc,
   font-size: 0.6875rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--hotc-ember);
+  color: var(--hotc-ember-700);
   font-weight: 700;
 }
 

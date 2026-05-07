@@ -4,7 +4,8 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { useLightbox } from "@/components/LightboxProvider";
 import PrismicImage from "@/components/PrismicImage";
-import { getContextualCtaAriaLabel } from "@/lib/a11y";
+import { getContextualCtaAriaLabel, getDescriptiveCtaLabel } from "@/lib/a11y";
+import { resolveLinkHref } from "@/lib/links";
 import { TextWithImageSlice } from "@/../prismicio-types";
 
 /**
@@ -25,6 +26,10 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
   const ctaAriaLabel = getContextualCtaAriaLabel(
     slice.primary.cta_label,
     slice.primary.title || slice.primary.kicker,
+  );
+  const ctaLabel = getDescriptiveCtaLabel(
+    slice.primary.cta_label,
+    resolveLinkHref(slice.primary.cta_link),
   );
 
   return (
@@ -56,8 +61,8 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
                 field={slice.primary.image}
                 className="hotc-twi__img"
                 fallbackAlt={imageAlt}
-                sizes="(max-width: 767px) 100vw, 50vw"
-                quality={75}
+                sizes="(max-width: 767px) calc(100vw - 48px), 560px"
+                quality={65}
               />
             </button>
           ) : (
@@ -65,8 +70,8 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
               field={slice.primary.image}
               className="hotc-twi__img"
               fallbackAlt={imageAlt}
-              sizes="(max-width: 767px) 100vw, 50vw"
-              quality={75}
+              sizes="(max-width: 767px) calc(100vw - 48px), 560px"
+              quality={65}
             />
           )}
         </div>
@@ -82,9 +87,9 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
             <PrismicNextLink
               field={slice.primary.cta_link}
               className="hotc-btn hotc-btn--ink"
-              aria-label={ctaAriaLabel}
+              aria-label={ctaLabel === slice.primary.cta_label ? ctaAriaLabel : undefined}
             >
-              {slice.primary.cta_label}
+              {ctaLabel}
             </PrismicNextLink>
           )}
         </div>

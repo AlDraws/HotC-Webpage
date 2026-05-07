@@ -49,7 +49,7 @@ const PrismicImage = forwardRef<HTMLImageElement, PrismicImageProps>(
       fallbackAlt,
       decorative = false,
       decoding = "async",
-      loader = null,
+      loader,
       loading,
       preload,
       fetchPriority,

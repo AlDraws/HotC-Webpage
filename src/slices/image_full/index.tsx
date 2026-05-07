@@ -23,6 +23,8 @@ const ImageFull = ({ slice }: ImageFullProps) => {
         field={slice.primary.image}
         fallbackAlt="Full-width artwork from Heirs of the Collapse"
         loading="lazy"
+        sizes="100vw"
+        quality={70}
       />
     </figure>
   );

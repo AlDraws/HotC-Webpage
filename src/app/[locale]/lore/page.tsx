@@ -99,7 +99,7 @@ export default async function LorePage({ params }: Props) {
                       fallbackAlt={item.data.title || item.uid || "Worldbuilding entry"}
                       fill
                       sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
-                      quality={75}
+                      quality={65}
                       className="hotc-cgrid__portrait-img"
                     />
                   ) : null}

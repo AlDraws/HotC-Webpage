@@ -48,9 +48,9 @@ export default function LiteYouTubeEmbed({
         src={getPosterUrl(videoId, useWebpPoster)}
         alt=""
         fill
-        sizes="(max-width: 767px) 100vw, 960px"
+        sizes="(max-width: 767px) calc(100vw - 48px), 960px"
         className="hotc-ytembed__thumb"
-        quality={75}
+        quality={60}
         onError={() => {
           if (useWebpPoster) {
             setUseWebpPoster(false);

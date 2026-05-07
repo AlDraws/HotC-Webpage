@@ -6,7 +6,11 @@ import { asText } from "@prismicio/client";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
 import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
-import { buildPageMetadata } from "@/lib/seo";
+import {
+  buildPageMetadata,
+  getDefaultSiteDescription,
+  getMetaDescriptionText,
+} from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
 
 type Params = { locale: AppLocale; uid: string };
@@ -36,7 +40,10 @@ export async function generateMetadata({
   ]);
   if (!page) return {};
   const title = page.data.meta_title || asText(page.data.title);
-  const description = page.data.meta_description || undefined;
+  const description = getMetaDescriptionText(
+    page.data.meta_description,
+    getDefaultSiteDescription(locale),
+  );
   const socialImage =
     page.data.meta_image?.url ||
     settings?.data.og_default?.url ||

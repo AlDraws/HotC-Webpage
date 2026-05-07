@@ -5,7 +5,8 @@ import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import PrismicImage from "@/components/PrismicImage";
-import { getContextualCtaAriaLabel } from "@/lib/a11y";
+import { getContextualCtaAriaLabel, getDescriptiveCtaLabel } from "@/lib/a11y";
+import { resolveLinkHref } from "@/lib/links";
 import { ParallaxHeroSlice } from "@/../prismicio-types";
 
 export type ParallaxHeroProps = SliceComponentProps<ParallaxHeroSlice>;
@@ -51,6 +52,14 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
   const secondaryCtaAriaLabel = getContextualCtaAriaLabel(
     slice.primary.secondaryCtaLabel,
     heroTitle,
+  );
+  const primaryCtaLabel = getDescriptiveCtaLabel(
+    slice.primary.primaryCtaLabel,
+    resolveLinkHref(slice.primary.primaryCtaLink),
+  );
+  const secondaryCtaLabel = getDescriptiveCtaLabel(
+    slice.primary.secondaryCtaLabel,
+    resolveLinkHref(slice.primary.secondaryCtaLink),
   );
 
   useEffect(() => {
@@ -149,7 +158,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
               preload={true}
               fetchPriority="high"
               loading="eager"
-              quality={75}
+              quality={65}
               className="hotc-phero__bg-img"
             />
           </div>
@@ -166,8 +175,8 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
             field={slice.primary.foreground}
             fallbackAlt={`${heroTitle} foreground artwork`}
             loading="lazy"
-            sizes="(max-width: 767px) 72vw, 68vw"
-            quality={75}
+            sizes="(max-width: 767px) 72vw, (max-width: 1279px) 68vw, 820px"
+            quality={70}
           />
         </div>
       )}
@@ -190,19 +199,27 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
               <PrismicNextLink
                 field={slice.primary.primaryCtaLink}
                 className="hotc-btn hotc-btn--ember"
-                aria-label={primaryCtaAriaLabel}
+                aria-label={
+                  primaryCtaLabel === slice.primary.primaryCtaLabel
+                    ? primaryCtaAriaLabel
+                    : undefined
+                }
               >
-                {slice.primary.primaryCtaLabel}
+                {primaryCtaLabel}
               </PrismicNextLink>
             )}
             {slice.primary.secondaryCtaLabel && (
               <PrismicNextLink
                 field={slice.primary.secondaryCtaLink}
                 className="hotc-btn hotc-btn--ghost"
-                aria-label={secondaryCtaAriaLabel}
+                aria-label={
+                  secondaryCtaLabel === slice.primary.secondaryCtaLabel
+                    ? secondaryCtaAriaLabel
+                    : undefined
+                }
                 style={{ color: "#fff" }}
               >
-                {slice.primary.secondaryCtaLabel}
+                {secondaryCtaLabel}
               </PrismicNextLink>
             )}
           </div>

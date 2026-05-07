@@ -14,6 +14,7 @@ type BrandLogoProps = {
   loading?: "eager" | "lazy";
   fetchPriority?: "high" | "low" | "auto";
   quality?: number;
+  decorative?: boolean;
 };
 
 function getDimension(value: number | null | undefined, fallback: number): number {
@@ -34,6 +35,7 @@ export default function BrandLogo({
   loading,
   fetchPriority,
   quality,
+  decorative,
 }: BrandLogoProps) {
   const resolvedSrc = src || field?.url;
   if (!resolvedSrc) return null;
@@ -51,6 +53,7 @@ export default function BrandLogo({
         loading={loading ?? "lazy"}
         fetchPriority={fetchPriority ?? "low"}
         quality={quality ?? 75}
+        decorative={decorative}
       />
     );
   }
@@ -58,7 +61,7 @@ export default function BrandLogo({
   return (
     <Image
       src={resolvedSrc}
-      alt={alt}
+      alt={decorative ? "" : alt}
       width={getDimension(width, 320)}
       height={getDimension(height, 120)}
       className={className}

@@ -1,13 +1,13 @@
 import { Metadata } from "next";
 import { SliceZone } from "@prismicio/react";
-import { asText } from "@prismicio/client";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
 import {
   buildPageMetadata,
-  DEFAULT_SITE_DESCRIPTION,
+  getDefaultSiteDescription,
+  getMetaDescriptionText,
   SITE_NAME,
 } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
@@ -46,9 +46,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!page) return {};
 
-  const description = page.data.meta_description
-    ? asText(page.data.meta_description)
-    : DEFAULT_SITE_DESCRIPTION;
+  const description = getMetaDescriptionText(
+    page.data.meta_description,
+    getDefaultSiteDescription(locale),
+  );
   const socialImage =
     page.data.meta_image?.url ||
     settings?.data.og_default?.url ||

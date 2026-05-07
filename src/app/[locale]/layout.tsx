@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { asText } from "@prismicio/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { LightboxProvider } from "@/components/LightboxProvider";
@@ -11,7 +10,8 @@ import {
 } from "@/lib/locale";
 import {
   buildStaticAlternates,
-  DEFAULT_SITE_DESCRIPTION,
+  getDefaultSiteDescription,
+  getMetaDescriptionText,
   metadataBase,
   SITE_NAME,
 } from "@/lib/seo";
@@ -35,9 +35,10 @@ export async function generateMetadata({
   if (!isAppLocale(locale)) return {};
 
   const settings = await getSettings(locale);
-  const siteDescription = settings?.data.meta_description
-    ? asText(settings.data.meta_description)
-    : DEFAULT_SITE_DESCRIPTION;
+  const siteDescription = getMetaDescriptionText(
+    settings?.data.meta_description,
+    getDefaultSiteDescription(locale),
+  );
   const ogImage =
     settings?.data.og_default?.url || settings?.data.meta_image?.url || undefined;
   const alternates = buildStaticAlternates(locale, "/");
@@ -46,8 +47,8 @@ export async function generateMetadata({
     metadataBase,
     alternates,
     icons: {
-      icon: "/favicon.ico",
-      shortcut: "/favicon.ico",
+      icon: "/favicon.svg",
+      shortcut: "/favicon.svg",
     },
     title: {
       template: `%s — ${SITE_NAME}`,
