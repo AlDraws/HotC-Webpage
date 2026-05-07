@@ -1,7 +1,8 @@
 import { ImageField, isFilled } from "@prismicio/client";
 import Image from "next/image";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
+import PrismicImage from "@/components/PrismicImage";
 import { CharacterGridSlice } from "@/../prismicio-types";
 
 export type CharacterGridProps = SliceComponentProps<CharacterGridSlice>;
@@ -52,8 +53,9 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
             >
               <div className="hotc-cgrid__portrait">
                 {portrait ? (
-                  <PrismicNextImage
+                  <PrismicImage
                     field={portrait}
+                    fallbackAlt={`Portrait of ${data?.name ?? character.uid ?? "character"}`}
                     fill
                     sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
                     className="hotc-cgrid__portrait-img"

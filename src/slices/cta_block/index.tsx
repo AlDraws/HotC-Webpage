@@ -1,6 +1,7 @@
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import PrismicImage from "@/components/PrismicImage";
 import { CtaBlockSlice } from "@/../prismicio-types";
 
 /**
@@ -21,9 +22,9 @@ const CtaBlock = ({ slice }: CtaBlockProps) => {
       <div className="hotc-cta-block">
         {slice.primary.background_image?.url ? (
           <div className="hotc-cta-block__bg" aria-hidden="true">
-            <PrismicNextImage
+            <PrismicImage
               field={slice.primary.background_image}
-              fallbackAlt=""
+              decorative
               fill
               sizes="100vw"
               className="hotc-cta-block__bg-img"

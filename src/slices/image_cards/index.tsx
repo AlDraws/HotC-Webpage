@@ -1,8 +1,8 @@
 import { Content } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
 import Link from "next/link";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import PrismicImage from "@/components/PrismicImage";
 import {
   getLinkTarget,
   isExternalHref,
@@ -54,9 +54,9 @@ const ImageCards = ({ slice }: ImageCardsProps) => {
                   className="hotc-icard__img"
                 >
                   {item.image.url ? (
-                    <PrismicNextImage
+                    <PrismicImage
                       field={item.image}
-                      fallbackAlt=""
+                      fallbackAlt={item.title || item.caption || `Card image ${index + 1}`}
                       fill
                       sizes="(max-width: 767px) 100vw, 33vw"
                       className="hotc-icard__image"

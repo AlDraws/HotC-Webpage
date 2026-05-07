@@ -1,12 +1,14 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PrismicNextImage } from "@prismicio/next";
 import { PrismicRichText, SliceZone } from "@prismicio/react";
 import Link from "next/link";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
 import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
+import PrismicImage from "@/components/PrismicImage";
+import { buildPageMetadata } from "@/lib/seo";
+import { getSettings } from "@/lib/server-locale";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
@@ -14,9 +16,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, uid } = await params;
   const lang = toPrismicLang(locale);
   const client = createClient();
-  const ch = await client.getByUID("character", uid, { lang }).catch(() => null);
+  const [ch, settings] = await Promise.all([
+    client.getByUID("character", uid, { lang }).catch(() => null),
+    getSettings(locale),
+  ]);
   if (!ch) return {};
-  return { title: `${ch.data.name ?? uid} — Heirs of the Collapse` };
+  const title = ch.data.name ?? uid;
+  const socialImage =
+    ch.data.meta_image?.url ||
+    ch.data.portrait?.url ||
+    ch.data.cover?.url ||
+    settings?.data.og_default?.url ||
+    settings?.data.meta_image?.url ||
+    undefined;
+
+  return buildPageMetadata({
+    locale,
+    document: ch,
+    title,
+    imageUrl: socialImage,
+    imageAlt: ch.data.meta_image?.alt || ch.data.name || title,
+  });
 }
 
 export async function generateStaticParams({
@@ -47,6 +67,7 @@ export default async function CharacterProfilePage({ params }: Props) {
   const attributes = ch.data.attributes ?? [];
   const gallery = ch.data.gallery ?? [];
   const slices = normalizeSlices(ch.data.slices);
+  const characterName = ch.data.name?.trim() || ch.uid || "Unknown character";
 
   return (
     <article>
@@ -54,9 +75,9 @@ export default async function CharacterProfilePage({ params }: Props) {
       <section className="hotc-cprofile__hero">
         {ch.data.cover?.url ? (
           <div className="hotc-cprofile__bg">
-            <PrismicNextImage
+            <PrismicImage
               field={ch.data.cover}
-              fallbackAlt=""
+              fallbackAlt={`${characterName} cover artwork`}
               fill
               sizes="100vw"
               className="hotc-cprofile__bg-img"
@@ -73,11 +94,11 @@ export default async function CharacterProfilePage({ params }: Props) {
             {/* Portrait card */}
             {ch.data.portrait?.url ? (
               <div className="hotc-cprofile__portrait-card">
-                <PrismicNextImage
+                <PrismicImage
                   field={ch.data.portrait}
                   className="hotc-cprofile__portrait"
                   quality={100}
-                  fallbackAlt=""
+                  fallbackAlt={`Portrait of ${characterName}`}
                 />
               </div>
             ) : null}
@@ -138,9 +159,9 @@ export default async function CharacterProfilePage({ params }: Props) {
                     key={i}
                     className="hotc-cprofile__gallery-tile"
                   >
-                    <PrismicNextImage
+                    <PrismicImage
                       field={g.image}
-                      fallbackAlt=""
+                      fallbackAlt={`${characterName} gallery image ${i + 1}`}
                       fill
                       sizes="(max-width: 639px) 100vw, 33vw"
                       className="hotc-cprofile__gallery-img"

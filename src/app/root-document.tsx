@@ -23,6 +23,7 @@ const bangers = Bangers({
   subsets: ["latin"],
   variable: "--font-bangers",
   display: "swap",
+  preload: false,
 });
 
 const bowlbyOne = Bowlby_One({
@@ -30,6 +31,7 @@ const bowlbyOne = Bowlby_One({
   subsets: ["latin"],
   variable: "--font-bowlby-one",
   display: "swap",
+  preload: false,
 });
 
 const permanentMarker = Permanent_Marker({
@@ -37,6 +39,7 @@ const permanentMarker = Permanent_Marker({
   subsets: ["latin"],
   variable: "--font-permanent-marker",
   display: "swap",
+  preload: false,
 });
 
 export function RootDocument({

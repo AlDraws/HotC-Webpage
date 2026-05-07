@@ -4,8 +4,7 @@ import { PrismicRichText } from "@prismicio/react";
 import { asText, type RichTextField } from "@prismicio/client";
 import { createClient } from "@/prismicio";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
-
-export const metadata: Metadata = { title: "Store" };
+import { buildPageMetadata } from "@/lib/seo";
 
 type ProductDocument = {
   id: string;
@@ -35,6 +34,17 @@ function getLinkHref(linkField: unknown): string | null {
 }
 
 type Props = { params: Promise<{ locale: AppLocale }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  return buildPageMetadata({
+    locale,
+    pathname: "/store",
+    title: "Store",
+    description: "Support Heirs of the Collapse through official products and drops.",
+  });
+}
 
 export default async function StorePage({ params }: Props) {
   const { locale } = await params;

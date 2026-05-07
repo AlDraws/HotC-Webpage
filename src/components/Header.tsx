@@ -48,6 +48,14 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   const headerLogo = brandData.header_logo?.url
     ? brandData.header_logo
     : settings.data.logo;
+  const labels = {
+    language: currentLocale === "es" ? "Idioma" : "Language",
+    primaryNav: currentLocale === "es" ? "Navegación principal" : "Primary navigation",
+    socialNav: currentLocale === "es" ? "Redes sociales" : "Social media",
+    menuOpen: currentLocale === "es" ? "Abrir menú principal" : "Open main menu",
+    menuClose: currentLocale === "es" ? "Cerrar menú principal" : "Close main menu",
+    mobileNav: currentLocale === "es" ? "Navegación móvil" : "Mobile navigation",
+  };
 
   function switchLocale(locale: AppLocale) {
     if (locale === currentLocale || isPending) return;
@@ -82,7 +90,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
           )}
         </Link>
 
-        <nav className="hotc-header__nav">
+        <nav className="hotc-header__nav" aria-label={labels.primaryNav}>
           {navItems.map((item, i) => (
             <PrismicNextLink
               key={i}
@@ -100,7 +108,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
           <div
             className="hotc-header__lang"
             role="group"
-            aria-label="Language"
+            aria-label={labels.language}
             aria-busy={isPending}
           >
             {(["en", "es"] as const).map((locale) => {
@@ -130,7 +138,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
               );
             })}
           </div>
-          <div className="hotc-header__socials" aria-label="Social links">
+          <nav className="hotc-header__socials" aria-label={labels.socialNav}>
             {headerSocials.map((s, i) => {
               const iconLabel =
                 s.icon_key && getSocialKey(s.icon_key) !== "other"
@@ -149,12 +157,14 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
                 </PrismicNextLink>
               );
             })}
-          </div>
+          </nav>
           <button
+            type="button"
             onClick={() => setOpen(!open)}
             className="hotc-header__burger"
-            aria-label="Menu"
+            aria-label={open ? labels.menuClose : labels.menuOpen}
             aria-expanded={open}
+            aria-controls="hotc-mobile-menu"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <path d="M4 7h16M4 12h16M4 17h16" />
@@ -164,7 +174,13 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
       </div>
 
       {open && (
-        <div className="hotc-header__drawer" role="dialog" aria-modal="true">
+        <div
+          id="hotc-mobile-menu"
+          className="hotc-header__drawer"
+          role="dialog"
+          aria-modal="true"
+          aria-label={labels.mobileNav}
+        >
           <div className="hotc-header__drawer-head">
             <Link
               href={`/${currentLocale}`}
@@ -186,8 +202,9 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
               )}
             </Link>
             <button
+              type="button"
               className="hotc-header__burger"
-              aria-label="Close menu"
+              aria-label={labels.menuClose}
               onClick={() => setOpen(false)}
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -196,7 +213,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
             </button>
           </div>
 
-          <nav className="hotc-header__drawer-nav">
+          <nav className="hotc-header__drawer-nav" aria-label={labels.mobileNav}>
             {navItems.map((item, i) => {
               return (
                 <PrismicNextLink

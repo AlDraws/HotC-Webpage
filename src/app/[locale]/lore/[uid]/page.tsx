@@ -1,11 +1,13 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PrismicNextImage } from "@prismicio/next";
 import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
 import Link from "next/link";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
+import PrismicImage from "@/components/PrismicImage";
+import { buildPageMetadata } from "@/lib/seo";
+import { getSettings } from "@/lib/server-locale";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
@@ -13,13 +15,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, uid } = await params;
   const lang = toPrismicLang(locale);
   const client = createClient();
-  const item = await client
-    .getByUID("lore_entry", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
-    .catch(() => null);
+  const [item, settings] = await Promise.all([
+    client
+      .getByUID("lore_entry", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
+      .catch(() => null),
+    getSettings(locale),
+  ]);
   if (!item) return {};
-  return {
-    title: `${item.data.title ?? uid} — Worldbuilding — Heirs of the Collapse`,
-  };
+  const title = `${item.data.title ?? uid} — Worldbuilding`;
+  const socialImage =
+    item.data.meta_image?.url ||
+    item.data.cover?.url ||
+    settings?.data.og_default?.url ||
+    settings?.data.meta_image?.url ||
+    undefined;
+
+  return buildPageMetadata({
+    locale,
+    document: item,
+    title,
+    imageUrl: socialImage,
+    imageAlt: item.data.meta_image?.alt || item.data.title || title,
+  });
 }
 
 export async function generateStaticParams({
@@ -46,8 +63,7 @@ export default async function LoreDetailPage({ params }: Props) {
     .getByUID("lore_entry", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
     .catch(() => null);
   if (!item) notFound();
-
-
+  const itemTitle = item.data.title?.trim() || item.uid || "Worldbuilding entry";
 
   return (
     <article>
@@ -55,9 +71,9 @@ export default async function LoreDetailPage({ params }: Props) {
       <section className="hotc-cprofile__hero">
         {item.data.cover?.url ? (
           <div className="hotc-cprofile__bg">
-            <PrismicNextImage
+            <PrismicImage
               field={item.data.cover}
-              fallbackAlt=""
+              fallbackAlt={`${itemTitle} cover artwork`}
               fill
               sizes="100vw"
               className="hotc-cprofile__bg-img"
@@ -99,16 +115,14 @@ export default async function LoreDetailPage({ params }: Props) {
       item.data.cover?.url ? (
         <section className="bounded bounded--base">
           <div className="hotc-cprofile__bio">
-            <PrismicNextImage
+            <PrismicImage
               field={item.data.cover}
               className="hotc-twi__img"
-              fallbackAlt=""
+              fallbackAlt={itemTitle}
             />
           </div>
         </section>
       ) : null}
-
-
     </article>
   );
 }

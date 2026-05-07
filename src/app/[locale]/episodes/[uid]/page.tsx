@@ -6,6 +6,7 @@ import { components } from "@/slices";
 import Link from "next/link";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
+import { buildPageMetadata } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
 import type { EpisodePanelSequenceContext } from "@/slices/episode_panel/sequence-context";
 
@@ -26,18 +27,35 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, uid } = await params;
   const lang = toPrismicLang(locale);
   const client = createClient();
-  const ep = await client
-    .getByUID("episode", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
-    .catch(() => null);
+  const [ep, settings] = await Promise.all([
+    client
+      .getByUID("episode", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
+      .catch(() => null),
+    getSettings(locale),
+  ]);
   if (!ep) return {};
-  return {
-    title:
-      ep.data.meta_title ??
-      `Chapter ${ep.data.chapter_number}: ${ep.data.title}`,
-    description: ep.data.meta_description
-      ? asText(ep.data.meta_description)
-      : undefined,
-  };
+  const title =
+    ep.data.meta_title ??
+    `Chapter ${ep.data.chapter_number}: ${ep.data.title}`;
+  const description = ep.data.meta_description
+    ? asText(ep.data.meta_description)
+    : undefined;
+  const socialImage =
+    ep.data.meta_image?.url ||
+    ep.data.cover?.url ||
+    settings?.data.og_default?.url ||
+    settings?.data.meta_image?.url ||
+    undefined;
+
+  return buildPageMetadata({
+    locale,
+    document: ep,
+    title,
+    description,
+    imageUrl: socialImage,
+    imageAlt: ep.data.meta_image?.alt || ep.data.title || title,
+    type: "article",
+  });
 }
 
 export async function generateStaticParams({

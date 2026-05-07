@@ -30,6 +30,11 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
   const footerLogo = brandData.footer_logo?.url
     ? brandData.footer_logo
     : settings.data.logo;
+  const labels = {
+    footerNav: currentLocale === "es" ? "Navegación del pie" : "Footer navigation",
+    socialLinks: currentLocale === "es" ? "Enlaces sociales" : "Social links",
+    socialIcons: currentLocale === "es" ? "Iconos sociales" : "Social icons",
+  };
 
   return (
     <footer className="hotc-footer">
@@ -63,15 +68,15 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
         </div>
 
         <div className="hotc-footer__cols">
-          <div className="hotc-footer__col">
+          <nav className="hotc-footer__col" aria-label={labels.footerNav}>
             <h4>Navigate</h4>
             {navItems.map((item, i) => (
               <PrismicNextLink key={i} field={item.link}>
                 {item.label}
               </PrismicNextLink>
             ))}
-          </div>
-          <div className="hotc-footer__col">
+          </nav>
+          <nav className="hotc-footer__col" aria-label={labels.socialLinks}>
             <h4>Follow</h4>
             {socials.map((s, i) => (
               <PrismicNextLink
@@ -83,8 +88,8 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
                 {s.label || "Social"}
               </PrismicNextLink>
             ))}
-          </div>
-          <div className="hotc-footer__col">
+          </nav>
+          <nav className="hotc-footer__col" aria-label={labels.socialIcons}>
             <h4>Social</h4>
             <div className="flex gap-2 pt-1">
               {socials.map((s, i) => {
@@ -106,7 +111,7 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
                 );
               })}
             </div>
-          </div>
+          </nav>
         </div>
       </div>
 

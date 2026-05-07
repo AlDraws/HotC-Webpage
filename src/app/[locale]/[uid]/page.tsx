@@ -6,6 +6,8 @@ import { asText } from "@prismicio/client";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
 import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
+import { buildPageMetadata } from "@/lib/seo";
+import { getSettings } from "@/lib/server-locale";
 
 type Params = { locale: AppLocale; uid: string };
 const RESERVED_PAGE_UIDS = new Set([
@@ -26,14 +28,29 @@ export async function generateMetadata({
   const { locale, uid } = await params;
   const lang = toPrismicLang(locale);
   const client = createClient();
-  const page = await client
-    .getByUID("page", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
-    .catch(() => null);
+  const [page, settings] = await Promise.all([
+    client
+      .getByUID("page", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
+      .catch(() => null),
+    getSettings(locale),
+  ]);
   if (!page) return {};
-  return {
-    title: page.data.meta_title || asText(page.data.title),
-    description: page.data.meta_description || undefined,
-  };
+  const title = page.data.meta_title || asText(page.data.title);
+  const description = page.data.meta_description || undefined;
+  const socialImage =
+    page.data.meta_image?.url ||
+    settings?.data.og_default?.url ||
+    settings?.data.meta_image?.url ||
+    undefined;
+
+  return buildPageMetadata({
+    locale,
+    document: page,
+    title,
+    description,
+    imageUrl: socialImage,
+    imageAlt: page.data.meta_image?.alt || title,
+  });
 }
 
 export async function generateStaticParams({

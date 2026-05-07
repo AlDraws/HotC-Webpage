@@ -1,8 +1,9 @@
 "use client";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { useLightbox } from "@/components/LightboxProvider";
+import PrismicImage from "@/components/PrismicImage";
 import { TextWithImageSlice } from "@/../prismicio-types";
 
 /**
@@ -15,6 +16,11 @@ export type TextWithImageProps = SliceComponentProps<TextWithImageSlice>;
  */
 const TextWithImage = ({ slice }: TextWithImageProps) => {
   const { openLightbox } = useLightbox();
+  const imageAlt =
+    slice.primary.image.alt ||
+    slice.primary.title ||
+    slice.primary.kicker ||
+    "Editorial image from Heirs of the Collapse";
 
   return (
     <Bounded
@@ -33,7 +39,7 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
                 openLightbox([
                   {
                     src: slice.primary.image.url || "",
-                    alt: slice.primary.image.alt || "",
+                    alt: imageAlt,
                     width: slice.primary.image.dimensions?.width,
                     height: slice.primary.image.dimensions?.height,
                   },
@@ -41,17 +47,17 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
               }
               aria-label="Open image"
             >
-              <PrismicNextImage
+              <PrismicImage
                 field={slice.primary.image}
                 className="hotc-twi__img"
-                fallbackAlt=""
+                fallbackAlt={imageAlt}
               />
             </button>
           ) : (
-            <PrismicNextImage
+            <PrismicImage
               field={slice.primary.image}
               className="hotc-twi__img"
-              fallbackAlt=""
+              fallbackAlt={imageAlt}
             />
           )}
         </div>

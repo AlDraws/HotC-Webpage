@@ -1,13 +1,9 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { PrismicNextImage } from "@prismicio/next";
+import PrismicImage from "@/components/PrismicImage";
 import { createClient } from "@/prismicio";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
-
-export const metadata: Metadata = {
-  title: "Worldbuilding",
-  description: "Explore the environments, props, and illustrations of Heirs of the Collapse.",
-};
+import { buildPageMetadata } from "@/lib/seo";
 
 /**
  * Lore / Worldbuilding index — replicates App.jsx "lore" route:
@@ -16,6 +12,18 @@ export const metadata: Metadata = {
  *   - Uses hotc-cgrid__* classes from Worldbuilding.jsx
  */
 type Props = { params: Promise<{ locale: AppLocale }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  return buildPageMetadata({
+    locale,
+    pathname: "/lore",
+    title: "Worldbuilding",
+    description:
+      "Explore the environments, props, and illustrations of Heirs of the Collapse.",
+  });
+}
 
 export default async function LorePage({ params }: Props) {
   const { locale } = await params;
@@ -86,9 +94,9 @@ export default async function LorePage({ params }: Props) {
                   }
                 >
                   {item.data.cover?.url ? (
-                    <PrismicNextImage
+                    <PrismicImage
                       field={item.data.cover}
-                      fallbackAlt=""
+                      fallbackAlt={item.data.title || item.uid || "Worldbuilding entry"}
                       fill
                       sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
                       className="hotc-cgrid__portrait-img"

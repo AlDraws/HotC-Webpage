@@ -1,17 +1,13 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { PrismicNextImage } from "@prismicio/next";
 import { asText, type RichTextField } from "@prismicio/client";
 import { SliceZone } from "@prismicio/react";
+import PrismicImage from "@/components/PrismicImage";
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
-
-export const metadata: Metadata = {
-  title: "Characters",
-  description: "Meet the cast of Heirs of the Collapse.",
-};
+import { buildPageMetadata } from "@/lib/seo";
 
 function getSliceText(value: unknown): string | null {
   if (typeof value === "string") {
@@ -34,6 +30,17 @@ function getSliceText(value: unknown): string | null {
  *   - Always lists the current character documents
  */
 type Props = { params: Promise<{ locale: AppLocale }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  return buildPageMetadata({
+    locale,
+    pathname: "/characters",
+    title: "Characters",
+    description: "Meet the cast of Heirs of the Collapse.",
+  });
+}
 
 export default async function CharactersPage({ params }: Props) {
   const { locale } = await params;
@@ -81,9 +88,9 @@ export default async function CharactersPage({ params }: Props) {
             >
               <div className="hotc-cgrid__portrait">
                 {ch.data.portrait?.url ? (
-                  <PrismicNextImage
+                  <PrismicImage
                     field={ch.data.portrait}
-                    fallbackAlt=""
+                    fallbackAlt={`Portrait of ${ch.data.name || ch.uid}`}
                     fill
                     sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
                     className="hotc-cgrid__portrait-img"

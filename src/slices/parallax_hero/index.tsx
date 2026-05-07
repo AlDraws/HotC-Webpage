@@ -1,9 +1,10 @@
 "use client";
 
 import { isFilled } from "@prismicio/client";
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
-import { CSSProperties, useEffect, useRef } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
+import PrismicImage from "@/components/PrismicImage";
 import { ParallaxHeroSlice } from "@/../prismicio-types";
 
 export type ParallaxHeroProps = SliceComponentProps<ParallaxHeroSlice>;
@@ -15,6 +16,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const bgRef = useRef<HTMLDivElement | null>(null);
   const fgRef = useRef<HTMLDivElement | null>(null);
+  const [enableVideo, setEnableVideo] = useState(false);
   const primary = slice.primary as {
     height_vh?: number | null;
     bgStrength?: number | null;
@@ -37,11 +39,25 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
   const style: CSSProperties | undefined = customHeightVh
     ? ({ "--hotc-phero-height": `${customHeightVh}vh` } as CSSProperties)
     : undefined;
+  const backgroundImage =
+    slice.primary.bgPoster?.url ? slice.primary.bgPoster : slice.primary.bgImage;
+  const heroTitle =
+    slice.primary.title?.trim() || "Heirs of the Collapse parallax hero artwork";
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const small = window.matchMedia("(max-width: 767px)").matches;
-    if (reduce || small) return;
+    const hasVideo = isFilled.linkToMedia(slice.primary.bgVideo);
+    const nextEnableVideo = hasVideo && !reduce && !small;
+    const enableVideoTimer = window.setTimeout(() => {
+      setEnableVideo(nextEnableVideo);
+    }, 0);
+
+    if (reduce || small) {
+      return () => {
+        window.clearTimeout(enableVideoTimer);
+      };
+    }
 
     const hero = sectionRef.current;
     if (!hero) return;
@@ -82,11 +98,12 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
     window.addEventListener("resize", requestUpdate);
 
     return () => {
+      window.clearTimeout(enableVideoTimer);
       window.removeEventListener("scroll", requestUpdate);
       window.removeEventListener("resize", requestUpdate);
       if (raf) cancelAnimationFrame(raf);
     };
-  }, [bgStrength, fgStrength]);
+  }, [bgStrength, fgStrength, slice.primary.bgVideo]);
 
   return (
     <section
@@ -97,7 +114,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
       style={style}
     >
       <div ref={bgRef} className="hotc-phero__bg">
-        {isFilled.linkToMedia(slice.primary.bgVideo) ? (
+        {enableVideo && isFilled.linkToMedia(slice.primary.bgVideo) ? (
           <video
             className="hotc-phero__video"
             src={slice.primary.bgVideo.url}
@@ -110,15 +127,18 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
             muted
             loop
             playsInline
+            preload="none"
           />
-        ) : slice.primary.bgImage?.url ? (
+        ) : backgroundImage?.url ? (
           <div className="hotc-phero__img">
-            <PrismicNextImage
-              field={slice.primary.bgImage}
-              fallbackAlt=""
+            <PrismicImage
+              field={backgroundImage}
+              fallbackAlt={heroTitle}
               fill
               sizes="100vw"
               preload={true}
+              fetchPriority="high"
+              loading="eager"
               className="hotc-phero__bg-img"
             />
           </div>
@@ -131,9 +151,10 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
 
       {slice.primary.foreground?.url && (
         <div ref={fgRef} className="hotc-phero__fg">
-          <PrismicNextImage
+          <PrismicImage
             field={slice.primary.foreground}
-            fallbackAlt=""
+            fallbackAlt={`${heroTitle} foreground artwork`}
+            loading="lazy"
           />
         </div>
       )}

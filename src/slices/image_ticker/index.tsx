@@ -1,9 +1,9 @@
 "use client";
 
 import type { ImageField } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { useEffect, useRef, useState } from "react";
+import PrismicImage from "@/components/PrismicImage";
 import { ImageTickerSlice } from "@/../prismicio-types";
 
 export type ImageTickerProps = SliceComponentProps<ImageTickerSlice>;
@@ -177,9 +177,9 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
       style={backgroundStyle}
     >
       {primary.background_image?.url ? (
-        <PrismicNextImage
+        <PrismicImage
           field={primary.background_image}
-          fallbackAlt=""
+          decorative
           fill
           sizes="100vw"
           className="hotc-ticker__bg"
@@ -281,12 +281,16 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
                         rel={isExternal ? "noopener noreferrer" : undefined}
                         draggable={false}
                       >
-                        <PrismicNextImage
+                        <PrismicImage
                           field={item.image}
+                          fallbackAlt={
+                            item.image.alt ||
+                            typedItem.badge_text ||
+                            `Ticker image ${itemIndex + 1}`
+                          }
                           fill
                           className="object-cover"
                           sizes="(min-width: 768px) 260px, 200px"
-                          fallbackAlt=""
                           draggable={false}
                         />
                         {showBadge ? (
@@ -297,12 +301,16 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
                       </a>
                     ) : (
                       <>
-                        <PrismicNextImage
+                        <PrismicImage
                           field={item.image}
+                          fallbackAlt={
+                            item.image.alt ||
+                            typedItem.badge_text ||
+                            `Ticker image ${itemIndex + 1}`
+                          }
                           fill
                           className="object-cover"
                           sizes="(min-width: 768px) 260px, 200px"
-                          fallbackAlt=""
                           draggable={false}
                         />
                         {showBadge ? (

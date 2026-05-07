@@ -1,7 +1,8 @@
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import type { CSSProperties } from "react";
 import Bounded from "@/components/Bounded";
+import PrismicImage from "@/components/PrismicImage";
 import {
   ExternalSupportSlice,
   ExternalSupportSliceBannerItem,
@@ -78,8 +79,9 @@ const ExternalSupport = ({ slice }: ExternalSupportProps) => {
               >
                 <div className="flex items-center gap-3">
                   {it.icon?.url ? (
-                    <PrismicNextImage
+                    <PrismicImage
                       field={it.icon}
+                      decorative
                       width={28}
                       height={28}
                       className="h-7 w-7 object-contain"
@@ -116,8 +118,9 @@ const ExternalSupport = ({ slice }: ExternalSupportProps) => {
                   }}
                 >
                   {it.icon?.url ? (
-                    <PrismicNextImage
+                    <PrismicImage
                       field={it.icon}
+                      decorative
                       width={20}
                       height={20}
                       className="h-5 w-5 object-contain"

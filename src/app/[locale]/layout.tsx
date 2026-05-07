@@ -9,6 +9,7 @@ import {
   isAppLocale,
   SUPPORTED_LOCALES,
 } from "@/lib/locale";
+import { metadataBase, SITE_NAME } from "@/lib/seo";
 import { getNavigation, getSettings } from "@/lib/server-locale";
 import "../globals.css";
 
@@ -28,7 +29,6 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isAppLocale(locale)) return {};
 
-  const siteTitle = "Heirs of the Collapse";
   const settings = await getSettings(locale);
   const siteDescription = settings?.data.meta_description
     ? asText(settings.data.meta_description)
@@ -37,20 +37,30 @@ export async function generateMetadata({
     settings?.data.og_default?.url || settings?.data.meta_image?.url || undefined;
 
   return {
+    metadataBase,
     icons: {
       icon: "/favicon.ico",
       shortcut: "/favicon.ico",
     },
     title: {
-      template: `%s — ${siteTitle}`,
-      default: siteTitle,
+      template: `%s — ${SITE_NAME}`,
+      default: SITE_NAME,
     },
     description: siteDescription,
-    openGraph: ogImage
-      ? {
-          images: [{ url: ogImage }],
-        }
-      : undefined,
+    openGraph: {
+      type: "website",
+      siteName: SITE_NAME,
+      locale: locale === "es" ? "es_ES" : "en_US",
+      title: SITE_NAME,
+      description: siteDescription,
+      images: ogImage ? [{ url: ogImage, alt: SITE_NAME }] : undefined,
+    },
+    twitter: {
+      card: ogImage ? "summary_large_image" : "summary",
+      title: SITE_NAME,
+      description: siteDescription,
+      images: ogImage ? [ogImage] : undefined,
+    },
   };
 }
 

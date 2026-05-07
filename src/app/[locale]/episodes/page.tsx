@@ -1,16 +1,24 @@
 import { Metadata } from "next";
-import { PrismicNextImage } from "@prismicio/next";
 import { asText } from "@prismicio/client";
 import Link from "next/link";
+import PrismicImage from "@/components/PrismicImage";
 import { createClient } from "@/prismicio";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
-
-export const metadata: Metadata = {
-  title: "Episodes",
-  description: "Read every chapter of Heirs of the Collapse, a webcomic updating every Sunday.",
-};
+import { buildPageMetadata } from "@/lib/seo";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+
+  return buildPageMetadata({
+    locale,
+    pathname: "/episodes",
+    title: "Episodes",
+    description:
+      "Read every chapter of Heirs of the Collapse, a webcomic updating every Sunday.",
+  });
+}
 
 export default async function EpisodesPage({ params }: Props) {
   const { locale } = await params;
@@ -54,12 +62,12 @@ export default async function EpisodesPage({ params }: Props) {
               {/* Cover */}
               <div className="hotc-ep-card__cover">
                 {ep.data.cover?.url ? (
-                  <PrismicNextImage
+                  <PrismicImage
                     field={ep.data.cover}
+                    fallbackAlt={ep.data.title || `Episode ${ep.uid}`}
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     className="object-cover"
-                    fallbackAlt=""
                   />
                 ) : null}
               </div>

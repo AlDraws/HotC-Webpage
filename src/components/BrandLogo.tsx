@@ -1,6 +1,6 @@
 import type { ImageField } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
 import Image from "next/image";
+import PrismicImage from "@/components/PrismicImage";
 
 type BrandLogoProps = {
   field?: ImageField | null;
@@ -32,14 +32,14 @@ export default function BrandLogo({
 
   if (field?.url) {
     return (
-      <PrismicNextImage
+      <PrismicImage
         field={field}
-        alt=""
+        alt={alt}
         width={getDimension(width, 320)}
         height={getDimension(height, 120)}
         className={className}
         sizes={sizes}
-        decoding="async"
+        loading="eager"
       />
     );
   }
@@ -53,6 +53,7 @@ export default function BrandLogo({
       className={className}
       sizes={sizes}
       decoding="async"
+      loading="eager"
     />
   );
 }

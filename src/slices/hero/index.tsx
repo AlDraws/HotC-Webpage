@@ -1,6 +1,7 @@
-import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import PrismicImage from "@/components/PrismicImage";
 import { HeroSlice } from "@/../prismicio-types";
 
 /**
@@ -22,6 +23,7 @@ const Hero = ({ slice }: HeroProps) => {
     (primary.background_image?.url ? primary.background_image : null) ??
     (primary.bgImage?.url ? primary.bgImage : null) ??
     (primary.hero_image?.url ? primary.hero_image : null);
+  const heroTitle = primary.title?.trim() || "Heirs of the Collapse hero artwork";
 
   return (
     <section
@@ -31,12 +33,14 @@ const Hero = ({ slice }: HeroProps) => {
     >
       {heroImage?.url && (
         <div className="hotc-hero__bg">
-          <PrismicNextImage
+          <PrismicImage
             field={heroImage}
-            fallbackAlt=""
+            fallbackAlt={heroTitle}
             fill
             sizes="100vw"
             preload={true}
+            fetchPriority="high"
+            loading="eager"
             className="hotc-hero__bg-img"
           />
         </div>

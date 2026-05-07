@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { useLightbox } from "@/components/LightboxProvider";
+import PrismicImage from "@/components/PrismicImage";
 import { FeatureGridSlice } from "@/../prismicio-types";
 import {
   getLinkTarget,
@@ -51,14 +51,16 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
             coverTarget === "_blank" || isExternal
               ? "noopener noreferrer"
               : undefined;
+          const featureTitle = item.title?.trim() || `Feature ${index + 1}`;
+          const coverAlt = coverImage?.alt || featureTitle;
 
           const content = (
             <>
               {coverImage?.url ? (
                 <div className="hotc-fcard__cover-wrap">
-                  <PrismicNextImage
+                  <PrismicImage
                     field={coverImage}
-                    fallbackAlt=""
+                    fallbackAlt={coverAlt}
                     className="hotc-fcard__cover"
                   />
                 </div>
@@ -66,9 +68,9 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
 
               {hasDedicatedCover && item.icon.url ? (
                 <div className="hotc-fcard__icon">
-                  <PrismicNextImage
+                  <PrismicImage
                     field={item.icon}
-                    fallbackAlt=""
+                    decorative
                     className="h-full w-full object-cover"
                   />
                 </div>
@@ -117,7 +119,7 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
                     openLightbox([
                       {
                         src: coverImage.url || "",
-                        alt: coverImage.alt || "",
+                        alt: coverAlt,
                         width: coverImage.dimensions?.width,
                         height: coverImage.dimensions?.height,
                       },

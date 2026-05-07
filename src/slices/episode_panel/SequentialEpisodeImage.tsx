@@ -1,8 +1,8 @@
 "use client";
 
 import type { ImageField } from "@prismicio/client";
-import { PrismicNextImage } from "@prismicio/next";
 import { useEffect, useState } from "react";
+import PrismicImage from "@/components/PrismicImage";
 
 type Props = {
   field: ImageField<never>;
@@ -128,10 +128,10 @@ export default function SequentialEpisodeImage({
     isFirstPanel || (isSecondPanel && isUnlocked) ? "high" : "auto";
 
   return (
-    <PrismicNextImage
+    <PrismicImage
       ref={setImageElement}
       field={resolvedField}
-      fallbackAlt=""
+      alt={alt}
       width={width}
       height={height}
       quality={100}

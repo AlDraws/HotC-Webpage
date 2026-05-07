@@ -1,5 +1,5 @@
-import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
+import PrismicImage from "@/components/PrismicImage";
 import { ImageFullSlice } from "@/../prismicio-types";
 
 /**
@@ -19,9 +19,10 @@ const ImageFull = ({ slice }: ImageFullProps) => {
       data-slice-variation={slice.variation}
       className="hotc-image-full"
     >
-      <PrismicNextImage
+      <PrismicImage
         field={slice.primary.image}
-        fallbackAlt=""
+        fallbackAlt="Full-width artwork from Heirs of the Collapse"
+        loading="lazy"
       />
     </figure>
   );
