@@ -500,9 +500,7 @@ function createPendingLocalizedDocument(sourceDocument, targetLang) {
 }
 
 function createExistingLocalizedDocument(targetDocument) {
-  const clonedDocument = structuredClone(targetDocument);
-  delete clonedDocument.uid;
-  return clonedDocument;
+  return structuredClone(targetDocument);
 }
 
 function extractTranslationUnits({ document, customTypeModel, sliceModels }) {
