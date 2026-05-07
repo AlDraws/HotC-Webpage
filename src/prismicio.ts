@@ -28,7 +28,6 @@ const baseRoutes: Route[] = [
   { type: "page", uid: "characters", path: "/characters" },
   { type: "page", uid: "lore", path: "/lore" },
   { type: "page", uid: "store", path: "/store" },
-  { type: "page", uid: "stores", path: "/store" },
   { type: "page", path: "/:uid" },
   { type: "episodes_index", path: "/episodes" },
   { type: "episode", path: "/episodes/:uid" },

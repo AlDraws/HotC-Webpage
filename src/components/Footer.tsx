@@ -1,11 +1,15 @@
 import { Content, asText } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText } from "@prismicio/react";
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
 import type { AppLocale } from "@/lib/locale";
-import { getLinkTarget, isExternalHref, resolveLinkHref } from "@/lib/links";
+import {
+  getLinkTarget,
+  isExternalHref,
+  resolveAppLinkHref,
+  resolveLinkHref,
+} from "@/lib/links";
 
 type Props = {
   settings: Content.SettingsDocument;
@@ -17,8 +21,9 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
   const socials = settings.data.social_links ?? [];
   const nav = navigation?.data.primary_links ?? [];
   const navItems = nav.map((n) => ({
+    href: resolveAppLinkHref(n.link, currentLocale) ?? "",
     label: asText(n.label),
-    link: n.link,
+    target: getLinkTarget(n.link),
   }));
   const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
   const siteByHref = resolveLinkHref(settings.data.site_by_link) ?? "";
@@ -91,11 +96,22 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
         <div className="hotc-footer__cols">
           <nav className="hotc-footer__col" aria-label={labels.footerNav}>
             <p className="hotc-footer__title">Navigate</p>
-            {navItems.map((item, i) => (
-              <PrismicNextLink key={i} field={item.link}>
-                {item.label}
-              </PrismicNextLink>
-            ))}
+            {navItems.map((item, i) =>
+              !item.href ? null : isExternalHref(item.href) ? (
+                <a
+                  key={i}
+                  href={item.href}
+                  target={item.target ?? "_blank"}
+                  rel="noopener noreferrer"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link key={i} href={item.href}>
+                  {item.label}
+                </Link>
+              ),
+            )}
           </nav>
           <nav className="hotc-footer__col" aria-label={labels.socialLinks}>
             <p className="hotc-footer__title">Follow</p>

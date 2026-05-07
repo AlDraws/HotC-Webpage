@@ -116,9 +116,6 @@ function resolvePrismicDocumentPath(
       if (!doc.uid || doc.uid === "home") {
         return `/${locale}`;
       }
-      if (doc.uid === "stores") {
-        return `/${locale}/store`;
-      }
       return `/${locale}/${doc.uid}`;
     case "episodes_index":
       return `/${locale}/episodes`;

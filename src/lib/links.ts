@@ -1,5 +1,11 @@
 import { isAppLocale, type AppLocale } from "@/lib/locale";
 
+type DocumentLinkLike = {
+  link_type?: unknown;
+  type?: unknown;
+  uid?: unknown;
+};
+
 export function getLinkHref(linkField: unknown): string | null {
   if (
     linkField &&
@@ -44,6 +50,53 @@ export function normalizeHref(rawHref: string): string {
 export function resolveLinkHref(linkField: unknown): string | null {
   const href = getLinkHref(linkField);
   return href ? normalizeHref(href) : null;
+}
+
+function isDocumentLink(linkField: unknown): linkField is DocumentLinkLike {
+  return (
+    !!linkField &&
+    typeof linkField === "object" &&
+    "link_type" in linkField &&
+    (linkField as { link_type?: unknown }).link_type === "Document"
+  );
+}
+
+export function resolveAppLinkHref(
+  linkField: unknown,
+  locale?: AppLocale,
+): string | null {
+  if (!isDocumentLink(linkField)) {
+    const href = resolveLinkHref(linkField);
+    return href && locale ? localizeHref(href, locale) : href;
+  }
+
+  const type = typeof linkField.type === "string" ? linkField.type : null;
+  const uid = typeof linkField.uid === "string" ? linkField.uid : null;
+
+  if (locale) {
+    switch (type) {
+      case "home":
+        return `/${locale}`;
+      case "page":
+        if (!uid || uid === "home") {
+          return `/${locale}`;
+        }
+        return `/${locale}/${uid}`;
+      case "episodes_index":
+        return `/${locale}/episodes`;
+      case "episode":
+        return uid ? `/${locale}/episodes/${uid}` : null;
+      case "lore_entry":
+        return uid ? `/${locale}/lore/${uid}` : null;
+      case "character":
+        return uid ? `/${locale}/characters/${uid}` : null;
+      default:
+        break;
+    }
+  }
+
+  const href = resolveLinkHref(linkField);
+  return href && locale ? localizeHref(href, locale) : href;
 }
 
 export function isExternalHref(href: string): boolean {

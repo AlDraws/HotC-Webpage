@@ -1,7 +1,6 @@
 "use client";
 
 import { Content, asLink, asText } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
@@ -10,6 +9,7 @@ import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
 import { LOCALE_COOKIE_NAME, type AppLocale } from "@/lib/locale";
 import {
   getLinkTarget,
+  resolveAppLinkHref,
   isExternalHref,
   localizeHref,
   resolveLinkHref,
@@ -33,9 +33,9 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   const router = useRouter();
   const nav = navigation?.data.primary_links ?? [];
   const navItems = nav.map((n) => ({
-    href: asLink(n.link) ?? "",
+    href: resolveAppLinkHref(n.link, currentLocale) ?? asLink(n.link) ?? "",
     label: asText(n.label),
-    link: n.link,
+    target: getLinkTarget(n.link),
   }));
   const socials = settings.data.social_links ?? [];
   const headerSocials = socials.reduce<
@@ -118,15 +118,32 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
 
         <nav className="hotc-header__nav" aria-label={labels.primaryNav}>
           {navItems.map((item, i) => (
-            <PrismicNextLink
-              key={i}
-              field={item.link}
-              className={`hotc-header__nav-item${
-                pathname && item.href === pathname ? " is-active" : ""
-              }`}
-            >
-              {item.label}
-            </PrismicNextLink>
+            item.href ? (
+              isExternalHref(item.href) ? (
+                <a
+                  key={i}
+                  href={item.href}
+                  target={item.target ?? "_blank"}
+                  rel="noopener noreferrer"
+                  className="hotc-header__nav-item"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={i}
+                  href={item.href}
+                  className={`hotc-header__nav-item${
+                    pathname &&
+                    item.href.split(/[#?]/, 1)[0] === pathname
+                      ? " is-active"
+                      : ""
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              )
+            ) : null
           ))}
         </nav>
 
@@ -241,18 +258,36 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
 
           <nav className="hotc-header__drawer-nav" aria-label={labels.mobileNav}>
             {navItems.map((item, i) => {
+              if (!item.href) return null;
+
+              const isActive =
+                pathname && item.href.split(/[#?]/, 1)[0] === pathname;
+
+              if (isExternalHref(item.href)) {
+                return (
+                  <a
+                    key={i}
+                    href={item.href}
+                    target={item.target ?? "_blank"}
+                    rel="noopener noreferrer"
+                    onClick={() => setOpen(false)}
+                  >
+                    <span>{item.label}</span>
+                    <span aria-hidden>→</span>
+                  </a>
+                );
+              }
+
               return (
-                <PrismicNextLink
+                <Link
                   key={i}
-                  field={item.link}
+                  href={item.href}
                   onClick={() => setOpen(false)}
-                  className={
-                    pathname && item.href === pathname ? "is-active" : ""
-                  }
+                  className={isActive ? "is-active" : ""}
                 >
                   <span>{item.label}</span>
                   <span aria-hidden>→</span>
-                </PrismicNextLink>
+                </Link>
               );
             })}
           </nav>

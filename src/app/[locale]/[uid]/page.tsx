@@ -22,7 +22,6 @@ const RESERVED_PAGE_UIDS = new Set([
   "episodes",
   "lore",
   "store",
-  "stores",
 ]);
 
 export async function generateMetadata({
