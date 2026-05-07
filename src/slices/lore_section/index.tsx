@@ -2,6 +2,7 @@ import { asLink, isFilled } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { LoreSectionSlice } from "@/../prismicio-types";
+import { isVisibleData } from "@/lib/content-visibility";
 
 /**
  * Props for `LoreSection`.
@@ -11,6 +12,7 @@ type LoreEntryWithData = NonNullable<
   LoreSectionSlice["items"][number]["entry"]
 > & {
   data?: {
+    is_visible?: boolean | null;
     title?: string | null;
   };
 };
@@ -45,6 +47,7 @@ const LoreSection = ({ slice }: LoreSectionProps) => {
             {items.map((item, i) => {
               const entry = item.entry;
               if (!isFilled.contentRelationship(entry)) return null;
+              if (!isVisibleData(entry.data)) return null;
               const enrichedEntry = entry as LoreEntryWithData;
               const title = enrichedEntry.data?.title;
 

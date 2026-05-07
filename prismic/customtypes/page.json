@@ -7,6 +7,7 @@
   "json": {
     "Main": {
       "uid":    { "type": "UID",  "config": { "label": "UID", "placeholder": "page-slug" } },
+      "is_visible": { "type": "Boolean", "config": { "label": "Visible on site", "default_value": true } },
       "title":  { "type": "StructuredText", "config": { "label": "Title", "single": "heading1" } },
       "parent": { "type": "Link", "config": { "label": "Parent", "select": "document", "customtypes": ["page"] } },
       "slices": {

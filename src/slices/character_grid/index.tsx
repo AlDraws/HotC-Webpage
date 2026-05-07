@@ -4,6 +4,7 @@ import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import PrismicImage from "@/components/PrismicImage";
 import { CharacterGridSlice } from "@/../prismicio-types";
+import { isVisibleData } from "@/lib/content-visibility";
 
 export type CharacterGridProps = SliceComponentProps<CharacterGridSlice>;
 
@@ -33,12 +34,14 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
         {slice.items.map((item, index) => {
           const character = item.character;
           if (!isFilled.contentRelationship(character)) return null;
+          if (!isVisibleData(character.data)) return null;
           const data = (character.data ?? {}) as
             | {
                 name?: string;
                 role?: string;
                 portrait?: ImageField;
                 image?: ImageField;
+                is_visible?: boolean | null;
               }
             | undefined;
           const portrait =

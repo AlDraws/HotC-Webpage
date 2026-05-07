@@ -9,6 +9,7 @@ import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
 import PrismicImage from "@/components/PrismicImage";
 import { buildPageMetadata } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
+import { filterVisibleDocuments, isDocumentVisible } from "@/lib/content-visibility";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
@@ -20,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     client.getByUID("character", uid, { lang }).catch(() => null),
     getSettings(locale),
   ]);
-  if (!ch) return {};
+  if (!isDocumentVisible(ch)) return {};
   const title = ch.data.name ?? uid;
   const socialImage =
     ch.data.meta_image?.url ||
@@ -48,7 +49,7 @@ export async function generateStaticParams({
   const lang = toPrismicLang(params.locale);
   const client = createClient();
   const chars = await client.getAllByType("character", { lang });
-  return chars.map((ch) => ({ uid: ch.uid }));
+  return filterVisibleDocuments(chars).map((ch) => ({ uid: ch.uid }));
 }
 
 /**
@@ -62,7 +63,7 @@ export default async function CharacterProfilePage({ params }: Props) {
   const ch = await client
     .getByUID("character", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
     .catch(() => null);
-  if (!ch) notFound();
+  if (!isDocumentVisible(ch)) notFound();
 
   const attributes = ch.data.attributes ?? [];
   const gallery = ch.data.gallery ?? [];

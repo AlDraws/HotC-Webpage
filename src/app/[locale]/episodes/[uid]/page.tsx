@@ -15,6 +15,7 @@ import {
 } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
 import type { EpisodePanelSequenceContext } from "@/slices/episode_panel/sequence-context";
+import { filterVisibleDocuments, isDocumentVisible } from "@/lib/content-visibility";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
@@ -39,7 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       .catch(() => null),
     getSettings(locale),
   ]);
-  if (!ep) return {};
+  if (!isDocumentVisible(ep)) return {};
   const title =
     ep.data.meta_title?.trim() ||
     `Chapter ${ep.data.chapter_number}: ${ep.data.title}`;
@@ -74,7 +75,7 @@ export async function generateStaticParams({
   const lang = toPrismicLang(params.locale);
   const client = createClient();
   const episodes = await client.getAllByType("episode", { lang });
-  return episodes.map((ep) => ({ uid: ep.uid }));
+  return filterVisibleDocuments(episodes).map((ep) => ({ uid: ep.uid }));
 }
 
 /**
@@ -99,12 +100,13 @@ export default async function EpisodeReaderPage({ params }: Props) {
       orderings: [{ field: "my.episode.chapter_number", direction: "asc" }],
     }),
   ]);
-  if (!ep) notFound();
+  if (!isDocumentVisible(ep)) notFound();
+  const visibleEpisodes = filterVisibleDocuments(allEpisodes);
 
   // Prev / next for chapter navigation (ascending order → prev is lower number)
-  const idx = allEpisodes.findIndex((e) => e.id === ep.id);
-  const prev = idx > 0 ? allEpisodes[idx - 1] : null;
-  const next = idx < allEpisodes.length - 1 ? allEpisodes[idx + 1] : null;
+  const idx = visibleEpisodes.findIndex((e) => e.id === ep.id);
+  const prev = idx > 0 ? visibleEpisodes[idx - 1] : null;
+  const next = idx < visibleEpisodes.length - 1 ? visibleEpisodes[idx + 1] : null;
   const panelOrderBySliceIndex = ep.data.slices.reduce<{
     panelMap: Record<number, number>;
     panelOrder: number;

@@ -57,6 +57,12 @@ export const SLICE_FETCH_LINKS = [
   "character.role",
   "character.portrait",
   "character.cover",
+  "character.is_visible",
+  "lore_entry.title",
+  "lore_entry.cover",
+  "lore_entry.role",
+  "lore_entry.category",
+  "lore_entry.is_visible",
 ];
 
 /**

@@ -13,6 +13,15 @@
           "placeholder": ""
         }
       },
+      "is_visible": {
+        "type": "Boolean",
+        "config": {
+          "label": "Visible on site",
+          "default_value": true,
+          "placeholder_true": "true",
+          "placeholder_false": "false"
+        }
+      },
       "title": {
         "type": "StructuredText",
         "config": {

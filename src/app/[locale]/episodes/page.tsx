@@ -3,6 +3,7 @@ import { asText } from "@prismicio/client";
 import Link from "next/link";
 import PrismicImage from "@/components/PrismicImage";
 import { createClient } from "@/prismicio";
+import { filterVisibleDocuments } from "@/lib/content-visibility";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -31,6 +32,7 @@ export default async function EpisodesPage({ params }: Props) {
     lang,
     orderings: [{ field: "my.episode.chapter_number", direction: "desc" }],
   });
+  const visibleEpisodes = filterVisibleDocuments(episodes);
   const arcs = ["Prologue", "Arc I", "Arc II", "Arc III", "Epilogue"] as const;
   const intro = episodesIndex?.data.intro_richtext
     ? asText(episodesIndex.data.intro_richtext)
@@ -53,7 +55,7 @@ export default async function EpisodesPage({ params }: Props) {
           ))}
         </div>
         <div className="hotc-eidx__grid">
-          {episodes.map((ep) => (
+          {visibleEpisodes.map((ep) => (
             <Link
               key={ep.id}
               href={`/${locale}/episodes/${ep.uid}`}

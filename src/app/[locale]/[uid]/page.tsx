@@ -12,6 +12,7 @@ import {
   getMetaDescriptionText,
 } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
+import { filterVisibleDocuments, isDocumentVisible } from "@/lib/content-visibility";
 
 type Params = { locale: AppLocale; uid: string };
 const RESERVED_PAGE_UIDS = new Set([
@@ -38,7 +39,7 @@ export async function generateMetadata({
       .catch(() => null),
     getSettings(locale),
   ]);
-  if (!page) return {};
+  if (!isDocumentVisible(page)) return {};
   const title = page.data.meta_title || asText(page.data.title);
   const description = getMetaDescriptionText(
     page.data.meta_description,
@@ -69,7 +70,7 @@ export async function generateStaticParams({
   const lang = toPrismicLang(params.locale);
   const client = createClient();
   const pages = await client.getAllByType("page", { lang });
-  return pages
+  return filterVisibleDocuments(pages)
     .filter((p) => !RESERVED_PAGE_UIDS.has(p.uid))
     .map((p) => ({ uid: p.uid }));
 }
@@ -89,7 +90,7 @@ export default async function GenericPage({
   const page = await client
     .getByUID("page", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
     .catch(() => null);
-  if (!page) notFound();
+  if (!isDocumentVisible(page)) notFound();
 
   return <SliceZone slices={normalizeSlices(page.data.slices)} components={components} />;
 }

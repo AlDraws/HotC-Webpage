@@ -8,6 +8,7 @@ import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
 import PrismicImage from "@/components/PrismicImage";
 import { buildPageMetadata } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
+import { filterVisibleDocuments, isDocumentVisible } from "@/lib/content-visibility";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       .catch(() => null),
     getSettings(locale),
   ]);
-  if (!item) return {};
+  if (!isDocumentVisible(item)) return {};
   const title = `${item.data.title ?? uid} — Worldbuilding`;
   const socialImage =
     item.data.meta_image?.url ||
@@ -48,7 +49,7 @@ export async function generateStaticParams({
   const lang = toPrismicLang(params.locale);
   const client = createClient();
   const items = await client.getAllByType("lore_entry", { lang });
-  return items.map((i) => ({ uid: i.uid }));
+  return filterVisibleDocuments(items).map((i) => ({ uid: i.uid }));
 }
 
 /**
@@ -62,7 +63,7 @@ export default async function LoreDetailPage({ params }: Props) {
   const item = await client
     .getByUID("lore_entry", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
     .catch(() => null);
-  if (!item) notFound();
+  if (!isDocumentVisible(item)) notFound();
   const itemTitle = item.data.title?.trim() || item.uid || "Worldbuilding entry";
 
   return (

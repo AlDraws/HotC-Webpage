@@ -3,6 +3,7 @@ import Image from "next/image";
 import { PrismicRichText } from "@prismicio/react";
 import { asText, type RichTextField } from "@prismicio/client";
 import { createClient } from "@/prismicio";
+import { filterVisibleDocuments } from "@/lib/content-visibility";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -17,6 +18,7 @@ type ProductDocument = {
     tag?: string | null;
     outOfStock?: boolean | null;
     buyUrl?: { url?: string | null } | null;
+    is_visible?: boolean | null;
   };
 };
 
@@ -53,6 +55,7 @@ export default async function StorePage({ params }: Props) {
   const products = await client
     .getAllByType("product" as never, { lang })
     .then((result) => result as unknown as ProductDocument[])
+    .then((result) => filterVisibleDocuments(result))
     .catch(() => [] as ProductDocument[]);
 
   const groups: Record<string, typeof products> = {};

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import PrismicImage from "@/components/PrismicImage";
 import { createClient } from "@/prismicio";
+import { filterVisibleDocuments } from "@/lib/content-visibility";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
 import { buildPageMetadata } from "@/lib/seo";
 
@@ -29,7 +30,9 @@ export default async function LorePage({ params }: Props) {
   const { locale } = await params;
   const lang = toPrismicLang(locale);
   const client = createClient();
-  const items = await client.getAllByType("lore_entry", { lang });
+  const items = filterVisibleDocuments(
+    await client.getAllByType("lore_entry", { lang }),
+  );
 
   // Group by category field (select: Environment | Prop | Illustration)
   const order = ["Environment", "Prop", "Illustration"];

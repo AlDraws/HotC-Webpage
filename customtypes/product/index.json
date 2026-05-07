@@ -1,0 +1,77 @@
+{
+  "id": "product",
+  "label": "Store product",
+  "repeatable": true,
+  "status": true,
+  "format": "page",
+  "json": {
+    "Main": {
+      "uid": {
+        "type": "UID",
+        "config": {
+          "label": "Slug"
+        }
+      },
+      "is_visible": {
+        "type": "Boolean",
+        "config": {
+          "label": "Visible on site",
+          "default_value": true,
+          "placeholder_true": "true",
+          "placeholder_false": "false"
+        }
+      },
+      "category": {
+        "type": "Text",
+        "config": {
+          "label": "Category"
+        }
+      },
+      "title": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Title",
+          "single": "heading2"
+        }
+      },
+      "desc": {
+        "type": "StructuredText",
+        "config": {
+          "label": "Description",
+          "multi": "paragraph"
+        }
+      },
+      "price": {
+        "type": "Text",
+        "config": {
+          "label": "Price label (e.g. EUR32)"
+        }
+      },
+      "image": {
+        "type": "Image",
+        "config": {
+          "label": "Product image (4:3)"
+        }
+      },
+      "tag": {
+        "type": "Text",
+        "config": {
+          "label": "Tag (New / Limited / etc.)"
+        }
+      },
+      "outOfStock": {
+        "type": "Boolean",
+        "config": {
+          "label": "Out of stock",
+          "default_value": false
+        }
+      },
+      "buyUrl": {
+        "type": "Link",
+        "config": {
+          "label": "External buy link"
+        }
+      }
+    }
+  }
+}
