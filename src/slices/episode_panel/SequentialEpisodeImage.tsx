@@ -1,11 +1,11 @@
 "use client";
 
-import { asImageSrc, type ImageFieldImage } from "@prismicio/client";
-import Image from "next/image";
+import type { ImageField } from "@prismicio/client";
+import { PrismicNextImage } from "@prismicio/next";
 import { useEffect, useState } from "react";
 
 type Props = {
-  field: ImageFieldImage;
+  field: ImageField<never>;
   alt: string;
   panelIndex: number;
   sequenceId: string;
@@ -79,7 +79,7 @@ export default function SequentialEpisodeImage({
     isPanelUnlocked(sequenceId, panelIndex),
   );
   const [imageElement, setImageElement] = useState<HTMLImageElement | null>(null);
-  const src = asImageSrc(field);
+  const resolvedField = field.alt || !alt ? field : { ...field, alt };
 
   useEffect(() => {
     return subscribeToSequence(sequenceId, () => {
@@ -115,12 +115,12 @@ export default function SequentialEpisodeImage({
     };
   }, [imageElement, isUnlocked, panelIndex, sequenceId]);
 
-  if (!src) {
+  if (!resolvedField.url) {
     return null;
   }
 
-  const width = field.dimensions?.width ?? 1080;
-  const height = field.dimensions?.height ?? width;
+  const width = resolvedField.dimensions?.width ?? 1080;
+  const height = resolvedField.dimensions?.height ?? width;
   const isFirstPanel = panelIndex === 0;
   const isSecondPanel = panelIndex === 1;
   const loading = isFirstPanel || isUnlocked ? "eager" : "lazy";
@@ -128,10 +128,10 @@ export default function SequentialEpisodeImage({
     isFirstPanel || (isSecondPanel && isUnlocked) ? "high" : "auto";
 
   return (
-    <Image
+    <PrismicNextImage
       ref={setImageElement}
-      src={src}
-      alt={alt}
+      field={resolvedField}
+      fallbackAlt=""
       width={width}
       height={height}
       quality={100}

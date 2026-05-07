@@ -590,6 +590,9 @@ body.hotc,
 }
 
 .hotc-header__lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   min-width: 50px;
   justify-content: center;
   padding: 0.5rem 0.65rem;
@@ -601,6 +604,10 @@ body.hotc,
   background: transparent;
   color: var(--hotc-ink);
   cursor: pointer;
+  transition:
+    opacity 180ms var(--hotc-ease-out),
+    background 180ms var(--hotc-ease-out),
+    color 180ms var(--hotc-ease-out);
 }
 
 .hotc-header__lang-btn + .hotc-header__lang-btn {
@@ -610,6 +617,30 @@ body.hotc,
 .hotc-header__lang-btn.is-active {
   background: var(--hotc-ink);
   color: var(--hotc-on-ink);
+}
+
+.hotc-header__lang-btn.is-pending {
+  opacity: 0.62;
+}
+
+.hotc-header__lang-btn:disabled {
+  cursor: progress;
+}
+
+.hotc-header__lang-spinner {
+  width: 0.72rem;
+  height: 0.72rem;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 999px;
+  animation: hotc-spin 0.7s linear infinite;
+  flex: 0 0 auto;
+}
+
+@keyframes hotc-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Socials */

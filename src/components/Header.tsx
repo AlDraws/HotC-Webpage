@@ -3,7 +3,7 @@
 import { Content, asLink, asText } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
@@ -16,8 +16,14 @@ type Props = {
   currentLocale: AppLocale;
 };
 
+function persistLocalePreference(locale: AppLocale) {
+  document.cookie = `${LOCALE_COOKIE_NAME}=${locale}; path=/; max-age=31536000; samesite=lax`;
+}
+
 export default function Header({ settings, navigation, currentLocale }: Props) {
   const [open, setOpen] = useState(false);
+  const [pendingLocale, setPendingLocale] = useState<AppLocale | null>(null);
+  const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const router = useRouter();
   const nav = navigation?.data.primary_links ?? [];
@@ -44,9 +50,14 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
     : settings.data.logo;
 
   function switchLocale(locale: AppLocale) {
-    if (locale === currentLocale) return;
-    document.cookie = `${LOCALE_COOKIE_NAME}=${locale}; path=/; max-age=31536000; samesite=lax`;
-    router.push(localizeHref(pathname || "/", locale));
+    if (locale === currentLocale || isPending) return;
+
+    setPendingLocale(locale);
+    persistLocalePreference(locale);
+
+    startTransition(() => {
+      router.push(localizeHref(pathname || "/", locale));
+    });
   }
 
   return (
@@ -86,27 +97,38 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
         </nav>
 
         <div className="hotc-header__actions">
-          <div className="hotc-header__lang" role="group" aria-label="Language">
-            <button
-              type="button"
-              className={`hotc-header__lang-btn${
-                currentLocale === "en" ? " is-active" : ""
-              }`}
-              onClick={() => switchLocale("en")}
-              aria-pressed={currentLocale === "en"}
-            >
-              EN
-            </button>
-            <button
-              type="button"
-              className={`hotc-header__lang-btn${
-                currentLocale === "es" ? " is-active" : ""
-              }`}
-              onClick={() => switchLocale("es")}
-              aria-pressed={currentLocale === "es"}
-            >
-              ES
-            </button>
+          <div
+            className="hotc-header__lang"
+            role="group"
+            aria-label="Language"
+            aria-busy={isPending}
+          >
+            {(["en", "es"] as const).map((locale) => {
+              const isActive = currentLocale === locale;
+              const isLocalePending = isPending && pendingLocale === locale;
+
+              return (
+                <button
+                  key={locale}
+                  type="button"
+                  className={`hotc-header__lang-btn${
+                    isActive ? " is-active" : ""
+                  }${isLocalePending ? " is-pending" : ""}`}
+                  onClick={() => switchLocale(locale)}
+                  aria-pressed={isActive}
+                  aria-busy={isLocalePending}
+                  disabled={isPending}
+                >
+                  <span>{locale.toUpperCase()}</span>
+                  {isLocalePending ? (
+                    <span
+                      className="hotc-header__lang-spinner"
+                      aria-hidden="true"
+                    />
+                  ) : null}
+                </button>
+              );
+            })}
           </div>
           <div className="hotc-header__socials" aria-label="Social links">
             {headerSocials.map((s, i) => {
