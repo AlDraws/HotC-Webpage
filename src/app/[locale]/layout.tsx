@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { LightboxProvider } from "@/components/LightboxProvider";
+import ScrollReset from "@/components/ScrollReset";
 import { RootDocument } from "../root-document";
 import {
   isAppLocale,
@@ -97,6 +98,7 @@ export default async function LocaleLayout({
   return (
     <RootDocument lang={locale}>
       <LightboxProvider locale={locale}>
+        <ScrollReset />
         {settings && navigation ? (
           <Header
             settings={settings}

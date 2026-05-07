@@ -216,12 +216,6 @@ export default async function EpisodeReaderPage({ params }: Props) {
           context={sliceContext}
         />
       </div>
-      <script
-        dangerouslySetInnerHTML={{
-          __html:
-            "(()=>{const load=i=>{if(!i||i.dataset.hotcLoaded)return;i.dataset.hotcLoaded='true';if(i.dataset.sizes)i.sizes=i.dataset.sizes;if(i.dataset.srcset)i.srcset=i.dataset.srcset;if(i.dataset.src)i.src=i.dataset.src;i.removeAttribute('data-src');i.removeAttribute('data-srcset');i.removeAttribute('data-sizes')};const run=()=>{const imgs=document.querySelectorAll('img[data-hotc-deferred-comic]');if(!('IntersectionObserver'in window)){imgs.forEach(load);return}const io=new IntersectionObserver(es=>{for(const e of es){if(e.isIntersecting){io.unobserve(e.target);load(e.target)}}},{rootMargin:'900px 0px'});imgs.forEach(i=>io.observe(i))};const start=()=>{('requestIdleCallback'in window)?requestIdleCallback(run,{timeout:1200}):setTimeout(run,600)};document.readyState==='complete'?start():window.addEventListener('load',start,{once:true})})();",
-        }}
-      />
 
       {/* Sticky prev/next nav — replicates EpisodeReader.__nav */}
       <nav className="hotc-ereader__nav">

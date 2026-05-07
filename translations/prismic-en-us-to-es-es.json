@@ -1,0 +1,3356 @@
+{
+  "version": 2,
+  "repositoryName": "hotcwebpage",
+  "exportedAt": "2026-05-07T20:53:39.172Z",
+  "sourceLang": "en-us",
+  "targetLang": "es-es",
+  "documentCount": 18,
+  "localResourceCount": 1,
+  "notes": [
+    "Translate the value inside each unit.target field.",
+    "For richText units, preserve the array/object structure and only translate text content.",
+    "Local UI copy entries update JSON dictionaries in src/locales/ui during import.",
+    "Import writes to a Prismic migration release and does not publish automatically."
+  ],
+  "documents": [
+    {
+      "key": "character:alba",
+      "type": "character",
+      "uid": "alba",
+      "sourceDocumentId": "afr1EhYAACgAQG1_",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwVRYAACoARAuY",
+      "targetExists": true,
+      "title": "Alba",
+      "units": [
+        {
+          "path": "data.name",
+          "fieldType": "Text",
+          "source": "Alba",
+          "target": "Alba",
+          "sourceText": "Alba"
+        },
+        {
+          "path": "data.epithet",
+          "fieldType": "Text",
+          "source": "Esto es un epiteto",
+          "target": "Esto es un epiteto",
+          "sourceText": "Esto es un epiteto"
+        },
+        {
+          "path": "data.attributes[0].label",
+          "fieldType": "Text",
+          "source": "Esto es label",
+          "target": "Esto es label",
+          "sourceText": "Esto es label"
+        },
+        {
+          "path": "data.attributes[0].value",
+          "fieldType": "Text",
+          "source": "Esto es Value",
+          "target": "Esto es Value",
+          "sourceText": "Esto es Value"
+        },
+        {
+          "path": "data.short_bio",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Short_bio",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Biografía breve",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Short_bio"
+        },
+        {
+          "path": "data.gallery[0].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.gallery[1].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.gallery[2].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.relations[0].note",
+          "fieldType": "Text",
+          "source": "Note",
+          "target": "Note",
+          "sourceText": "Note"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2495dbb660-7027-4f70-a5de-5509dd21aaf1:0].primary.kicker",
+          "fieldType": "Text",
+          "source": "Kicker",
+          "target": "Antetítulo",
+          "sourceText": "Kicker"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2495dbb660-7027-4f70-a5de-5509dd21aaf1:0].primary.title",
+          "fieldType": "Text",
+          "source": "Title",
+          "target": "Título",
+          "sourceText": "Title"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2495dbb660-7027-4f70-a5de-5509dd21aaf1:0].primary.text",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Text Content",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Contenido de texto",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Text Content"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2495dbb660-7027-4f70-a5de-5509dd21aaf1:0].primary.cta_label",
+          "fieldType": "Text",
+          "source": "CTA LABEL",
+          "target": "ETIQUETA CTA",
+          "sourceText": "CTA LABEL"
+        }
+      ]
+    },
+    {
+      "key": "character:alex",
+      "type": "character",
+      "uid": "alex",
+      "sourceDocumentId": "afyxlBYAACkAQ6GK",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwUxYAACkARAuO",
+      "targetExists": true,
+      "title": "Alex",
+      "units": [
+        {
+          "path": "data.name",
+          "fieldType": "Text",
+          "source": "Alex",
+          "target": "Alex",
+          "sourceText": "Alex"
+        },
+        {
+          "path": "data.epithet",
+          "fieldType": "Text",
+          "source": "What are those monsters?",
+          "target": "¿Qué son esos monstruos?",
+          "sourceText": "What are those monsters?"
+        },
+        {
+          "path": "data.attributes[0].label",
+          "fieldType": "Text",
+          "source": "Prometheus",
+          "target": "Prometeo",
+          "sourceText": "Prometheus"
+        },
+        {
+          "path": "data.attributes[0].value",
+          "fieldType": "Text",
+          "source": "Who is him?",
+          "target": "¿Quién es?",
+          "sourceText": "Who is him?"
+        },
+        {
+          "path": "data.gallery[0].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.gallery[1].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.gallery[2].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.relations[0].note",
+          "fieldType": "Text",
+          "source": "Note",
+          "target": "Note",
+          "sourceText": "Note"
+        }
+      ]
+    },
+    {
+      "key": "character:ex-ai",
+      "type": "character",
+      "uid": "ex-ai",
+      "sourceDocumentId": "aftjDxYAACoAQVfA",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwURYAACoARAuG",
+      "targetExists": true,
+      "title": "EX-AI",
+      "units": [
+        {
+          "path": "data.name",
+          "fieldType": "Text",
+          "source": "EX-AI",
+          "target": "EX-AI",
+          "sourceText": "EX-AI"
+        },
+        {
+          "path": "data.epithet",
+          "fieldType": "Text",
+          "source": "The machine that should not be alive.",
+          "target": "La máquina que no debería estar viva.",
+          "sourceText": "The machine that should not be alive."
+        },
+        {
+          "path": "data.attributes[0].label",
+          "fieldType": "Text",
+          "source": "STATUS",
+          "target": "ESTADO",
+          "sourceText": "STATUS"
+        },
+        {
+          "path": "data.attributes[0].value",
+          "fieldType": "Text",
+          "source": "Recovered from a sealed chamber.",
+          "target": "Recuperado de una cámara sellada.",
+          "sourceText": "Recovered from a sealed chamber."
+        },
+        {
+          "path": "data.attributes[1].label",
+          "fieldType": "Text",
+          "source": "ORIGIN",
+          "target": "ORIGEN",
+          "sourceText": "ORIGIN"
+        },
+        {
+          "path": "data.attributes[1].value",
+          "fieldType": "Text",
+          "source": "Linked to the old system.",
+          "target": "Vinculado al viejo sistema.",
+          "sourceText": "Linked to the old system."
+        },
+        {
+          "path": "data.attributes[2].label",
+          "fieldType": "Text",
+          "source": "THREAT LEVEL",
+          "target": "NIVEL DE AMENAZA",
+          "sourceText": "THREAT LEVEL"
+        },
+        {
+          "path": "data.attributes[2].value",
+          "fieldType": "Text",
+          "source": "Unknown.",
+          "target": "Desconocido.",
+          "sourceText": "Unknown."
+        },
+        {
+          "path": "data.short_bio",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "EX-AI was supposed to be a machine.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "That is what Vic3nt’s signal promised. That is what Sandra expected to find beneath the city.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Instead, inside a glowing capsule surrounded by water, bones and old infrastructure, she finds something with a human shape.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "It does not explain itself.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "It only makes one thing clear: whatever EX-AI is, the dark wants it back.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Se suponía que EX-AI era una máquina.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Eso prometía la señal de Vic3nt. Eso esperaba encontrar Sandra bajo la ciudad.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "En su lugar, dentro de una cápsula brillante rodeada de agua, huesos y vieja infraestructura, encuentra algo con forma humana.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "No da explicaciones.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Solo deja clara una cosa: sea lo que sea EX-AI, la oscuridad lo quiere de vuelta.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "EX-AI was supposed to be a machine. That is what Vic3nt’s signal promised. That is what Sandra expected to find beneath the city. Instead, inside a glowing capsule surrounded by water, bones and old infrastructure, she finds something with a human shape. It does not explain itself. It only makes one thing clear: whatever EX-AI is, the dark wants it back."
+        },
+        {
+          "path": "data.gallery[0].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.gallery[1].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.gallery[2].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.relations[0].note",
+          "fieldType": "Text",
+          "source": "Breve descripcion de la conexión con Sandra",
+          "target": "Breve descripción de la conexión con Sandra",
+          "sourceText": "Breve descripcion de la conexión con Sandra"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%24eb7eeb66-6a41-41ed-9398-53868b4b190c:0].primary.kicker",
+          "fieldType": "Text",
+          "source": "FIRST RECORDED APPEARANCE",
+          "target": "PRIMERA APARICIÓN REGISTRADA",
+          "sourceText": "FIRST RECORDED APPEARANCE"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%24eb7eeb66-6a41-41ed-9398-53868b4b190c:0].primary.title",
+          "fieldType": "Text",
+          "source": "The Capsule Beneath the City",
+          "target": "La cápsula bajo la ciudad",
+          "sourceText": "The Capsule Beneath the City"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%24eb7eeb66-6a41-41ed-9398-53868b4b190c:0].primary.text",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Sandra came looking for a tool. She found a question.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Sandra fue en busca de una herramienta. Encontró una pregunta.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Sandra came looking for a tool. She found a question."
+        },
+        {
+          "path": "data.slices[slice:text_with_image%24eb7eeb66-6a41-41ed-9398-53868b4b190c:0].primary.cta_label",
+          "fieldType": "Text",
+          "source": "Read Chapter 1",
+          "target": "Leer capítulo 1",
+          "sourceText": "Read Chapter 1"
+        }
+      ]
+    },
+    {
+      "key": "character:sandra",
+      "type": "character",
+      "uid": "sandra",
+      "sourceDocumentId": "afrxSxYAACgAQGVm",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwUhYAACgARAuL",
+      "targetExists": true,
+      "title": "Sandra",
+      "units": [
+        {
+          "path": "data.name",
+          "fieldType": "Text",
+          "source": "Sandra",
+          "target": "Sandra",
+          "sourceText": "Sandra"
+        },
+        {
+          "path": "data.attributes[0].label",
+          "fieldType": "Text",
+          "source": "INSTINCT",
+          "target": "INSTINTO",
+          "sourceText": "INSTINCT"
+        },
+        {
+          "path": "data.attributes[0].value",
+          "fieldType": "Text",
+          "source": "Acts before fear has time to win.",
+          "target": "Actúa antes de que el miedo tenga tiempo de ganar.",
+          "sourceText": "Acts before fear has time to win."
+        },
+        {
+          "path": "data.attributes[1].label",
+          "fieldType": "Text",
+          "source": "ROLE",
+          "target": "ROL",
+          "sourceText": "ROLE"
+        },
+        {
+          "path": "data.attributes[1].value",
+          "fieldType": "Text",
+          "source": "Explorer of ruins and dead systems.",
+          "target": "Exploradora de ruinas y sistemas muertos.",
+          "sourceText": "Explorer of ruins and dead systems."
+        },
+        {
+          "path": "data.attributes[2].label",
+          "fieldType": "Text",
+          "source": "METHOD",
+          "target": "MÉTODO",
+          "sourceText": "METHOD"
+        },
+        {
+          "path": "data.attributes[2].value",
+          "fieldType": "Text",
+          "source": "Climb, improvise, survive.",
+          "target": "Trepar, improvisar, sobrevivir.",
+          "sourceText": "Climb, improvise, survive."
+        },
+        {
+          "path": "data.short_bio",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Sandra is an explorer with more courage than caution.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "When Vic3nt’s signal points to a buried bunker near the towers, she is the one who climbs down, crosses the flooded dark and keeps moving even when the walls start to feel alive.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "She does not trust old systems, but she does trust what she can do with her own hands: climb, run, fight, carry someone out.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "In Chapter 1, that may be the only reason EX-AI makes it out of the chamber at all.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Sandra es una exploradora con más valor que prudencia.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Cuando la señal de Vic3nt apunta a un búnker enterrado cerca de las torres, ella es quien desciende, cruza la oscuridad inundada y sigue avanzando incluso cuando las paredes empiezan a parecer vivas.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "No confía en los viejos sistemas, pero sí en lo que puede hacer con sus propias manos: trepar, correr, pelear, sacar a alguien de allí.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "En el capítulo 1, puede que esa sea la única razón por la que EX-AI consigue salir de la cámara.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Sandra is an explorer with more courage than caution. When Vic3nt’s signal points to a buried bunker near the towers, she is the one who climbs down, crosses the flooded dark and keeps moving even when the walls start to feel alive. She does not trust old systems, but she does trust what she can do with her own hands: climb, run, fight, carry someone out. In Chapter 1, that may be the only reason EX-AI makes it out of the chamber at all."
+        },
+        {
+          "path": "data.gallery[0].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.relations[0].note",
+          "fieldType": "Text",
+          "source": "Definir relacion Vic3nt",
+          "target": "Definir relación con Vic3nt",
+          "sourceText": "Definir relacion Vic3nt"
+        },
+        {
+          "path": "data.relations[1].note",
+          "fieldType": "Text",
+          "source": "Definir relacion EX-AI",
+          "target": "Definir relación con EX-AI",
+          "sourceText": "Definir relacion EX-AI"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2495dbb660-7027-4f70-a5de-5509dd21aaf1:0].primary.kicker",
+          "fieldType": "Text",
+          "source": "FIRST APPEARANCE",
+          "target": "PRIMERA APARICIÓN",
+          "sourceText": "FIRST APPEARANCE"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2495dbb660-7027-4f70-a5de-5509dd21aaf1:0].primary.title",
+          "fieldType": "Text",
+          "source": "Chapter 1 · The Incursion",
+          "target": "Capítulo 1 · La Incursión",
+          "sourceText": "Chapter 1 · The Incursion"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2495dbb660-7027-4f70-a5de-5509dd21aaf1:0].primary.text",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Sandra follows a signal into a bunker that should have been forgotten. What waits below turns a simple retrieval mission into a race for survival.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Sandra sigue una señal hasta un búnker que debería haber sido olvidado. Lo que espera abajo convierte una simple misión de recuperación en una carrera por sobrevivir.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Sandra follows a signal into a bunker that should have been forgotten. What waits below turns a simple retrieval mission into a race for survival."
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2495dbb660-7027-4f70-a5de-5509dd21aaf1:0].primary.cta_label",
+          "fieldType": "Text",
+          "source": "Read Her First Appearance",
+          "target": "Lee su primera aparición",
+          "sourceText": "Read Her First Appearance"
+        }
+      ]
+    },
+    {
+      "key": "character:shadow",
+      "type": "character",
+      "uid": "shadow",
+      "sourceDocumentId": "afth7RYAACoAQVWW",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwUBYAAJuaRAuC",
+      "targetExists": true,
+      "title": "SHADOW",
+      "units": [
+        {
+          "path": "data.name",
+          "fieldType": "Text",
+          "source": "SHADOW",
+          "target": "SOMBRA",
+          "sourceText": "SHADOW"
+        },
+        {
+          "path": "data.epithet",
+          "fieldType": "Text",
+          "source": "What moves where the system rotted.",
+          "target": "Lo que se mueve donde el sistema se pudrió.",
+          "sourceText": "What moves where the system rotted."
+        },
+        {
+          "path": "data.attributes[0].label",
+          "fieldType": "Text",
+          "source": "HABITAT",
+          "target": "HÁBITAT",
+          "sourceText": "HABITAT"
+        },
+        {
+          "path": "data.attributes[0].value",
+          "fieldType": "Text",
+          "source": "Dark, wet, abandoned places.",
+          "target": "Lugares oscuros, húmedos y abandonados.",
+          "sourceText": "Dark, wet, abandoned places."
+        },
+        {
+          "path": "data.attributes[1].label",
+          "fieldType": "Text",
+          "source": "COMPOSITION",
+          "target": "COMPOSICIÓN",
+          "sourceText": "COMPOSITION"
+        },
+        {
+          "path": "data.attributes[1].value",
+          "fieldType": "Text",
+          "source": "Bone, biomass and hunger.",
+          "target": "Hueso, biomasa y hambre.",
+          "sourceText": "Bone, biomass and hunger."
+        },
+        {
+          "path": "data.attributes[2].label",
+          "fieldType": "Text",
+          "source": "WARNING",
+          "target": "ADVERTENCIA",
+          "sourceText": "WARNING"
+        },
+        {
+          "path": "data.attributes[2].value",
+          "fieldType": "Text",
+          "source": "Do not let it close the distance.",
+          "target": "No dejes que acorte distancias.",
+          "sourceText": "Do not let it close the distance."
+        },
+        {
+          "path": "data.short_bio",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "People call them Shadows because it is easier than asking what they used to be.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "In the old tunnels, where humidity clings to the walls and forgotten systems still breathe, something has kept growing.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "A Shadow is not just a monster in the dark.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "It is proof that the Collapse did not end cleanly.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "La gente las llama Sombras porque es más fácil que preguntarse qué fueron antes.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "En los viejos túneles, donde la humedad se pega a las paredes y los sistemas olvidados aún respiran, algo ha seguido creciendo.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Una Sombra no es solo un monstruo en la oscuridad.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Es la prueba de que el Colapso no terminó limpiamente.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "People call them Shadows because it is easier than asking what they used to be. In the old tunnels, where humidity clings to the walls and forgotten systems still breathe, something has kept growing. A Shadow is not just a monster in the dark. It is proof that the Collapse did not end cleanly."
+        },
+        {
+          "path": "data.gallery[0].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.gallery[1].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.gallery[2].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.relations[0].note",
+          "fieldType": "Text",
+          "source": "Breve descripción",
+          "target": "Breve descripción",
+          "sourceText": "Breve descripción"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2454ea54b1-b75e-44a9-8014-17a2ef52bf07:0].primary.kicker",
+          "fieldType": "Text",
+          "source": "FIRST SIGHTING",
+          "target": "PRIMER AVISTAMIENTO",
+          "sourceText": "FIRST SIGHTING"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2454ea54b1-b75e-44a9-8014-17a2ef52bf07:0].primary.title",
+          "fieldType": "Text",
+          "source": "The Thing in the Bunker",
+          "target": "La cosa del búnker",
+          "sourceText": "The Thing in the Bunker"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2454ea54b1-b75e-44a9-8014-17a2ef52bf07:0].primary.text",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Sandra finds EX-AI. Then the water moves.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Sandra encuentra a EX-AI. Entonces el agua se mueve.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Sandra finds EX-AI. Then the water moves."
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2454ea54b1-b75e-44a9-8014-17a2ef52bf07:0].primary.cta_label",
+          "fieldType": "Text",
+          "source": "Read Chapter 1",
+          "target": "Leer capítulo 1",
+          "sourceText": "Read Chapter 1"
+        }
+      ]
+    },
+    {
+      "key": "character:vic3nt",
+      "type": "character",
+      "uid": "vic3nt",
+      "sourceDocumentId": "afr0KhYAACoAQGuY",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwUhYAACgARAuI",
+      "targetExists": true,
+      "title": "Vic3nt",
+      "units": [
+        {
+          "path": "data.name",
+          "fieldType": "Text",
+          "source": "Vic3nt",
+          "target": "Vic3nt",
+          "sourceText": "Vic3nt"
+        },
+        {
+          "path": "data.epithet",
+          "fieldType": "Text",
+          "source": "A signal with attitude and a body built for bad ideas.",
+          "target": "Una señal con actitud y un cuerpo hecho para las malas ideas.",
+          "sourceText": "A signal with attitude and a body built for bad ideas."
+        },
+        {
+          "path": "data.attributes[0].label",
+          "fieldType": "Text",
+          "source": "SIGNAL",
+          "target": "SEÑAL",
+          "sourceText": "SIGNAL"
+        },
+        {
+          "path": "data.attributes[0].value",
+          "fieldType": "Text",
+          "source": "Tracks what others would rather leave buried.",
+          "target": "Rastrea lo que otros preferirían dejar enterrado.",
+          "sourceText": "Tracks what others would rather leave buried."
+        },
+        {
+          "path": "data.attributes[1].label",
+          "fieldType": "Text",
+          "source": "STYLE",
+          "target": "ESTILO",
+          "sourceText": "STYLE"
+        },
+        {
+          "path": "data.attributes[1].value",
+          "fieldType": "Text",
+          "source": "Sarcasm, telemetry and terrible timing.",
+          "target": "Sarcasmo, telemetría y un sentido de la oportunidad horrible.",
+          "sourceText": "Sarcasm, telemetry and terrible timing."
+        },
+        {
+          "path": "data.attributes[2].label",
+          "fieldType": "Text",
+          "source": "FIELD UNIT",
+          "target": "UNIDAD DE CAMPO",
+          "sourceText": "FIELD UNIT"
+        },
+        {
+          "path": "data.attributes[2].value",
+          "fieldType": "Text",
+          "source": "Shows up when the mission goes wrong.",
+          "target": "Aparece cuando la misión sale mal.",
+          "sourceText": "Shows up when the mission goes wrong."
+        },
+        {
+          "path": "data.short_bio",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Vic3nt is not exactly Vicent.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "He is the field avatar: a remote body with a screen for a face, a dangerous amount of confidence and just enough technical knowledge to get Sandra into places no one should enter.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "From somewhere behind the signal, Vic3nt guides the incursion toward EX-AI. He knows the old systems better than most.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Unfortunately, the old systems know how to bite back.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Vic3nt no es exactamente Vicent.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Es el avatar de campo: un cuerpo remoto con una pantalla por rostro, una cantidad peligrosa de confianza y el conocimiento técnico justo para meter a Sandra en lugares donde nadie debería entrar.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Desde algún lugar detrás de la señal, Vic3nt guía la incursión hacia EX-AI. Conoce los viejos sistemas mejor que la mayoría.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Por desgracia, los viejos sistemas saben devolver el mordisco.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Vic3nt is not exactly Vicent. He is the field avatar: a remote body with a screen for a face, a dangerous amount of confidence and just enough technical knowledge to get Sandra into places no one should enter. From somewhere behind the signal, Vic3nt guides the incursion toward EX-AI. He knows the old systems better than most. Unfortunately, the old systems know how to bite back."
+        },
+        {
+          "path": "data.gallery[0].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.gallery[1].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.relations[0].note",
+          "fieldType": "Text",
+          "source": "Descripción de la relación con Sandra",
+          "target": "Descripción de la relación con Sandra",
+          "sourceText": "Descripción de la relación con Sandra"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2495dbb660-7027-4f70-a5de-5509dd21aaf1:0].primary.kicker",
+          "fieldType": "Text",
+          "source": "FIRST APPEARANCE",
+          "target": "PRIMERA APARICIÓN",
+          "sourceText": "FIRST APPEARANCE"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2495dbb660-7027-4f70-a5de-5509dd21aaf1:0].primary.title",
+          "fieldType": "Text",
+          "source": "Chapter 1 · The Incursion",
+          "target": "Capítulo 1 · La Incursión",
+          "sourceText": "Chapter 1 · The Incursion"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2495dbb660-7027-4f70-a5de-5509dd21aaf1:0].primary.text",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Vic3nt leads Sandra to the bunker, then enters the field when the mission collapses into a fight.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Vic3nt guía a Sandra hasta el búnker y luego entra en el terreno cuando la misión se convierte en una pelea.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Vic3nt leads Sandra to the bunker, then enters the field when the mission collapses into a fight."
+        },
+        {
+          "path": "data.slices[slice:text_with_image%2495dbb660-7027-4f70-a5de-5509dd21aaf1:0].primary.cta_label",
+          "fieldType": "Text",
+          "source": "Read Chapter 1",
+          "target": "Leer capítulo 1",
+          "sourceText": "Read Chapter 1"
+        }
+      ]
+    },
+    {
+      "key": "character:vicent",
+      "type": "character",
+      "uid": "vicent",
+      "sourceDocumentId": "aftjwRYAACoAQVkQ",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwVBYAACoARAuV",
+      "targetExists": true,
+      "title": "Vicent",
+      "units": [
+        {
+          "path": "data.name",
+          "fieldType": "Text",
+          "source": "Vicent",
+          "target": "Vicent",
+          "sourceText": "Vicent"
+        },
+        {
+          "path": "data.epithet",
+          "fieldType": "Text",
+          "source": "The man in the shadow",
+          "target": "El hombre en la sombra",
+          "sourceText": "The man in the shadow"
+        },
+        {
+          "path": "data.attributes[0].label",
+          "fieldType": "Text",
+          "source": "Vicent",
+          "target": "Vicent",
+          "sourceText": "Vicent"
+        },
+        {
+          "path": "data.attributes[0].value",
+          "fieldType": "Text",
+          "source": "Who is him?",
+          "target": "¿Quién es?",
+          "sourceText": "Who is him?"
+        },
+        {
+          "path": "data.gallery[0].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.gallery[1].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.gallery[2].caption",
+          "fieldType": "Text",
+          "source": "Caption",
+          "target": "Pie de imagen",
+          "sourceText": "Caption"
+        },
+        {
+          "path": "data.relations[0].note",
+          "fieldType": "Text",
+          "source": "Note",
+          "target": "Note",
+          "sourceText": "Note"
+        }
+      ]
+    },
+    {
+      "key": "episode:ch_001",
+      "type": "episode",
+      "uid": "ch_001",
+      "sourceDocumentId": "afr14BYAACoAQG7D",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "aftpkhYAACkAQWQh",
+      "targetExists": true,
+      "title": "THE INCURSION",
+      "units": [
+        {
+          "path": "data.title",
+          "fieldType": "Text",
+          "source": "THE INCURSION",
+          "target": "LA INCURSIÓN",
+          "sourceText": "THE INCURSION"
+        },
+        {
+          "path": "data.summary",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Sandra follows Vic3nt’s signal into a flooded bunker near the towers. ",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Sandra sigue la señal de Vic3nt hasta un búnker inundado cerca de las torres. ",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Sandra follows Vic3nt’s signal into a flooded bunker near the towers."
+        },
+        {
+          "path": "data.tags[0].tag",
+          "fieldType": "Text",
+          "source": "Ruins",
+          "target": "Ruinas",
+          "sourceText": "Ruins"
+        },
+        {
+          "path": "data.tags[1].tag",
+          "fieldType": "Text",
+          "source": "Survival",
+          "target": "Survival",
+          "sourceText": "Survival"
+        },
+        {
+          "path": "data.tags[2].tag",
+          "fieldType": "Text",
+          "source": "Bio-horror",
+          "target": "Biohorror",
+          "sourceText": "Bio-horror"
+        },
+        {
+          "path": "data.tags[3].tag",
+          "fieldType": "Text",
+          "source": "Post-Collapse",
+          "target": "Postcolapso",
+          "sourceText": "Post-Collapse"
+        },
+        {
+          "path": "data.slices[slice:episode_panel%24b696bcf8-2c28-4023-96d4-f834d893fbc2:0].primary.label",
+          "fieldType": "Text",
+          "source": "Page 1",
+          "target": "Página 1",
+          "sourceText": "Page 1"
+        },
+        {
+          "path": "data.slices[slice:episode_panel%24ae19c155-d9dd-45ce-b6ff-31cec5fc009d:1].primary.label",
+          "fieldType": "Text",
+          "source": "Page 2",
+          "target": "Página 2",
+          "sourceText": "Page 2"
+        },
+        {
+          "path": "data.slices[slice:episode_panel%24c97698c2-9870-46d9-b098-904b897c4b55:2].primary.label",
+          "fieldType": "Text",
+          "source": "Page 3",
+          "target": "Página 3",
+          "sourceText": "Page 3"
+        },
+        {
+          "path": "data.slices[slice:episode_panel%244e963f79-3dfd-4086-b258-a2e10ca4b560:3].primary.label",
+          "fieldType": "Text",
+          "source": "Page 4",
+          "target": "Página 4",
+          "sourceText": "Page 4"
+        }
+      ]
+    },
+    {
+      "key": "episodes_index:__singleton__",
+      "type": "episodes_index",
+      "uid": null,
+      "sourceDocumentId": "afr3SxYAACoAQHHM",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwThYAAJuaRAt1",
+      "targetExists": true,
+      "title": "Episodes · Heirs of the Collapse",
+      "units": [
+        {
+          "path": "data.intro_richtext",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Read the surviving records of a world buried under vegetation, old protocols and things that should have stayed underground.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Lee los registros supervivientes de un mundo enterrado bajo vegetación, viejos protocolos y cosas que deberían haberse quedado bajo tierra.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Read the surviving records of a world buried under vegetation, old protocols and things that should have stayed underground."
+        },
+        {
+          "path": "data.meta_title",
+          "fieldType": "Text",
+          "source": "Episodes · Heirs of the Collapse",
+          "target": "Episodios · Heirs of the Collapse",
+          "sourceText": "Episodes · Heirs of the Collapse"
+        },
+        {
+          "path": "data.meta_description",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Read the episodes of Heirs of the Collapse, beginning with Chapter 1: The Incursion.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Lee los episodios de Heirs of the Collapse, empezando por el capítulo 1: La Incursión.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Read the episodes of Heirs of the Collapse, beginning with Chapter 1: The Incursion."
+        }
+      ]
+    },
+    {
+      "key": "home:__singleton__",
+      "type": "home",
+      "uid": null,
+      "sourceDocumentId": "afpWrhYAACgAP32j",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwShYAACgARAtn",
+      "targetExists": true,
+      "title": "Heirs of the Collapse · Mediterranean Hopepunk Webcomic",
+      "units": [
+        {
+          "path": "data.title",
+          "fieldType": "Text",
+          "source": "Heirs of the Collapse",
+          "target": "Heirs of the Collapse",
+          "sourceText": "Heirs of the Collapse"
+        },
+        {
+          "path": "data.hero_kicker",
+          "fieldType": "Text",
+          "source": "HOPE SURVIVES EVEN THE COLLAPSE.",
+          "target": "LA ESPERANZA SOBREVIVE INCLUSO AL COLAPSO.",
+          "sourceText": "HOPE SURVIVES EVEN THE COLLAPSE."
+        },
+        {
+          "path": "data.hero_cta[0].label",
+          "fieldType": "Text",
+          "source": "Read Chapter 1",
+          "target": "Leer capítulo 1",
+          "sourceText": "Read Chapter 1"
+        },
+        {
+          "path": "data.hero_cta[1].label",
+          "fieldType": "Text",
+          "source": "Explore the World",
+          "target": "Explora el mundo",
+          "sourceText": "Explore the World"
+        },
+        {
+          "path": "data.slices[slice:parallax_hero%248d707b01-864c-46ac-b000-a6c15584e40a:0].primary.kicker",
+          "fieldType": "Text",
+          "source": "Hope survives even the collapse.",
+          "target": "La esperanza sobrevive incluso al colapso.",
+          "sourceText": "Hope survives even the collapse."
+        },
+        {
+          "path": "data.slices[slice:parallax_hero%248d707b01-864c-46ac-b000-a6c15584e40a:0].primary.title",
+          "fieldType": "Text",
+          "source": "Heirs of the collapse",
+          "target": "Heirs of the Collapse",
+          "sourceText": "Heirs of the collapse"
+        },
+        {
+          "path": "data.slices[slice:parallax_hero%248d707b01-864c-46ac-b000-a6c15584e40a:0].primary.subtitle",
+          "fieldType": "Text",
+          "source": "In a Valencia swallowed by vegetation and forgotten machines, Sandra enters a buried bunker in search of an old system known only as EX-AI.\nWhat she finds inside should not be alive.\nAnd something in the dark has already noticed her.",
+          "target": "En una Valencia devorada por la vegetación y las máquinas olvidadas, Sandra entra en un búnker enterrado en busca de un viejo sistema conocido solo como EX-AI.\nLo que encuentra dentro no debería estar vivo.\nY algo en la oscuridad ya se ha fijado en ella.",
+          "sourceText": "In a Valencia swallowed by vegetation and forgotten machines, Sandra enters a buried bunker in search of an old system known only as EX-AI.\nWhat she finds inside should not be alive.\nAnd something in the dark has already noticed her."
+        },
+        {
+          "path": "data.slices[slice:parallax_hero%248d707b01-864c-46ac-b000-a6c15584e40a:0].primary.primaryCtaLabel",
+          "fieldType": "Text",
+          "source": "Read Chapter 1",
+          "target": "Leer capítulo 1",
+          "sourceText": "Read Chapter 1"
+        },
+        {
+          "path": "data.slices[slice:parallax_hero%248d707b01-864c-46ac-b000-a6c15584e40a:0].primary.secondaryCtaLabel",
+          "fieldType": "Text",
+          "source": "Explore the World",
+          "target": "Explora el mundo",
+          "sourceText": "Explore the World"
+        },
+        {
+          "path": "data.slices[slice:image_ticker%2451d56b9f-6a30-4280-886d-583a140df462:1].items[0].image.alt",
+          "fieldType": "ImageAlt",
+          "source": "A figure wearing orange goggles in the dark.",
+          "target": "Una figura con gafas naranjas en la oscuridad.",
+          "sourceText": "A figure wearing orange goggles in the dark."
+        },
+        {
+          "path": "data.slices[slice:image_ticker%2451d56b9f-6a30-4280-886d-583a140df462:1].items[1].image.alt",
+          "fieldType": "ImageAlt",
+          "source": "A glowing chamber beneath the city.",
+          "target": "Una cámara brillante bajo la ciudad.",
+          "sourceText": "A glowing chamber beneath the city."
+        },
+        {
+          "path": "data.slices[slice:image_ticker%2451d56b9f-6a30-4280-886d-583a140df462:1].items[2].image.alt",
+          "fieldType": "ImageAlt",
+          "source": "Sandra entering the ruins of post-collapse.",
+          "target": "Sandra entrando en las ruinas postcolapso.",
+          "sourceText": "Sandra entering the ruins of post-collapse."
+        },
+        {
+          "path": "data.slices[slice:image_ticker%2451d56b9f-6a30-4280-886d-583a140df462:1].items[3].image.alt",
+          "fieldType": "ImageAlt",
+          "source": "Vic3nt moving through the old system.",
+          "target": "Vic3nt moviéndose por el viejo sistema.",
+          "sourceText": "Vic3nt moving through the old system."
+        },
+        {
+          "path": "data.slices[slice:image_ticker%2451d56b9f-6a30-4280-886d-583a140df462:1].items[4].image.alt",
+          "fieldType": "ImageAlt",
+          "source": "A monstruos appearance.",
+          "target": "Una aparición monstruosa.",
+          "sourceText": "A monstruos appearance."
+        },
+        {
+          "path": "data.slices[slice:text_with_image%249eff3912-2798-441a-9bd3-818c3cf4d0d5:2].primary.kicker",
+          "fieldType": "Text",
+          "source": "THE ANOMALIES",
+          "target": "LAS ANOMALÍAS",
+          "sourceText": "THE ANOMALIES"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%249eff3912-2798-441a-9bd3-818c3cf4d0d5:2].primary.title",
+          "fieldType": "Text",
+          "source": "Not chosen. Not ready. Still moving.",
+          "target": "No elegidos. No preparados. Aún en marcha.",
+          "sourceText": "Not chosen. Not ready. Still moving."
+        },
+        {
+          "path": "data.slices[slice:text_with_image%249eff3912-2798-441a-9bd3-818c3cf4d0d5:2].primary.text",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "The Collapse did not leave heroes behind.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "It left scavengers, technicians, stubborn explorers and frightened survivors trying to make sense of a world that no longer explains itself.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Sandra is one of them. Tonight, she goes underground.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "El Colapso no dejó héroes atrás.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Dejó carroñeros, técnicos, exploradoras tercas y supervivientes asustados intentando entender un mundo que ya no se explica a sí mismo.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Sandra es una de ellas. Esta noche, baja bajo tierra.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "The Collapse did not leave heroes behind. It left scavengers, technicians, stubborn explorers and frightened survivors trying to make sense of a world that no longer explains itself. Sandra is one of them. Tonight, she goes underground."
+        },
+        {
+          "path": "data.slices[slice:text_with_image%249eff3912-2798-441a-9bd3-818c3cf4d0d5:2].primary.cta_label",
+          "fieldType": "Text",
+          "source": "Meet the Cast",
+          "target": "Conoce al elenco",
+          "sourceText": "Meet the Cast"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%24b9a60fbd-d63b-412a-8329-b0cdd19b52d0:3].primary.kicker",
+          "fieldType": "Text",
+          "source": "WORLDBUILDING",
+          "target": "WORLDBUILDING",
+          "sourceText": "WORLDBUILDING"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%24b9a60fbd-d63b-412a-8329-b0cdd19b52d0:3].primary.title",
+          "fieldType": "Text",
+          "source": "A world that learned to obey too late",
+          "target": "Un mundo que aprendió a obedecer demasiado tarde",
+          "sourceText": "A world that learned to obey too late"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%24b9a60fbd-d63b-412a-8329-b0cdd19b52d0:3].primary.text",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Before the Collapse, the city trusted systems that promised order, safety and efficiency.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Afterward, the ruins remained.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "The walls stayed wet.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "The machines kept humming.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "And in the dark, the Shadows learned to move.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Antes del Colapso, la ciudad confió en sistemas que prometían orden, seguridad y eficiencia.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Después, quedaron las ruinas.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Las paredes siguieron húmedas.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Las máquinas siguieron zumbando.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Y en la oscuridad, las Sombras aprendieron a moverse.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Before the Collapse, the city trusted systems that promised order, safety and efficiency. Afterward, the ruins remained. The walls stayed wet. The machines kept humming. And in the dark, the Shadows learned to move."
+        },
+        {
+          "path": "data.slices[slice:text_with_image%24b9a60fbd-d63b-412a-8329-b0cdd19b52d0:3].primary.cta_label",
+          "fieldType": "Text",
+          "source": "Discover the Lore",
+          "target": "Descubre el lore",
+          "sourceText": "Discover the Lore"
+        },
+        {
+          "path": "data.slices[slice:character_grid%240e506799-f86c-4776-b046-0b4072aba2f0:5].primary.kicker",
+          "fieldType": "Text",
+          "source": "THE HEIRS",
+          "target": "LOS HEREDEROS",
+          "sourceText": "THE HEIRS"
+        },
+        {
+          "path": "data.slices[slice:character_grid%240e506799-f86c-4776-b046-0b4072aba2f0:5].primary.title",
+          "fieldType": "Text",
+          "source": "Meet the ones who step into the dark before anyone understands what is waiting there.",
+          "target": "Conoce a quienes se adentran en la oscuridad antes de que nadie entienda qué les espera allí.",
+          "sourceText": "Meet the ones who step into the dark before anyone understands what is waiting there."
+        },
+        {
+          "path": "data.slices[slice:cta_block%24a5c9aa92-e824-49e3-ae14-0e9464324474:6].primary.title",
+          "fieldType": "Text",
+          "source": "Incursion Shop",
+          "target": "Tienda de la Incursión",
+          "sourceText": "Incursion Shop"
+        },
+        {
+          "path": "data.slices[slice:cta_block%24a5c9aa92-e824-49e3-ae14-0e9464324474:6].primary.description",
+          "fieldType": "Text",
+          "source": "The future is still in our hands. Gear up to explore the ruins, face the Shadows!",
+          "target": "El futuro sigue en nuestras manos. Equípate para explorar las ruinas y enfrentarte a las Sombras.",
+          "sourceText": "The future is still in our hands. Gear up to explore the ruins, face the Shadows!"
+        },
+        {
+          "path": "data.slices[slice:cta_block%24a5c9aa92-e824-49e3-ae14-0e9464324474:6].primary.cta_label",
+          "fieldType": "Text",
+          "source": "Take a look!",
+          "target": "¡Echa un vistazo!",
+          "sourceText": "Take a look!"
+        },
+        {
+          "path": "data.slices[slice:feature_grid%24dcc1234e-5c5b-439b-9b2f-41979f29cc25:7].primary.kicker",
+          "fieldType": "Text",
+          "source": "ACCESS THE FRAGMENTED RECORDS OF THE OLD SYSTEM",
+          "target": "ACCEDE A LOS REGISTROS FRAGMENTADOS DEL VIEJO SISTEMA",
+          "sourceText": "ACCESS THE FRAGMENTED RECORDS OF THE OLD SYSTEM"
+        },
+        {
+          "path": "data.slices[slice:feature_grid%24dcc1234e-5c5b-439b-9b2f-41979f29cc25:7].primary.title",
+          "fieldType": "Text",
+          "source": "Featured Episodes",
+          "target": "Episodios destacados",
+          "sourceText": "Featured Episodes"
+        },
+        {
+          "path": "data.slices[slice:feature_grid%24dcc1234e-5c5b-439b-9b2f-41979f29cc25:7].items[0].icon.alt",
+          "fieldType": "ImageAlt",
+          "source": "CH. 1 · THE INCURSION",
+          "target": "CAP. 1 · LA INCURSIÓN",
+          "sourceText": "CH. 1 · THE INCURSION"
+        },
+        {
+          "path": "data.slices[slice:feature_grid%24dcc1234e-5c5b-439b-9b2f-41979f29cc25:7].items[0].title",
+          "fieldType": "Text",
+          "source": "The Incursion",
+          "target": "La Incursión",
+          "sourceText": "The Incursion"
+        },
+        {
+          "path": "data.slices[slice:feature_grid%24dcc1234e-5c5b-439b-9b2f-41979f29cc25:7].items[0].description",
+          "fieldType": "Text",
+          "source": "Sandra enters a buried bunker near the towers in search of EX-AI, an old machine that may help them survive the Shadows. What she finds below changes the mission into a desperate escape.",
+          "target": "Sandra entra en un búnker enterrado junto a las torres en busca de EX-AI, una vieja máquina que podría ayudarles a sobrevivir a las Sombras. Lo que encuentra abajo convierte la misión en una huida desesperada.",
+          "sourceText": "Sandra enters a buried bunker near the towers in search of EX-AI, an old machine that may help them survive the Shadows. What she finds below changes the mission into a desperate escape."
+        },
+        {
+          "path": "data.slices[slice:newsletter_embed%24380c5a9c-a20a-425d-b35d-799508a092af:8].primary.title",
+          "fieldType": "Text",
+          "source": "Receive signals from the ruins",
+          "target": "Recibe señales desde las ruinas",
+          "sourceText": "Receive signals from the ruins"
+        },
+        {
+          "path": "data.slices[slice:newsletter_embed%24380c5a9c-a20a-425d-b35d-799508a092af:8].primary.description",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Sign up to receive new chapters, process art, world notes and important project updates.\n\nNo spam. Only transmissions when something is worth sending out of the bunker.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Suscríbete para recibir nuevos capítulos, arte de proceso, notas del mundo y actualizaciones importantes del proyecto.\n\nSin spam. Solo transmisiones cuando algo merezca salir del búnker.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Sign up to receive new chapters, process art, world notes and important project updates.\n\nNo spam. Only transmissions when something is worth sending out of the bunker."
+        },
+        {
+          "path": "data.slices[slice:newsletter_embed%24380c5a9c-a20a-425d-b35d-799508a092af:8].primary.placeholder",
+          "fieldType": "Text",
+          "source": "Your email",
+          "target": "Tu email",
+          "sourceText": "Your email"
+        },
+        {
+          "path": "data.slices[slice:newsletter_embed%24380c5a9c-a20a-425d-b35d-799508a092af:8].primary.cta_label",
+          "fieldType": "Text",
+          "source": "Join the Signal",
+          "target": "Únete a la señal",
+          "sourceText": "Join the Signal"
+        },
+        {
+          "path": "data.meta_title",
+          "fieldType": "Text",
+          "source": "Heirs of the Collapse · Mediterranean Hopepunk Webcomic",
+          "target": "Heirs of the Collapse · Webcómic hopepunk mediterráneo",
+          "sourceText": "Heirs of the Collapse · Mediterranean Hopepunk Webcomic"
+        },
+        {
+          "path": "data.meta_description",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Read Heirs of the Collapse, a mediterranean hope punk webcomic set in a ruined Valencia where vegetation, old machines and Shadows haunt the remains of the city.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Lee Heirs of the Collapse, un webcómic hopepunk mediterráneo ambientado en una Valencia en ruinas donde la vegetación, las viejas máquinas y las Sombras acechan entre los restos de la ciudad.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Read Heirs of the Collapse, a mediterranean hope punk webcomic set in a ruined Valencia where vegetation, old machines and Shadows haunt the remains of the city."
+        }
+      ]
+    },
+    {
+      "key": "lore_entry:almoina",
+      "type": "lore_entry",
+      "uid": "almoina",
+      "sourceDocumentId": "afr31BYAACkAQHL8",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwThYAACgARAt4",
+      "targetExists": true,
+      "title": "L'ALMOINA",
+      "units": [
+        {
+          "path": "data.title",
+          "fieldType": "Text",
+          "source": "L'ALMOINA",
+          "target": "L'ALMOINA",
+          "sourceText": "L'ALMOINA"
+        },
+        {
+          "path": "data.epithet",
+          "fieldType": "Text",
+          "source": "Is older than it seems.",
+          "target": "Es más antigua de lo que parece.",
+          "sourceText": "Is older than it seems."
+        },
+        {
+          "path": "data.role",
+          "fieldType": "Text",
+          "source": "UNDERGROUND RUINS",
+          "target": "RUINAS SUBTERRÁNEAS",
+          "sourceText": "UNDERGROUND RUINS"
+        },
+        {
+          "path": "data.short_intro",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "A flooded layer of the city where stone, water and old infrastructure meet. The deeper Sandra goes, the less dead the place feels.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Una capa inundada de la ciudad donde se encuentran la piedra, el agua y la vieja infraestructura. Cuanto más desciende Sandra, menos muerto parece el lugar.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "A flooded layer of the city where stone, water and old infrastructure meet. The deeper Sandra goes, the less dead the place feels."
+        }
+      ]
+    },
+    {
+      "key": "lore_entry:torres",
+      "type": "lore_entry",
+      "uid": "torres",
+      "sourceDocumentId": "afr5FBYAACgAQHW5",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwTxYAACkARAt9",
+      "targetExists": true,
+      "title": "TORRES",
+      "units": [
+        {
+          "path": "data.title",
+          "fieldType": "Text",
+          "source": "TORRES",
+          "target": "TORRES",
+          "sourceText": "TORRES"
+        },
+        {
+          "path": "data.epithet",
+          "fieldType": "Text",
+          "source": "The river came back.",
+          "target": "El río volvió.",
+          "sourceText": "The river came back."
+        },
+        {
+          "path": "data.role",
+          "fieldType": "Text",
+          "source": "BUNKER DISTRICT",
+          "target": "DISTRITO DEL BÚNKER",
+          "sourceText": "BUNKER DISTRICT"
+        },
+        {
+          "path": "data.short_intro",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "A landmark above a buried route into the old system. By night, the towers are less a destination than a warning.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Un hito sobre una ruta enterrada hacia el viejo sistema. De noche, las torres son menos un destino que una advertencia.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "A landmark above a buried route into the old system. By night, the towers are less a destination than a warning."
+        }
+      ]
+    },
+    {
+      "key": "navigation:__singleton__",
+      "type": "navigation",
+      "uid": null,
+      "sourceDocumentId": "afpYsRYAACkAP4ES",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwSxYAACgARAtp",
+      "targetExists": true,
+      "title": "navigation",
+      "units": [
+        {
+          "path": "data.primary_links[0].label",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "heading3",
+              "text": "Episodes",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "heading3",
+              "text": "Episodios",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Episodes"
+        },
+        {
+          "path": "data.primary_links[0].icon_alt_override",
+          "fieldType": "Text",
+          "source": "icon_alt_override",
+          "target": "icon_alt_override",
+          "sourceText": "icon_alt_override"
+        },
+        {
+          "path": "data.primary_links[1].label",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "heading3",
+              "text": "Characters",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "heading3",
+              "text": "Personajes",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Characters"
+        },
+        {
+          "path": "data.primary_links[2].label",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "heading3",
+              "text": "Worldbuilding",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "heading3",
+              "text": "Worldbuilding",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Worldbuilding"
+        },
+        {
+          "path": "data.primary_links[3].label",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "heading3",
+              "text": "Store",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "heading3",
+              "text": "Tienda",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Store"
+        },
+        {
+          "path": "data.primary_links[4].label",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "heading3",
+              "text": "About",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "heading3",
+              "text": "Sobre",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "About"
+        },
+        {
+          "path": "data.primary_links[4].icon_alt_override",
+          "fieldType": "Text",
+          "source": "About",
+          "target": "Sobre",
+          "sourceText": "About"
+        },
+        {
+          "path": "data.secondary_links[0].label",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Read Latest",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Leer lo último",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Read Latest"
+        }
+      ]
+    },
+    {
+      "key": "page:about",
+      "type": "page",
+      "uid": "about",
+      "sourceDocumentId": "afr6HBYAACoAQHhG",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwSxYAACoARAts",
+      "targetExists": true,
+      "title": "About · Heirs of the Collapse",
+      "units": [
+        {
+          "path": "data.title",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "heading1",
+              "text": "ABOUT THE PROJECT",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "heading1",
+              "text": "SOBRE EL PROYECTO",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "ABOUT THE PROJECT"
+        },
+        {
+          "path": "data.slices[slice:hero%24644d2e8a-7d3e-4558-b4b3-c5874cfff976:0].primary.kicker",
+          "fieldType": "Text",
+          "source": "Kicker",
+          "target": "Antetítulo",
+          "sourceText": "Kicker"
+        },
+        {
+          "path": "data.slices[slice:hero%24644d2e8a-7d3e-4558-b4b3-c5874cfff976:0].primary.title",
+          "fieldType": "Text",
+          "source": "A post-collapse webcomic about survival, broken systems and rebuilding from below.",
+          "target": "Un webcómic postcolapso sobre supervivencia, sistemas rotos y reconstrucción desde abajo.",
+          "sourceText": "A post-collapse webcomic about survival, broken systems and rebuilding from below."
+        },
+        {
+          "path": "data.slices[slice:hero%24644d2e8a-7d3e-4558-b4b3-c5874cfff976:0].primary.subtitle",
+          "fieldType": "Text",
+          "source": "Heirs of the Collapse is an action-driven sci-fi webcomic set in a ruined Valencia where nature, obsolete technology and old fears have grown into something dangerous.",
+          "target": "Heirs of the Collapse es un webcómic de ciencia ficción impulsado por la acción, ambientado en una Valencia en ruinas donde la naturaleza, la tecnología obsoleta y los viejos miedos han crecido hasta volverse algo peligroso.",
+          "sourceText": "Heirs of the Collapse is an action-driven sci-fi webcomic set in a ruined Valencia where nature, obsolete technology and old fears have grown into something dangerous."
+        },
+        {
+          "path": "data.slices[slice:hero%24644d2e8a-7d3e-4558-b4b3-c5874cfff976:0].primary.cta_label",
+          "fieldType": "Text",
+          "source": "Start with Chapter 1",
+          "target": "Empieza por el capítulo 1",
+          "sourceText": "Start with Chapter 1"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%240800b7e7-d7f0-49e2-8953-f93311561451:1].primary.kicker",
+          "fieldType": "Text",
+          "source": "THE WORLD",
+          "target": "EL MUNDO",
+          "sourceText": "THE WORLD"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%240800b7e7-d7f0-49e2-8953-f93311561451:1].primary.title",
+          "fieldType": "Text",
+          "source": "The city after the system stopped answering",
+          "target": "La ciudad después de que el sistema dejara de responder",
+          "sourceText": "The city after the system stopped answering"
+        },
+        {
+          "path": "data.slices[slice:text_with_image%240800b7e7-d7f0-49e2-8953-f93311561451:1].primary.text",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "The city was once managed by systems built to optimize everything: movement, resources, safety, survival.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Then came the Collapse.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Now the streets are overgrown, the walls are wet, the machines are half-remembered and the people who remain have learned not to wait for permission.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "La ciudad estuvo gestionada por sistemas construidos para optimizarlo todo: movimiento, recursos, seguridad, supervivencia.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Entonces llegó el Colapso.",
+              "spans": [],
+              "direction": "ltr"
+            },
+            {
+              "type": "paragraph",
+              "text": "Ahora las calles están cubiertas de maleza, las paredes siguen húmedas, las máquinas apenas se recuerdan y quienes quedan han aprendido a no esperar permiso.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "The city was once managed by systems built to optimize everything: movement, resources, safety, survival. Then came the Collapse. Now the streets are overgrown, the walls are wet, the machines are half-remembered and the people who remain have learned not to wait for permission."
+        },
+        {
+          "path": "data.slices[slice:text_with_image%240800b7e7-d7f0-49e2-8953-f93311561451:1].primary.cta_label",
+          "fieldType": "Text",
+          "source": "Explore Worldbuilding",
+          "target": "Explora el worldbuilding",
+          "sourceText": "Explore Worldbuilding"
+        },
+        {
+          "path": "data.slices[slice:cta_block%24525727f7-6500-4d09-b612-36d8a1a0d704:2].primary.title",
+          "fieldType": "Text",
+          "source": "CREATED BY ÁLVARO SERRANO SIERRA",
+          "target": "CREADO POR ÁLVARO SERRANO SIERRA",
+          "sourceText": "CREATED BY ÁLVARO SERRANO SIERRA"
+        },
+        {
+          "path": "data.slices[slice:cta_block%24525727f7-6500-4d09-b612-36d8a1a0d704:2].primary.description",
+          "fieldType": "Text",
+          "source": "Heirs of the Collapse is a webcomic by Álvaro Serrano Sierra, blending post-apocalyptic adventure, bio-horror, action and Mediterranean ruins into a story about what survives when the systems that promised safety finally fail.",
+          "target": "Heirs of the Collapse es un webcómic de Álvaro Serrano Sierra que mezcla aventura postapocalíptica, biohorror, acción y ruinas mediterráneas en una historia sobre lo que sobrevive cuando los sistemas que prometían seguridad acaban fallando.",
+          "sourceText": "Heirs of the Collapse is a webcomic by Álvaro Serrano Sierra, blending post-apocalyptic adventure, bio-horror, action and Mediterranean ruins into a story about what survives when the systems that promised safety finally fail."
+        },
+        {
+          "path": "data.slices[slice:cta_block%24525727f7-6500-4d09-b612-36d8a1a0d704:2].primary.cta_label",
+          "fieldType": "Text",
+          "source": "See my portfolio!",
+          "target": "¡Ver mi portfolio!",
+          "sourceText": "See my portfolio!"
+        },
+        {
+          "path": "data.meta_title",
+          "fieldType": "Text",
+          "source": "About · Heirs of the Collapse",
+          "target": "Sobre · Heirs of the Collapse",
+          "sourceText": "About · Heirs of the Collapse"
+        },
+        {
+          "path": "data.meta_description",
+          "fieldType": "Text",
+          "source": "Learn about Heirs of the Collapse, a sci-fi webcomic about survival, broken systems and rebuilding after the Collapse.",
+          "target": "Conoce Heirs of the Collapse, un webcómic de ciencia ficción sobre supervivencia, sistemas rotos y reconstrucción tras el Colapso.",
+          "sourceText": "Learn about Heirs of the Collapse, a sci-fi webcomic about survival, broken systems and rebuilding after the Collapse."
+        }
+      ]
+    },
+    {
+      "key": "page:characters",
+      "type": "page",
+      "uid": "characters",
+      "sourceDocumentId": "afs-qRYAACoAQQE0",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwTRYAACoARAtz",
+      "targetExists": true,
+      "title": "Characters · Heirs of the Collapse",
+      "units": [
+        {
+          "path": "data.title",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "heading1",
+              "text": "Characters",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "heading1",
+              "text": "Personajes",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Characters"
+        },
+        {
+          "path": "data.slices[slice:hero%242aa23290-2c2b-4428-a379-b2af093df2ac:0].primary.kicker",
+          "fieldType": "Text",
+          "source": "THE ANOMALIES",
+          "target": "LAS ANOMALÍAS",
+          "sourceText": "THE ANOMALIES"
+        },
+        {
+          "path": "data.slices[slice:hero%242aa23290-2c2b-4428-a379-b2af093df2ac:0].primary.title",
+          "fieldType": "Text",
+          "source": "The Cast",
+          "target": "El elenco",
+          "sourceText": "The Cast"
+        },
+        {
+          "path": "data.slices[slice:hero%242aa23290-2c2b-4428-a379-b2af093df2ac:0].primary.subtitle",
+          "fieldType": "Text",
+          "source": "No chosen ones. No clean heroes.\nJust people, signals and things that survived the Collapse in very different ways.",
+          "target": "No hay elegidos. No hay héroes impecables.\nSolo personas, señales y cosas que sobrevivieron al Colapso de formas muy distintas.",
+          "sourceText": "No chosen ones. No clean heroes.\nJust people, signals and things that survived the Collapse in very different ways."
+        },
+        {
+          "path": "data.slices[slice:character_grid%24374b11ef-a274-4a1b-ab08-845521c5ae7d:1].primary.kicker",
+          "fieldType": "Text",
+          "source": "THE ANOMALIES",
+          "target": "LAS ANOMALÍAS",
+          "sourceText": "THE ANOMALIES"
+        },
+        {
+          "path": "data.slices[slice:character_grid%24374b11ef-a274-4a1b-ab08-845521c5ae7d:1].primary.title",
+          "fieldType": "Text",
+          "source": "Known Records",
+          "target": "Registros conocidos",
+          "sourceText": "Known Records"
+        },
+        {
+          "path": "data.meta_title",
+          "fieldType": "Text",
+          "source": "Characters · Heirs of the Collapse",
+          "target": "Personajes · Heirs of the Collapse",
+          "sourceText": "Characters · Heirs of the Collapse"
+        },
+        {
+          "path": "data.meta_description",
+          "fieldType": "Text",
+          "source": "Meet Sandra, Vic3nt, EX-AI and the Shadows in Heirs of the Collapse.",
+          "target": "Conoce a Sandra, Vic3nt, EX-AI y las Sombras en Heirs of the Collapse.",
+          "sourceText": "Meet Sandra, Vic3nt, EX-AI and the Shadows in Heirs of the Collapse."
+        }
+      ]
+    },
+    {
+      "key": "page:lore",
+      "type": "page",
+      "uid": "lore",
+      "sourceDocumentId": "afr5zRYAAJuaQHeD",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwUBYAAJuaRAt_",
+      "targetExists": true,
+      "title": "Lore",
+      "units": [
+        {
+          "path": "data.title",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "heading1",
+              "text": "Lore",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "heading1",
+              "text": "Lore",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Lore"
+        },
+        {
+          "path": "data.slices[slice:hero%24ff2224c4-51d5-4c02-960c-49795fc6710f:0].primary.kicker",
+          "fieldType": "Text",
+          "source": "The old city did not disappear. It changed shape.",
+          "target": "La vieja ciudad no desapareció. Cambió de forma.",
+          "sourceText": "The old city did not disappear. It changed shape."
+        },
+        {
+          "path": "data.slices[slice:hero%24ff2224c4-51d5-4c02-960c-49795fc6710f:0].primary.title",
+          "fieldType": "Text",
+          "source": "The World after the Collapse",
+          "target": "El mundo tras el Colapso",
+          "sourceText": "The World after the Collapse"
+        },
+        {
+          "path": "data.slices[slice:hero%24ff2224c4-51d5-4c02-960c-49795fc6710f:0].primary.subtitle",
+          "fieldType": "Text",
+          "source": "Places, objects and surviving records from a city transformed by the Collapse.",
+          "target": "Lugares, objetos y registros supervivientes de una ciudad transformada por el Colapso.",
+          "sourceText": "Places, objects and surviving records from a city transformed by the Collapse."
+        },
+        {
+          "path": "data.slices[slice:hero%24ff2224c4-51d5-4c02-960c-49795fc6710f:0].primary.cta_label",
+          "fieldType": "Text",
+          "source": "CTA Label",
+          "target": "Etiqueta CTA",
+          "sourceText": "CTA Label"
+        },
+        {
+          "path": "data.slices[slice:lore_section%245a80a246-bd07-4ed3-bed0-b47b535a2484:1].primary.kicker",
+          "fieldType": "Text",
+          "source": "ARCHIVE",
+          "target": "ARCHIVO",
+          "sourceText": "ARCHIVE"
+        },
+        {
+          "path": "data.slices[slice:lore_section%245a80a246-bd07-4ed3-bed0-b47b535a2484:1].primary.title",
+          "fieldType": "Text",
+          "source": "Worldbuilding",
+          "target": "Worldbuilding",
+          "sourceText": "Worldbuilding"
+        }
+      ]
+    },
+    {
+      "key": "page:shop",
+      "type": "page",
+      "uid": "shop",
+      "sourceDocumentId": "afr6hBYAACgAQHk9",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwTBYAACkARAtw",
+      "targetExists": true,
+      "title": "Shop · Heirs of the Collapse",
+      "units": [
+        {
+          "path": "data.title",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "heading1",
+              "text": "SHOP",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "heading1",
+              "text": "SHOP",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "SHOP"
+        },
+        {
+          "path": "data.slices[slice:image_cards%246628042b-7bcf-443f-b4da-7cb151d780ad:0].primary.kicker",
+          "fieldType": "Text",
+          "source": "COMING SOON!",
+          "target": "¡PRÓXIMAMENTE!",
+          "sourceText": "COMING SOON!"
+        },
+        {
+          "path": "data.slices[slice:image_cards%246628042b-7bcf-443f-b4da-7cb151d780ad:0].primary.title",
+          "fieldType": "Text",
+          "source": "THE SHOP",
+          "target": "LA TIENDA",
+          "sourceText": "THE SHOP"
+        },
+        {
+          "path": "data.slices[slice:image_cards%246628042b-7bcf-443f-b4da-7cb151d780ad:0].items[0].title",
+          "fieldType": "Text",
+          "source": "COMING SOON!",
+          "target": "¡PRÓXIMAMENTE!",
+          "sourceText": "COMING SOON!"
+        },
+        {
+          "path": "data.slices[slice:image_cards%246628042b-7bcf-443f-b4da-7cb151d780ad:0].items[1].title",
+          "fieldType": "Text",
+          "source": "COMING SOON!",
+          "target": "¡PRÓXIMAMENTE!",
+          "sourceText": "COMING SOON!"
+        },
+        {
+          "path": "data.slices[slice:image_cards%246628042b-7bcf-443f-b4da-7cb151d780ad:0].items[2].title",
+          "fieldType": "Text",
+          "source": "COMING SOON!",
+          "target": "¡PRÓXIMAMENTE!",
+          "sourceText": "COMING SOON!"
+        },
+        {
+          "path": "data.slices[slice:newsletter_embed%245abfcab3-1091-4c01-8694-91d3d72c3d11:1].primary.title",
+          "fieldType": "Text",
+          "source": "Artifacts Coming Soon",
+          "target": "Artefactos próximamente",
+          "sourceText": "Artifacts Coming Soon"
+        },
+        {
+          "path": "data.slices[slice:newsletter_embed%245abfcab3-1091-4c01-8694-91d3d72c3d11:1].primary.description",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Prints, books and field-approved relics from the Collapse are not ready yet.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Las láminas, libros y reliquias del Colapso aprobadas para campo aún no están listas.",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Prints, books and field-approved relics from the Collapse are not ready yet."
+        },
+        {
+          "path": "data.slices[slice:newsletter_embed%245abfcab3-1091-4c01-8694-91d3d72c3d11:1].primary.placeholder",
+          "fieldType": "Text",
+          "source": "your@email.com",
+          "target": "your@email.com",
+          "sourceText": "your@email.com"
+        },
+        {
+          "path": "data.slices[slice:newsletter_embed%245abfcab3-1091-4c01-8694-91d3d72c3d11:1].primary.cta_label",
+          "fieldType": "Text",
+          "source": "Join the Signal",
+          "target": "Únete a la señal",
+          "sourceText": "Join the Signal"
+        },
+        {
+          "path": "data.slices[slice:cta_block%24f66f3a92-240b-4709-a544-799938068025:2].primary.description",
+          "fieldType": "Text",
+          "source": "The store will open after the first records are released. Until then, the best way to support Heirs of the Collapse is to read Chapter 1 and share the signal!",
+          "target": "La tienda abrirá cuando se publiquen los primeros registros. Hasta entonces, la mejor forma de apoyar Heirs of the Collapse es leer el capítulo 1 y compartir la señal.",
+          "sourceText": "The store will open after the first records are released. Until then, the best way to support Heirs of the Collapse is to read Chapter 1 and share the signal!"
+        },
+        {
+          "path": "data.slices[slice:cta_block%24f66f3a92-240b-4709-a544-799938068025:2].primary.cta_label",
+          "fieldType": "Text",
+          "source": "Read Chapter 1!",
+          "target": "¡Leer capítulo 1!",
+          "sourceText": "Read Chapter 1!"
+        },
+        {
+          "path": "data.meta_title",
+          "fieldType": "Text",
+          "source": "Shop · Heirs of the Collapse",
+          "target": "Tienda · Heirs of the Collapse",
+          "sourceText": "Shop · Heirs of the Collapse"
+        },
+        {
+          "path": "data.meta_description",
+          "fieldType": "Text",
+          "source": "Official Heirs of the Collapse prints, extras and artifacts. Coming soon.",
+          "target": "Láminas, extras y artefactos oficiales de Heirs of the Collapse. Próximamente.",
+          "sourceText": "Official Heirs of the Collapse prints, extras and artifacts. Coming soon."
+        }
+      ]
+    },
+    {
+      "key": "settings:__singleton__",
+      "type": "settings",
+      "uid": null,
+      "sourceDocumentId": "afpZVBYAACgAP4Im",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "targetDocumentId": "afzwVBYAACgARAuS",
+      "targetExists": true,
+      "title": "Heirs of the Collapse",
+      "units": [
+        {
+          "path": "data.site_title",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "Heirs of the Collapse",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Heirs of the Collapse",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "Heirs of the Collapse"
+        },
+        {
+          "path": "data.brand[0].label",
+          "fieldType": "Text",
+          "source": "Heirs of the Collapse",
+          "target": "Heirs of the Collapse",
+          "sourceText": "Heirs of the Collapse"
+        },
+        {
+          "path": "data.brand[0].icon_image.alt",
+          "fieldType": "ImageAlt",
+          "source": "Logo Heirs of the Collapse",
+          "target": "Logo Heirs of the Collapse",
+          "sourceText": "Logo Heirs of the Collapse"
+        },
+        {
+          "path": "data.footer_logo.alt",
+          "fieldType": "ImageAlt",
+          "source": "Logo Heirs of the Collapse",
+          "target": "Logo Heirs of the Collapse",
+          "sourceText": "Logo Heirs of the Collapse"
+        },
+        {
+          "path": "data.footer_text",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "This is a test",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "Esto es una prueba",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "This is a test"
+        },
+        {
+          "path": "data.social_links[0].label",
+          "fieldType": "Text",
+          "source": "Instagram",
+          "target": "Instagram",
+          "sourceText": "Instagram"
+        },
+        {
+          "path": "data.social_links[1].label",
+          "fieldType": "Text",
+          "source": "Tik Tok",
+          "target": "Tik Tok",
+          "sourceText": "Tik Tok"
+        },
+        {
+          "path": "data.tagline",
+          "fieldType": "Text",
+          "source": "A webcomic by Álvaro Serrano Sierra",
+          "target": "Un webcómic de Álvaro Serrano Sierra",
+          "sourceText": "A webcomic by Álvaro Serrano Sierra"
+        },
+        {
+          "path": "data.copyright",
+          "fieldType": "StructuredText",
+          "source": [
+            {
+              "type": "paragraph",
+              "text": "© Álvaro Serrano Sierra",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "target": [
+            {
+              "type": "paragraph",
+              "text": "© Álvaro Serrano Sierra",
+              "spans": [],
+              "direction": "ltr"
+            }
+          ],
+          "sourceText": "© Álvaro Serrano Sierra"
+        },
+        {
+          "path": "data.site_by_text",
+          "fieldType": "Text",
+          "source": "Site by",
+          "target": "Site by",
+          "sourceText": "Site by"
+        },
+        {
+          "path": "data.meta_title",
+          "fieldType": "Text",
+          "source": "Heirs of the Collapse",
+          "target": "Heirs of the Collapse",
+          "sourceText": "Heirs of the Collapse"
+        }
+      ]
+    }
+  ],
+  "localResources": [
+    {
+      "key": "ui-copy",
+      "sourceLang": "en-us",
+      "targetLang": "es-es",
+      "sourceFile": "src/locales/ui/en.json",
+      "targetFile": "src/locales/ui/es.json",
+      "units": [
+        {
+          "path": "seo.defaultSiteDescription",
+          "fieldType": "LocalString",
+          "source": "Heirs of the Collapse is a cinematic sci-fi webcomic exploring survival, memory, and collapse.",
+          "target": "Heirs of the Collapse es un webcómic cinematográfico de ciencia ficción sobre supervivencia, memoria y colapso.",
+          "sourceText": "Heirs of the Collapse is a cinematic sci-fi webcomic exploring survival, memory, and collapse."
+        },
+        {
+          "path": "seo.homeSiteDescription",
+          "fieldType": "LocalString",
+          "source": "Heirs of the Collapse is a post-apocalyptic sci-fi webcomic set in a transformed Valencia, where memory, technology and hope collide after the collapse.",
+          "target": "Heirs of the Collapse es un webcómic de ciencia ficción postapocalíptica ambientado en una Valencia transformada, donde memoria, tecnología y esperanza chocan tras el Colapso.",
+          "sourceText": "Heirs of the Collapse is a post-apocalyptic sci-fi webcomic set in a transformed Valencia, where memory, technology and hope collide after the collapse."
+        },
+        {
+          "path": "seo.pages.characters.title",
+          "fieldType": "LocalString",
+          "source": "Characters",
+          "target": "Personajes",
+          "sourceText": "Characters"
+        },
+        {
+          "path": "seo.pages.characters.description",
+          "fieldType": "LocalString",
+          "source": "Meet the cast of Heirs of the Collapse.",
+          "target": "Conoce al elenco de Heirs of the Collapse.",
+          "sourceText": "Meet the cast of Heirs of the Collapse."
+        },
+        {
+          "path": "seo.pages.episodes.title",
+          "fieldType": "LocalString",
+          "source": "Episodes",
+          "target": "Episodios",
+          "sourceText": "Episodes"
+        },
+        {
+          "path": "seo.pages.episodes.description",
+          "fieldType": "LocalString",
+          "source": "Read every chapter of Heirs of the Collapse, a webcomic updating every Sunday.",
+          "target": "Lee cada capítulo de Heirs of the Collapse, un webcómic que se actualiza cada domingo.",
+          "sourceText": "Read every chapter of Heirs of the Collapse, a webcomic updating every Sunday."
+        },
+        {
+          "path": "seo.pages.lore.title",
+          "fieldType": "LocalString",
+          "source": "Worldbuilding",
+          "target": "Lore",
+          "sourceText": "Worldbuilding"
+        },
+        {
+          "path": "seo.pages.lore.description",
+          "fieldType": "LocalString",
+          "source": "Explore the environments, props, and illustrations of Heirs of the Collapse.",
+          "target": "Explora los entornos, objetos e ilustraciones de Heirs of the Collapse.",
+          "sourceText": "Explore the environments, props, and illustrations of Heirs of the Collapse."
+        },
+        {
+          "path": "seo.pages.store.title",
+          "fieldType": "LocalString",
+          "source": "Store",
+          "target": "Tienda",
+          "sourceText": "Store"
+        },
+        {
+          "path": "seo.pages.store.description",
+          "fieldType": "LocalString",
+          "source": "Support Heirs of the Collapse through official products and drops.",
+          "target": "Apoya Heirs of the Collapse con productos y lanzamientos oficiales.",
+          "sourceText": "Support Heirs of the Collapse through official products and drops."
+        },
+        {
+          "path": "common.siteTitleFallback",
+          "fieldType": "LocalString",
+          "source": "Heirs of the Collapse",
+          "target": "Heirs of the Collapse",
+          "sourceText": "Heirs of the Collapse"
+        },
+        {
+          "path": "common.socialFallbackLabel",
+          "fieldType": "LocalString",
+          "source": "Social",
+          "target": "Social",
+          "sourceText": "Social"
+        },
+        {
+          "path": "common.openImage",
+          "fieldType": "LocalString",
+          "source": "Open image",
+          "target": "Abrir imagen",
+          "sourceText": "Open image"
+        },
+        {
+          "path": "common.viewArtwork",
+          "fieldType": "LocalString",
+          "source": "View artwork",
+          "target": "Ver ilustración",
+          "sourceText": "View artwork"
+        },
+        {
+          "path": "common.imageViewer",
+          "fieldType": "LocalString",
+          "source": "Image viewer",
+          "target": "Visor de imágenes",
+          "sourceText": "Image viewer"
+        },
+        {
+          "path": "common.closeImageViewer",
+          "fieldType": "LocalString",
+          "source": "Close image viewer",
+          "target": "Cerrar visor de imágenes",
+          "sourceText": "Close image viewer"
+        },
+        {
+          "path": "common.previousImage",
+          "fieldType": "LocalString",
+          "source": "Previous image",
+          "target": "Imagen anterior",
+          "sourceText": "Previous image"
+        },
+        {
+          "path": "common.nextImage",
+          "fieldType": "LocalString",
+          "source": "Next image",
+          "target": "Imagen siguiente",
+          "sourceText": "Next image"
+        },
+        {
+          "path": "common.play",
+          "fieldType": "LocalString",
+          "source": "Play",
+          "target": "Reproducir",
+          "sourceText": "Play"
+        },
+        {
+          "path": "a11y.genericCtas.learnMore",
+          "fieldType": "LocalString",
+          "source": "learn more",
+          "target": "saber más",
+          "sourceText": "learn more"
+        },
+        {
+          "path": "a11y.genericCtas.readMore",
+          "fieldType": "LocalString",
+          "source": "read more",
+          "target": "leer más",
+          "sourceText": "read more"
+        },
+        {
+          "path": "a11y.genericCtas.discover",
+          "fieldType": "LocalString",
+          "source": "discover",
+          "target": "descubrir",
+          "sourceText": "discover"
+        },
+        {
+          "path": "a11y.genericCtas.explore",
+          "fieldType": "LocalString",
+          "source": "explore",
+          "target": "explorar",
+          "sourceText": "explore"
+        },
+        {
+          "path": "a11y.genericCtas.view",
+          "fieldType": "LocalString",
+          "source": "view",
+          "target": "ver",
+          "sourceText": "view"
+        },
+        {
+          "path": "a11y.genericCtas.viewMore",
+          "fieldType": "LocalString",
+          "source": "view more",
+          "target": "ver más",
+          "sourceText": "view more"
+        },
+        {
+          "path": "a11y.genericCtas.more",
+          "fieldType": "LocalString",
+          "source": "more",
+          "target": "más",
+          "sourceText": "more"
+        },
+        {
+          "path": "a11y.descriptiveCtas.characters",
+          "fieldType": "LocalString",
+          "source": "Explore the characters",
+          "target": "Explora los personajes",
+          "sourceText": "Explore the characters"
+        },
+        {
+          "path": "a11y.descriptiveCtas.lore",
+          "fieldType": "LocalString",
+          "source": "Discover the lore",
+          "target": "Descubre el lore",
+          "sourceText": "Discover the lore"
+        },
+        {
+          "path": "a11y.aboutConnector",
+          "fieldType": "LocalString",
+          "source": "about",
+          "target": "sobre",
+          "sourceText": "about"
+        },
+        {
+          "path": "header.language",
+          "fieldType": "LocalString",
+          "source": "Language",
+          "target": "Idioma",
+          "sourceText": "Language"
+        },
+        {
+          "path": "header.primaryNav",
+          "fieldType": "LocalString",
+          "source": "Primary navigation",
+          "target": "Navegación principal",
+          "sourceText": "Primary navigation"
+        },
+        {
+          "path": "header.socialNav",
+          "fieldType": "LocalString",
+          "source": "Social media",
+          "target": "Redes sociales",
+          "sourceText": "Social media"
+        },
+        {
+          "path": "header.menuOpen",
+          "fieldType": "LocalString",
+          "source": "Open main menu",
+          "target": "Abrir menú principal",
+          "sourceText": "Open main menu"
+        },
+        {
+          "path": "header.menuClose",
+          "fieldType": "LocalString",
+          "source": "Close main menu",
+          "target": "Cerrar menú principal",
+          "sourceText": "Close main menu"
+        },
+        {
+          "path": "header.mobileNav",
+          "fieldType": "LocalString",
+          "source": "Mobile navigation",
+          "target": "Navegación móvil",
+          "sourceText": "Mobile navigation"
+        },
+        {
+          "path": "footer.siteByFallback",
+          "fieldType": "LocalString",
+          "source": "Site by",
+          "target": "Web por",
+          "sourceText": "Site by"
+        },
+        {
+          "path": "footer.footerNav",
+          "fieldType": "LocalString",
+          "source": "Footer navigation",
+          "target": "Navegación del pie",
+          "sourceText": "Footer navigation"
+        },
+        {
+          "path": "footer.socialLinks",
+          "fieldType": "LocalString",
+          "source": "Social links",
+          "target": "Enlaces sociales",
+          "sourceText": "Social links"
+        },
+        {
+          "path": "footer.socialIcons",
+          "fieldType": "LocalString",
+          "source": "Social icons",
+          "target": "Iconos sociales",
+          "sourceText": "Social icons"
+        },
+        {
+          "path": "footer.navigate",
+          "fieldType": "LocalString",
+          "source": "Navigate",
+          "target": "Navegar",
+          "sourceText": "Navigate"
+        },
+        {
+          "path": "footer.follow",
+          "fieldType": "LocalString",
+          "source": "Follow",
+          "target": "Seguir",
+          "sourceText": "Follow"
+        },
+        {
+          "path": "footer.social",
+          "fieldType": "LocalString",
+          "source": "Social",
+          "target": "Social",
+          "sourceText": "Social"
+        },
+        {
+          "path": "footer.copyrightFallback",
+          "fieldType": "LocalString",
+          "source": "© {year} {siteTitle}. All rights reserved.",
+          "target": "© {year} {siteTitle}. Todos los derechos reservados.",
+          "sourceText": "© {year} {siteTitle}. All rights reserved."
+        },
+        {
+          "path": "images.defaultIllustrationAlt",
+          "fieldType": "LocalString",
+          "source": "Illustration from Heirs of the Collapse",
+          "target": "Ilustración de Heirs of the Collapse",
+          "sourceText": "Illustration from Heirs of the Collapse"
+        },
+        {
+          "path": "images.editorialImageAlt",
+          "fieldType": "LocalString",
+          "source": "Editorial image from Heirs of the Collapse",
+          "target": "Imagen editorial de Heirs of the Collapse",
+          "sourceText": "Editorial image from Heirs of the Collapse"
+        },
+        {
+          "path": "images.heroArtworkAlt",
+          "fieldType": "LocalString",
+          "source": "Heirs of the Collapse hero artwork",
+          "target": "Arte principal de Heirs of the Collapse",
+          "sourceText": "Heirs of the Collapse hero artwork"
+        },
+        {
+          "path": "images.parallaxHeroArtworkAlt",
+          "fieldType": "LocalString",
+          "source": "Heirs of the Collapse parallax hero artwork",
+          "target": "Arte principal parallax de Heirs of the Collapse",
+          "sourceText": "Heirs of the Collapse parallax hero artwork"
+        },
+        {
+          "path": "images.foregroundArtworkAlt",
+          "fieldType": "LocalString",
+          "source": "{title} foreground artwork",
+          "target": "Arte de primer plano de {title}",
+          "sourceText": "{title} foreground artwork"
+        },
+        {
+          "path": "images.fullWidthArtworkAlt",
+          "fieldType": "LocalString",
+          "source": "Full-width artwork from Heirs of the Collapse",
+          "target": "Arte a todo ancho de Heirs of the Collapse",
+          "sourceText": "Full-width artwork from Heirs of the Collapse"
+        },
+        {
+          "path": "images.galleryImage",
+          "fieldType": "LocalString",
+          "source": "Gallery image {index}",
+          "target": "Imagen de galería {index}",
+          "sourceText": "Gallery image {index}"
+        },
+        {
+          "path": "images.tickerImage",
+          "fieldType": "LocalString",
+          "source": "Ticker image {index}",
+          "target": "Imagen del carrusel {index}",
+          "sourceText": "Ticker image {index}"
+        },
+        {
+          "path": "images.cardImage",
+          "fieldType": "LocalString",
+          "source": "Card image {index}",
+          "target": "Imagen de tarjeta {index}",
+          "sourceText": "Card image {index}"
+        },
+        {
+          "path": "images.featureTitle",
+          "fieldType": "LocalString",
+          "source": "Feature {index}",
+          "target": "Elemento {index}",
+          "sourceText": "Feature {index}"
+        },
+        {
+          "path": "images.featureImageAria",
+          "fieldType": "LocalString",
+          "source": "View artwork: {title} image",
+          "target": "Ver ilustración: imagen de {title}",
+          "sourceText": "View artwork: {title} image"
+        },
+        {
+          "path": "character.fallbackName",
+          "fieldType": "LocalString",
+          "source": "Unknown character",
+          "target": "Personaje desconocido",
+          "sourceText": "Unknown character"
+        },
+        {
+          "path": "character.castBack",
+          "fieldType": "LocalString",
+          "source": "Cast",
+          "target": "Personajes",
+          "sourceText": "Cast"
+        },
+        {
+          "path": "character.bio",
+          "fieldType": "LocalString",
+          "source": "Bio",
+          "target": "Biografía",
+          "sourceText": "Bio"
+        },
+        {
+          "path": "character.gallery",
+          "fieldType": "LocalString",
+          "source": "Gallery",
+          "target": "Galería",
+          "sourceText": "Gallery"
+        },
+        {
+          "path": "character.coverArtwork",
+          "fieldType": "LocalString",
+          "source": "{name} cover artwork",
+          "target": "Arte de portada de {name}",
+          "sourceText": "{name} cover artwork"
+        },
+        {
+          "path": "character.portraitOf",
+          "fieldType": "LocalString",
+          "source": "Portrait of {name}",
+          "target": "Retrato de {name}",
+          "sourceText": "Portrait of {name}"
+        },
+        {
+          "path": "character.galleryImage",
+          "fieldType": "LocalString",
+          "source": "{name} gallery image {index}",
+          "target": "Imagen de galería de {name} {index}",
+          "sourceText": "{name} gallery image {index}"
+        },
+        {
+          "path": "character.unknownListItem",
+          "fieldType": "LocalString",
+          "source": "Unknown",
+          "target": "Desconocido",
+          "sourceText": "Unknown"
+        },
+        {
+          "path": "character.roles.Protagonist",
+          "fieldType": "LocalString",
+          "source": "Protagonist",
+          "target": "Protagonista",
+          "sourceText": "Protagonist"
+        },
+        {
+          "path": "character.roles.Ally",
+          "fieldType": "LocalString",
+          "source": "Ally",
+          "target": "Aliado",
+          "sourceText": "Ally"
+        },
+        {
+          "path": "character.roles.Antagonist",
+          "fieldType": "LocalString",
+          "source": "Antagonist",
+          "target": "Antagonista",
+          "sourceText": "Antagonist"
+        },
+        {
+          "path": "character.roles.Neutral",
+          "fieldType": "LocalString",
+          "source": "Neutral",
+          "target": "Neutral",
+          "sourceText": "Neutral"
+        },
+        {
+          "path": "character.roles.Other",
+          "fieldType": "LocalString",
+          "source": "Other",
+          "target": "Otro",
+          "sourceText": "Other"
+        },
+        {
+          "path": "episodes.archive",
+          "fieldType": "LocalString",
+          "source": "Archive",
+          "target": "Archivo",
+          "sourceText": "Archive"
+        },
+        {
+          "path": "episodes.title",
+          "fieldType": "LocalString",
+          "source": "Episodes",
+          "target": "Episodios",
+          "sourceText": "Episodes"
+        },
+        {
+          "path": "episodes.introFallback",
+          "fieldType": "LocalString",
+          "source": "Read the story from the beginning, or jump to the latest chapter.",
+          "target": "Lee la historia desde el principio o salta al capítulo más reciente.",
+          "sourceText": "Read the story from the beginning, or jump to the latest chapter."
+        },
+        {
+          "path": "episodes.fallbackCardAlt",
+          "fieldType": "LocalString",
+          "source": "Episode {uid}",
+          "target": "Episodio {uid}",
+          "sourceText": "Episode {uid}"
+        },
+        {
+          "path": "episodes.chapterTitle",
+          "fieldType": "LocalString",
+          "source": "Chapter {number}: {title}",
+          "target": "Capítulo {number}: {title}",
+          "sourceText": "Chapter {number}: {title}"
+        },
+        {
+          "path": "episodes.chapterLabel",
+          "fieldType": "LocalString",
+          "source": "Chapter {number}",
+          "target": "Capítulo {number}",
+          "sourceText": "Chapter {number}"
+        },
+        {
+          "path": "episodes.chapterShort",
+          "fieldType": "LocalString",
+          "source": "CH. {number}",
+          "target": "CAP. {number}",
+          "sourceText": "CH. {number}"
+        },
+        {
+          "path": "episodes.nav.prev",
+          "fieldType": "LocalString",
+          "source": "Previous Episode",
+          "target": "Episodio anterior",
+          "sourceText": "Previous Episode"
+        },
+        {
+          "path": "episodes.nav.next",
+          "fieldType": "LocalString",
+          "source": "Next Episode",
+          "target": "Siguiente episodio",
+          "sourceText": "Next Episode"
+        },
+        {
+          "path": "episodes.synopsisAria",
+          "fieldType": "LocalString",
+          "source": "Episode synopsis",
+          "target": "Sinopsis del episodio",
+          "sourceText": "Episode synopsis"
+        },
+        {
+          "path": "episodes.synopsisTitle",
+          "fieldType": "LocalString",
+          "source": "Synopsis",
+          "target": "Sinopsis",
+          "sourceText": "Synopsis"
+        },
+        {
+          "path": "episodes.breadcrumbTitle",
+          "fieldType": "LocalString",
+          "source": "Episodes",
+          "target": "Episodios",
+          "sourceText": "Episodes"
+        },
+        {
+          "path": "episodes.arcs.Prologue",
+          "fieldType": "LocalString",
+          "source": "Prologue",
+          "target": "Prólogo",
+          "sourceText": "Prologue"
+        },
+        {
+          "path": "episodes.arcs.Arc I",
+          "fieldType": "LocalString",
+          "source": "Arc I",
+          "target": "Arco I",
+          "sourceText": "Arc I"
+        },
+        {
+          "path": "episodes.arcs.Arc II",
+          "fieldType": "LocalString",
+          "source": "Arc II",
+          "target": "Arco II",
+          "sourceText": "Arc II"
+        },
+        {
+          "path": "episodes.arcs.Arc III",
+          "fieldType": "LocalString",
+          "source": "Arc III",
+          "target": "Arco III",
+          "sourceText": "Arc III"
+        },
+        {
+          "path": "episodes.arcs.Epilogue",
+          "fieldType": "LocalString",
+          "source": "Epilogue",
+          "target": "Epilogo",
+          "sourceText": "Epilogue"
+        },
+        {
+          "path": "lore.archive",
+          "fieldType": "LocalString",
+          "source": "Archive",
+          "target": "Archivo",
+          "sourceText": "Archive"
+        },
+        {
+          "path": "lore.title",
+          "fieldType": "LocalString",
+          "source": "Worldbuilding",
+          "target": "Lore",
+          "sourceText": "Worldbuilding"
+        },
+        {
+          "path": "lore.intro",
+          "fieldType": "LocalString",
+          "source": "The places, objects, and images of the Collapse.",
+          "target": "Lugares, objetos e imágenes del Colapso.",
+          "sourceText": "The places, objects, and images of the Collapse."
+        },
+        {
+          "path": "lore.entryFallback",
+          "fieldType": "LocalString",
+          "source": "Worldbuilding entry",
+          "target": "Entrada de lore",
+          "sourceText": "Worldbuilding entry"
+        },
+        {
+          "path": "lore.back",
+          "fieldType": "LocalString",
+          "source": "Worldbuilding",
+          "target": "Lore",
+          "sourceText": "Worldbuilding"
+        },
+        {
+          "path": "lore.coverArtwork",
+          "fieldType": "LocalString",
+          "source": "{name} cover artwork",
+          "target": "Arte de portada de {name}",
+          "sourceText": "{name} cover artwork"
+        },
+        {
+          "path": "lore.titleSuffix",
+          "fieldType": "LocalString",
+          "source": "Worldbuilding",
+          "target": "Lore",
+          "sourceText": "Worldbuilding"
+        },
+        {
+          "path": "lore.categories.Environment.singular",
+          "fieldType": "LocalString",
+          "source": "Environment",
+          "target": "Entorno",
+          "sourceText": "Environment"
+        },
+        {
+          "path": "lore.categories.Environment.plural",
+          "fieldType": "LocalString",
+          "source": "Environments",
+          "target": "Entornos",
+          "sourceText": "Environments"
+        },
+        {
+          "path": "lore.categories.Environment.kicker",
+          "fieldType": "LocalString",
+          "source": "01",
+          "target": "01",
+          "sourceText": "01"
+        },
+        {
+          "path": "lore.categories.Prop.singular",
+          "fieldType": "LocalString",
+          "source": "Prop",
+          "target": "Objeto",
+          "sourceText": "Prop"
+        },
+        {
+          "path": "lore.categories.Prop.plural",
+          "fieldType": "LocalString",
+          "source": "Props",
+          "target": "Objetos",
+          "sourceText": "Props"
+        },
+        {
+          "path": "lore.categories.Prop.kicker",
+          "fieldType": "LocalString",
+          "source": "02",
+          "target": "02",
+          "sourceText": "02"
+        },
+        {
+          "path": "lore.categories.Illustration.singular",
+          "fieldType": "LocalString",
+          "source": "Illustration",
+          "target": "Ilustración",
+          "sourceText": "Illustration"
+        },
+        {
+          "path": "lore.categories.Illustration.plural",
+          "fieldType": "LocalString",
+          "source": "Illustrations",
+          "target": "Ilustraciones",
+          "sourceText": "Illustrations"
+        },
+        {
+          "path": "lore.categories.Illustration.kicker",
+          "fieldType": "LocalString",
+          "source": "03",
+          "target": "03",
+          "sourceText": "03"
+        },
+        {
+          "path": "lore.categories.Other.singular",
+          "fieldType": "LocalString",
+          "source": "Other",
+          "target": "Otro",
+          "sourceText": "Other"
+        },
+        {
+          "path": "lore.categories.Other.plural",
+          "fieldType": "LocalString",
+          "source": "Others",
+          "target": "Otros",
+          "sourceText": "Others"
+        },
+        {
+          "path": "lore.categories.Other.kicker",
+          "fieldType": "LocalString",
+          "source": "--",
+          "target": "--",
+          "sourceText": "--"
+        },
+        {
+          "path": "store.fallbackCategory",
+          "fieldType": "LocalString",
+          "source": "Store",
+          "target": "Tienda",
+          "sourceText": "Store"
+        },
+        {
+          "path": "store.shop",
+          "fieldType": "LocalString",
+          "source": "Shop",
+          "target": "Tienda",
+          "sourceText": "Shop"
+        },
+        {
+          "path": "store.title",
+          "fieldType": "LocalString",
+          "source": "Store",
+          "target": "Tienda",
+          "sourceText": "Store"
+        },
+        {
+          "path": "store.intro",
+          "fieldType": "LocalString",
+          "source": "Support the project.",
+          "target": "Apoya el proyecto.",
+          "sourceText": "Support the project."
+        },
+        {
+          "path": "store.buyProductAria",
+          "fieldType": "LocalString",
+          "source": "Buy {title}",
+          "target": "Comprar {title}",
+          "sourceText": "Buy {title}"
+        },
+        {
+          "path": "store.productFallbackTitle",
+          "fieldType": "LocalString",
+          "source": "product",
+          "target": "producto",
+          "sourceText": "product"
+        },
+        {
+          "path": "store.productImage",
+          "fieldType": "LocalString",
+          "source": "Product image",
+          "target": "Imagen del producto",
+          "sourceText": "Product image"
+        },
+        {
+          "path": "store.soldOut",
+          "fieldType": "LocalString",
+          "source": "Sold out",
+          "target": "Agotado",
+          "sourceText": "Sold out"
+        },
+        {
+          "path": "store.buy",
+          "fieldType": "LocalString",
+          "source": "Buy",
+          "target": "Comprar",
+          "sourceText": "Buy"
+        },
+        {
+          "path": "store.soon",
+          "fieldType": "LocalString",
+          "source": "Soon",
+          "target": "Próximamente",
+          "sourceText": "Soon"
+        },
+        {
+          "path": "store.empty",
+          "fieldType": "LocalString",
+          "source": "No products available yet.",
+          "target": "Aún no hay productos disponibles.",
+          "sourceText": "No products available yet."
+        },
+        {
+          "path": "newsletter.title",
+          "fieldType": "LocalString",
+          "source": "Sundays in your inbox.",
+          "target": "Domingos en tu bandeja de entrada.",
+          "sourceText": "Sundays in your inbox."
+        },
+        {
+          "path": "newsletter.description",
+          "fieldType": "LocalString",
+          "source": "One email when a new chapter drops.",
+          "target": "Un correo cada vez que salga un nuevo capítulo.",
+          "sourceText": "One email when a new chapter drops."
+        },
+        {
+          "path": "newsletter.placeholder",
+          "fieldType": "LocalString",
+          "source": "your@email.com",
+          "target": "tu@email.com",
+          "sourceText": "your@email.com"
+        },
+        {
+          "path": "newsletter.subscribe",
+          "fieldType": "LocalString",
+          "source": "Subscribe",
+          "target": "Suscribirse",
+          "sourceText": "Subscribe"
+        },
+        {
+          "path": "youtube.videoFallbackTitle",
+          "fieldType": "LocalString",
+          "source": "YouTube video",
+          "target": "Video de YouTube",
+          "sourceText": "YouTube video"
+        },
+        {
+          "path": "youtube.invalidUrl",
+          "fieldType": "LocalString",
+          "source": "Add a valid YouTube URL to display the video.",
+          "target": "Añade una URL válida de YouTube para mostrar el vídeo.",
+          "sourceText": "Add a valid YouTube URL to display the video."
+        },
+        {
+          "path": "externalSupport.supportProject",
+          "fieldType": "LocalString",
+          "source": "Support this project",
+          "target": "Apoya este proyecto",
+          "sourceText": "Support this project"
+        },
+        {
+          "path": "externalSupport.support",
+          "fieldType": "LocalString",
+          "source": "Support",
+          "target": "Apoyo",
+          "sourceText": "Support"
+        },
+        {
+          "path": "errors.homePageNotFound",
+          "fieldType": "LocalString",
+          "source": "Home page content not found. Please create it in Prismic.",
+          "target": "No se encontró el contenido de la portada. Créalo en Prismic.",
+          "sourceText": "Home page content not found. Please create it in Prismic."
+        }
+      ]
+    }
+  ]
+}

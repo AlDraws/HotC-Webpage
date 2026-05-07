@@ -73,9 +73,11 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   const headerLogo = brandData.header_logo?.url
     ? brandData.header_logo
     : settings.data.logo;
+
   function switchLocale(locale: AppLocale) {
     if (locale === currentLocale || isPending) return;
 
+    setOpen(false);
     setPendingLocale(locale);
     persistLocalePreference(locale);
 
@@ -85,7 +87,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   }
 
   return (
-    <header className="hotc-header">
+    <header className={`hotc-header${open ? " is-open" : ""}`}>
       <div className="bounded hotc-header__inner">
         <Link
           href={`/${currentLocale}`}
@@ -200,92 +202,57 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
             aria-controls="hotc-mobile-menu"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-              <path d="M4 7h16M4 12h16M4 17h16" />
+              {open ? (
+                <path d="M6 6l12 12M18 6L6 18" />
+              ) : (
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              )}
             </svg>
           </button>
         </div>
       </div>
 
-      {open && (
-        <div
-          id="hotc-mobile-menu"
-          className="hotc-header__drawer"
-          role="dialog"
-          aria-modal="true"
-          aria-label={copy.header.mobileNav}
-        >
-          <div className="hotc-header__drawer-head">
-            <Link
-              href={`/${currentLocale}`}
-              className="hotc-header__logo"
-              aria-label={siteTitle}
-              onClick={() => setOpen(false)}
-            >
-              {headerLogo?.url ? (
-                <BrandLogo
-                  field={headerLogo}
-                  alt={siteTitle}
-                  className="h-full w-auto object-contain"
-                  width={headerLogo?.dimensions?.width}
-                  height={headerLogo?.dimensions?.height}
-                  sizes="96px"
-                  loading="lazy"
-                  fetchPriority="low"
-                  quality={60}
-                />
-              ) : (
-                <span className="hotc-logo-mask hotc-logo-mask--heirs" />
-              )}
-            </Link>
-            <button
-              type="button"
-              className="hotc-header__burger"
-              aria-label={copy.header.menuClose}
-              onClick={() => setOpen(false)}
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <path d="M6 6l12 12M18 6L6 18" />
-              </svg>
-            </button>
-          </div>
+      <div
+        id="hotc-mobile-menu"
+        className={`hotc-header__drawer${open ? " is-open" : ""}`}
+        aria-hidden={!open}
+      >
+        <nav className="hotc-header__drawer-nav" aria-label={copy.header.mobileNav}>
+          {navItems.map((item, i) => {
+            if (!item.href) return null;
 
-          <nav className="hotc-header__drawer-nav" aria-label={copy.header.mobileNav}>
-            {navItems.map((item, i) => {
-              if (!item.href) return null;
+            const isActive =
+              pathname && item.href.split(/[#?]/, 1)[0] === pathname;
 
-              const isActive =
-                pathname && item.href.split(/[#?]/, 1)[0] === pathname;
-
-              if (isExternalHref(item.href)) {
-                return (
-                  <a
-                    key={i}
-                    href={item.href}
-                    target={item.target ?? "_blank"}
-                    rel="noopener noreferrer"
-                    onClick={() => setOpen(false)}
-                  >
-                    <span>{item.label}</span>
-                    <span aria-hidden>→</span>
-                  </a>
-                );
-              }
-
+            if (isExternalHref(item.href)) {
               return (
-                <Link
+                <a
                   key={i}
                   href={item.href}
+                  target={item.target ?? "_blank"}
+                  rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
-                  className={isActive ? "is-active" : ""}
                 >
                   <span>{item.label}</span>
                   <span aria-hidden>→</span>
-                </Link>
+                </a>
               );
-            })}
-          </nav>
-        </div>
-      )}
+            }
+
+            return (
+              <Link
+                key={i}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className={isActive ? "is-active" : ""}
+              >
+                <span>{item.label}</span>
+                <span aria-hidden>→</span>
+              </Link>
+            );
+          })}
+        </nav>
+      </div>
     </header>
   );
 }

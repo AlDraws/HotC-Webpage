@@ -92,17 +92,19 @@ export default async function LoreDetailPage({ params }: Props) {
         <div className="hotc-cprofile__overlay" />
 
         <div className="bounded hotc-cprofile__hero-inner">
-          <Link href={`/${locale}/lore`} className="hotc-cprofile__back">
-            ← {copy.lore.back}
-          </Link>
-          {item.data.category ? (
-            <span
-              className="hotc-kicker"
-              style={{ color: "var(--hotc-ember)" }}
-            >
-              {getLocalizedLoreCategory(item.data.category || null, locale)}
-            </span>
-          ) : null}
+          <div className="hotc-cprofile__hero-head">
+            <Link href={`/${locale}/lore`} className="hotc-cprofile__back">
+              ← {copy.lore.back}
+            </Link>
+            {item.data.category ? (
+              <span
+                className="hotc-kicker"
+                style={{ color: "var(--hotc-ember)" }}
+              >
+                {getLocalizedLoreCategory(item.data.category || null, locale)}
+              </span>
+            ) : null}
+          </div>
           <h1 className="hotc-cprofile__name">{item.data.title}</h1>
           {item.data.epithet ? (
             <p className="hotc-cprofile__epithet">{item.data.epithet}</p>
