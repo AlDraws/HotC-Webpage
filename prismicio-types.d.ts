@@ -1659,6 +1659,28 @@ interface SettingsDocumentData {
   >;
 
   /**
+   * prev_button_label field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Previous Episode
+   * - **API ID Path**: settings.prev_button_label
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  prev_button_label: prismic.KeyTextField;
+
+  /**
+   * next_button_label field in *Settings*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: Next Episode
+   * - **API ID Path**: settings.next_button_label
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  next_button_label: prismic.KeyTextField;
+
+  /**
    * store_links field in *Settings*
    *
    * - **Field Type**: Group

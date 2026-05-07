@@ -1,13 +1,14 @@
 "use client";
 
-import { Content, asText } from "@prismicio/client";
+import { Content, asLink, asText } from "@prismicio/client";
+import { PrismicNextLink } from "@prismicio/next";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
 import { LOCALE_COOKIE_NAME, type AppLocale } from "@/lib/locale";
-import { localizeHref, resolveLinkHref } from "@/lib/links";
+import { localizeHref } from "@/lib/links";
 
 type Props = {
   settings: Content.SettingsDocument;
@@ -20,14 +21,11 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   const pathname = usePathname();
   const router = useRouter();
   const nav = navigation?.data.primary_links ?? [];
-  const navItems = nav.map((n) => {
-    const href = localizeHref(resolveLinkHref(n.link) ?? "#", currentLocale);
-
-    return {
-      href,
-      label: asText(n.label),
-    };
-  });
+  const navItems = nav.map((n) => ({
+    href: asLink(n.link) ?? "",
+    label: asText(n.label),
+    link: n.link,
+  }));
   const socials = settings.data.social_links ?? [];
   const headerSocials = socials.filter((s) => {
     const iconLabel =
@@ -39,15 +37,11 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   });
   const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
   const brandData = settings.data as typeof settings.data & {
-    header_logo?: {
-      url?: string | null;
-      dimensions?: { width?: number | null; height?: number | null } | null;
-    } | null;
+    header_logo?: typeof settings.data.logo | null;
   };
   const headerLogo = brandData.header_logo?.url
     ? brandData.header_logo
     : settings.data.logo;
-  const headerLogoUrl = headerLogo?.url;
 
   function switchLocale(locale: AppLocale) {
     if (locale === currentLocale) return;
@@ -63,9 +57,9 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
           className="hotc-header__logo"
           aria-label={siteTitle}
         >
-          {headerLogoUrl ? (
+          {headerLogo?.url ? (
             <BrandLogo
-              src={headerLogoUrl}
+              field={headerLogo}
               alt={siteTitle}
               className="h-full w-auto object-contain"
               width={headerLogo?.dimensions?.width}
@@ -79,15 +73,15 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
 
         <nav className="hotc-header__nav">
           {navItems.map((item, i) => (
-            <Link
+            <PrismicNextLink
               key={i}
-              href={item.href}
+              field={item.link}
               className={`hotc-header__nav-item${
                 pathname && item.href === pathname ? " is-active" : ""
               }`}
             >
               {item.label}
-            </Link>
+            </PrismicNextLink>
           ))}
         </nav>
 
@@ -121,16 +115,16 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
                   ? s.icon_key
                   : s.label || s.icon_key || "";
               return (
-                <a
+                <PrismicNextLink
                   key={i}
-                  href={resolveLinkHref(s.url) ?? "#"}
+                  field={s.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hotc-header__icon"
                   aria-label={s.label || "Social"}
                 >
                   <SocialIcon label={iconLabel} />
-                </a>
+                </PrismicNextLink>
               );
             })}
           </div>
@@ -156,9 +150,9 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
               aria-label={siteTitle}
               onClick={() => setOpen(false)}
             >
-              {headerLogoUrl ? (
+              {headerLogo?.url ? (
                 <BrandLogo
-                  src={headerLogoUrl}
+                  field={headerLogo}
                   alt={siteTitle}
                   className="h-full w-auto object-contain"
                   width={headerLogo?.dimensions?.width}
@@ -183,9 +177,9 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
           <nav className="hotc-header__drawer-nav">
             {navItems.map((item, i) => {
               return (
-                <Link
+                <PrismicNextLink
                   key={i}
-                  href={item.href}
+                  field={item.link}
                   onClick={() => setOpen(false)}
                   className={
                     pathname && item.href === pathname ? "is-active" : ""
@@ -193,7 +187,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
                 >
                   <span>{item.label}</span>
                   <span aria-hidden>→</span>
-                </Link>
+                </PrismicNextLink>
               );
             })}
           </nav>

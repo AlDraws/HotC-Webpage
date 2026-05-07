@@ -1,10 +1,10 @@
-import { Content, asText } from "@prismicio/client";
+import { Content, asLink, asText } from "@prismicio/client";
+import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText } from "@prismicio/react";
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
 import type { AppLocale } from "@/lib/locale";
-import { localizeHref, resolveLinkHref } from "@/lib/links";
 
 type Props = {
   settings: Content.SettingsDocument;
@@ -16,23 +16,20 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
   const socials = settings.data.social_links ?? [];
   const nav = navigation?.data.primary_links ?? [];
   const navItems = nav.map((n) => ({
-    href: localizeHref(resolveLinkHref(n.link) ?? "#", currentLocale),
     label: asText(n.label),
+    link: n.link,
   }));
   const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
-  const siteByHref = resolveLinkHref(settings.data.site_by_link) ?? "#";
+  const siteByHref = asLink(settings.data.site_by_link) ?? "";
   const siteByText = settings.data.site_by_text || "Site by";
   const fallbackCopyright = `© ${new Date().getFullYear()} ${siteTitle}. All rights reserved.`;
   const brandData = settings.data as typeof settings.data & {
-    footer_logo?: {
-      url?: string | null;
-      dimensions?: { width?: number | null; height?: number | null } | null;
-    } | null;
+    footer_logo?: typeof settings.data.logo | null;
+    site_by_logo?: typeof settings.data.logo | null;
   };
   const footerLogo = brandData.footer_logo?.url
     ? brandData.footer_logo
     : settings.data.logo;
-  const footerLogoUrl = footerLogo?.url;
 
   return (
     <footer className="hotc-footer">
@@ -43,9 +40,9 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
             className="hotc-footer__logo"
             aria-label={siteTitle}
           >
-            {footerLogoUrl ? (
+            {footerLogo?.url ? (
               <BrandLogo
-                src={footerLogoUrl}
+                field={footerLogo}
                 alt={siteTitle}
                 className="h-20 w-auto object-contain"
                 width={footerLogo?.dimensions?.width}
@@ -69,22 +66,22 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
           <div className="hotc-footer__col">
             <h4>Navigate</h4>
             {navItems.map((item, i) => (
-              <Link key={i} href={item.href}>
+              <PrismicNextLink key={i} field={item.link}>
                 {item.label}
-              </Link>
+              </PrismicNextLink>
             ))}
           </div>
           <div className="hotc-footer__col">
             <h4>Follow</h4>
             {socials.map((s, i) => (
-              <a
+              <PrismicNextLink
                 key={i}
-                href={resolveLinkHref(s.url) ?? "#"}
+                field={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 {s.label || "Social"}
-              </a>
+              </PrismicNextLink>
             ))}
           </div>
           <div className="hotc-footer__col">
@@ -96,16 +93,16 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
                     ? s.icon_key
                     : s.label || s.icon_key || "";
                 return (
-                  <a
+                  <PrismicNextLink
                     key={i}
-                    href={resolveLinkHref(s.url) ?? "#"}
+                    field={s.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hotc-header__icon"
                     aria-label={s.label || "Social"}
                   >
                     <SocialIcon label={iconLabel} />
-                  </a>
+                  </PrismicNextLink>
                 );
               })}
             </div>
@@ -119,27 +116,27 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
         ) : (
           <span>{fallbackCopyright}</span>
         )}
-        <a
+        <PrismicNextLink
           className="hotc-footer__attr"
-          href={siteByHref}
+          field={settings.data.site_by_link}
           target={siteByHref.startsWith("http") ? "_blank" : undefined}
           rel={siteByHref.startsWith("http") ? "noopener noreferrer" : undefined}
           aria-label={siteByText}
         >
           <span className="hotc-footer__attr-by">{siteByText}</span>
-          {settings.data.site_by_logo?.url ? (
+          {brandData.site_by_logo?.url ? (
             <BrandLogo
-              src={settings.data.site_by_logo.url}
+              field={brandData.site_by_logo}
               alt={siteByText}
               className="h-[18px] w-auto object-contain"
-              width={settings.data.site_by_logo.dimensions?.width}
-              height={settings.data.site_by_logo.dimensions?.height}
+              width={brandData.site_by_logo.dimensions?.width}
+              height={brandData.site_by_logo.dimensions?.height}
               sizes="120px"
             />
           ) : (
             <span className="hotc-logo-mask hotc-logo-mask--alvaro" />
           )}
-        </a>
+        </PrismicNextLink>
       </div>
     </footer>
   );

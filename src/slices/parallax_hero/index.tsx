@@ -118,6 +118,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
               fallbackAlt=""
               fill
               sizes="100vw"
+              preload={true}
               className="hotc-phero__bg-img"
             />
           </div>
@@ -130,7 +131,10 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
 
       {slice.primary.foreground?.url && (
         <div ref={fgRef} className="hotc-phero__fg">
-          <PrismicNextImage field={slice.primary.foreground} fallbackAlt="" />
+          <PrismicNextImage
+            field={slice.primary.foreground}
+            fallbackAlt=""
+          />
         </div>
       )}
 

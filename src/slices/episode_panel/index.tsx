@@ -1,19 +1,25 @@
-import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { EpisodePanelSlice } from "@/../prismicio-types";
+import SequentialEpisodeImage from "@/slices/episode_panel/SequentialEpisodeImage";
+import type { EpisodePanelSequenceContext } from "@/slices/episode_panel/sequence-context";
 
-export type EpisodePanelProps = SliceComponentProps<EpisodePanelSlice>;
+export type EpisodePanelProps = SliceComponentProps<
+  EpisodePanelSlice,
+  EpisodePanelSequenceContext
+>;
 
-const EpisodePanel = ({ slice }: EpisodePanelProps) => {
+const EpisodePanel = ({ slice, index, context }: EpisodePanelProps) => {
+  const panelIndex = context.panelOrderBySliceIndex[index] ?? 0;
+  const alt = slice.primary.image.alt || slice.primary.label || "";
+
   return (
     <div className="hotc-ep-panel">
       {slice.primary.image?.url ? (
-        <PrismicNextImage
+        <SequentialEpisodeImage
           field={slice.primary.image}
-          quality={100}
-          className="block w-full"
-          sizes="(min-width: 1080px) 1080px, 100vw"
-          fallbackAlt={(slice.primary.label ?? "") as unknown as ""}
+          alt={alt}
+          panelIndex={panelIndex}
+          sequenceId={context.sequenceId}
         />
       ) : null}
     </div>

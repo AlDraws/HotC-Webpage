@@ -36,8 +36,7 @@ const Hero = ({ slice }: HeroProps) => {
             fallbackAlt=""
             fill
             sizes="100vw"
-            loading="eager"
-            fetchPriority="high"
+            preload={true}
             className="hotc-hero__bg-img"
           />
         </div>

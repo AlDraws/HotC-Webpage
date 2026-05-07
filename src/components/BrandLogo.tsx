@@ -1,7 +1,10 @@
+import type { ImageField } from "@prismicio/client";
+import { PrismicNextImage } from "@prismicio/next";
 import Image from "next/image";
 
 type BrandLogoProps = {
-  src: string;
+  field?: ImageField | null;
+  src?: string;
   alt?: string;
   className?: string;
   width?: number | null;
@@ -16,6 +19,7 @@ function getDimension(value: number | null | undefined, fallback: number): numbe
 }
 
 export default function BrandLogo({
+  field,
   src,
   alt = "",
   className = "",
@@ -23,15 +27,31 @@ export default function BrandLogo({
   height,
   sizes,
 }: BrandLogoProps) {
+  const resolvedSrc = src || field?.url;
+  if (!resolvedSrc) return null;
+
+  if (field?.url) {
+    return (
+      <PrismicNextImage
+        field={field}
+        alt=""
+        width={getDimension(width, 320)}
+        height={getDimension(height, 120)}
+        className={className}
+        sizes={sizes}
+        decoding="async"
+      />
+    );
+  }
+
   return (
     <Image
-      src={src}
+      src={resolvedSrc}
       alt={alt}
       width={getDimension(width, 320)}
       height={getDimension(height, 120)}
       className={className}
       sizes={sizes}
-      loading="eager"
       decoding="async"
     />
   );

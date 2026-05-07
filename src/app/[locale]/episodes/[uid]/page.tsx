@@ -6,8 +6,21 @@ import { components } from "@/slices";
 import Link from "next/link";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
+import { getSettings } from "@/lib/server-locale";
+import type { EpisodePanelSequenceContext } from "@/slices/episode_panel/sequence-context";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
+
+const EPISODE_NAV_LABELS = {
+  en: {
+    prev: "Previous Episode",
+    next: "Next Episode",
+  },
+  es: {
+    prev: "Episodio anterior",
+    next: "Próximo episodio",
+  },
+} as const;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, uid } = await params;
@@ -51,19 +64,48 @@ export default async function EpisodeReaderPage({ params }: Props) {
   const { locale, uid } = await params;
   const lang = toPrismicLang(locale);
   const client = createClient();
-  const ep = await client
-    .getByUID("episode", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
-    .catch(() => null);
+  const [ep, settings, allEpisodes] = await Promise.all([
+    client
+      .getByUID("episode", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
+      .catch(() => null),
+    getSettings(locale),
+    client.getAllByType("episode", {
+      lang,
+      orderings: [{ field: "my.episode.chapter_number", direction: "asc" }],
+    }),
+  ]);
   if (!ep) notFound();
 
   // Prev / next for chapter navigation (ascending order → prev is lower number)
-  const allEpisodes = await client.getAllByType("episode", {
-    lang,
-    orderings: [{ field: "my.episode.chapter_number", direction: "asc" }],
-  });
   const idx = allEpisodes.findIndex((e) => e.id === ep.id);
   const prev = idx > 0 ? allEpisodes[idx - 1] : null;
   const next = idx < allEpisodes.length - 1 ? allEpisodes[idx + 1] : null;
+  const panelOrderBySliceIndex = ep.data.slices.reduce<{
+    panelMap: Record<number, number>;
+    panelOrder: number;
+  }>(
+    (acc, slice, sliceIndex) => {
+      if (slice.slice_type !== "episode_panel") {
+        return acc;
+      }
+
+      return {
+        panelMap: {
+          ...acc.panelMap,
+          [sliceIndex]: acc.panelOrder,
+        },
+        panelOrder: acc.panelOrder + 1,
+      };
+    },
+    { panelMap: {}, panelOrder: 0 },
+  ).panelMap;
+  const sliceContext: EpisodePanelSequenceContext = {
+    sequenceId: ep.id,
+    panelOrderBySliceIndex,
+  };
+  const navLabels = EPISODE_NAV_LABELS[locale];
+  const prevButtonLabel = settings?.data.prev_button_label?.trim() || navLabels.prev;
+  const nextButtonLabel = settings?.data.next_button_label?.trim() || navLabels.next;
 
   return (
     <article className="hotc-ereader hotc--cinema">
@@ -86,7 +128,11 @@ export default async function EpisodeReaderPage({ params }: Props) {
 
       {/* Comic strip — SliceZone renders panels, beats, dividers */}
       <div className="hotc-ereader__strip">
-        <SliceZone slices={ep.data.slices} components={components} />
+        <SliceZone
+          slices={ep.data.slices}
+          components={components}
+          context={sliceContext}
+        />
       </div>
 
       {/* Sticky prev/next nav — replicates EpisodeReader.__nav */}
@@ -95,9 +141,9 @@ export default async function EpisodeReaderPage({ params }: Props) {
           <Link
             href={prev ? `/${locale}/episodes/${prev.uid}` : "#"}
             aria-disabled={!prev}
-            className="hotc-btn hotc-btn--ghost"
+            className="hotc-btn hotc-btn--ghost !px-4 !py-2 !text-sm"
           >
-            ← Episodio Anterior
+            ← {prevButtonLabel}
           </Link>
 
           <div className="hotc-ereader__progress">
@@ -107,9 +153,9 @@ export default async function EpisodeReaderPage({ params }: Props) {
           <Link
             href={next ? `/${locale}/episodes/${next.uid}` : "#"}
             aria-disabled={!next}
-            className="hotc-btn hotc-btn--ember"
+            className="hotc-btn hotc-btn--ember !px-4 !py-2 !text-sm"
           >
-            Próximo Episodio →
+            {nextButtonLabel} →
           </Link>
         </div>
       </nav>

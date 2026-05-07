@@ -198,6 +198,20 @@
           "select": null
         }
       },
+      "prev_button_label": {
+        "type": "Text",
+        "config": {
+          "label": "prev_button_label",
+          "placeholder": "Previous Episode"
+        }
+      },
+      "next_button_label": {
+        "type": "Text",
+        "config": {
+          "label": "next_button_label",
+          "placeholder": "Next Episode"
+        }
+      },
       "store_links": {
         "type": "Group",
         "config": {

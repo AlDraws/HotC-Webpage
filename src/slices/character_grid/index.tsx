@@ -1,7 +1,7 @@
-import { SliceComponentProps } from "@prismicio/react";
+import { ImageField, isFilled } from "@prismicio/client";
 import Image from "next/image";
-import { PrismicNextLink } from "@prismicio/next";
-import { isFilled } from "@prismicio/client";
+import { PrismicNextImage, PrismicNextLink } from "@prismicio/next";
+import { SliceComponentProps } from "@prismicio/react";
 import { CharacterGridSlice } from "@/../prismicio-types";
 
 export type CharacterGridProps = SliceComponentProps<CharacterGridSlice>;
@@ -36,23 +36,13 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
             | {
                 name?: string;
                 role?: string;
-                portrait?: {
-                  url?: string;
-                  alt?: string;
-                  dimensions?: { width: number; height: number };
-                };
+                portrait?: ImageField;
+                image?: ImageField;
               }
             | undefined;
           const portrait =
-            data?.portrait ||
-            (data as { image?: { url?: string } } | undefined)?.image ||
-            undefined;
-          const portraitUrl =
-            portrait?.url ?? "/assets/character-portrait-placeholder.svg";
-          const portraitAlt =
-            typeof (portrait as { alt?: unknown } | undefined)?.alt === "string"
-              ? (portrait as { alt: string }).alt
-              : "";
+            (data?.portrait?.url ? data.portrait : null) ??
+            (data?.image?.url ? data.image : null);
 
           return (
             <PrismicNextLink
@@ -61,13 +51,22 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
               className="hotc-cgrid__cell hotc-pressable"
             >
               <div className="hotc-cgrid__portrait">
-                <Image
-                  src={portraitUrl}
-                  alt={portraitAlt}
-                  fill
-                  sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
-                  className="hotc-cgrid__portrait-img"
-                />
+                {portrait ? (
+                  <PrismicNextImage
+                    field={portrait}
+                    fill
+                    sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
+                    className="hotc-cgrid__portrait-img"
+                  />
+                ) : (
+                  <Image
+                    src="/assets/character-portrait-placeholder.svg"
+                    alt=""
+                    fill
+                    sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
+                    className="hotc-cgrid__portrait-img"
+                  />
+                )}
               </div>
               <div className="hotc-cgrid__meta">
                 <span className="hotc-cgrid__name">

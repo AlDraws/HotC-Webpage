@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import type { ImageField } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { useEffect, useRef, useState } from "react";
@@ -75,7 +75,7 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
   const items = slice.items ?? [];
   const primary = slice.primary as {
     background_color?: string | null;
-    background_image?: { url?: string | null } | null;
+    background_image?: ImageField | null;
   };
   const backgroundStyle: Record<string, string> = {};
   if (primary.background_color) {
@@ -177,9 +177,9 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
       style={backgroundStyle}
     >
       {primary.background_image?.url ? (
-        <Image
-          src={primary.background_image.url}
-          alt=""
+        <PrismicNextImage
+          field={primary.background_image}
+          fallbackAlt=""
           fill
           sizes="100vw"
           className="hotc-ticker__bg"
