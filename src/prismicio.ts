@@ -4,6 +4,11 @@ import {
   type Route,
 } from "@prismicio/client";
 import { enableAutoPreviews } from "@prismicio/next";
+import {
+  PRISMIC_LANG_BY_LOCALE,
+  type AppLocale,
+  type PrismicLang,
+} from "@/lib/locale";
 import sm from "../slicemachine.config.json";
 
 /**
@@ -18,14 +23,34 @@ export const repositoryName =
  *
  * {@link https://prismic.io/docs/route-resolver#route-resolver}
  */
-const routes: Route[] = [
+const baseRoutes: Route[] = [
   { type: "home", path: "/" },
+  { type: "page", uid: "characters", path: "/characters" },
+  { type: "page", uid: "lore", path: "/lore" },
+  { type: "page", uid: "store", path: "/store" },
+  { type: "page", uid: "stores", path: "/store" },
   { type: "page", path: "/:uid" },
   { type: "episodes_index", path: "/episodes" },
   { type: "episode", path: "/episodes/:uid" },
   { type: "lore_entry", path: "/lore/:uid" },
   { type: "character", path: "/characters/:uid" },
 ];
+
+const localeEntries = Object.entries(PRISMIC_LANG_BY_LOCALE) as [
+  AppLocale,
+  PrismicLang,
+][];
+
+const routes: Route[] = localeEntries.flatMap(([locale, lang]) =>
+  baseRoutes.map((route) => ({
+    ...route,
+    lang,
+    path: route.path === "/" ? `/${locale}` : `/${locale}${route.path}`,
+  })),
+);
+
+const PRISMIC_REVALIDATE_SECONDS =
+  process.env.NODE_ENV === "production" ? 3600 : 5;
 
 export const SLICE_FETCH_LINKS = [
   "character.name",
@@ -44,8 +69,13 @@ export const createClient = (config: ClientConfig = {}) => {
     routes,
     fetchOptions:
       process.env.NODE_ENV === "production"
-        ? { next: { tags: ["prismic"] }, cache: "force-cache" }
-        : { next: { revalidate: 5 } },
+        ? {
+            next: {
+              tags: ["prismic"],
+              revalidate: PRISMIC_REVALIDATE_SECONDS,
+            },
+          }
+        : { next: { revalidate: PRISMIC_REVALIDATE_SECONDS } },
     ...config,
   });
 

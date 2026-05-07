@@ -6,7 +6,7 @@ import Link from "next/link";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
-import { toPrismicLang, type AppLocale } from "@/lib/locale";
+import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
@@ -19,9 +19,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: `${ch.data.name ?? uid} — Heirs of the Collapse` };
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  if (!isAppLocale(params.locale)) return [];
+  const lang = toPrismicLang(params.locale);
   const client = createClient();
-  const chars = await client.getAllByType("character");
+  const chars = await client.getAllByType("character", { lang });
   return chars.map((ch) => ({ uid: ch.uid }));
 }
 

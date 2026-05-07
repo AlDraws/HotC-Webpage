@@ -60,8 +60,12 @@ export function localizeHref(href: string, locale: AppLocale): string {
   if (!href.startsWith("/")) return href;
 
   const [pathname, suffix = ""] = href.split(/(?=[?#])/, 2);
-  const firstSegment = pathname.split("/")[1];
-  if (isAppLocale(firstSegment)) return href;
+  const [, firstSegment, ...restSegments] = pathname.split("/");
+  if (isAppLocale(firstSegment)) {
+    const restPath = restSegments.join("/");
+    const localizedPath = restPath ? `/${locale}/${restPath}` : `/${locale}`;
+    return `${localizedPath}${suffix}`;
+  }
 
   const localizedPath = pathname === "/" ? `/${locale}` : `/${locale}${pathname}`;
   return `${localizedPath}${suffix}`;

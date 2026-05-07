@@ -5,7 +5,7 @@ import { SliceZone } from "@prismicio/react";
 import { components } from "@/slices";
 import Link from "next/link";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
-import { toPrismicLang, type AppLocale } from "@/lib/locale";
+import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
@@ -22,9 +22,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  if (!isAppLocale(params.locale)) return [];
+  const lang = toPrismicLang(params.locale);
   const client = createClient();
-  const items = await client.getAllByType("lore_entry");
+  const items = await client.getAllByType("lore_entry", { lang });
   return items.map((i) => ({ uid: i.uid }));
 }
 

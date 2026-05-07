@@ -1,37 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { cache } from "react";
 import { asText } from "@prismicio/client";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { LightboxProvider } from "@/components/LightboxProvider";
 import { RootDocument } from "../root-document";
-import { createClient } from "@/prismicio";
 import {
   isAppLocale,
   SUPPORTED_LOCALES,
-  toPrismicLang,
-  type AppLocale,
 } from "@/lib/locale";
+import { getNavigation, getSettings } from "@/lib/server-locale";
 import "../globals.css";
 
 type LocaleParams = {
   locale: string;
 };
-
-const getSettings = cache(async (locale: AppLocale) => {
-  const client = createClient();
-  return client
-    .getSingle("settings", { lang: toPrismicLang(locale) })
-    .catch(() => null);
-});
-
-const getNavigation = cache(async (locale: AppLocale) => {
-  const client = createClient();
-  return client
-    .getSingle("navigation", { lang: toPrismicLang(locale) })
-    .catch(() => null);
-});
 
 export function generateStaticParams() {
   return SUPPORTED_LOCALES.map((locale) => ({ locale }));

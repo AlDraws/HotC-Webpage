@@ -4,7 +4,7 @@ import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
 import type { AppLocale } from "@/lib/locale";
-import { localizeHref } from "@/lib/links";
+import { localizeHref, resolveLinkHref } from "@/lib/links";
 
 type Props = {
   settings: Content.SettingsDocument;
@@ -12,24 +12,15 @@ type Props = {
   currentLocale: AppLocale;
 };
 
-function getLinkHref(linkField: unknown): string {
-  if (
-    linkField &&
-    typeof linkField === "object" &&
-    "url" in linkField &&
-    typeof (linkField as { url?: unknown }).url === "string" &&
-    (linkField as { url: string }).url
-  ) {
-    return (linkField as { url: string }).url;
-  }
-  return "#";
-}
-
 export default function Footer({ settings, navigation, currentLocale }: Props) {
   const socials = settings.data.social_links ?? [];
   const nav = navigation?.data.primary_links ?? [];
+  const navItems = nav.map((n) => ({
+    href: localizeHref(resolveLinkHref(n.link) ?? "#", currentLocale),
+    label: asText(n.label),
+  }));
   const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
-  const siteByHref = getLinkHref(settings.data.site_by_link);
+  const siteByHref = resolveLinkHref(settings.data.site_by_link) ?? "#";
   const siteByText = settings.data.site_by_text || "Site by";
   const fallbackCopyright = `© ${new Date().getFullYear()} ${siteTitle}. All rights reserved.`;
   const brandData = settings.data as typeof settings.data & {
@@ -77,12 +68,9 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
         <div className="hotc-footer__cols">
           <div className="hotc-footer__col">
             <h4>Navigate</h4>
-            {nav.map((n, i) => (
-              <Link
-                key={i}
-                href={localizeHref(getLinkHref(n.link), currentLocale)}
-              >
-                {asText(n.label)}
+            {navItems.map((item, i) => (
+              <Link key={i} href={item.href}>
+                {item.label}
               </Link>
             ))}
           </div>
@@ -91,7 +79,7 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
             {socials.map((s, i) => (
               <a
                 key={i}
-                href={getLinkHref(s.url)}
+                href={resolveLinkHref(s.url) ?? "#"}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -110,7 +98,7 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
                 return (
                   <a
                     key={i}
-                    href={getLinkHref(s.url)}
+                    href={resolveLinkHref(s.url) ?? "#"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hotc-header__icon"

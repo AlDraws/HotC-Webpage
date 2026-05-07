@@ -5,7 +5,7 @@ import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { asText } from "@prismicio/client";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
-import { toPrismicLang, type AppLocale } from "@/lib/locale";
+import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
 
 type Params = { locale: AppLocale; uid: string };
 const RESERVED_PAGE_UIDS = new Set([
@@ -15,6 +15,7 @@ const RESERVED_PAGE_UIDS = new Set([
   "episodes",
   "lore",
   "store",
+  "stores",
 ]);
 
 export async function generateMetadata({
@@ -35,9 +36,15 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  if (!isAppLocale(params.locale)) return [];
+  const lang = toPrismicLang(params.locale);
   const client = createClient();
-  const pages = await client.getAllByType("page");
+  const pages = await client.getAllByType("page", { lang });
   return pages
     .filter((p) => !RESERVED_PAGE_UIDS.has(p.uid))
     .map((p) => ({ uid: p.uid }));

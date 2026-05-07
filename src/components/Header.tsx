@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
 import { LOCALE_COOKIE_NAME, type AppLocale } from "@/lib/locale";
-import { localizeHref } from "@/lib/links";
+import { localizeHref, resolveLinkHref } from "@/lib/links";
 
 type Props = {
   settings: Content.SettingsDocument;
@@ -15,24 +15,19 @@ type Props = {
   currentLocale: AppLocale;
 };
 
-function getLinkHref(linkField: unknown): string {
-  if (
-    linkField &&
-    typeof linkField === "object" &&
-    "url" in linkField &&
-    typeof (linkField as { url?: unknown }).url === "string" &&
-    (linkField as { url: string }).url
-  ) {
-    return (linkField as { url: string }).url;
-  }
-  return "#";
-}
-
 export default function Header({ settings, navigation, currentLocale }: Props) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
   const nav = navigation?.data.primary_links ?? [];
+  const navItems = nav.map((n) => {
+    const href = localizeHref(resolveLinkHref(n.link) ?? "#", currentLocale);
+
+    return {
+      href,
+      label: asText(n.label),
+    };
+  });
   const socials = settings.data.social_links ?? [];
   const headerSocials = socials.filter((s) => {
     const iconLabel =
@@ -57,9 +52,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   function switchLocale(locale: AppLocale) {
     if (locale === currentLocale) return;
     document.cookie = `${LOCALE_COOKIE_NAME}=${locale}; path=/; max-age=31536000; samesite=lax`;
-    const parts = (pathname || "/").split("/");
-    parts[1] = locale;
-    router.push(parts.join("/") || `/${locale}`);
+    router.push(localizeHref(pathname || "/", locale));
   }
 
   return (
@@ -85,18 +78,15 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
         </Link>
 
         <nav className="hotc-header__nav">
-          {nav.map((n, i) => (
+          {navItems.map((item, i) => (
             <Link
               key={i}
-              href={localizeHref(getLinkHref(n.link), currentLocale)}
+              href={item.href}
               className={`hotc-header__nav-item${
-                pathname &&
-                localizeHref(getLinkHref(n.link), currentLocale) === pathname
-                  ? " is-active"
-                  : ""
+                pathname && item.href === pathname ? " is-active" : ""
               }`}
             >
-              {asText(n.label)}
+              {item.label}
             </Link>
           ))}
         </nav>
@@ -133,7 +123,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
               return (
                 <a
                   key={i}
-                  href={getLinkHref(s.url)}
+                  href={resolveLinkHref(s.url) ?? "#"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hotc-header__icon"
@@ -191,16 +181,17 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
           </div>
 
           <nav className="hotc-header__drawer-nav">
-            {nav.map((n, i) => {
-              const href = localizeHref(getLinkHref(n.link), currentLocale);
+            {navItems.map((item, i) => {
               return (
                 <Link
                   key={i}
-                  href={href}
+                  href={item.href}
                   onClick={() => setOpen(false)}
-                  className={pathname && href === pathname ? "is-active" : ""}
+                  className={
+                    pathname && item.href === pathname ? "is-active" : ""
+                  }
                 >
-                  <span>{asText(n.label)}</span>
+                  <span>{item.label}</span>
                   <span aria-hidden>→</span>
                 </Link>
               );
