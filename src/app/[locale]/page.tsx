@@ -5,7 +5,11 @@ import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
-import { buildPageMetadata, SITE_NAME } from "@/lib/seo";
+import {
+  buildPageMetadata,
+  DEFAULT_SITE_DESCRIPTION,
+  SITE_NAME,
+} from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
@@ -44,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const description = page.data.meta_description
     ? asText(page.data.meta_description)
-    : undefined;
+    : DEFAULT_SITE_DESCRIPTION;
   const socialImage =
     page.data.meta_image?.url ||
     settings?.data.og_default?.url ||

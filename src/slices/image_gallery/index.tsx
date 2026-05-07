@@ -45,6 +45,7 @@ const ImageGallery = ({ slice }: ImageGalleryProps) => {
               fallbackAlt={image.alt}
               fill
               sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
+              quality={75}
               className="hotc-gallery__image"
             />
           </button>

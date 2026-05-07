@@ -93,6 +93,7 @@ export default async function CharactersPage({ params }: Props) {
                     fallbackAlt={`Portrait of ${ch.data.name || ch.uid}`}
                     fill
                     sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
+                    quality={75}
                     className="hotc-cgrid__portrait-img"
                   />
                 ) : null}

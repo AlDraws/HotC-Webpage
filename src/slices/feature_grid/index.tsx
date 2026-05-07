@@ -62,6 +62,8 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
                     field={coverImage}
                     fallbackAlt={coverAlt}
                     className="hotc-fcard__cover"
+                    sizes="(max-width: 767px) 100vw, 33vw"
+                    quality={75}
                   />
                 </div>
               ) : null}
@@ -75,7 +77,7 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
                   />
                 </div>
               ) : null}
-              <h4>{item.title}</h4>
+              <h3>{item.title}</h3>
               <p>{item.description}</p>
             </>
           );
@@ -127,7 +129,7 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
                   }
                   aria-label={`Open ${item.title || "feature"} image`}
                 >
-                  View
+                  View artwork
                 </button>
               ) : null}
             </article>

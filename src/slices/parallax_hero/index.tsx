@@ -5,6 +5,7 @@ import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import PrismicImage from "@/components/PrismicImage";
+import { getContextualCtaAriaLabel } from "@/lib/a11y";
 import { ParallaxHeroSlice } from "@/../prismicio-types";
 
 export type ParallaxHeroProps = SliceComponentProps<ParallaxHeroSlice>;
@@ -43,6 +44,14 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
     slice.primary.bgPoster?.url ? slice.primary.bgPoster : slice.primary.bgImage;
   const heroTitle =
     slice.primary.title?.trim() || "Heirs of the Collapse parallax hero artwork";
+  const primaryCtaAriaLabel = getContextualCtaAriaLabel(
+    slice.primary.primaryCtaLabel,
+    heroTitle,
+  );
+  const secondaryCtaAriaLabel = getContextualCtaAriaLabel(
+    slice.primary.secondaryCtaLabel,
+    heroTitle,
+  );
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -140,6 +149,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
               preload={true}
               fetchPriority="high"
               loading="eager"
+              quality={75}
               className="hotc-phero__bg-img"
             />
           </div>
@@ -157,6 +167,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
             fallbackAlt={`${heroTitle} foreground artwork`}
             loading="lazy"
             sizes="(max-width: 767px) 72vw, 68vw"
+            quality={75}
           />
         </div>
       )}
@@ -179,6 +190,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
               <PrismicNextLink
                 field={slice.primary.primaryCtaLink}
                 className="hotc-btn hotc-btn--ember"
+                aria-label={primaryCtaAriaLabel}
               >
                 {slice.primary.primaryCtaLabel}
               </PrismicNextLink>
@@ -187,6 +199,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
               <PrismicNextLink
                 field={slice.primary.secondaryCtaLink}
                 className="hotc-btn hotc-btn--ghost"
+                aria-label={secondaryCtaAriaLabel}
                 style={{ color: "#fff" }}
               >
                 {slice.primary.secondaryCtaLabel}

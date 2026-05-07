@@ -4,6 +4,7 @@ import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { useLightbox } from "@/components/LightboxProvider";
 import PrismicImage from "@/components/PrismicImage";
+import { getContextualCtaAriaLabel } from "@/lib/a11y";
 import { TextWithImageSlice } from "@/../prismicio-types";
 
 /**
@@ -21,6 +22,10 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
     slice.primary.title ||
     slice.primary.kicker ||
     "Editorial image from Heirs of the Collapse";
+  const ctaAriaLabel = getContextualCtaAriaLabel(
+    slice.primary.cta_label,
+    slice.primary.title || slice.primary.kicker,
+  );
 
   return (
     <Bounded
@@ -51,6 +56,8 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
                 field={slice.primary.image}
                 className="hotc-twi__img"
                 fallbackAlt={imageAlt}
+                sizes="(max-width: 767px) 100vw, 50vw"
+                quality={75}
               />
             </button>
           ) : (
@@ -58,6 +65,8 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
               field={slice.primary.image}
               className="hotc-twi__img"
               fallbackAlt={imageAlt}
+              sizes="(max-width: 767px) 100vw, 50vw"
+              quality={75}
             />
           )}
         </div>
@@ -73,6 +82,7 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
             <PrismicNextLink
               field={slice.primary.cta_link}
               className="hotc-btn hotc-btn--ink"
+              aria-label={ctaAriaLabel}
             >
               {slice.primary.cta_label}
             </PrismicNextLink>

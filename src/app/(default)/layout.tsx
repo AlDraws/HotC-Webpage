@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { RootDocument } from "../root-document";
+import { DEFAULT_SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -7,6 +8,8 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
   },
+  title: SITE_NAME,
+  description: DEFAULT_SITE_DESCRIPTION,
 };
 
 export default function DefaultRootLayout({

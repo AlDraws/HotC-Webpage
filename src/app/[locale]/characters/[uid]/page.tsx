@@ -80,6 +80,7 @@ export default async function CharacterProfilePage({ params }: Props) {
               fallbackAlt={`${characterName} cover artwork`}
               fill
               sizes="100vw"
+              quality={75}
               className="hotc-cprofile__bg-img"
             />
           </div>
@@ -97,7 +98,8 @@ export default async function CharacterProfilePage({ params }: Props) {
                 <PrismicImage
                   field={ch.data.portrait}
                   className="hotc-cprofile__portrait"
-                  quality={100}
+                  sizes="(max-width: 767px) 220px, 280px"
+                  quality={75}
                   fallbackAlt={`Portrait of ${characterName}`}
                 />
               </div>
@@ -140,7 +142,7 @@ export default async function CharacterProfilePage({ params }: Props) {
       {/* Bio section */}
       <section className="bounded bounded--base">
         <div className="hotc-cprofile__bio">
-          <h3 className="hotc-h3">Bio</h3>
+          <h2 className="hotc-h3">Bio</h2>
           {ch.data.short_bio ? (
             <PrismicRichText field={ch.data.short_bio} />
           ) : null}
@@ -151,7 +153,7 @@ export default async function CharacterProfilePage({ params }: Props) {
       {gallery.length > 0 ? (
         <section className="bounded bounded--base" style={{ paddingTop: 0 }}>
           <div className="hotc-cprofile__gallery">
-            <h3 className="hotc-h3">Gallery</h3>
+            <h2 className="hotc-h3">Gallery</h2>
             <div className="hotc-cprofile__gallery-grid">
               {gallery.map((g, i) =>
                 g.image?.url ? (
@@ -164,6 +166,7 @@ export default async function CharacterProfilePage({ params }: Props) {
                       fallbackAlt={`${characterName} gallery image ${i + 1}`}
                       fill
                       sizes="(max-width: 639px) 100vw, 33vw"
+                      quality={75}
                       className="hotc-cprofile__gallery-img"
                     />
                   </div>

@@ -9,7 +9,12 @@ import {
   isAppLocale,
   SUPPORTED_LOCALES,
 } from "@/lib/locale";
-import { buildStaticAlternates, metadataBase, SITE_NAME } from "@/lib/seo";
+import {
+  buildStaticAlternates,
+  DEFAULT_SITE_DESCRIPTION,
+  metadataBase,
+  SITE_NAME,
+} from "@/lib/seo";
 import { getNavigation, getSettings } from "@/lib/server-locale";
 import "../globals.css";
 
@@ -32,7 +37,7 @@ export async function generateMetadata({
   const settings = await getSettings(locale);
   const siteDescription = settings?.data.meta_description
     ? asText(settings.data.meta_description)
-    : undefined;
+    : DEFAULT_SITE_DESCRIPTION;
   const ogImage =
     settings?.data.og_default?.url || settings?.data.meta_image?.url || undefined;
   const alternates = buildStaticAlternates(locale, "/");

@@ -69,7 +69,7 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
 
         <div className="hotc-footer__cols">
           <nav className="hotc-footer__col" aria-label={labels.footerNav}>
-            <h4>Navigate</h4>
+            <p className="hotc-footer__title">Navigate</p>
             {navItems.map((item, i) => (
               <PrismicNextLink key={i} field={item.link}>
                 {item.label}
@@ -77,7 +77,7 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
             ))}
           </nav>
           <nav className="hotc-footer__col" aria-label={labels.socialLinks}>
-            <h4>Follow</h4>
+            <p className="hotc-footer__title">Follow</p>
             {socials.map((s, i) => (
               <PrismicNextLink
                 key={i}
@@ -90,7 +90,7 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
             ))}
           </nav>
           <nav className="hotc-footer__col" aria-label={labels.socialIcons}>
-            <h4>Social</h4>
+            <p className="hotc-footer__title">Social</p>
             <div className="flex gap-2 pt-1">
               {socials.map((s, i) => {
                 const iconLabel =

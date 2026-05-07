@@ -20,7 +20,7 @@ const NewsletterEmbed = ({ slice }: NewsletterEmbedProps) => {
       as="section"
     >
       <div className="hotc-newsletter">
-        <h3>{slice.primary.title || "Sundays in your inbox."}</h3>
+        <h2>{slice.primary.title || "Sundays in your inbox."}</h2>
         <div className="hotc-newsletter__body">
           <PrismicRichText
             field={slice.primary.description}

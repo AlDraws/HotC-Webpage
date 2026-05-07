@@ -53,7 +53,9 @@ const PrismicImage = forwardRef<HTMLImageElement, PrismicImageProps>(
       loading,
       preload,
       fetchPriority,
+      quality,
       sizes,
+      imgixParams,
       ...restProps
     },
     ref,
@@ -74,6 +76,16 @@ const PrismicImage = forwardRef<HTMLImageElement, PrismicImageProps>(
     const resolvedLoading =
       loading ?? (preload || fetchPriority === "high" ? "eager" : "lazy");
     const resolvedSizes = sizes ?? (restProps.fill ? "100vw" : undefined);
+    const resolvedQuality = quality ?? 75;
+    const resolvedImgixQuality =
+      typeof resolvedQuality === "number"
+        ? resolvedQuality
+        : Number.parseInt(resolvedQuality, 10);
+    const resolvedImgixParams: BasePrismicImageProps["imgixParams"] = {
+      auto: ["format", "compress"],
+      q: Number.isFinite(resolvedImgixQuality) ? resolvedImgixQuality : 75,
+      ...imgixParams,
+    };
 
     return (
       <PrismicNextImage
@@ -84,7 +96,9 @@ const PrismicImage = forwardRef<HTMLImageElement, PrismicImageProps>(
         loading={resolvedLoading}
         preload={preload}
         fetchPriority={fetchPriority}
+        quality={resolvedQuality}
         sizes={resolvedSizes}
+        imgixParams={resolvedImgixParams}
         {...(decorative ? { alt: "" as const } : {})}
         {...restProps}
       />

@@ -2,6 +2,7 @@ import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import PrismicImage from "@/components/PrismicImage";
+import { getContextualCtaAriaLabel } from "@/lib/a11y";
 import { CtaBlockSlice } from "@/../prismicio-types";
 
 /**
@@ -13,6 +14,11 @@ export type CtaBlockProps = SliceComponentProps<CtaBlockSlice>;
  * Component for "CtaBlock" Slices.
  */
 const CtaBlock = ({ slice }: CtaBlockProps) => {
+  const ctaAriaLabel = getContextualCtaAriaLabel(
+    slice.primary.cta_label,
+    slice.primary.title,
+  );
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -27,6 +33,7 @@ const CtaBlock = ({ slice }: CtaBlockProps) => {
               decorative
               fill
               sizes="100vw"
+              quality={75}
               className="hotc-cta-block__bg-img"
             />
           </div>
@@ -42,6 +49,7 @@ const CtaBlock = ({ slice }: CtaBlockProps) => {
               <PrismicNextLink
                 field={slice.primary.cta_link}
                 className="hotc-btn hotc-btn--ink"
+                aria-label={ctaAriaLabel}
               >
                 {slice.primary.cta_label}
               </PrismicNextLink>

@@ -84,6 +84,9 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
               width={headerLogo?.dimensions?.width}
               height={headerLogo?.dimensions?.height}
               sizes="(max-width: 767px) 180px, 220px"
+              preload
+              loading="eager"
+              fetchPriority="high"
             />
           ) : (
             <span className="hotc-logo-mask hotc-logo-mask--heirs" />
@@ -196,6 +199,8 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
                   width={headerLogo?.dimensions?.width}
                   height={headerLogo?.dimensions?.height}
                   sizes="180px"
+                  loading="eager"
+                  fetchPriority="high"
                 />
               ) : (
                 <span className="hotc-logo-mask hotc-logo-mask--heirs" />

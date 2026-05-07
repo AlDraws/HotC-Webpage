@@ -2,6 +2,7 @@ import * as prismic from "@prismicio/client";
 import { isFilled } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import LiteYouTubeEmbed from "@/components/LiteYouTubeEmbed";
 
 type YoutubeEmbedSlice = prismic.SharedSlice<
   "youtube_embed",
@@ -29,7 +30,7 @@ const YOUTUBE_HOSTS = new Set([
   "www.youtube-nocookie.com",
 ]);
 
-function getYouTubeEmbedUrl(rawUrl: string | null | undefined) {
+function getYouTubeVideoId(rawUrl: string | null | undefined) {
   if (!rawUrl) return null;
   const normalizedUrl = rawUrl.startsWith("http") ? rawUrl : `https://${rawUrl}`;
 
@@ -57,11 +58,12 @@ function getYouTubeEmbedUrl(rawUrl: string | null | undefined) {
   videoId = videoId.trim();
   if (!videoId) return null;
 
-  return `https://www.youtube-nocookie.com/embed/${videoId}?rel=0`;
+  return videoId;
 }
 
 const YoutubeEmbed = ({ slice }: YoutubeEmbedProps) => {
-  const embedUrl = getYouTubeEmbedUrl(slice.primary.youtube_url);
+  const videoId = getYouTubeVideoId(slice.primary.youtube_url);
+  const videoTitle = slice.primary.title || "YouTube video";
 
   return (
     <Bounded
@@ -76,23 +78,16 @@ const YoutubeEmbed = ({ slice }: YoutubeEmbedProps) => {
               <span className="hotc-kicker">{slice.primary.kicker}</span>
             ) : null}
             {slice.primary.title ? (
-              <h3 className="hotc-ytembed__title">
+              <h2 className="hotc-ytembed__title">
                 {slice.primary.title}
-              </h3>
+              </h2>
             ) : null}
           </header>
         )}
 
-        {embedUrl ? (
+        {videoId ? (
           <div className="hotc-ytembed__frame">
-            <iframe
-              src={embedUrl}
-              title={slice.primary.title || "YouTube video"}
-              loading="lazy"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
+            <LiteYouTubeEmbed videoId={videoId} title={videoTitle} />
           </div>
         ) : (
           <p className="hotc-ytembed__error">

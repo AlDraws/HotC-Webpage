@@ -9,6 +9,12 @@
     "lint": "eslint",
     "slicemachine": "start-slicemachine"
   },
+  "browserslist": [
+    "chrome 111",
+    "edge 111",
+    "firefox 111",
+    "safari 16.4"
+  ],
   "dependencies": {
     "@prismicio/client": "^7.21.8",
     "@prismicio/next": "^2.2.4",

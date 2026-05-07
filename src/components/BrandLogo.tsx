@@ -10,6 +10,10 @@ type BrandLogoProps = {
   width?: number | null;
   height?: number | null;
   sizes?: string;
+  preload?: boolean;
+  loading?: "eager" | "lazy";
+  fetchPriority?: "high" | "low" | "auto";
+  quality?: number;
 };
 
 function getDimension(value: number | null | undefined, fallback: number): number {
@@ -26,6 +30,10 @@ export default function BrandLogo({
   width,
   height,
   sizes,
+  preload,
+  loading,
+  fetchPriority,
+  quality,
 }: BrandLogoProps) {
   const resolvedSrc = src || field?.url;
   if (!resolvedSrc) return null;
@@ -39,8 +47,10 @@ export default function BrandLogo({
         height={getDimension(height, 120)}
         className={className}
         sizes={sizes}
-        loading="lazy"
-        fetchPriority="low"
+        preload={preload}
+        loading={loading ?? "lazy"}
+        fetchPriority={fetchPriority ?? "low"}
+        quality={quality ?? 75}
       />
     );
   }
@@ -54,8 +64,10 @@ export default function BrandLogo({
       className={className}
       sizes={sizes}
       decoding="async"
-      loading="lazy"
-      fetchPriority="low"
+      preload={preload}
+      loading={loading ?? "lazy"}
+      fetchPriority={fetchPriority ?? "low"}
+      quality={quality ?? 75}
     />
   );
 }

@@ -132,7 +132,7 @@ export default function SequentialEpisodeImage({
       alt={alt}
       width={width}
       height={height}
-      quality={100}
+      quality={75}
       className="block h-auto w-full"
       sizes="(max-width: 1080px) 100vw, 1080px"
       decoding={isFirstPanel ? "sync" : "async"}

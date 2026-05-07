@@ -354,7 +354,7 @@ body.hotc,
   text-transform: uppercase;
   letter-spacing: var(--hotc-tracking-wide);
   font-size: var(--hotc-text-sm);
-  color: var(--hotc-ember);
+  color: var(--hotc-ember-600);
 }
 
 /* Legacy alias — some slices use .kicker without the hotc- prefix */
@@ -363,7 +363,7 @@ body.hotc,
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 0.875rem;
-  color: var(--hotc-ember);
+  color: var(--hotc-ember-600);
 }
 
 .hotc-attr-label {
@@ -741,7 +741,7 @@ body.hotc,
 
 .hotc-header__drawer-nav a.is-active {
   background: var(--hotc-ember);
-  color: #fff;
+  color: var(--hotc-ink);
 }
 
 /* Drawer foot (lang + socials) */
@@ -834,6 +834,15 @@ body.hotc,
   letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--hotc-ember);
+  margin: 0 0 0.5rem;
+}
+
+.hotc-footer__title {
+  font-family: var(--hotc-font-display);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--hotc-ember-600);
   margin: 0 0 0.5rem;
 }
 
@@ -931,17 +940,17 @@ body.hotc,
 
 .hotc-btn--ember {
   background: var(--hotc-ember);
-  color: #fff;
+  color: var(--hotc-ink);
 }
 
 .hotc-btn--cyan {
   background: var(--hotc-cyan);
-  color: #fff;
+  color: var(--hotc-ink);
 }
 
 .hotc-btn--magenta {
   background: var(--hotc-magenta);
-  color: #fff;
+  color: var(--hotc-ink);
 }
 
 .hotc-btn--ink {
@@ -1624,7 +1633,7 @@ body.hotc,
   top: 0.5rem;
   left: 0.5rem;
   background: var(--hotc-ember);
-  color: #fff;
+  color: var(--hotc-ink);
   font-family: var(--hotc-font-display);
   font-size: 0.875rem;
   letter-spacing: 0.06em;
@@ -2080,7 +2089,7 @@ body.hotc,
   top: 0.625rem;
   left: 0.625rem;
   background: var(--hotc-ember);
-  color: #fff;
+  color: var(--hotc-ink);
   font-family: var(--hotc-font-display);
   font-size: 0.875rem;
   letter-spacing: 0.06em;
@@ -2370,12 +2379,12 @@ body.hotc,
 
 .hotc-callout--lore {
   background: var(--hotc-cyan);
-  color: #fff;
+  color: var(--hotc-ink);
 }
 
 .hotc-callout--warning {
   background: var(--hotc-ember);
-  color: #fff;
+  color: var(--hotc-ink);
 }
 
 .hotc-callout__bar {
@@ -2385,7 +2394,7 @@ body.hotc,
   border-radius: 3px;
 }
 
-.hotc-callout__body h4 {
+.hotc-callout__title {
   font-family: var(--hotc-font-display);
   font-size: 1.25rem;
   letter-spacing: 0.03em;
@@ -2433,7 +2442,7 @@ body.hotc,
 /* CtaBlock */
 .hotc-cta-block {
   background: var(--hotc-ember);
-  color: #fff;
+  color: var(--hotc-ink);
   border: 3px solid var(--hotc-ink);
   border-radius: var(--hotc-r-lg);
   padding: 2rem 1.5rem;
@@ -2601,6 +2610,7 @@ body.hotc,
 }
 
 .hotc-ytembed__frame {
+  position: relative;
   border: 3px solid var(--hotc-ink);
   border-radius: var(--hotc-r-md);
   overflow: hidden;
@@ -2608,11 +2618,77 @@ body.hotc,
   box-shadow: var(--hotc-shadow-panel-sm);
 }
 
+.hotc-ytembed__button,
 .hotc-ytembed__frame iframe {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   border: 0;
+}
+
+.hotc-ytembed__button {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  background: var(--hotc-slate-900);
+}
+
+.hotc-ytembed__thumb {
+  object-fit: cover;
+}
+
+.hotc-ytembed__button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.14), rgba(0, 0, 0, 0.45)),
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.08), transparent 45%);
+}
+
+.hotc-ytembed__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  border: 3px solid var(--hotc-ink);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: var(--hotc-shadow-panel-sm);
+  transform: translate(-50%, -50%);
+  transition: transform 150ms var(--hotc-ease-snap);
+}
+
+.hotc-ytembed__button:hover .hotc-ytembed__play {
+  transform: translate(-50%, -50%) scale(1.03);
+}
+
+.hotc-ytembed__play-icon {
+  width: 0;
+  height: 0;
+  margin-left: 0.2rem;
+  border-top: 0.75rem solid transparent;
+  border-bottom: 0.75rem solid transparent;
+  border-left: 1.2rem solid var(--hotc-ink);
+}
+
+.hotc-ytembed__button-title {
+  position: absolute;
+  right: 0.875rem;
+  bottom: 0.875rem;
+  z-index: 1;
+  max-width: calc(100% - 1.75rem);
+  padding: 0.35rem 0.55rem;
+  border-radius: var(--hotc-r-xs);
+  background: rgba(11, 11, 14, 0.82);
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: var(--hotc-w-semibold);
+  text-align: left;
 }
 
 .hotc-ytembed__caption p {
@@ -2858,11 +2934,11 @@ body.hotc,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: var(--hotc-ink);
   overflow: hidden;
 }
 
-.hotc-fcard h4 {
+.hotc-fcard h3 {
   font-family: var(--hotc-font-display);
   font-size: 1.25rem;
   margin: 0;
@@ -2895,7 +2971,7 @@ body.hotc,
 /* LoreSection */
 .hotc-lore {
   background: var(--hotc-cyan);
-  color: #fff;
+  color: var(--hotc-ink);
   padding: 2.5rem 1rem;
   border-top: 3px solid var(--hotc-ink);
   border-bottom: 3px solid var(--hotc-ink);

@@ -21,7 +21,9 @@ const Callout = ({ slice }: CalloutProps) => {
       <aside className={`hotc-callout hotc-callout--${slice.primary.variant || "default"}`}>
         <div className="hotc-callout__bar" aria-hidden></div>
         <div className="hotc-callout__body">
-          {slice.primary.title && <h4>{slice.primary.title}</h4>}
+          {slice.primary.title ? (
+            <h3 className="hotc-callout__title">{slice.primary.title}</h3>
+          ) : null}
           <p>{slice.primary.body}</p>
         </div>
       </aside>

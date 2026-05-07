@@ -31,6 +31,8 @@ type MetadataInput = {
 };
 
 const SITE_NAME = "Heirs of the Collapse";
+const DEFAULT_SITE_DESCRIPTION =
+  "Heirs of the Collapse is a cinematic sci-fi webcomic exploring survival, memory, and collapse.";
 const OG_LOCALE_BY_APP_LOCALE: Record<AppLocale, string> = {
   en: "en_US",
   es: "es_ES",
@@ -220,4 +222,4 @@ export function buildPageMetadata({
   };
 }
 
-export { SITE_NAME };
+export { DEFAULT_SITE_DESCRIPTION, SITE_NAME };

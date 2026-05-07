@@ -76,6 +76,7 @@ export default async function LoreDetailPage({ params }: Props) {
               fallbackAlt={`${itemTitle} cover artwork`}
               fill
               sizes="100vw"
+              quality={75}
               className="hotc-cprofile__bg-img"
             />
           </div>
@@ -119,6 +120,8 @@ export default async function LoreDetailPage({ params }: Props) {
               field={item.data.cover}
               className="hotc-twi__img"
               fallbackAlt={itemTitle}
+              sizes="(max-width: 767px) 100vw, 960px"
+              quality={75}
             />
           </div>
         </section>

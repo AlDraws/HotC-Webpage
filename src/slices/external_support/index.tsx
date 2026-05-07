@@ -1,8 +1,10 @@
+import { asText, type RichTextField } from "@prismicio/client";
 import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import type { CSSProperties } from "react";
 import Bounded from "@/components/Bounded";
 import PrismicImage from "@/components/PrismicImage";
+import { getContextualCtaAriaLabel } from "@/lib/a11y";
 import {
   ExternalSupportSlice,
   ExternalSupportSliceBannerItem,
@@ -23,6 +25,20 @@ type ExternalSupportItemWithOptionalMedia = ExternalSupportItem & {
   description?: ExternalSupportSliceRowItem["description"];
   icon?: ExternalSupportSliceRowItem["icon"];
 };
+
+function getTextContent(value: unknown) {
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    return trimmed || null;
+  }
+
+  if (Array.isArray(value)) {
+    const text = (asText(value as RichTextField) || "").trim();
+    return text || null;
+  }
+
+  return null;
+}
 
 /**
  * ExternalSupport — modular block of external CTAs.
@@ -67,42 +83,56 @@ const ExternalSupport = ({ slice }: ExternalSupportProps) => {
 
         {variation === "cards" ? (
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {items.map((it: ExternalSupportItem, i: number) => (
-              <li
-                key={i}
-                className="flex flex-col gap-3 rounded-sm bg-slate-800/60 p-5"
-                style={
-                  it.accent
-                    ? ({ borderTop: `2px solid ${it.accent}` } as CSSProperties)
-                    : undefined
-                }
-              >
-                <div className="flex items-center gap-3">
-                  {it.icon?.url ? (
-                    <PrismicImage
-                      field={it.icon}
-                      decorative
-                      width={28}
-                      height={28}
-                      className="h-7 w-7 object-contain"
-                    />
-                  ) : null}
-                  <span className="text-sm uppercase tracking-wide text-slate-300">
-                    {it.platform || "Support"}
-                  </span>
-                </div>
-                <p className="text-base text-slate-100">{it.description}</p>
-                <PrismicNextLink
-                  field={it.url}
-                  className="mt-auto inline-block rounded-sm px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-                  style={{
-                    backgroundColor: it.accent || "var(--hotc-ember, #D97757)",
-                  }}
+            {items.map((it: ExternalSupportItem, i: number) => {
+              const ctaLabel = it.label || "Support this project";
+              const ctaContext =
+                it.platform ||
+                getTextContent(it.description) ||
+                getTextContent(slice.primary.title) ||
+                null;
+              const ctaAriaLabel = getContextualCtaAriaLabel(
+                it.label || null,
+                ctaContext,
+              );
+
+              return (
+                <li
+                  key={i}
+                  className="flex flex-col gap-3 rounded-sm bg-slate-800/60 p-5"
+                  style={
+                    it.accent
+                      ? ({ borderTop: `2px solid ${it.accent}` } as CSSProperties)
+                      : undefined
+                  }
                 >
-                  {it.label || "Learn more"}
-                </PrismicNextLink>
-              </li>
-            ))}
+                  <div className="flex items-center gap-3">
+                    {it.icon?.url ? (
+                      <PrismicImage
+                        field={it.icon}
+                        decorative
+                        width={28}
+                        height={28}
+                        className="h-7 w-7 object-contain"
+                      />
+                    ) : null}
+                    <span className="text-sm uppercase tracking-wide text-slate-300">
+                      {it.platform || "Support"}
+                    </span>
+                  </div>
+                  <p className="text-base text-slate-100">{it.description}</p>
+                  <PrismicNextLink
+                    field={it.url}
+                    className="mt-auto inline-block rounded-sm px-4 py-2 text-sm font-semibold text-slate-950 transition-opacity hover:opacity-90"
+                    style={{
+                      backgroundColor: it.accent || "var(--hotc-ember, #D97757)",
+                    }}
+                    aria-label={ctaAriaLabel}
+                  >
+                    {ctaLabel}
+                  </PrismicNextLink>
+                </li>
+              );
+            })}
           </ul>
         ) : null}
 
@@ -112,7 +142,7 @@ const ExternalSupport = ({ slice }: ExternalSupportProps) => {
               <li key={i}>
                 <PrismicNextLink
                   field={it.url}
-                  className="inline-flex items-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                  className="inline-flex items-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-slate-950 transition-opacity hover:opacity-90"
                   style={{
                     backgroundColor: it.accent || "var(--hotc-ember, #D97757)",
                   }}
@@ -140,7 +170,7 @@ const ExternalSupport = ({ slice }: ExternalSupportProps) => {
                 <PrismicNextLink
                   key={i}
                   field={it.url}
-                  className="inline-flex items-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+                  className="inline-flex items-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-slate-950 transition-opacity hover:opacity-90"
                   style={{
                     backgroundColor: it.accent || "var(--hotc-ember, #D97757)",
                   }}
