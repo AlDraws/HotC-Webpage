@@ -4,17 +4,21 @@ import Bounded from "@/components/Bounded";
 import PrismicImage from "@/components/PrismicImage";
 import { getContextualCtaAriaLabel, getDescriptiveCtaLabel } from "@/lib/a11y";
 import { resolveLinkHref } from "@/lib/links";
+import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
+import { getUiCopy } from "@/lib/ui-copy";
 import { HeroSlice } from "@/../prismicio-types";
 
 /**
  * Props for `Hero`.
  */
-export type HeroProps = SliceComponentProps<HeroSlice>;
+export type HeroProps = SliceComponentProps<HeroSlice, HotcSliceContext>;
 
 /**
  * Component for "Hero" Slices.
  */
-const Hero = ({ slice }: HeroProps) => {
+const Hero = ({ slice, context }: HeroProps) => {
+  const locale = getSliceLocale(context);
+  const copy = getUiCopy(locale);
   const primary = slice.primary as HeroSlice["primary"] & {
     background_image?: HeroSlice["primary"]["image"];
     bgImage?: HeroSlice["primary"]["image"];
@@ -25,8 +29,8 @@ const Hero = ({ slice }: HeroProps) => {
     (primary.background_image?.url ? primary.background_image : null) ??
     (primary.bgImage?.url ? primary.bgImage : null) ??
     (primary.hero_image?.url ? primary.hero_image : null);
-  const heroTitle = primary.title?.trim() || "Heirs of the Collapse hero artwork";
-  const ctaAriaLabel = getContextualCtaAriaLabel(primary.cta_label, heroTitle);
+  const heroTitle = primary.title?.trim() || copy.images.heroArtworkAlt;
+  const ctaAriaLabel = getContextualCtaAriaLabel(primary.cta_label, heroTitle, locale);
   const ctaHref = resolveLinkHref(primary.cta_link);
   const ctaLabel = getDescriptiveCtaLabel(primary.cta_label, ctaHref);
 

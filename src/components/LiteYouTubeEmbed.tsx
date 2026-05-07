@@ -6,6 +6,7 @@ import { useState } from "react";
 type LiteYouTubeEmbedProps = {
   videoId: string;
   title: string;
+  playLabel?: string;
 };
 
 function getPosterUrl(videoId: string, useWebp: boolean) {
@@ -19,6 +20,7 @@ function getPosterUrl(videoId: string, useWebp: boolean) {
 export default function LiteYouTubeEmbed({
   videoId,
   title,
+  playLabel = "Play",
 }: LiteYouTubeEmbedProps) {
   const [isActivated, setIsActivated] = useState(false);
   const [useWebpPoster, setUseWebpPoster] = useState(true);
@@ -41,7 +43,7 @@ export default function LiteYouTubeEmbed({
     <button
       type="button"
       className="hotc-ytembed__button"
-      aria-label={`Play ${title}`}
+      aria-label={`${playLabel} ${title}`}
       onClick={() => setIsActivated(true)}
     >
       <Image

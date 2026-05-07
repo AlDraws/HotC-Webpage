@@ -1,0 +1,183 @@
+{
+  "seo": {
+    "defaultSiteDescription": "Heirs of the Collapse es un webcomic cinematografico de ciencia ficcion sobre supervivencia, memoria y colapso.",
+    "homeSiteDescription": "Heirs of the Collapse es un webcomic de ciencia ficcion postapocaliptica ambientado en una Valencia transformada, donde memoria, tecnologia y esperanza chocan tras el colapso.",
+    "pages": {
+      "characters": {
+        "title": "Personajes",
+        "description": "Conoce al elenco de Heirs of the Collapse."
+      },
+      "episodes": {
+        "title": "Episodios",
+        "description": "Lee cada capitulo de Heirs of the Collapse, un webcomic que se actualiza cada domingo."
+      },
+      "lore": {
+        "title": "Lore",
+        "description": "Explora los entornos, objetos e ilustraciones de Heirs of the Collapse."
+      },
+      "store": {
+        "title": "Tienda",
+        "description": "Apoya Heirs of the Collapse con productos y lanzamientos oficiales."
+      }
+    }
+  },
+  "common": {
+    "siteTitleFallback": "Heirs of the Collapse",
+    "socialFallbackLabel": "Social",
+    "openImage": "Abrir imagen",
+    "viewArtwork": "Ver ilustracion",
+    "imageViewer": "Visor de imagenes",
+    "closeImageViewer": "Cerrar visor de imagenes",
+    "previousImage": "Imagen anterior",
+    "nextImage": "Imagen siguiente",
+    "play": "Reproducir"
+  },
+  "a11y": {
+    "genericCtas": {
+      "learnMore": "saber mas",
+      "readMore": "leer mas",
+      "discover": "descubrir",
+      "explore": "explorar",
+      "view": "ver",
+      "viewMore": "ver mas",
+      "more": "mas"
+    },
+    "descriptiveCtas": {
+      "characters": "Explora los personajes",
+      "lore": "Descubre el lore"
+    },
+    "aboutConnector": "sobre"
+  },
+  "header": {
+    "language": "Idioma",
+    "primaryNav": "Navegacion principal",
+    "socialNav": "Redes sociales",
+    "menuOpen": "Abrir menu principal",
+    "menuClose": "Cerrar menu principal",
+    "mobileNav": "Navegacion movil"
+  },
+  "footer": {
+    "siteByFallback": "Web por",
+    "footerNav": "Navegacion del pie",
+    "socialLinks": "Enlaces sociales",
+    "socialIcons": "Iconos sociales",
+    "navigate": "Navegar",
+    "follow": "Seguir",
+    "social": "Social",
+    "copyrightFallback": "© {year} {siteTitle}. Todos los derechos reservados."
+  },
+  "images": {
+    "defaultIllustrationAlt": "Ilustracion de Heirs of the Collapse",
+    "editorialImageAlt": "Imagen editorial de Heirs of the Collapse",
+    "heroArtworkAlt": "Arte principal de Heirs of the Collapse",
+    "parallaxHeroArtworkAlt": "Arte principal parallax de Heirs of the Collapse",
+    "foregroundArtworkAlt": "Arte de primer plano de {title}",
+    "fullWidthArtworkAlt": "Arte a todo ancho de Heirs of the Collapse",
+    "galleryImage": "Imagen de galeria {index}",
+    "tickerImage": "Imagen del carrusel {index}",
+    "cardImage": "Imagen de tarjeta {index}",
+    "featureTitle": "Elemento {index}",
+    "featureImageAria": "Ver ilustracion: imagen de {title}"
+  },
+  "character": {
+    "fallbackName": "Personaje desconocido",
+    "castBack": "Personajes",
+    "bio": "Biografia",
+    "gallery": "Galeria",
+    "coverArtwork": "Arte de portada de {name}",
+    "portraitOf": "Retrato de {name}",
+    "galleryImage": "Imagen de galeria de {name} {index}",
+    "unknownListItem": "Desconocido",
+    "roles": {
+      "Protagonist": "Protagonista",
+      "Ally": "Aliado",
+      "Antagonist": "Antagonista",
+      "Neutral": "Neutral",
+      "Other": "Otro"
+    }
+  },
+  "episodes": {
+    "archive": "Archivo",
+    "title": "Episodios",
+    "introFallback": "Lee la historia desde el principio o salta al capitulo mas reciente.",
+    "fallbackCardAlt": "Episodio {uid}",
+    "chapterTitle": "Capitulo {number}: {title}",
+    "chapterLabel": "Capitulo {number}",
+    "chapterShort": "CAP. {number}",
+    "nav": {
+      "prev": "Episodio anterior",
+      "next": "Siguiente episodio"
+    },
+    "synopsisAria": "Sinopsis del episodio",
+    "synopsisTitle": "Sinopsis",
+    "breadcrumbTitle": "Episodios",
+    "arcs": {
+      "Prologue": "Prologo",
+      "Arc I": "Arco I",
+      "Arc II": "Arco II",
+      "Arc III": "Arco III",
+      "Epilogue": "Epilogo"
+    }
+  },
+  "lore": {
+    "archive": "Archivo",
+    "title": "Lore",
+    "intro": "Lugares, objetos e imagenes del Colapso.",
+    "entryFallback": "Entrada de lore",
+    "back": "Lore",
+    "coverArtwork": "Arte de portada de {name}",
+    "titleSuffix": "Lore",
+    "categories": {
+      "Environment": {
+        "singular": "Entorno",
+        "plural": "Entornos",
+        "kicker": "01"
+      },
+      "Prop": {
+        "singular": "Objeto",
+        "plural": "Objetos",
+        "kicker": "02"
+      },
+      "Illustration": {
+        "singular": "Ilustracion",
+        "plural": "Ilustraciones",
+        "kicker": "03"
+      },
+      "Other": {
+        "singular": "Otro",
+        "plural": "Otros",
+        "kicker": "--"
+      }
+    }
+  },
+  "store": {
+    "fallbackCategory": "Tienda",
+    "shop": "Tienda",
+    "title": "Tienda",
+    "intro": "Apoya el proyecto.",
+    "buyProductAria": "Comprar {title}",
+    "productFallbackTitle": "producto",
+    "productImage": "Imagen del producto",
+    "soldOut": "Agotado",
+    "buy": "Comprar",
+    "soon": "Proximamente",
+    "empty": "Aun no hay productos disponibles."
+  },
+  "newsletter": {
+    "title": "Domingos en tu bandeja de entrada.",
+    "description": "Un correo cada vez que salga un nuevo capitulo.",
+    "placeholder": "tu@email.com",
+    "subscribe": "Suscribirse"
+  },
+  "youtube": {
+    "videoFallbackTitle": "Video de YouTube",
+    "invalidUrl": "Anade una URL valida de YouTube para mostrar el video."
+  },
+  "externalSupport": {
+    "supportProject": "Apoya este proyecto",
+    "support": "Apoyo"
+  },
+  "errors": {
+    "homePageNotFound": "No se encontro el contenido de la portada. Crealo en Prismic."
+  }
+}

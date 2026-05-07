@@ -16,22 +16,13 @@ import {
 import { getSettings } from "@/lib/server-locale";
 import type { EpisodePanelSequenceContext } from "@/slices/episode_panel/sequence-context";
 import { filterVisibleDocuments, isDocumentVisible } from "@/lib/content-visibility";
+import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
-const EPISODE_NAV_LABELS = {
-  en: {
-    prev: "Previous Episode",
-    next: "Next Episode",
-  },
-  es: {
-    prev: "Episodio anterior",
-    next: "Próximo episodio",
-  },
-} as const;
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, uid } = await params;
+  const copy = getUiCopy(locale);
   const lang = toPrismicLang(locale);
   const client = createClient();
   const [ep, settings] = await Promise.all([
@@ -43,7 +34,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!isDocumentVisible(ep)) return {};
   const title =
     ep.data.meta_title?.trim() ||
-    `Chapter ${ep.data.chapter_number}: ${ep.data.title}`;
+    formatUiText(copy.episodes.chapterTitle, {
+      number: ep.data.chapter_number ?? "",
+      title: ep.data.title || "",
+    });
   const description = getMetaDescriptionText(
     ep.data.meta_description,
     getMetaDescriptionText(ep.data.summary, getDefaultSiteDescription(locale)),
@@ -88,6 +82,7 @@ export async function generateStaticParams({
  */
 export default async function EpisodeReaderPage({ params }: Props) {
   const { locale, uid } = await params;
+  const copy = getUiCopy(locale);
   const lang = toPrismicLang(locale);
   const client = createClient();
   const [ep, settings, allEpisodes] = await Promise.all([
@@ -126,17 +121,16 @@ export default async function EpisodeReaderPage({ params }: Props) {
     },
     { panelMap: {}, panelOrder: 0 },
   ).panelMap;
-  const sliceContext: EpisodePanelSequenceContext = {
+  const sliceContext: EpisodePanelSequenceContext & { locale: AppLocale } = {
+    locale,
     sequenceId: ep.id,
     panelOrderBySliceIndex,
   };
-  const navLabels = EPISODE_NAV_LABELS[locale];
-  const prevButtonLabel = settings?.data.prev_button_label?.trim() || navLabels.prev;
-  const nextButtonLabel = settings?.data.next_button_label?.trim() || navLabels.next;
-  const chapterLabel =
-    locale === "es"
-      ? `Capítulo ${ep.data.chapter_number ?? ""}`.trim()
-      : `Chapter ${ep.data.chapter_number ?? ""}`.trim();
+  const prevButtonLabel = settings?.data.prev_button_label?.trim() || copy.episodes.nav.prev;
+  const nextButtonLabel = settings?.data.next_button_label?.trim() || copy.episodes.nav.next;
+  const chapterLabel = formatUiText(copy.episodes.chapterLabel, {
+    number: ep.data.chapter_number ?? "",
+  }).trim();
   const summaryText = getMetaDescriptionText(
     ep.data.summary,
     getDefaultSiteDescription(locale),
@@ -174,7 +168,7 @@ export default async function EpisodeReaderPage({ params }: Props) {
         {
           "@type": "ListItem",
           position: 2,
-          name: locale === "es" ? "Episodios" : "Episodes",
+          name: copy.episodes.breadcrumbTitle,
           item: archiveUrl,
         },
         {
@@ -196,7 +190,7 @@ export default async function EpisodeReaderPage({ params }: Props) {
       {/* Episode header — replicates EpisodeReader.__head */}
       <div className="hotc-ereader__head">
         <Link href={`/${locale}/episodes`} className="hotc-ereader__back">
-          ← Archive
+          ← {copy.episodes.archive}
         </Link>
         <span className="hotc-ereader__chapter">
           {chapterLabel}
@@ -208,8 +202,8 @@ export default async function EpisodeReaderPage({ params }: Props) {
             ? ` · ${asText(ep.data.summary).slice(0, 80)}`
             : ""}
         </p>
-        <section className="sr-only" aria-label="Episode synopsis">
-          <h2>{locale === "es" ? "Sinopsis" : "Synopsis"}</h2>
+        <section className="sr-only" aria-label={copy.episodes.synopsisAria}>
+          <h2>{copy.episodes.synopsisTitle}</h2>
           <p>{summaryText}</p>
         </section>
       </div>
@@ -241,7 +235,11 @@ export default async function EpisodeReaderPage({ params }: Props) {
           </Link>
 
           <div className="hotc-ereader__progress">
-            <span className="hotc-attr-label">CH. {ep.data.chapter_number}</span>
+            <span className="hotc-attr-label">
+              {formatUiText(copy.episodes.chapterShort, {
+                number: ep.data.chapter_number ?? "",
+              })}
+            </span>
           </div>
 
           <Link

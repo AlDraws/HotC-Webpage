@@ -11,11 +11,13 @@ import {
   SITE_NAME,
 } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
+import { getUiCopy } from "@/lib/ui-copy";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
 
 export default async function Home({ params }: Props) {
   const { locale } = await params;
+  const copy = getUiCopy(locale);
   const lang = toPrismicLang(locale);
   const client = createClient();
   const page = await client
@@ -25,12 +27,18 @@ export default async function Home({ params }: Props) {
   if (!page) {
     return (
       <div className="flex h-screen items-center justify-center">
-        <p>Home page content not found. Please create it in Prismic.</p>
+        <p>{copy.errors.homePageNotFound}</p>
       </div>
     );
   }
 
-  return <SliceZone slices={normalizeSlices(page.data.slices)} components={components} />;
+  return (
+    <SliceZone
+      slices={normalizeSlices(page.data.slices)}
+      components={components}
+      context={{ locale }}
+    />
+  );
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

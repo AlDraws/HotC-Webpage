@@ -34,3 +34,43 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Prismic translation workflow
+
+The translation round-trip now includes both:
+
+- Prismic content documents
+- local UI copy in `src/locales/ui/*.json`
+
+Export a round-trip file plus a reviewable Markdown summary:
+
+```bash
+npm run prismic:translations:export -- --from en --to es
+```
+
+That creates:
+
+- `translations/prismic-en-us-to-es-es.json`
+- `translations/prismic-en-us-to-es-es.md`
+
+Translate the JSON by editing each unit's `target` value:
+
+- plain text fields: replace the string in `target`
+- rich text fields: keep the Prismic JSON structure and translate the text content inside `target`
+- local UI copy entries live under `localResources`
+
+Then import it back into Prismic:
+
+```bash
+npm run prismic:translations:import -- --file translations/prismic-en-us-to-es-es.json
+```
+
+Useful environment variables:
+
+- `PRISMIC_ACCESS_TOKEN`: optional, for protected Content API access
+- `PRISMIC_WRITE_TOKEN`: required for import
+- `PRISMIC_REPOSITORY`: optional repository override
+
+Important: the import writes to a Prismic migration release. It does not publish live automatically; review and publish from Prismic afterwards.
+
+Important: local UI copy is updated directly in `src/locales/ui/es.json` during import.

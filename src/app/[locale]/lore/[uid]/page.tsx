@@ -9,11 +9,17 @@ import PrismicImage from "@/components/PrismicImage";
 import { buildPageMetadata } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
 import { filterVisibleDocuments, isDocumentVisible } from "@/lib/content-visibility";
+import {
+  formatUiText,
+  getLocalizedLoreCategory,
+  getUiCopy,
+} from "@/lib/ui-copy";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, uid } = await params;
+  const copy = getUiCopy(locale);
   const lang = toPrismicLang(locale);
   const client = createClient();
   const [item, settings] = await Promise.all([
@@ -23,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     getSettings(locale),
   ]);
   if (!isDocumentVisible(item)) return {};
-  const title = `${item.data.title ?? uid} — Worldbuilding`;
+  const title = `${item.data.title ?? uid} — ${copy.lore.titleSuffix}`;
   const socialImage =
     item.data.meta_image?.url ||
     item.data.cover?.url ||
@@ -58,13 +64,14 @@ export async function generateStaticParams({
  */
 export default async function LoreDetailPage({ params }: Props) {
   const { locale, uid } = await params;
+  const copy = getUiCopy(locale);
   const lang = toPrismicLang(locale);
   const client = createClient();
   const item = await client
     .getByUID("lore_entry", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
     .catch(() => null);
   if (!isDocumentVisible(item)) notFound();
-  const itemTitle = item.data.title?.trim() || item.uid || "Worldbuilding entry";
+  const itemTitle = item.data.title?.trim() || item.uid || copy.lore.entryFallback;
 
   return (
     <article>
@@ -74,7 +81,7 @@ export default async function LoreDetailPage({ params }: Props) {
           <div className="hotc-cprofile__bg">
             <PrismicImage
               field={item.data.cover}
-              fallbackAlt={`${itemTitle} cover artwork`}
+              fallbackAlt={formatUiText(copy.lore.coverArtwork, { name: itemTitle })}
               fill
               sizes="100vw"
               quality={75}
@@ -86,14 +93,14 @@ export default async function LoreDetailPage({ params }: Props) {
 
         <div className="bounded hotc-cprofile__hero-inner">
           <Link href={`/${locale}/lore`} className="hotc-cprofile__back">
-            ← Worldbuilding
+            ← {copy.lore.back}
           </Link>
           {item.data.category ? (
             <span
               className="hotc-kicker"
               style={{ color: "var(--hotc-ember)" }}
             >
-              {item.data.category}
+              {getLocalizedLoreCategory(item.data.category || null, locale)}
             </span>
           ) : null}
           <h1 className="hotc-cprofile__name">{item.data.title}</h1>
@@ -107,7 +114,11 @@ export default async function LoreDetailPage({ params }: Props) {
       {item.data.slices && item.data.slices.length > 0 ? (
         <section className="bounded bounded--base">
           <div className="hotc-cprofile__bio">
-            <SliceZone slices={item.data.slices} components={components} />
+            <SliceZone
+              slices={item.data.slices}
+              components={components}
+              context={{ locale }}
+            />
           </div>
         </section>
       ) : null}

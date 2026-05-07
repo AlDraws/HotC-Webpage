@@ -14,6 +14,7 @@ import {
   localizeHref,
   resolveLinkHref,
 } from "@/lib/links";
+import { getUiCopy } from "@/lib/ui-copy";
 
 type Props = {
   settings: Content.SettingsDocument;
@@ -26,6 +27,7 @@ function persistLocalePreference(locale: AppLocale) {
 }
 
 export default function Header({ settings, navigation, currentLocale }: Props) {
+  const copy = getUiCopy(currentLocale);
   const [open, setOpen] = useState(false);
   const [pendingLocale, setPendingLocale] = useState<AppLocale | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -59,27 +61,18 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
     items.push({
       href,
       iconLabel,
-      label: s.label || iconLabel || "Social",
+      label: s.label || iconLabel || copy.common.socialFallbackLabel,
       target: getLinkTarget(s.url),
     });
     return items;
   }, []);
-  const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
+  const siteTitle = asText(settings.data.site_title) || copy.common.siteTitleFallback;
   const brandData = settings.data as typeof settings.data & {
     header_logo?: typeof settings.data.logo | null;
   };
   const headerLogo = brandData.header_logo?.url
     ? brandData.header_logo
     : settings.data.logo;
-  const labels = {
-    language: currentLocale === "es" ? "Idioma" : "Language",
-    primaryNav: currentLocale === "es" ? "Navegación principal" : "Primary navigation",
-    socialNav: currentLocale === "es" ? "Redes sociales" : "Social media",
-    menuOpen: currentLocale === "es" ? "Abrir menú principal" : "Open main menu",
-    menuClose: currentLocale === "es" ? "Cerrar menú principal" : "Close main menu",
-    mobileNav: currentLocale === "es" ? "Navegación móvil" : "Mobile navigation",
-  };
-
   function switchLocale(locale: AppLocale) {
     if (locale === currentLocale || isPending) return;
 
@@ -116,7 +109,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
           )}
         </Link>
 
-        <nav className="hotc-header__nav" aria-label={labels.primaryNav}>
+        <nav className="hotc-header__nav" aria-label={copy.header.primaryNav}>
           {navItems.map((item, i) => (
             item.href ? (
               isExternalHref(item.href) ? (
@@ -151,7 +144,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
           <div
             className="hotc-header__lang"
             role="group"
-            aria-label={labels.language}
+            aria-label={copy.header.language}
             aria-busy={isPending}
           >
             {(["en", "es"] as const).map((locale) => {
@@ -181,7 +174,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
               );
             })}
           </div>
-          <nav className="hotc-header__socials" aria-label={labels.socialNav}>
+          <nav className="hotc-header__socials" aria-label={copy.header.socialNav}>
             {headerSocials.map((s, i) => {
               const target = s.target ?? (isExternalHref(s.href) ? "_blank" : undefined);
               return (
@@ -202,7 +195,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
             type="button"
             onClick={() => setOpen(!open)}
             className="hotc-header__burger"
-            aria-label={open ? labels.menuClose : labels.menuOpen}
+            aria-label={open ? copy.header.menuClose : copy.header.menuOpen}
             aria-expanded={open}
             aria-controls="hotc-mobile-menu"
           >
@@ -219,7 +212,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
           className="hotc-header__drawer"
           role="dialog"
           aria-modal="true"
-          aria-label={labels.mobileNav}
+          aria-label={copy.header.mobileNav}
         >
           <div className="hotc-header__drawer-head">
             <Link
@@ -247,7 +240,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
             <button
               type="button"
               className="hotc-header__burger"
-              aria-label={labels.menuClose}
+              aria-label={copy.header.menuClose}
               onClick={() => setOpen(false)}
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
@@ -256,7 +249,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
             </button>
           </div>
 
-          <nav className="hotc-header__drawer-nav" aria-label={labels.mobileNav}>
+          <nav className="hotc-header__drawer-nav" aria-label={copy.header.mobileNav}>
             {navItems.map((item, i) => {
               if (!item.href) return null;
 

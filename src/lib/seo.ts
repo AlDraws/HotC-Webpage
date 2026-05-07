@@ -7,6 +7,7 @@ import {
   normalizeAppLocale,
   type AppLocale,
 } from "@/lib/locale";
+import { getUiCopy } from "@/lib/ui-copy";
 
 type LocalizedRouteDocument = {
   type: string;
@@ -32,11 +33,10 @@ type MetadataInput = {
 };
 
 const SITE_NAME = "Heirs of the Collapse";
-const DEFAULT_SITE_DESCRIPTION =
-  "Heirs of the Collapse is a cinematic sci-fi webcomic exploring survival, memory, and collapse.";
+const DEFAULT_SITE_DESCRIPTION = getUiCopy(DEFAULT_LOCALE).seo.defaultSiteDescription;
 const HOME_SITE_DESCRIPTION_BY_LOCALE: Record<AppLocale, string> = {
-  en: "Heirs of the Collapse is a post-apocalyptic sci-fi webcomic set in a transformed Valencia, where memory, technology and hope collide after the collapse.",
-  es: "Heirs of the Collapse es un webcómic de ciencia ficción postapocalíptica ambientado en una Valencia transformada, donde memoria, tecnología y esperanza chocan tras el colapso.",
+  en: getUiCopy("en").seo.homeSiteDescription,
+  es: getUiCopy("es").seo.homeSiteDescription,
 };
 const OG_LOCALE_BY_APP_LOCALE: Record<AppLocale, string> = {
   en: "en_US",

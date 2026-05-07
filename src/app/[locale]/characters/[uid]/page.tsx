@@ -10,6 +10,11 @@ import PrismicImage from "@/components/PrismicImage";
 import { buildPageMetadata } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
 import { filterVisibleDocuments, isDocumentVisible } from "@/lib/content-visibility";
+import {
+  formatUiText,
+  getLocalizedCharacterRole,
+  getUiCopy,
+} from "@/lib/ui-copy";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
@@ -58,6 +63,7 @@ export async function generateStaticParams({
  */
 export default async function CharacterProfilePage({ params }: Props) {
   const { locale, uid } = await params;
+  const copy = getUiCopy(locale);
   const lang = toPrismicLang(locale);
   const client = createClient();
   const ch = await client
@@ -68,7 +74,7 @@ export default async function CharacterProfilePage({ params }: Props) {
   const attributes = ch.data.attributes ?? [];
   const gallery = ch.data.gallery ?? [];
   const slices = normalizeSlices(ch.data.slices);
-  const characterName = ch.data.name?.trim() || ch.uid || "Unknown character";
+  const characterName = ch.data.name?.trim() || ch.uid || copy.character.fallbackName;
 
   return (
     <article>
@@ -78,7 +84,7 @@ export default async function CharacterProfilePage({ params }: Props) {
           <div className="hotc-cprofile__bg">
             <PrismicImage
               field={ch.data.cover}
-              fallbackAlt={`${characterName} cover artwork`}
+              fallbackAlt={formatUiText(copy.character.coverArtwork, { name: characterName })}
               fill
               sizes="100vw"
               quality={75}
@@ -90,7 +96,7 @@ export default async function CharacterProfilePage({ params }: Props) {
 
         <div className="bounded hotc-cprofile__hero-inner">
           <Link href={`/${locale}/characters`} className="hotc-cprofile__back">
-            ← Cast
+            ← {copy.character.castBack}
           </Link>
           <div className="hotc-cprofile__hero-grid">
             {/* Portrait card */}
@@ -101,7 +107,7 @@ export default async function CharacterProfilePage({ params }: Props) {
                   className="hotc-cprofile__portrait"
                   sizes="(max-width: 767px) 220px, 280px"
                   quality={75}
-                  fallbackAlt={`Portrait of ${characterName}`}
+                  fallbackAlt={formatUiText(copy.character.portraitOf, { name: characterName })}
                 />
               </div>
             ) : null}
@@ -113,7 +119,7 @@ export default async function CharacterProfilePage({ params }: Props) {
                   className="hotc-kicker"
                   style={{ color: "var(--hotc-ember)" }}
                 >
-                  {ch.data.role}
+                  {getLocalizedCharacterRole(ch.data.role, locale)}
                 </span>
               ) : null}
               {ch.data.name ? (
@@ -143,7 +149,7 @@ export default async function CharacterProfilePage({ params }: Props) {
       {/* Bio section */}
       <section className="bounded bounded--base">
         <div className="hotc-cprofile__bio">
-          <h2 className="hotc-h3">Bio</h2>
+          <h2 className="hotc-h3">{copy.character.bio}</h2>
           {ch.data.short_bio ? (
             <PrismicRichText field={ch.data.short_bio} />
           ) : null}
@@ -154,7 +160,7 @@ export default async function CharacterProfilePage({ params }: Props) {
       {gallery.length > 0 ? (
         <section className="bounded bounded--base" style={{ paddingTop: 0 }}>
           <div className="hotc-cprofile__gallery">
-            <h2 className="hotc-h3">Gallery</h2>
+            <h2 className="hotc-h3">{copy.character.gallery}</h2>
             <div className="hotc-cprofile__gallery-grid">
               {gallery.map((g, i) =>
                 g.image?.url ? (
@@ -164,7 +170,10 @@ export default async function CharacterProfilePage({ params }: Props) {
                   >
                     <PrismicImage
                       field={g.image}
-                      fallbackAlt={`${characterName} gallery image ${i + 1}`}
+                      fallbackAlt={formatUiText(copy.character.galleryImage, {
+                        name: characterName,
+                        index: i + 1,
+                      })}
                       fill
                       sizes="(max-width: 639px) 100vw, 33vw"
                       quality={75}
@@ -179,7 +188,7 @@ export default async function CharacterProfilePage({ params }: Props) {
       ) : null}
 
       {slices.length > 0 ? (
-        <SliceZone slices={slices} components={components} />
+        <SliceZone slices={slices} components={components} context={{ locale }} />
       ) : null}
     </article>
   );

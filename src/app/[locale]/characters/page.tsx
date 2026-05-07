@@ -7,17 +7,19 @@ import { normalizeSlices } from "@/lib/prismic-slices";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
 import { buildPageMetadata } from "@/lib/seo";
 import { components } from "@/slices";
+import { getUiCopy } from "@/lib/ui-copy";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const copy = getUiCopy(locale);
 
   return buildPageMetadata({
     locale,
     pathname: "/characters",
-    title: "Characters",
-    description: "Meet the cast of Heirs of the Collapse.",
+    title: copy.seo.pages.characters.title,
+    description: copy.seo.pages.characters.description,
   });
 }
 

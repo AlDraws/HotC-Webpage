@@ -5,15 +5,23 @@ import { SliceComponentProps } from "@prismicio/react";
 import PrismicImage from "@/components/PrismicImage";
 import { CharacterGridSlice } from "@/../prismicio-types";
 import { isVisibleData } from "@/lib/content-visibility";
+import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
+import {
+  formatUiText,
+  getLocalizedCharacterRole,
+  getUiCopy,
+} from "@/lib/ui-copy";
 
-export type CharacterGridProps = SliceComponentProps<CharacterGridSlice>;
+export type CharacterGridProps = SliceComponentProps<CharacterGridSlice, HotcSliceContext>;
 
 /**
  * CharacterGrid — grid 2/3/4 col of character portrait cards.
  * Items are content-relationship links to character documents.
  * Faithfully replicates CharacterGrid.jsx from ui_kits/website/.
  */
-const CharacterGrid = ({ slice }: CharacterGridProps) => {
+const CharacterGrid = ({ slice, context }: CharacterGridProps) => {
+  const locale = getSliceLocale(context);
+  const copy = getUiCopy(locale);
   return (
     <section
       data-slice-type={slice.slice_type}
@@ -58,7 +66,9 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
                 {portrait ? (
                   <PrismicImage
                     field={portrait}
-                    fallbackAlt={`Portrait of ${data?.name ?? character.uid ?? "character"}`}
+                    fallbackAlt={formatUiText(copy.character.portraitOf, {
+                      name: data?.name ?? character.uid ?? copy.character.fallbackName,
+                    })}
                     fill
                     sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
                     quality={65}
@@ -76,10 +86,12 @@ const CharacterGrid = ({ slice }: CharacterGridProps) => {
               </div>
               <div className="hotc-cgrid__meta">
                 <span className="hotc-cgrid__name">
-                  {data?.name ?? character.uid ?? "Unknown"}
+                  {data?.name ?? character.uid ?? copy.character.unknownListItem}
                 </span>
                 {data?.role && (
-                  <span className="hotc-cgrid__role">{data?.role}</span>
+                  <span className="hotc-cgrid__role">
+                    {getLocalizedCharacterRole(data?.role, locale)}
+                  </span>
                 )}
               </div>
             </PrismicNextLink>

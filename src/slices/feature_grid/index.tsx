@@ -10,16 +10,20 @@ import {
   isExternalHref,
   resolveLinkHref,
 } from "@/lib/links";
+import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
+import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 
 /**
  * Props for `FeatureGrid`.
  */
-export type FeatureGridProps = SliceComponentProps<FeatureGridSlice>;
+export type FeatureGridProps = SliceComponentProps<FeatureGridSlice, HotcSliceContext>;
 
 /**
  * Component for "FeatureGrid" Slices.
  */
-const FeatureGrid = ({ slice }: FeatureGridProps) => {
+const FeatureGrid = ({ slice, context }: FeatureGridProps) => {
+  const locale = getSliceLocale(context);
+  const copy = getUiCopy(locale);
   const { openLightbox } = useLightbox();
 
   return (
@@ -51,7 +55,8 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
             coverTarget === "_blank" || isExternal
               ? "noopener noreferrer"
               : undefined;
-          const featureTitle = item.title?.trim() || `Feature ${index + 1}`;
+          const featureTitle =
+            item.title?.trim() || formatUiText(copy.images.featureTitle, { index: index + 1 });
           const coverAlt = coverImage?.alt || featureTitle;
 
           const content = (
@@ -129,9 +134,11 @@ const FeatureGrid = ({ slice }: FeatureGridProps) => {
                       },
                     ])
                   }
-                  aria-label={`View artwork: ${item.title || "feature"} image`}
+                  aria-label={formatUiText(copy.images.featureImageAria, {
+                    title: item.title || featureTitle,
+                  })}
                 >
-                  View artwork
+                  {copy.common.viewArtwork}
                 </button>
               ) : null}
             </article>

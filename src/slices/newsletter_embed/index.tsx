@@ -2,17 +2,24 @@
 
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
+import { getUiCopy } from "@/lib/ui-copy";
 import { NewsletterEmbedSlice } from "@/../prismicio-types";
 
 /**
  * Props for `NewsletterEmbed`.
  */
-export type NewsletterEmbedProps = SliceComponentProps<NewsletterEmbedSlice>;
+export type NewsletterEmbedProps = SliceComponentProps<
+  NewsletterEmbedSlice,
+  HotcSliceContext
+>;
 
 /**
  * Component for "NewsletterEmbed" Slices.
  */
-const NewsletterEmbed = ({ slice }: NewsletterEmbedProps) => {
+const NewsletterEmbed = ({ slice, context }: NewsletterEmbedProps) => {
+  const locale = getSliceLocale(context);
+  const copy = getUiCopy(locale);
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -20,11 +27,11 @@ const NewsletterEmbed = ({ slice }: NewsletterEmbedProps) => {
       as="section"
     >
       <div className="hotc-newsletter">
-        <h2>{slice.primary.title || "Sundays in your inbox."}</h2>
+        <h2>{slice.primary.title || copy.newsletter.title}</h2>
         <div className="hotc-newsletter__body">
           <PrismicRichText
             field={slice.primary.description}
-            fallback={<p>One email when a new chapter drops.</p>}
+            fallback={<p>{copy.newsletter.description}</p>}
           />
         </div>
         <form
@@ -33,11 +40,11 @@ const NewsletterEmbed = ({ slice }: NewsletterEmbedProps) => {
         >
           <input
             type="email"
-            placeholder={slice.primary.placeholder || "your@email.com"}
+            placeholder={slice.primary.placeholder || copy.newsletter.placeholder}
             required
           />
           <button className="hotc-btn hotc-btn--ember" type="submit">
-            {slice.primary.cta_label || "Subscribe"}
+            {slice.primary.cta_label || copy.newsletter.subscribe}
           </button>
         </form>
       </div>

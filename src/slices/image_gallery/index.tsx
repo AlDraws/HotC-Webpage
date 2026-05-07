@@ -4,22 +4,31 @@ import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import { useLightbox } from "@/components/LightboxProvider";
 import PrismicImage from "@/components/PrismicImage";
+import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
+import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 
 /**
  * Props for `ImageGallery`.
  */
-export type ImageGalleryProps = SliceComponentProps<Content.ImageGallerySlice>;
+export type ImageGalleryProps = SliceComponentProps<
+  Content.ImageGallerySlice,
+  HotcSliceContext
+>;
 
 /**
  * Component for "ImageGallery" Slices.
  */
-const ImageGallery = ({ slice }: ImageGalleryProps) => {
+const ImageGallery = ({ slice, context }: ImageGalleryProps) => {
+  const locale = getSliceLocale(context);
+  const copy = getUiCopy(locale);
   const { openLightbox } = useLightbox();
   const images = slice.items
     .map((item, index) => ({
       field: item.image,
       src: item.image.url || "",
-      alt: item.image.alt || `Gallery image ${index + 1}`,
+      alt:
+        item.image.alt ||
+        formatUiText(copy.images.galleryImage, { index: index + 1 }),
       width: item.image.dimensions?.width,
       height: item.image.dimensions?.height,
     }))
@@ -37,7 +46,7 @@ const ImageGallery = ({ slice }: ImageGalleryProps) => {
             key={index}
             type="button"
             className="hotc-gallery__tile hotc-pressable"
-            aria-label={`Open image ${index + 1}`}
+            aria-label={formatUiText(copy.images.galleryImage, { index: index + 1 })}
             onClick={() => openLightbox(images, index)}
           >
             <PrismicImage

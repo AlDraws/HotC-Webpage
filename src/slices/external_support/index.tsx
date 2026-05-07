@@ -5,6 +5,8 @@ import type { CSSProperties } from "react";
 import Bounded from "@/components/Bounded";
 import PrismicImage from "@/components/PrismicImage";
 import { getContextualCtaAriaLabel } from "@/lib/a11y";
+import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
+import { getUiCopy } from "@/lib/ui-copy";
 import {
   ExternalSupportSlice,
   ExternalSupportSliceBannerItem,
@@ -13,7 +15,7 @@ import {
 } from "@/../prismicio-types";
 
 export type ExternalSupportProps =
-  SliceComponentProps<ExternalSupportSlice>;
+  SliceComponentProps<ExternalSupportSlice, HotcSliceContext>;
 type ExternalSupportItem =
   | ExternalSupportSliceRowItem
   | ExternalSupportSliceCardsItem
@@ -52,7 +54,9 @@ function getTextContent(value: unknown) {
  *  - "cards"  : richer card grid with description + icon (good for /support page)
  *  - "banner" : single full-width strip with one or two prominent CTAs
  */
-const ExternalSupport = ({ slice }: ExternalSupportProps) => {
+const ExternalSupport = ({ slice, context }: ExternalSupportProps) => {
+  const locale = getSliceLocale(context);
+  const copy = getUiCopy(locale);
   const variation = slice.variation;
   const items = (slice.items ?? []) as ExternalSupportItemWithOptionalMedia[];
 
@@ -84,7 +88,7 @@ const ExternalSupport = ({ slice }: ExternalSupportProps) => {
         {variation === "cards" ? (
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {items.map((it: ExternalSupportItem, i: number) => {
-              const ctaLabel = it.label || "Support this project";
+              const ctaLabel = it.label || copy.externalSupport.supportProject;
               const ctaContext =
                 it.platform ||
                 getTextContent(it.description) ||
@@ -93,6 +97,7 @@ const ExternalSupport = ({ slice }: ExternalSupportProps) => {
               const ctaAriaLabel = getContextualCtaAriaLabel(
                 it.label || null,
                 ctaContext,
+                locale,
               );
 
               return (
@@ -116,7 +121,7 @@ const ExternalSupport = ({ slice }: ExternalSupportProps) => {
                       />
                     ) : null}
                     <span className="text-sm uppercase tracking-wide text-slate-300">
-                      {it.platform || "Support"}
+                      {it.platform || copy.externalSupport.support}
                     </span>
                   </div>
                   <p className="text-base text-slate-100">{it.description}</p>

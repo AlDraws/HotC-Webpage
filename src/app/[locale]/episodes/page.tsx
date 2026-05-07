@@ -6,23 +6,29 @@ import { createClient } from "@/prismicio";
 import { filterVisibleDocuments } from "@/lib/content-visibility";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
 import { buildPageMetadata } from "@/lib/seo";
+import {
+  formatUiText,
+  getLocalizedEpisodeArc,
+  getUiCopy,
+} from "@/lib/ui-copy";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const copy = getUiCopy(locale);
 
   return buildPageMetadata({
     locale,
     pathname: "/episodes",
-    title: "Episodes",
-    description:
-      "Read every chapter of Heirs of the Collapse, a webcomic updating every Sunday.",
+    title: copy.seo.pages.episodes.title,
+    description: copy.seo.pages.episodes.description,
   });
 }
 
 export default async function EpisodesPage({ params }: Props) {
   const { locale } = await params;
+  const copy = getUiCopy(locale);
   const lang = toPrismicLang(locale);
   const client = createClient();
   const episodesIndex = await client
@@ -36,13 +42,13 @@ export default async function EpisodesPage({ params }: Props) {
   const arcs = ["Prologue", "Arc I", "Arc II", "Arc III", "Epilogue"] as const;
   const intro = episodesIndex?.data.intro_richtext
     ? asText(episodesIndex.data.intro_richtext)
-    : "Read the story from the beginning, or jump to the latest chapter.";
+    : copy.episodes.introFallback;
 
   return (
     <>
       <section className="bounded hotc-page__head">
-        <span className="hotc-kicker">Archive</span>
-        <h1 className="hotc-h1">Episodes</h1>
+        <span className="hotc-kicker">{copy.episodes.archive}</span>
+        <h1 className="hotc-h1">{copy.episodes.title}</h1>
         <p className="hotc-page__intro">{intro}</p>
       </section>
 
@@ -50,7 +56,7 @@ export default async function EpisodesPage({ params }: Props) {
         <div className="mb-6 flex flex-wrap gap-2">
           {arcs.map((arc) => (
             <span key={arc} className="hotc-btn hotc-btn--ghost">
-              {arc}
+              {getLocalizedEpisodeArc(arc, locale)}
             </span>
           ))}
         </div>
@@ -66,7 +72,12 @@ export default async function EpisodesPage({ params }: Props) {
                 {ep.data.cover?.url ? (
                   <PrismicImage
                     field={ep.data.cover}
-                    fallbackAlt={ep.data.title || `Episode ${ep.uid}`}
+                    fallbackAlt={
+                      ep.data.title ||
+                      formatUiText(copy.episodes.fallbackCardAlt, {
+                        uid: ep.uid || "",
+                      })
+                    }
                     fill
                     sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
                     quality={75}
@@ -78,7 +89,9 @@ export default async function EpisodesPage({ params }: Props) {
               {/* Meta */}
               <div>
                 <span className="hotc-ep-card__date">
-                  CH. {ep.data.chapter_number ?? "—"}&nbsp;·&nbsp;
+                  {formatUiText(copy.episodes.chapterShort, {
+                    number: ep.data.chapter_number ?? "—",
+                  })}&nbsp;·&nbsp;
                   {ep.data.publish_date ?? ""}
                 </span>
                 <h3 className="hotc-ep-card__title">{ep.data.title}</h3>

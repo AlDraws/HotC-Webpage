@@ -4,20 +4,23 @@ import Bounded from "@/components/Bounded";
 import PrismicImage from "@/components/PrismicImage";
 import { getContextualCtaAriaLabel, getDescriptiveCtaLabel } from "@/lib/a11y";
 import { resolveLinkHref } from "@/lib/links";
+import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
 import { CtaBlockSlice } from "@/../prismicio-types";
 
 /**
  * Props for `CtaBlock`.
  */
-export type CtaBlockProps = SliceComponentProps<CtaBlockSlice>;
+export type CtaBlockProps = SliceComponentProps<CtaBlockSlice, HotcSliceContext>;
 
 /**
  * Component for "CtaBlock" Slices.
  */
-const CtaBlock = ({ slice }: CtaBlockProps) => {
+const CtaBlock = ({ slice, context }: CtaBlockProps) => {
+  const locale = getSliceLocale(context);
   const ctaAriaLabel = getContextualCtaAriaLabel(
     slice.primary.cta_label,
     slice.primary.title,
+    locale,
   );
   const ctaLabel = getDescriptiveCtaLabel(
     slice.primary.cta_label,

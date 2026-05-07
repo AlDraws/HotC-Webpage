@@ -7,14 +7,18 @@ import { CSSProperties, useEffect, useRef, useState } from "react";
 import PrismicImage from "@/components/PrismicImage";
 import { getContextualCtaAriaLabel, getDescriptiveCtaLabel } from "@/lib/a11y";
 import { resolveLinkHref } from "@/lib/links";
+import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
+import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 import { ParallaxHeroSlice } from "@/../prismicio-types";
 
-export type ParallaxHeroProps = SliceComponentProps<ParallaxHeroSlice>;
+export type ParallaxHeroProps = SliceComponentProps<ParallaxHeroSlice, HotcSliceContext>;
 
 /**
  * ParallaxHero
  */
-const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
+const ParallaxHero = ({ slice, context }: ParallaxHeroProps) => {
+  const locale = getSliceLocale(context);
+  const copy = getUiCopy(locale);
   const sectionRef = useRef<HTMLElement | null>(null);
   const bgRef = useRef<HTMLDivElement | null>(null);
   const fgRef = useRef<HTMLDivElement | null>(null);
@@ -44,14 +48,16 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
   const backgroundImage =
     slice.primary.bgPoster?.url ? slice.primary.bgPoster : slice.primary.bgImage;
   const heroTitle =
-    slice.primary.title?.trim() || "Heirs of the Collapse parallax hero artwork";
+    slice.primary.title?.trim() || copy.images.parallaxHeroArtworkAlt;
   const primaryCtaAriaLabel = getContextualCtaAriaLabel(
     slice.primary.primaryCtaLabel,
     heroTitle,
+    locale,
   );
   const secondaryCtaAriaLabel = getContextualCtaAriaLabel(
     slice.primary.secondaryCtaLabel,
     heroTitle,
+    locale,
   );
   const primaryCtaLabel = getDescriptiveCtaLabel(
     slice.primary.primaryCtaLabel,
@@ -172,7 +178,9 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
         <div ref={fgRef} className="hotc-phero__fg">
           <PrismicImage
             field={slice.primary.foreground}
-            fallbackAlt={`${heroTitle} foreground artwork`}
+            fallbackAlt={formatUiText(copy.images.foregroundArtworkAlt, {
+              title: heroTitle,
+            })}
             loading="lazy"
             sizes="(max-width: 767px) 72vw, (max-width: 1279px) 68vw, 820px"
             quality={60}

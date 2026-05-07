@@ -3,6 +3,8 @@ import { isFilled } from "@prismicio/client";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import LiteYouTubeEmbed from "@/components/LiteYouTubeEmbed";
+import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
+import { getUiCopy } from "@/lib/ui-copy";
 
 type YoutubeEmbedSlice = prismic.SharedSlice<
   "youtube_embed",
@@ -18,7 +20,7 @@ type YoutubeEmbedSlice = prismic.SharedSlice<
   >
 >;
 
-export type YoutubeEmbedProps = SliceComponentProps<YoutubeEmbedSlice>;
+export type YoutubeEmbedProps = SliceComponentProps<YoutubeEmbedSlice, HotcSliceContext>;
 
 const YOUTUBE_HOSTS = new Set([
   "youtube.com",
@@ -61,9 +63,11 @@ function getYouTubeVideoId(rawUrl: string | null | undefined) {
   return videoId;
 }
 
-const YoutubeEmbed = ({ slice }: YoutubeEmbedProps) => {
+const YoutubeEmbed = ({ slice, context }: YoutubeEmbedProps) => {
+  const locale = getSliceLocale(context);
+  const copy = getUiCopy(locale);
   const videoId = getYouTubeVideoId(slice.primary.youtube_url);
-  const videoTitle = slice.primary.title || "YouTube video";
+  const videoTitle = slice.primary.title || copy.youtube.videoFallbackTitle;
 
   return (
     <Bounded
@@ -87,11 +91,15 @@ const YoutubeEmbed = ({ slice }: YoutubeEmbedProps) => {
 
         {videoId ? (
           <div className="hotc-ytembed__frame">
-            <LiteYouTubeEmbed videoId={videoId} title={videoTitle} />
+            <LiteYouTubeEmbed
+              videoId={videoId}
+              title={videoTitle}
+              playLabel={copy.common.play}
+            />
           </div>
         ) : (
           <p className="hotc-ytembed__error">
-            Anade una URL valida de YouTube para mostrar el video.
+            {copy.youtube.invalidUrl}
           </p>
         )}
 

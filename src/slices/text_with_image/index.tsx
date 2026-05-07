@@ -6,26 +6,31 @@ import { useLightbox } from "@/components/LightboxProvider";
 import PrismicImage from "@/components/PrismicImage";
 import { getContextualCtaAriaLabel, getDescriptiveCtaLabel } from "@/lib/a11y";
 import { resolveLinkHref } from "@/lib/links";
+import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
+import { getUiCopy } from "@/lib/ui-copy";
 import { TextWithImageSlice } from "@/../prismicio-types";
 
 /**
  * Props for `TextWithImage`.
  */
-export type TextWithImageProps = SliceComponentProps<TextWithImageSlice>;
+export type TextWithImageProps = SliceComponentProps<TextWithImageSlice, HotcSliceContext>;
 
 /**
  * Component for "TextWithImage" Slices.
  */
-const TextWithImage = ({ slice }: TextWithImageProps) => {
+const TextWithImage = ({ slice, context }: TextWithImageProps) => {
+  const locale = getSliceLocale(context);
+  const copy = getUiCopy(locale);
   const { openLightbox } = useLightbox();
   const imageAlt =
     slice.primary.image.alt ||
     slice.primary.title ||
     slice.primary.kicker ||
-    "Editorial image from Heirs of the Collapse";
+    copy.images.editorialImageAlt;
   const ctaAriaLabel = getContextualCtaAriaLabel(
     slice.primary.cta_label,
     slice.primary.title || slice.primary.kicker,
+    locale,
   );
   const ctaLabel = getDescriptiveCtaLabel(
     slice.primary.cta_label,
@@ -55,7 +60,7 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
                   },
                 ])
               }
-              aria-label="Open image"
+              aria-label={copy.common.openImage}
             >
               <PrismicImage
                 field={slice.primary.image}

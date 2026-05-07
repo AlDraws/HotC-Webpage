@@ -6,6 +6,7 @@ import { createClient } from "@/prismicio";
 import { filterVisibleDocuments } from "@/lib/content-visibility";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
 import { buildPageMetadata } from "@/lib/seo";
+import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 
 type ProductDocument = {
   id: string;
@@ -39,17 +40,19 @@ type Props = { params: Promise<{ locale: AppLocale }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const copy = getUiCopy(locale);
 
   return buildPageMetadata({
     locale,
     pathname: "/store",
-    title: "Store",
-    description: "Support Heirs of the Collapse through official products and drops.",
+    title: copy.seo.pages.store.title,
+    description: copy.seo.pages.store.description,
   });
 }
 
 export default async function StorePage({ params }: Props) {
   const { locale } = await params;
+  const copy = getUiCopy(locale);
   const lang = toPrismicLang(locale);
   const client = createClient();
   const products = await client
@@ -60,7 +63,7 @@ export default async function StorePage({ params }: Props) {
 
   const groups: Record<string, typeof products> = {};
   for (const p of products) {
-    const cat = p.data.category || "Store";
+    const cat = p.data.category || copy.store.fallbackCategory;
     if (!groups[cat]) groups[cat] = [];
     groups[cat].push(p);
   }
@@ -68,9 +71,9 @@ export default async function StorePage({ params }: Props) {
   return (
     <>
       <section className="bounded hotc-page__head">
-        <span className="hotc-kicker">Shop</span>
-        <h1 className="hotc-h1">Store</h1>
-        <p className="hotc-page__intro">Support the project.</p>
+        <span className="hotc-kicker">{copy.store.shop}</span>
+        <h1 className="hotc-h1">{copy.store.title}</h1>
+        <p className="hotc-page__intro">{copy.store.intro}</p>
       </section>
 
       <section className="bounded bounded--base" style={{ paddingTop: "1.5rem" }}>
@@ -91,7 +94,9 @@ export default async function StorePage({ params }: Props) {
                         href={buyHref || "#"}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label={`Buy ${asText(p.data.title) || "product"}`}
+                        aria-label={formatUiText(copy.store.buyProductAria, {
+                          title: asText(p.data.title) || copy.store.productFallbackTitle,
+                        })}
                       >
                         <div
                           className="hotc-store__cover"
@@ -99,7 +104,7 @@ export default async function StorePage({ params }: Props) {
                           {p.data.image?.url ? (
                             <Image
                               src={p.data.image.url}
-                              alt={asText(p.data.title) || "Product image"}
+                              alt={asText(p.data.title) || copy.store.productImage}
                               fill
                               sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                               className="hotc-store__image"
@@ -115,7 +120,7 @@ export default async function StorePage({ params }: Props) {
                         {p.data.image?.url ? (
                           <Image
                             src={p.data.image.url}
-                            alt={asText(p.data.title) || "Product image"}
+                            alt={asText(p.data.title) || copy.store.productImage}
                             fill
                             sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
                             className="hotc-store__image"
@@ -147,7 +152,7 @@ export default async function StorePage({ params }: Props) {
                       <div className="hotc-store__row">
                         <span className="hotc-store__price">{p.data.price ?? "—"}</span>
                         {p.data.outOfStock ? (
-                          <span className="hotc-btn hotc-btn--ghost">Sold out</span>
+                          <span className="hotc-btn hotc-btn--ghost">{copy.store.soldOut}</span>
                         ) : buyHref ? (
                           <a
                             href={buyHref}
@@ -155,10 +160,10 @@ export default async function StorePage({ params }: Props) {
                             rel="noopener noreferrer"
                             className="hotc-btn hotc-btn--ember"
                           >
-                            Buy
+                            {copy.store.buy}
                           </a>
                         ) : (
-                          <span className="hotc-btn hotc-btn--ghost">Soon</span>
+                          <span className="hotc-btn hotc-btn--ghost">{copy.store.soon}</span>
                         )}
                       </div>
                     </div>
@@ -171,7 +176,7 @@ export default async function StorePage({ params }: Props) {
 
         {!products.length ? (
           <div className="hotc-tb hotc-tone-neutral">
-            <p>No products available yet.</p>
+            <p>{copy.store.empty}</p>
           </div>
         ) : null}
       </section>

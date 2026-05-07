@@ -10,6 +10,8 @@ import {
   useMemo,
   useState,
 } from "react";
+import type { AppLocale } from "@/lib/locale";
+import { getUiCopy } from "@/lib/ui-copy";
 
 type LightboxImage = {
   src: string;
@@ -32,7 +34,14 @@ function clampIndex(index: number, length: number): number {
   return index;
 }
 
-export function LightboxProvider({ children }: { children: ReactNode }) {
+export function LightboxProvider({
+  children,
+  locale,
+}: {
+  children: ReactNode;
+  locale: AppLocale;
+}) {
+  const copy = getUiCopy(locale);
   const [images, setImages] = useState<LightboxImage[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const isOpen = images.length > 0;
@@ -111,14 +120,14 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
           className="hotc-lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label="Image viewer"
+          aria-label={copy.common.imageViewer}
           onClick={closeLightbox}
         >
           <div className="hotc-lightbox__panel" onClick={(e) => e.stopPropagation()}>
             <button
               type="button"
               className="hotc-lightbox__close"
-              aria-label="Close image viewer"
+              aria-label={copy.common.closeImageViewer}
               onClick={closeLightbox}
             >
               X
@@ -128,7 +137,7 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
               <button
                 type="button"
                 className="hotc-lightbox__nav hotc-lightbox__nav--prev"
-                aria-label="Previous image"
+                aria-label={copy.common.previousImage}
                 onClick={goPrev}
               >
                 {"<"}
@@ -150,7 +159,7 @@ export function LightboxProvider({ children }: { children: ReactNode }) {
               <button
                 type="button"
                 className="hotc-lightbox__nav hotc-lightbox__nav--next"
-                aria-label="Next image"
+                aria-label={copy.common.nextImage}
                 onClick={goNext}
               >
                 {">"}

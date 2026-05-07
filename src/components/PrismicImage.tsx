@@ -1,6 +1,7 @@
 import type { ImageField } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import { forwardRef, type ComponentProps } from "react";
+import { getUiCopy } from "@/lib/ui-copy";
 
 type BasePrismicImageProps = ComponentProps<typeof PrismicNextImage>;
 
@@ -38,7 +39,7 @@ function resolveAltText({
     }
   }
 
-  return "Illustration from Heirs of the Collapse";
+  return getUiCopy("en").images.defaultIllustrationAlt;
 }
 
 const PrismicImage = forwardRef<HTMLImageElement, PrismicImageProps>(

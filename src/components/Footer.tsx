@@ -10,6 +10,7 @@ import {
   resolveAppLinkHref,
   resolveLinkHref,
 } from "@/lib/links";
+import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 
 type Props = {
   settings: Content.SettingsDocument;
@@ -18,6 +19,7 @@ type Props = {
 };
 
 export default function Footer({ settings, navigation, currentLocale }: Props) {
+  const copy = getUiCopy(currentLocale);
   const socials = settings.data.social_links ?? [];
   const nav = navigation?.data.primary_links ?? [];
   const navItems = nav.map((n) => ({
@@ -25,10 +27,13 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
     label: asText(n.label),
     target: getLinkTarget(n.link),
   }));
-  const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
+  const siteTitle = asText(settings.data.site_title) || copy.common.siteTitleFallback;
   const siteByHref = resolveLinkHref(settings.data.site_by_link) ?? "";
-  const siteByText = settings.data.site_by_text || "Site by";
-  const fallbackCopyright = `© ${new Date().getFullYear()} ${siteTitle}. All rights reserved.`;
+  const siteByText = settings.data.site_by_text || copy.footer.siteByFallback;
+  const fallbackCopyright = formatUiText(copy.footer.copyrightFallback, {
+    year: new Date().getFullYear(),
+    siteTitle,
+  });
   const brandData = settings.data as typeof settings.data & {
     footer_logo?: typeof settings.data.logo | null;
     site_by_logo?: typeof settings.data.logo | null;
@@ -36,11 +41,6 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
   const footerLogo = brandData.footer_logo?.url
     ? brandData.footer_logo
     : settings.data.logo;
-  const labels = {
-    footerNav: currentLocale === "es" ? "Navegación del pie" : "Footer navigation",
-    socialLinks: currentLocale === "es" ? "Enlaces sociales" : "Social links",
-    socialIcons: currentLocale === "es" ? "Iconos sociales" : "Social icons",
-  };
   const socialLinks = socials.flatMap((s) => {
     const href = resolveLinkHref(s.url);
     if (!href) return [];
@@ -56,7 +56,7 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
         href,
         target,
         rel: target === "_blank" ? "noopener noreferrer" : undefined,
-        label: s.label || iconLabel || "Social",
+        label: s.label || iconLabel || copy.common.socialFallbackLabel,
         iconLabel,
       },
     ];
@@ -94,8 +94,8 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
         </div>
 
         <div className="hotc-footer__cols">
-          <nav className="hotc-footer__col" aria-label={labels.footerNav}>
-            <p className="hotc-footer__title">Navigate</p>
+          <nav className="hotc-footer__col" aria-label={copy.footer.footerNav}>
+            <p className="hotc-footer__title">{copy.footer.navigate}</p>
             {navItems.map((item, i) =>
               !item.href ? null : isExternalHref(item.href) ? (
                 <a
@@ -113,8 +113,8 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
               ),
             )}
           </nav>
-          <nav className="hotc-footer__col" aria-label={labels.socialLinks}>
-            <p className="hotc-footer__title">Follow</p>
+          <nav className="hotc-footer__col" aria-label={copy.footer.socialLinks}>
+            <p className="hotc-footer__title">{copy.footer.follow}</p>
             {socialLinks.map((s, i) => (
               <a
                 key={i}
@@ -126,8 +126,8 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
               </a>
             ))}
           </nav>
-          <nav className="hotc-footer__col" aria-label={labels.socialIcons}>
-            <p className="hotc-footer__title">Social</p>
+          <nav className="hotc-footer__col" aria-label={copy.footer.socialIcons}>
+            <p className="hotc-footer__title">{copy.footer.social}</p>
             <div className="flex gap-2 pt-1">
               {socialLinks.map((s, i) => {
                 return (

@@ -1,0 +1,183 @@
+{
+  "seo": {
+    "defaultSiteDescription": "Heirs of the Collapse is a cinematic sci-fi webcomic exploring survival, memory, and collapse.",
+    "homeSiteDescription": "Heirs of the Collapse is a post-apocalyptic sci-fi webcomic set in a transformed Valencia, where memory, technology and hope collide after the collapse.",
+    "pages": {
+      "characters": {
+        "title": "Characters",
+        "description": "Meet the cast of Heirs of the Collapse."
+      },
+      "episodes": {
+        "title": "Episodes",
+        "description": "Read every chapter of Heirs of the Collapse, a webcomic updating every Sunday."
+      },
+      "lore": {
+        "title": "Worldbuilding",
+        "description": "Explore the environments, props, and illustrations of Heirs of the Collapse."
+      },
+      "store": {
+        "title": "Store",
+        "description": "Support Heirs of the Collapse through official products and drops."
+      }
+    }
+  },
+  "common": {
+    "siteTitleFallback": "Heirs of the Collapse",
+    "socialFallbackLabel": "Social",
+    "openImage": "Open image",
+    "viewArtwork": "View artwork",
+    "imageViewer": "Image viewer",
+    "closeImageViewer": "Close image viewer",
+    "previousImage": "Previous image",
+    "nextImage": "Next image",
+    "play": "Play"
+  },
+  "a11y": {
+    "genericCtas": {
+      "learnMore": "learn more",
+      "readMore": "read more",
+      "discover": "discover",
+      "explore": "explore",
+      "view": "view",
+      "viewMore": "view more",
+      "more": "more"
+    },
+    "descriptiveCtas": {
+      "characters": "Explore the characters",
+      "lore": "Discover the lore"
+    },
+    "aboutConnector": "about"
+  },
+  "header": {
+    "language": "Language",
+    "primaryNav": "Primary navigation",
+    "socialNav": "Social media",
+    "menuOpen": "Open main menu",
+    "menuClose": "Close main menu",
+    "mobileNav": "Mobile navigation"
+  },
+  "footer": {
+    "siteByFallback": "Site by",
+    "footerNav": "Footer navigation",
+    "socialLinks": "Social links",
+    "socialIcons": "Social icons",
+    "navigate": "Navigate",
+    "follow": "Follow",
+    "social": "Social",
+    "copyrightFallback": "© {year} {siteTitle}. All rights reserved."
+  },
+  "images": {
+    "defaultIllustrationAlt": "Illustration from Heirs of the Collapse",
+    "editorialImageAlt": "Editorial image from Heirs of the Collapse",
+    "heroArtworkAlt": "Heirs of the Collapse hero artwork",
+    "parallaxHeroArtworkAlt": "Heirs of the Collapse parallax hero artwork",
+    "foregroundArtworkAlt": "{title} foreground artwork",
+    "fullWidthArtworkAlt": "Full-width artwork from Heirs of the Collapse",
+    "galleryImage": "Gallery image {index}",
+    "tickerImage": "Ticker image {index}",
+    "cardImage": "Card image {index}",
+    "featureTitle": "Feature {index}",
+    "featureImageAria": "View artwork: {title} image"
+  },
+  "character": {
+    "fallbackName": "Unknown character",
+    "castBack": "Cast",
+    "bio": "Bio",
+    "gallery": "Gallery",
+    "coverArtwork": "{name} cover artwork",
+    "portraitOf": "Portrait of {name}",
+    "galleryImage": "{name} gallery image {index}",
+    "unknownListItem": "Unknown",
+    "roles": {
+      "Protagonist": "Protagonist",
+      "Ally": "Ally",
+      "Antagonist": "Antagonist",
+      "Neutral": "Neutral",
+      "Other": "Other"
+    }
+  },
+  "episodes": {
+    "archive": "Archive",
+    "title": "Episodes",
+    "introFallback": "Read the story from the beginning, or jump to the latest chapter.",
+    "fallbackCardAlt": "Episode {uid}",
+    "chapterTitle": "Chapter {number}: {title}",
+    "chapterLabel": "Chapter {number}",
+    "chapterShort": "CH. {number}",
+    "nav": {
+      "prev": "Previous Episode",
+      "next": "Next Episode"
+    },
+    "synopsisAria": "Episode synopsis",
+    "synopsisTitle": "Synopsis",
+    "breadcrumbTitle": "Episodes",
+    "arcs": {
+      "Prologue": "Prologue",
+      "Arc I": "Arc I",
+      "Arc II": "Arc II",
+      "Arc III": "Arc III",
+      "Epilogue": "Epilogue"
+    }
+  },
+  "lore": {
+    "archive": "Archive",
+    "title": "Worldbuilding",
+    "intro": "The places, objects, and images of the Collapse.",
+    "entryFallback": "Worldbuilding entry",
+    "back": "Worldbuilding",
+    "coverArtwork": "{name} cover artwork",
+    "titleSuffix": "Worldbuilding",
+    "categories": {
+      "Environment": {
+        "singular": "Environment",
+        "plural": "Environments",
+        "kicker": "01"
+      },
+      "Prop": {
+        "singular": "Prop",
+        "plural": "Props",
+        "kicker": "02"
+      },
+      "Illustration": {
+        "singular": "Illustration",
+        "plural": "Illustrations",
+        "kicker": "03"
+      },
+      "Other": {
+        "singular": "Other",
+        "plural": "Others",
+        "kicker": "--"
+      }
+    }
+  },
+  "store": {
+    "fallbackCategory": "Store",
+    "shop": "Shop",
+    "title": "Store",
+    "intro": "Support the project.",
+    "buyProductAria": "Buy {title}",
+    "productFallbackTitle": "product",
+    "productImage": "Product image",
+    "soldOut": "Sold out",
+    "buy": "Buy",
+    "soon": "Soon",
+    "empty": "No products available yet."
+  },
+  "newsletter": {
+    "title": "Sundays in your inbox.",
+    "description": "One email when a new chapter drops.",
+    "placeholder": "your@email.com",
+    "subscribe": "Subscribe"
+  },
+  "youtube": {
+    "videoFallbackTitle": "YouTube video",
+    "invalidUrl": "Add a valid YouTube URL to display the video."
+  },
+  "externalSupport": {
+    "supportProject": "Support this project",
+    "support": "Support"
+  },
+  "errors": {
+    "homePageNotFound": "Home page content not found. Please create it in Prismic."
+  }
+}

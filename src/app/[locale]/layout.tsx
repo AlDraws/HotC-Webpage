@@ -96,7 +96,7 @@ export default async function LocaleLayout({
 
   return (
     <RootDocument lang={locale}>
-      <LightboxProvider>
+      <LightboxProvider locale={locale}>
         {settings && navigation ? (
           <Header
             settings={settings}

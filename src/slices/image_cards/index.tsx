@@ -8,16 +8,23 @@ import {
   isExternalHref,
   resolveLinkHref,
 } from "@/lib/links";
+import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
+import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 
 /**
  * Props for `ImageCards`.
  */
-export type ImageCardsProps = SliceComponentProps<Content.ImageCardsSlice>;
+export type ImageCardsProps = SliceComponentProps<
+  Content.ImageCardsSlice,
+  HotcSliceContext
+>;
 
 /**
  * Component for "ImageCards" Slices.
  */
-const ImageCards = ({ slice }: ImageCardsProps) => {
+const ImageCards = ({ slice, context }: ImageCardsProps) => {
+  const locale = getSliceLocale(context);
+  const copy = getUiCopy(locale);
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -56,7 +63,11 @@ const ImageCards = ({ slice }: ImageCardsProps) => {
                   {item.image.url ? (
                     <PrismicImage
                       field={item.image}
-                      fallbackAlt={item.title || item.caption || `Card image ${index + 1}`}
+                      fallbackAlt={
+                        item.title ||
+                        item.caption ||
+                        formatUiText(copy.images.cardImage, { index: index + 1 })
+                      }
                       fill
                       sizes="(max-width: 639px) calc(100vw - 48px), (max-width: 1023px) 45vw, 360px"
                       quality={65}

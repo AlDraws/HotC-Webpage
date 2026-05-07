@@ -91,5 +91,11 @@ export default async function GenericPage({
     .catch(() => null);
   if (!isDocumentVisible(page)) notFound();
 
-  return <SliceZone slices={normalizeSlices(page.data.slices)} components={components} />;
+  return (
+    <SliceZone
+      slices={normalizeSlices(page.data.slices)}
+      components={components}
+      context={{ locale }}
+    />
+  );
 }

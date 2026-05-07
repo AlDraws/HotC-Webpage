@@ -4,9 +4,11 @@ import type { ImageField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { useEffect, useRef, useState } from "react";
 import PrismicImage from "@/components/PrismicImage";
+import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
+import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 import { ImageTickerSlice } from "@/../prismicio-types";
 
-export type ImageTickerProps = SliceComponentProps<ImageTickerSlice>;
+export type ImageTickerProps = SliceComponentProps<ImageTickerSlice, HotcSliceContext>;
 
 const MIN_TICKER_COPIES = 3;
 
@@ -54,7 +56,9 @@ function wrapOffset(value: number, span: number): number {
   return ((value % span) + span) % span;
 }
 
-const ImageTicker = ({ slice }: ImageTickerProps) => {
+const ImageTicker = ({ slice, context }: ImageTickerProps) => {
+  const locale = getSliceLocale(context);
+  const copy = getUiCopy(locale);
   const viewportRef = useRef<HTMLDivElement | null>(null);
   const railRef = useRef<HTMLDivElement | null>(null);
   const offsetRef = useRef(0);
@@ -287,7 +291,9 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
                           fallbackAlt={
                             item.image.alt ||
                             typedItem.badge_text ||
-                            `Ticker image ${itemIndex + 1}`
+                            formatUiText(copy.images.tickerImage, {
+                              index: itemIndex + 1,
+                            })
                           }
                           fill
                           className="object-cover"
@@ -308,7 +314,9 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
                           fallbackAlt={
                             item.image.alt ||
                             typedItem.badge_text ||
-                            `Ticker image ${itemIndex + 1}`
+                            formatUiText(copy.images.tickerImage, {
+                              index: itemIndex + 1,
+                            })
                           }
                           fill
                           className="object-cover"
