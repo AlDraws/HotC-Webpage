@@ -6,7 +6,13 @@ import { components } from "@/slices";
 import Link from "next/link";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
-import { buildPageMetadata } from "@/lib/seo";
+import {
+  buildPageMetadata,
+  getDefaultSiteDescription,
+  getMetaDescriptionText,
+  metadataBase,
+  SITE_NAME,
+} from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
 import type { EpisodePanelSequenceContext } from "@/slices/episode_panel/sequence-context";
 
@@ -35,11 +41,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   ]);
   if (!ep) return {};
   const title =
-    ep.data.meta_title ??
+    ep.data.meta_title?.trim() ||
     `Chapter ${ep.data.chapter_number}: ${ep.data.title}`;
-  const description = ep.data.meta_description
-    ? asText(ep.data.meta_description)
-    : undefined;
+  const description = getMetaDescriptionText(
+    ep.data.meta_description,
+    getMetaDescriptionText(ep.data.summary, getDefaultSiteDescription(locale)),
+  );
   const socialImage =
     ep.data.meta_image?.url ||
     ep.data.cover?.url ||
@@ -124,16 +131,73 @@ export default async function EpisodeReaderPage({ params }: Props) {
   const navLabels = EPISODE_NAV_LABELS[locale];
   const prevButtonLabel = settings?.data.prev_button_label?.trim() || navLabels.prev;
   const nextButtonLabel = settings?.data.next_button_label?.trim() || navLabels.next;
+  const chapterLabel =
+    locale === "es"
+      ? `Capítulo ${ep.data.chapter_number ?? ""}`.trim()
+      : `Chapter ${ep.data.chapter_number ?? ""}`.trim();
+  const summaryText = getMetaDescriptionText(
+    ep.data.summary,
+    getDefaultSiteDescription(locale),
+  );
+  const episodeUrl = new URL(`/${locale}/episodes/${ep.uid}`, metadataBase).toString();
+  const archiveUrl = new URL(`/${locale}/episodes`, metadataBase).toString();
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "ComicIssue",
+      name: ep.data.title || chapterLabel,
+      headline: ep.data.title || chapterLabel,
+      description: summaryText,
+      url: episodeUrl,
+      inLanguage: locale,
+      isPartOf: {
+        "@type": "ComicSeries",
+        name: SITE_NAME,
+        url: new URL(`/${locale}`, metadataBase).toString(),
+      },
+      issueNumber: ep.data.chapter_number ?? undefined,
+      datePublished: ep.data.publish_date || undefined,
+      image: ep.data.cover?.url || ep.data.meta_image?.url || undefined,
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: SITE_NAME,
+          item: new URL(`/${locale}`, metadataBase).toString(),
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: locale === "es" ? "Episodios" : "Episodes",
+          item: archiveUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: ep.data.title || chapterLabel,
+          item: episodeUrl,
+        },
+      ],
+    },
+  ];
 
   return (
     <article className="hotc-ereader hotc--cinema">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       {/* Episode header — replicates EpisodeReader.__head */}
       <div className="hotc-ereader__head">
         <Link href={`/${locale}/episodes`} className="hotc-ereader__back">
           ← Archive
         </Link>
         <span className="hotc-ereader__chapter">
-          Chapter {ep.data.chapter_number ?? "—"}
+          {chapterLabel}
         </span>
         <h1 className="hotc-ereader__title">{ep.data.title}</h1>
         <p className="hotc-ereader__date">
@@ -142,6 +206,10 @@ export default async function EpisodeReaderPage({ params }: Props) {
             ? ` · ${asText(ep.data.summary).slice(0, 80)}`
             : ""}
         </p>
+        <section className="sr-only" aria-label="Episode synopsis">
+          <h2>{locale === "es" ? "Sinopsis" : "Synopsis"}</h2>
+          <p>{summaryText}</p>
+        </section>
       </div>
 
       {/* Comic strip — SliceZone renders panels, beats, dividers */}
@@ -152,6 +220,12 @@ export default async function EpisodeReaderPage({ params }: Props) {
           context={sliceContext}
         />
       </div>
+      <script
+        dangerouslySetInnerHTML={{
+          __html:
+            "(()=>{const load=i=>{if(!i||i.dataset.hotcLoaded)return;i.dataset.hotcLoaded='true';if(i.dataset.sizes)i.sizes=i.dataset.sizes;if(i.dataset.srcset)i.srcset=i.dataset.srcset;if(i.dataset.src)i.src=i.dataset.src;i.removeAttribute('data-src');i.removeAttribute('data-srcset');i.removeAttribute('data-sizes')};const run=()=>{const imgs=document.querySelectorAll('img[data-hotc-deferred-comic]');if(!('IntersectionObserver'in window)){imgs.forEach(load);return}const io=new IntersectionObserver(es=>{for(const e of es){if(e.isIntersecting){io.unobserve(e.target);load(e.target)}}},{rootMargin:'900px 0px'});imgs.forEach(i=>io.observe(i))};const start=()=>{('requestIdleCallback'in window)?requestIdleCallback(run,{timeout:1200}):setTimeout(run,600)};document.readyState==='complete'?start():window.addEventListener('load',start,{once:true})})();",
+        }}
+      />
 
       {/* Sticky prev/next nav — replicates EpisodeReader.__nav */}
       <nav className="hotc-ereader__nav">

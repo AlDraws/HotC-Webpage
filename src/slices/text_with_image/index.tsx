@@ -62,7 +62,7 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
                 className="hotc-twi__img"
                 fallbackAlt={imageAlt}
                 sizes="(max-width: 767px) calc(100vw - 48px), 560px"
-                quality={65}
+                quality={55}
               />
             </button>
           ) : (
@@ -71,7 +71,7 @@ const TextWithImage = ({ slice }: TextWithImageProps) => {
               className="hotc-twi__img"
               fallbackAlt={imageAlt}
               sizes="(max-width: 767px) calc(100vw - 48px), 560px"
-              quality={65}
+              quality={55}
             />
           )}
         </div>

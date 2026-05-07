@@ -38,7 +38,14 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
     link: n.link,
   }));
   const socials = settings.data.social_links ?? [];
-  const headerSocials = socials.flatMap((s) => {
+  const headerSocials = socials.reduce<
+    Array<{
+      href: string;
+      iconLabel: string;
+      label: string;
+      target?: string;
+    }>
+  >((items, s) => {
     const iconLabel =
       s.icon_key && getSocialKey(s.icon_key) !== "other"
         ? s.icon_key
@@ -46,18 +53,17 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
     const key = getSocialKey(iconLabel);
     const href = resolveLinkHref(s.url);
     if (!href || (key !== "instagram" && key !== "tiktok" && key !== "patreon")) {
-      return [];
+      return items;
     }
 
-    return [
-      {
-        href,
-        iconLabel,
-        label: s.label || iconLabel || "Social",
-        target: getLinkTarget(s.url),
-      },
-    ];
-  });
+    items.push({
+      href,
+      iconLabel,
+      label: s.label || iconLabel || "Social",
+      target: getLinkTarget(s.url),
+    });
+    return items;
+  }, []);
   const siteTitle = asText(settings.data.site_title) || "Heirs of the Collapse";
   const brandData = settings.data as typeof settings.data & {
     header_logo?: typeof settings.data.logo | null;

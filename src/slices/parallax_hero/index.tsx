@@ -153,12 +153,11 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
               field={backgroundImage}
               fallbackAlt={heroTitle}
               fill
-              sizes="100vw"
-              decoding="sync"
-              preload={true}
+              sizes="(max-width: 480px) 90vw, 100vw"
+              decoding="async"
               fetchPriority="high"
               loading="eager"
-              quality={65}
+              quality={55}
               className="hotc-phero__bg-img"
             />
           </div>
@@ -176,7 +175,7 @@ const ParallaxHero = ({ slice }: ParallaxHeroProps) => {
             fallbackAlt={`${heroTitle} foreground artwork`}
             loading="lazy"
             sizes="(max-width: 767px) 72vw, (max-width: 1279px) 68vw, 820px"
-            quality={70}
+            quality={60}
           />
         </div>
       )}

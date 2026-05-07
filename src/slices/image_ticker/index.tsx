@@ -182,7 +182,7 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
           decorative
           fill
           sizes="100vw"
-          quality={60}
+          quality={50}
           className="hotc-ticker__bg"
         />
       ) : null}
@@ -292,7 +292,7 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
                           fill
                           className="object-cover"
                           sizes="(min-width: 768px) 260px, 200px"
-                          quality={60}
+                          quality={50}
                           draggable={false}
                         />
                         {showBadge ? (
@@ -313,7 +313,7 @@ const ImageTicker = ({ slice }: ImageTickerProps) => {
                           fill
                           className="object-cover"
                           sizes="(min-width: 768px) 260px, 200px"
-                          quality={60}
+                          quality={50}
                           draggable={false}
                         />
                         {showBadge ? (

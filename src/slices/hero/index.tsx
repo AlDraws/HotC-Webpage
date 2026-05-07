@@ -43,11 +43,10 @@ const Hero = ({ slice }: HeroProps) => {
             fallbackAlt={heroTitle}
             fill
             sizes="100vw"
-            decoding="sync"
-            preload={true}
+            decoding="async"
             fetchPriority="high"
             loading="eager"
-            quality={65}
+            quality={60}
             className="hotc-hero__bg-img"
           />
         </div>

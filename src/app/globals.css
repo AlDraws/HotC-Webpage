@@ -3078,6 +3078,23 @@ body.hotc,
   font-size: 0;
 }
 
+.hotc-ep-panel__segment {
+  width: 100%;
+  max-width: var(--hotc-reader-max);
+  margin: 0;
+  background: var(--hotc-slate-950);
+  overflow: hidden;
+}
+
+.hotc-ep-panel__segment:not(.is-lcp) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1300px;
+}
+
+.hotc-ep-panel__deferred:not([src]) {
+  background: var(--hotc-slate-950);
+}
+
 .hotc-ep-panel img,
 .hotc-ep-panel picture {
   display: block;
