@@ -47,10 +47,6 @@ export async function generateMetadata({
   return {
     metadataBase,
     alternates,
-    icons: {
-      icon: "/favicon.svg",
-      shortcut: "/favicon.svg",
-    },
     title: {
       template: `%s — ${SITE_NAME}`,
       default: SITE_NAME,

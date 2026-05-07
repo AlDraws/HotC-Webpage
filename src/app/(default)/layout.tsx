@@ -4,10 +4,6 @@ import { DEFAULT_SITE_DESCRIPTION, SITE_NAME } from "@/lib/seo";
 import "../globals.css";
 
 export const metadata: Metadata = {
-  icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-  },
   title: SITE_NAME,
   description: DEFAULT_SITE_DESCRIPTION,
 };
