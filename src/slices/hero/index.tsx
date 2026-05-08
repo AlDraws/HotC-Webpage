@@ -57,14 +57,8 @@ const Hero = ({ slice, context }: HeroProps) => {
       )}
       <div className="hotc-hero__overlay" />
       <Bounded className="hotc-hero__inner" yPadding="none">
-        {primary.kicker && (
-          <span className="hotc-kicker hotc-hero__kicker">
-            {primary.kicker}
-          </span>
-        )}
-        {primary.title && (
-          <h1 className="hotc-hero__title">{primary.title}</h1>
-        )}
+        {primary.kicker && <span className="hotc-kicker hotc-hero__kicker">{primary.kicker}</span>}
+        {primary.title && <h1 className="hotc-hero__title">{primary.title}</h1>}
         {primary.subtitle && (
           <div className="hotc-hero__subtitle">
             <p>{primary.subtitle}</p>

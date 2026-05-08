@@ -8,6 +8,7 @@ import {
   buildPageMetadata,
   getDefaultSiteDescription,
   getMetaDescriptionText,
+  metadataBase,
   SITE_NAME,
 } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
@@ -32,12 +33,40 @@ export default async function Home({ params }: Props) {
     );
   }
 
+  const siteUrl = new URL(`/${locale}`, metadataBase).toString();
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      name: SITE_NAME,
+      url: siteUrl,
+      inLanguage: locale,
+      potentialAction: {
+        "@type": "SearchAction",
+        target: `${siteUrl}/episodes?q={search_term_string}`,
+        "query-input": "required name=search_term_string",
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: new URL("/", metadataBase).toString(),
+    },
+  ];
+
   return (
-    <SliceZone
-      slices={normalizeSlices(page.data.slices)}
-      components={components}
-      context={{ locale }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <SliceZone
+        slices={normalizeSlices(page.data.slices)}
+        components={components}
+        context={{ locale }}
+      />
+    </>
   );
 }
 
@@ -46,9 +75,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const lang = toPrismicLang(locale);
   const client = createClient();
   const [page, settings] = await Promise.all([
-    client
-    .getSingle("home", { lang, fetchLinks: SLICE_FETCH_LINKS })
-    .catch(() => null),
+    client.getSingle("home", { lang, fetchLinks: SLICE_FETCH_LINKS }).catch(() => null),
     getSettings(locale),
   ]);
 
@@ -56,7 +83,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const description = getMetaDescriptionText(
     page.data.meta_description,
-    getDefaultSiteDescription(locale),
+    getDefaultSiteDescription(locale)
   );
   const socialImage =
     page.data.meta_image?.url ||

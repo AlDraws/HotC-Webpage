@@ -4,12 +4,7 @@ import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
 import type { AppLocale } from "@/lib/locale";
-import {
-  getLinkTarget,
-  isExternalHref,
-  resolveAppLinkHref,
-  resolveLinkHref,
-} from "@/lib/links";
+import { getLinkTarget, isExternalHref, resolveAppLinkHref, resolveLinkHref } from "@/lib/links";
 import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 
 type Props = {
@@ -38,18 +33,14 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
     footer_logo?: typeof settings.data.logo | null;
     site_by_logo?: typeof settings.data.logo | null;
   };
-  const footerLogo = brandData.footer_logo?.url
-    ? brandData.footer_logo
-    : settings.data.logo;
+  const footerLogo = brandData.footer_logo?.url ? brandData.footer_logo : settings.data.logo;
   const socialLinks = socials.flatMap((s) => {
     const href = resolveLinkHref(s.url);
     if (!href) return [];
 
     const target = getLinkTarget(s.url) ?? (isExternalHref(href) ? "_blank" : undefined);
     const iconLabel =
-      s.icon_key && getSocialKey(s.icon_key) !== "other"
-        ? s.icon_key
-        : s.label || s.icon_key || "";
+      s.icon_key && getSocialKey(s.icon_key) !== "other" ? s.icon_key : s.label || s.icon_key || "";
 
     return [
       {
@@ -66,11 +57,7 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
     <footer className="hotc-footer">
       <div className="bounded hotc-footer__inner">
         <div className="hotc-footer__brand">
-          <Link
-            href={`/${currentLocale}`}
-            className="hotc-footer__logo"
-            aria-label={siteTitle}
-          >
+          <Link href={`/${currentLocale}`} className="hotc-footer__logo" aria-label={siteTitle}>
             {footerLogo?.url ? (
               <BrandLogo
                 field={footerLogo}
@@ -110,18 +97,13 @@ export default function Footer({ settings, navigation, currentLocale }: Props) {
                 <Link key={i} href={item.href}>
                   {item.label}
                 </Link>
-              ),
+              )
             )}
           </nav>
           <nav className="hotc-footer__col" aria-label={copy.footer.socialLinks}>
             <p className="hotc-footer__title">{copy.footer.follow}</p>
             {socialLinks.map((s, i) => (
-              <a
-                key={i}
-                href={s.href}
-                target={s.target}
-                rel={s.rel}
-              >
+              <a key={i} href={s.href} target={s.target} rel={s.rel}>
                 {s.label}
               </a>
             ))}

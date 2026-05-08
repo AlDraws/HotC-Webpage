@@ -6,11 +6,7 @@ import { createClient } from "@/prismicio";
 import { filterVisibleDocuments } from "@/lib/content-visibility";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
 import { buildPageMetadata } from "@/lib/seo";
-import {
-  formatUiText,
-  getLocalizedEpisodeArc,
-  getUiCopy,
-} from "@/lib/ui-copy";
+import { formatUiText, getLocalizedEpisodeArc, getUiCopy } from "@/lib/ui-copy";
 import { formatDate } from "@/lib/format";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
@@ -32,9 +28,7 @@ export default async function EpisodesPage({ params }: Props) {
   const copy = getUiCopy(locale);
   const lang = toPrismicLang(locale);
   const client = createClient();
-  const episodesIndex = await client
-    .getSingle("episodes_index", { lang })
-    .catch(() => null);
+  const episodesIndex = await client.getSingle("episodes_index", { lang }).catch(() => null);
   const episodes = await client.getAllByType("episode", {
     lang,
     orderings: [{ field: "my.episode.chapter_number", direction: "desc" }],
@@ -63,11 +57,7 @@ export default async function EpisodesPage({ params }: Props) {
         </div>
         <div className="hotc-eidx__grid">
           {visibleEpisodes.map((ep) => (
-            <Link
-              key={ep.id}
-              href={`/${locale}/episodes/${ep.uid}`}
-              className="hotc-ep-card"
-            >
+            <Link key={ep.id} href={`/${locale}/episodes/${ep.uid}`} className="hotc-ep-card">
               {/* Cover */}
               <div className="hotc-ep-card__cover">
                 {ep.data.cover?.url ? (
@@ -92,14 +82,13 @@ export default async function EpisodesPage({ params }: Props) {
                 <span className="hotc-ep-card__date">
                   {formatUiText(copy.episodes.chapterShort, {
                     number: ep.data.chapter_number ?? "—",
-                  })}&nbsp;·&nbsp;
+                  })}
+                  &nbsp;·&nbsp;
                   {formatDate(ep.data.publish_date, locale)}
                 </span>
                 <h3 className="hotc-ep-card__title">{ep.data.title}</h3>
                 {ep.data.summary ? (
-                  <p className="hotc-ep-card__synopsis">
-                    {asText(ep.data.summary)}
-                  </p>
+                  <p className="hotc-ep-card__synopsis">{asText(ep.data.summary)}</p>
                 ) : null}
               </div>
             </Link>

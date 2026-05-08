@@ -1,20 +1,17 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PrismicRichText, SliceZone } from "@prismicio/react";
+import { asText } from "@prismicio/client";
 import Link from "next/link";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
 import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
 import PrismicImage from "@/components/PrismicImage";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, metadataBase, SITE_NAME } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
 import { filterVisibleDocuments, isDocumentVisible } from "@/lib/content-visibility";
-import {
-  formatUiText,
-  getLocalizedCharacterRole,
-  getUiCopy,
-} from "@/lib/ui-copy";
+import { formatUiText, getLocalizedCharacterRole, getUiCopy } from "@/lib/ui-copy";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
@@ -45,11 +42,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export async function generateStaticParams({
-  params,
-}: {
-  params: { locale: string };
-}) {
+export async function generateStaticParams({ params }: { params: { locale: string } }) {
   if (!isAppLocale(params.locale)) return [];
   const lang = toPrismicLang(params.locale);
   const client = createClient();
@@ -75,9 +68,25 @@ export default async function CharacterProfilePage({ params }: Props) {
   const gallery = ch.data.gallery ?? [];
   const slices = normalizeSlices(ch.data.slices);
   const characterName = ch.data.name?.trim() || ch.uid || copy.character.fallbackName;
+  const characterUrl = new URL(`/${locale}/characters/${ch.uid}`, metadataBase).toString();
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: characterName,
+    description: ch.data.short_bio ? asText(ch.data.short_bio) || undefined : undefined,
+    image:
+      ch.data.portrait?.url || ch.data.cover?.url || ch.data.meta_image?.url || undefined,
+    url: characterUrl,
+    inLanguage: locale,
+    memberOf: { "@type": "Organization", name: SITE_NAME },
+  };
 
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       {/* Hero — hotc-cprofile__hero with cover background */}
       <section className="hotc-cprofile__hero">
         {ch.data.cover?.url ? (
@@ -115,28 +124,19 @@ export default async function CharacterProfilePage({ params }: Props) {
             {/* Intro: role, name, epithet, attributes */}
             <div className="hotc-cprofile__intro">
               {ch.data.role ? (
-                <span
-                  className="hotc-kicker"
-                  style={{ color: "var(--hotc-ember)" }}
-                >
+                <span className="hotc-kicker" style={{ color: "var(--hotc-ember)" }}>
                   {getLocalizedCharacterRole(ch.data.role, locale)}
                 </span>
               ) : null}
-              {ch.data.name ? (
-                <h1 className="hotc-cprofile__name">{ch.data.name}</h1>
-              ) : null}
-              {ch.data.epithet ? (
-                <p className="hotc-cprofile__epithet">{ch.data.epithet}</p>
-              ) : null}
+              {ch.data.name ? <h1 className="hotc-cprofile__name">{ch.data.name}</h1> : null}
+              {ch.data.epithet ? <p className="hotc-cprofile__epithet">{ch.data.epithet}</p> : null}
 
               {attributes.length > 0 ? (
                 <div className="hotc-cprofile__attrs">
                   {attributes.map((a, i) => (
                     <div key={i} className="hotc-cprofile__attr">
                       <span className="hotc-attr-label">{a.label}</span>
-                      <span className="hotc-cprofile__attr-value">
-                        {a.value}
-                      </span>
+                      <span className="hotc-cprofile__attr-value">{a.value}</span>
                     </div>
                   ))}
                 </div>
@@ -150,9 +150,7 @@ export default async function CharacterProfilePage({ params }: Props) {
       <section className="bounded bounded--base">
         <div className="hotc-cprofile__bio">
           <h2 className="hotc-h3">{copy.character.bio}</h2>
-          {ch.data.short_bio ? (
-            <PrismicRichText field={ch.data.short_bio} />
-          ) : null}
+          {ch.data.short_bio ? <PrismicRichText field={ch.data.short_bio} /> : null}
         </div>
       </section>
 
@@ -164,10 +162,7 @@ export default async function CharacterProfilePage({ params }: Props) {
             <div className="hotc-cprofile__gallery-grid">
               {gallery.map((g, i) =>
                 g.image?.url ? (
-                  <div
-                    key={i}
-                    className="hotc-cprofile__gallery-tile"
-                  >
+                  <div key={i} className="hotc-cprofile__gallery-tile">
                     <PrismicImage
                       field={g.image}
                       fallbackAlt={formatUiText(copy.character.galleryImage, {
@@ -180,7 +175,7 @@ export default async function CharacterProfilePage({ params }: Props) {
                       className="hotc-cprofile__gallery-img"
                     />
                   </div>
-                ) : null,
+                ) : null
               )}
             </div>
           </div>

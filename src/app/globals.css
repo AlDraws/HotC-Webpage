@@ -2686,7 +2686,13 @@ body.hotc,
   outline: none;
 }
 
-.hotc-newsletter input:focus {
+.hotc-newsletter input:focus-visible {
+  outline: 3px solid var(--hotc-sfx);
+  outline-offset: 3px;
+  box-shadow: 3px 3px 0 var(--hotc-ember);
+}
+
+.hotc-newsletter input:focus:not(:focus-visible) {
   box-shadow: 3px 3px 0 var(--hotc-ember);
 }
 

@@ -8,10 +8,6 @@ export const metadata: Metadata = {
   description: DEFAULT_SITE_DESCRIPTION,
 };
 
-export default function DefaultRootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function DefaultRootLayout({ children }: { children: React.ReactNode }) {
   return <RootDocument lang="en">{children}</RootDocument>;
 }

@@ -20,19 +20,15 @@ const CtaBlock = ({ slice, context }: CtaBlockProps) => {
   const ctaAriaLabel = getContextualCtaAriaLabel(
     slice.primary.cta_label,
     slice.primary.title,
-    locale,
+    locale
   );
   const ctaLabel = getDescriptiveCtaLabel(
     slice.primary.cta_label,
-    resolveLinkHref(slice.primary.cta_link),
+    resolveLinkHref(slice.primary.cta_link)
   );
 
   return (
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-      as="section"
-    >
+    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation} as="section">
       <div className="hotc-cta-block">
         {slice.primary.background_image?.url ? (
           <div className="hotc-cta-block__bg" aria-hidden="true">

@@ -38,7 +38,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
     if (!drawer) return;
 
     const focusable = drawer.querySelectorAll<HTMLElement>(
-      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
     );
     const first = focusable[0];
     const last = focusable[focusable.length - 1];
@@ -47,7 +47,10 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
 
     function handleKeyDown(e: KeyboardEvent) {
       if (e.key !== "Tab") return;
-      if (focusable.length === 0) { e.preventDefault(); return; }
+      if (focusable.length === 0) {
+        e.preventDefault();
+        return;
+      }
 
       if (e.shiftKey) {
         if (document.activeElement === first) {
@@ -81,9 +84,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
     }>
   >((items, s) => {
     const iconLabel =
-      s.icon_key && getSocialKey(s.icon_key) !== "other"
-        ? s.icon_key
-        : s.label || s.icon_key || "";
+      s.icon_key && getSocialKey(s.icon_key) !== "other" ? s.icon_key : s.label || s.icon_key || "";
     const key = getSocialKey(iconLabel);
     const href = resolveLinkHref(s.url);
     if (!href || (key !== "instagram" && key !== "tiktok" && key !== "patreon")) {
@@ -102,9 +103,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   const brandData = settings.data as typeof settings.data & {
     header_logo?: typeof settings.data.logo | null;
   };
-  const headerLogo = brandData.header_logo?.url
-    ? brandData.header_logo
-    : settings.data.logo;
+  const headerLogo = brandData.header_logo?.url ? brandData.header_logo : settings.data.logo;
 
   function switchLocale(locale: AppLocale) {
     if (locale === currentLocale || isPending) return;
@@ -125,13 +124,9 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   }
 
   return (
-    <header className={`hotc-header${open ? " is-open" : ""}`}>
+    <header className={`hotc-header${open ? "is-open" : ""}`}>
       <div className="bounded hotc-header__inner">
-        <Link
-          href={`/${currentLocale}`}
-          className="hotc-header__logo"
-          aria-label={siteTitle}
-        >
+        <Link href={`/${currentLocale}`} className="hotc-header__logo" aria-label={siteTitle}>
           {headerLogo?.url ? (
             <BrandLogo
               field={headerLogo}
@@ -150,7 +145,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
         </Link>
 
         <nav className="hotc-header__nav" aria-label={copy.header.primaryNav}>
-          {navItems.map((item, i) => (
+          {navItems.map((item, i) =>
             item.href ? (
               isExternalHref(item.href) ? (
                 <a
@@ -167,17 +162,14 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
                   key={i}
                   href={item.href}
                   className={`hotc-header__nav-item${
-                    pathname &&
-                    item.href.split(/[#?]/, 1)[0] === pathname
-                      ? " is-active"
-                      : ""
+                    pathname && item.href.split(/[#?]/, 1)[0] === pathname ? "is-active" : ""
                   }`}
                 >
                   {item.label}
                 </Link>
               )
             ) : null
-          ))}
+          )}
         </nav>
 
         <div className="hotc-header__actions">
@@ -196,8 +188,8 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
                   key={locale}
                   type="button"
                   className={`hotc-header__lang-btn${
-                    isActive ? " is-active" : ""
-                  }${isLocalePending ? " is-pending" : ""}`}
+                    isActive ? "is-active" : ""
+                  }${isLocalePending ? "is-pending" : ""}`}
                   onClick={() => switchLocale(locale)}
                   aria-pressed={isActive}
                   aria-busy={isLocalePending}
@@ -205,10 +197,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
                 >
                   <span>{locale.toUpperCase()}</span>
                   {isLocalePending ? (
-                    <span
-                      className="hotc-header__lang-spinner"
-                      aria-hidden="true"
-                    />
+                    <span className="hotc-header__lang-spinner" aria-hidden="true" />
                   ) : null}
                 </button>
               );
@@ -239,12 +228,14 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
             aria-expanded={open}
             aria-controls="hotc-mobile-menu"
           >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-              {open ? (
-                <path d="M6 6l12 12M18 6L6 18" />
-              ) : (
-                <path d="M4 7h16M4 12h16M4 17h16" />
-              )}
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            >
+              {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
             </svg>
           </button>
         </div>
@@ -253,15 +244,14 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
       <div
         id="hotc-mobile-menu"
         ref={drawerRef}
-        className={`hotc-header__drawer${open ? " is-open" : ""}`}
+        className={`hotc-header__drawer${open ? "is-open" : ""}`}
         aria-hidden={!open}
       >
         <nav className="hotc-header__drawer-nav" aria-label={copy.header.mobileNav}>
           {navItems.map((item, i) => {
             if (!item.href) return null;
 
-            const isActive =
-              pathname && item.href.split(/[#?]/, 1)[0] === pathname;
+            const isActive = pathname && item.href.split(/[#?]/, 1)[0] === pathname;
 
             if (isExternalHref(item.href)) {
               return (

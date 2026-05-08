@@ -15,7 +15,7 @@ export function isVisibleData(data: unknown): boolean {
 }
 
 export function isDocumentVisible<T extends VisibilityControlledDocument>(
-  document: T | null | undefined,
+  document: T | null | undefined
 ): document is T {
   if (!document) {
     return false;
@@ -25,7 +25,7 @@ export function isDocumentVisible<T extends VisibilityControlledDocument>(
 }
 
 export function filterVisibleDocuments<T extends VisibilityControlledDocument>(
-  documents: readonly T[] | null | undefined,
+  documents: readonly T[] | null | undefined
 ): T[] {
   return (documents ?? []).filter(isDocumentVisible);
 }

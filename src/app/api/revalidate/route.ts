@@ -2,6 +2,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { revalidateTag } from "next/cache";
 
 export async function POST(request: NextRequest) {
+  const contentType = request.headers.get("content-type") ?? "";
+  if (!contentType.includes("application/json")) {
+    return NextResponse.json({ message: "Unsupported Media Type" }, { status: 415 });
+  }
+
   const body = await request.json().catch(() => null);
   const webhookSecret = process.env.PRISMIC_WEBHOOK_SECRET;
 
@@ -9,7 +14,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
-  revalidateTag("prismic", "max");
+  // expire: 0 forces immediate cache invalidation — required for CMS publish webhooks
+  revalidateTag("prismic", { expire: 0 });
 
   return NextResponse.json({ revalidated: true, now: Date.now() });
 }

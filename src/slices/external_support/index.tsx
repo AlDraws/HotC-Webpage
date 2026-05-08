@@ -14,8 +14,7 @@ import {
   ExternalSupportSliceRowItem,
 } from "@/../prismicio-types";
 
-export type ExternalSupportProps =
-  SliceComponentProps<ExternalSupportSlice, HotcSliceContext>;
+export type ExternalSupportProps = SliceComponentProps<ExternalSupportSlice, HotcSliceContext>;
 type ExternalSupportItem =
   | ExternalSupportSliceRowItem
   | ExternalSupportSliceCardsItem
@@ -94,11 +93,7 @@ const ExternalSupport = ({ slice, context }: ExternalSupportProps) => {
                 getTextContent(it.description) ||
                 getTextContent(slice.primary.title) ||
                 null;
-              const ctaAriaLabel = getContextualCtaAriaLabel(
-                it.label || null,
-                ctaContext,
-                locale,
-              );
+              const ctaAriaLabel = getContextualCtaAriaLabel(it.label || null, ctaContext, locale);
 
               return (
                 <li
@@ -120,7 +115,7 @@ const ExternalSupport = ({ slice, context }: ExternalSupportProps) => {
                         className="h-7 w-7 object-contain"
                       />
                     ) : null}
-                    <span className="text-sm uppercase tracking-wide text-slate-300">
+                    <span className="text-sm tracking-wide text-slate-300 uppercase">
                       {it.platform || copy.externalSupport.support}
                     </span>
                   </div>

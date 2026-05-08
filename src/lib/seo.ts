@@ -49,7 +49,7 @@ function getOpenGraphLocale(locale: AppLocale) {
 
 function getAlternateOpenGraphLocales(locale: AppLocale) {
   return SUPPORTED_LOCALES.filter((supportedLocale) => supportedLocale !== locale).map(
-    getOpenGraphLocale,
+    getOpenGraphLocale
   );
 }
 
@@ -67,10 +67,7 @@ export function getDefaultSiteDescription(locale?: AppLocale) {
   return locale ? HOME_SITE_DESCRIPTION_BY_LOCALE[locale] : DEFAULT_SITE_DESCRIPTION;
 }
 
-export function getMetaDescriptionText(
-  value: unknown,
-  fallback = DEFAULT_SITE_DESCRIPTION,
-) {
+export function getMetaDescriptionText(value: unknown, fallback = DEFAULT_SITE_DESCRIPTION) {
   if (typeof value === "string") {
     const text = value.trim();
     return text || fallback;
@@ -107,7 +104,7 @@ function resolveLocalizedStaticPath(locale: AppLocale, pathname = "/") {
 
 function resolvePrismicDocumentPath(
   doc: Pick<LocalizedRouteDocument, "type" | "uid">,
-  locale: AppLocale,
+  locale: AppLocale
 ) {
   switch (doc.type) {
     case "home":
@@ -132,14 +129,14 @@ function resolvePrismicDocumentPath(
 
 function buildAlternatesFromPaths(
   currentPath: string,
-  languagePaths: Partial<Record<AppLocale, string>>,
+  languagePaths: Partial<Record<AppLocale, string>>
 ): NonNullable<Metadata["alternates"]> {
   const defaultPath = languagePaths[DEFAULT_LOCALE] ?? currentPath;
   const languages = Object.fromEntries(
     Object.entries(languagePaths).map(([locale, path]) => [
       HREFLANG_BY_LOCALE[locale as AppLocale],
       ensureAbsoluteUrl(path),
-    ]),
+    ])
   ) as Record<string, string>;
 
   languages["x-default"] = ensureAbsoluteUrl(defaultPath);
@@ -156,8 +153,8 @@ export const metadataBase = new URL(
       process.env.SITE_URL ||
       process.env.VERCEL_PROJECT_PRODUCTION_URL ||
       process.env.VERCEL_URL ||
-      "",
-  ),
+      ""
+  )
 );
 
 export function buildStaticAlternates(locale: AppLocale, pathname = "/") {
@@ -166,19 +163,15 @@ export function buildStaticAlternates(locale: AppLocale, pathname = "/") {
     SUPPORTED_LOCALES.map((supportedLocale) => [
       supportedLocale,
       resolveLocalizedStaticPath(supportedLocale, pathname),
-    ]),
+    ])
   ) as Record<AppLocale, string>;
 
   return buildAlternatesFromPaths(currentPath, languagePaths);
 }
 
-export function buildDocumentAlternates(
-  locale: AppLocale,
-  document: LocalizedRouteDocument,
-) {
+export function buildDocumentAlternates(locale: AppLocale, document: LocalizedRouteDocument) {
   const currentPath =
-    resolvePrismicDocumentPath(document, locale) ??
-    resolveLocalizedStaticPath(locale, "/");
+    resolvePrismicDocumentPath(document, locale) ?? resolveLocalizedStaticPath(locale, "/");
   const languagePaths: Partial<Record<AppLocale, string>> = {
     [locale]: currentPath,
   };
@@ -211,7 +204,8 @@ export function buildPageMetadata({
   const canonicalUrl =
     typeof alternates.canonical === "string" || alternates.canonical instanceof URL
       ? alternates.canonical
-      : alternates.canonical?.url || ensureAbsoluteUrl(resolveLocalizedStaticPath(locale, pathname));
+      : alternates.canonical?.url ||
+        ensureAbsoluteUrl(resolveLocalizedStaticPath(locale, pathname));
   const socialImage = imageUrl ? ensureAbsoluteUrl(imageUrl) : undefined;
   const socialImageAlt = imageAlt?.trim() || title;
   const alternateLocales = getAlternateOpenGraphLocales(locale);

@@ -24,7 +24,7 @@ export function getLocaleFromPathname(pathname: string | null | undefined): AppL
 
 export function formatUiText(
   template: string,
-  values: Record<string, string | number | null | undefined>,
+  values: Record<string, string | number | null | undefined>
 ) {
   return template.replace(/\{(\w+)\}/g, (_, key) => {
     const value = values[key];
@@ -53,7 +53,7 @@ export function getLocalizedEpisodeArc(arc: string | null | undefined, locale: A
 export function getLocalizedLoreCategory(
   category: string | null | undefined,
   locale: AppLocale,
-  form: "singular" | "plural" = "singular",
+  form: "singular" | "plural" = "singular"
 ) {
   const copy = getUiCopy(locale).lore.categories as Record<
     string,
@@ -66,7 +66,7 @@ export function getLocalizedLoreCategory(
 
 export function getLocalizedLoreCategoryKicker(
   category: string | null | undefined,
-  locale: AppLocale,
+  locale: AppLocale
 ) {
   const copy = getUiCopy(locale).lore.categories as Record<
     string,

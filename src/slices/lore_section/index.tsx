@@ -8,9 +8,7 @@ import { isVisibleData } from "@/lib/content-visibility";
  * Props for `LoreSection`.
  */
 export type LoreSectionProps = SliceComponentProps<LoreSectionSlice>;
-type LoreEntryWithData = NonNullable<
-  LoreSectionSlice["items"][number]["entry"]
-> & {
+type LoreEntryWithData = NonNullable<LoreSectionSlice["items"][number]["entry"]> & {
   data?: {
     is_visible?: boolean | null;
     title?: string | null;
@@ -32,10 +30,7 @@ const LoreSection = ({ slice }: LoreSectionProps) => {
       <div className="hotc-lore__inner">
         <div>
           {slice.primary.kicker && (
-            <span
-              className="hotc-kicker"
-              style={{ display: "block", marginBottom: "0.5rem" }}
-            >
+            <span className="hotc-kicker" style={{ display: "block", marginBottom: "0.5rem" }}>
               {slice.primary.kicker}
             </span>
           )}
@@ -53,10 +48,7 @@ const LoreSection = ({ slice }: LoreSectionProps) => {
 
               return (
                 <li key={i} className="hotc-lore__card">
-                  <PrismicNextLink
-                    href={asLink(entry) ?? "#"}
-                    className="hotc-lore__card-link"
-                  >
+                  <PrismicNextLink href={asLink(entry) ?? "#"} className="hotc-lore__card-link">
                     {/* Si la página padre pasa data enriched vía graphQuery,
                         aquí aparecerán title/cover. Sin graphQuery, solo el uid. */}
                     {title || entry.uid || "—"}

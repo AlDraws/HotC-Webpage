@@ -21,11 +21,7 @@ export default function Error({
       <p className="max-w-md text-[var(--hotc-ink-2)]">
         {error.message || "An unexpected error occurred. Please try again."}
       </p>
-      <button
-        type="button"
-        onClick={reset}
-        className="hotc-btn hotc-btn--ember"
-      >
+      <button type="button" onClick={reset} className="hotc-btn hotc-btn--ember">
         Try again
       </button>
     </div>

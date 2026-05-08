@@ -3,16 +3,12 @@ import { EpisodePanelSlice } from "@/../prismicio-types";
 import PrismicImage from "@/components/PrismicImage";
 import type { EpisodePanelSequenceContext } from "@/slices/episode_panel/sequence-context";
 
-export type EpisodePanelProps = SliceComponentProps<
-  EpisodePanelSlice,
-  EpisodePanelSequenceContext
->;
+export type EpisodePanelProps = SliceComponentProps<EpisodePanelSlice, EpisodePanelSequenceContext>;
 
 const FIRST_COMIC_SEGMENT_HEIGHT = 960;
 const COMIC_SEGMENT_HEIGHT = 1920;
 const COMIC_SEGMENT_QUALITY = 55;
-const COMIC_IMAGE_SIZES =
-  "(max-width: 480px) 90vw, (max-width: 1080px) 100vw, 980px";
+const COMIC_IMAGE_SIZES = "(max-width: 480px) 90vw, (max-width: 1080px) 100vw, 980px";
 function getPanelSegments(width: number, height: number) {
   if (height <= COMIC_SEGMENT_HEIGHT * 1.15) {
     return [{ y: 0, height }];
@@ -46,24 +42,14 @@ const EpisodePanel = ({ slice, index, context }: EpisodePanelProps) => {
             const isFirstSegment = panelIndex === 0 && segmentIndex === 0;
             const isNearStart = panelIndex === 0 && segmentIndex < 2;
             const imgixParams = {
-              rect: [0, segment.y, width, segment.height] as [
-                number,
-                number,
-                number,
-                number,
-              ],
+              rect: [0, segment.y, width, segment.height] as [number, number, number, number],
             };
-            const segmentAlt =
-              segmentIndex === 0
-                ? alt
-                : `${alt}, segment ${segmentIndex + 1}`;
+            const segmentAlt = segmentIndex === 0 ? alt : `${alt}, segment ${segmentIndex + 1}`;
 
             return (
               <div
                 key={`${segment.y}-${segment.height}`}
-                className={`hotc-ep-panel__segment${
-                  isFirstSegment ? " is-lcp" : ""
-                }`}
+                className={`hotc-ep-panel__segment${isFirstSegment ? "is-lcp" : ""}`}
                 style={{ aspectRatio: `${width} / ${segment.height}` }}
               >
                 <PrismicImage

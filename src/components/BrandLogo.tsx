@@ -18,9 +18,7 @@ type BrandLogoProps = {
 };
 
 function getDimension(value: number | null | undefined, fallback: number): number {
-  return typeof value === "number" && Number.isFinite(value) && value > 0
-    ? value
-    : fallback;
+  return typeof value === "number" && Number.isFinite(value) && value > 0 ? value : fallback;
 }
 
 export default function BrandLogo({

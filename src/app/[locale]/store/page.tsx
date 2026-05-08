@@ -98,9 +98,7 @@ export default async function StorePage({ params }: Props) {
                           title: asText(p.data.title) || copy.store.productFallbackTitle,
                         })}
                       >
-                        <div
-                          className="hotc-store__cover"
-                        >
+                        <div className="hotc-store__cover">
                           {p.data.image?.url ? (
                             <Image
                               src={p.data.image.url}
@@ -126,9 +124,7 @@ export default async function StorePage({ params }: Props) {
                             className="hotc-store__image"
                           />
                         ) : null}
-                        {p.data.tag ? (
-                          <span className="hotc-store__tag">{p.data.tag}</span>
-                        ) : null}
+                        {p.data.tag ? <span className="hotc-store__tag">{p.data.tag}</span> : null}
                       </div>
                     )}
 

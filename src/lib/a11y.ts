@@ -19,7 +19,7 @@ function getGenericCtaLabels(copy: UiCopy) {
 
 export function getDescriptiveCtaLabel(
   label: string | null | undefined,
-  href: string | null | undefined,
+  href: string | null | undefined
 ) {
   if (!label || !href) {
     return label;
@@ -45,7 +45,7 @@ export function getDescriptiveCtaLabel(
 export function getContextualCtaAriaLabel(
   label: string | null | undefined,
   context: string | null | undefined,
-  locale: "en" | "es" = "en",
+  locale: "en" | "es" = "en"
 ) {
   if (!label || !context) {
     return undefined;

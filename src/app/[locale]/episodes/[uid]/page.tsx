@@ -27,9 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const lang = toPrismicLang(locale);
   const client = createClient();
   const [ep, settings] = await Promise.all([
-    client
-      .getByUID("episode", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
-      .catch(() => null),
+    client.getByUID("episode", uid, { lang, fetchLinks: SLICE_FETCH_LINKS }).catch(() => null),
     getSettings(locale),
   ]);
   if (!isDocumentVisible(ep)) return {};
@@ -41,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     });
   const description = getMetaDescriptionText(
     ep.data.meta_description,
-    getMetaDescriptionText(ep.data.summary, getDefaultSiteDescription(locale)),
+    getMetaDescriptionText(ep.data.summary, getDefaultSiteDescription(locale))
   );
   const socialImage =
     ep.data.meta_image?.url ||
@@ -61,11 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export async function generateStaticParams({
-  params,
-}: {
-  params: { locale: string };
-}) {
+export async function generateStaticParams({ params }: { params: { locale: string } }) {
   if (!isAppLocale(params.locale)) return [];
   const lang = toPrismicLang(params.locale);
   const client = createClient();
@@ -87,9 +81,7 @@ export default async function EpisodeReaderPage({ params }: Props) {
   const lang = toPrismicLang(locale);
   const client = createClient();
   const [ep, settings, allEpisodes] = await Promise.all([
-    client
-      .getByUID("episode", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
-      .catch(() => null),
+    client.getByUID("episode", uid, { lang, fetchLinks: SLICE_FETCH_LINKS }).catch(() => null),
     getSettings(locale),
     client.getAllByType("episode", {
       lang,
@@ -120,7 +112,7 @@ export default async function EpisodeReaderPage({ params }: Props) {
         panelOrder: acc.panelOrder + 1,
       };
     },
-    { panelMap: {}, panelOrder: 0 },
+    { panelMap: {}, panelOrder: 0 }
   ).panelMap;
   const sliceContext: EpisodePanelSequenceContext & { locale: AppLocale } = {
     locale,
@@ -132,10 +124,7 @@ export default async function EpisodeReaderPage({ params }: Props) {
   const chapterLabel = formatUiText(copy.episodes.chapterLabel, {
     number: ep.data.chapter_number ?? "",
   }).trim();
-  const summaryText = getMetaDescriptionText(
-    ep.data.summary,
-    getDefaultSiteDescription(locale),
-  );
+  const summaryText = getMetaDescriptionText(ep.data.summary, getDefaultSiteDescription(locale));
   const episodeUrl = new URL(`/${locale}/episodes/${ep.uid}`, metadataBase).toString();
   const archiveUrl = new URL(`/${locale}/episodes`, metadataBase).toString();
   const structuredData = [
@@ -194,15 +183,11 @@ export default async function EpisodeReaderPage({ params }: Props) {
         <Link href={`/${locale}/episodes`} className="hotc-ereader__back">
           ← {copy.episodes.archive}
         </Link>
-        <span className="hotc-ereader__chapter">
-          {chapterLabel}
-        </span>
+        <span className="hotc-ereader__chapter">{chapterLabel}</span>
         <h1 className="hotc-ereader__title">{ep.data.title}</h1>
         <p className="hotc-ereader__date">
           {formatDate(ep.data.publish_date, locale)}
-          {ep.data.summary
-            ? ` · ${asText(ep.data.summary).slice(0, 80)}`
-            : ""}
+          {ep.data.summary ? ` · ${asText(ep.data.summary).slice(0, 80)}` : ""}
         </p>
         <section className="sr-only" aria-label={copy.episodes.synopsisAria}>
           <h2>{copy.episodes.synopsisTitle}</h2>
@@ -212,11 +197,7 @@ export default async function EpisodeReaderPage({ params }: Props) {
 
       {/* Comic strip — SliceZone renders panels, beats, dividers */}
       <div className="hotc-ereader__strip">
-        <SliceZone
-          slices={ep.data.slices}
-          components={components}
-          context={sliceContext}
-        />
+        <SliceZone slices={ep.data.slices} components={components} context={sliceContext} />
       </div>
 
       {/* Sticky prev/next nav — replicates EpisodeReader.__nav */}

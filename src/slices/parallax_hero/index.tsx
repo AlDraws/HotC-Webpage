@@ -45,27 +45,27 @@ const ParallaxHero = ({ slice, context }: ParallaxHeroProps) => {
   const style: CSSProperties | undefined = customHeightVh
     ? ({ "--hotc-phero-height": `${customHeightVh}vh` } as CSSProperties)
     : undefined;
-  const backgroundImage =
-    slice.primary.bgPoster?.url ? slice.primary.bgPoster : slice.primary.bgImage;
-  const heroTitle =
-    slice.primary.title?.trim() || copy.images.parallaxHeroArtworkAlt;
+  const backgroundImage = slice.primary.bgPoster?.url
+    ? slice.primary.bgPoster
+    : slice.primary.bgImage;
+  const heroTitle = slice.primary.title?.trim() || copy.images.parallaxHeroArtworkAlt;
   const primaryCtaAriaLabel = getContextualCtaAriaLabel(
     slice.primary.primaryCtaLabel,
     heroTitle,
-    locale,
+    locale
   );
   const secondaryCtaAriaLabel = getContextualCtaAriaLabel(
     slice.primary.secondaryCtaLabel,
     heroTitle,
-    locale,
+    locale
   );
   const primaryCtaLabel = getDescriptiveCtaLabel(
     slice.primary.primaryCtaLabel,
-    resolveLinkHref(slice.primary.primaryCtaLink),
+    resolveLinkHref(slice.primary.primaryCtaLink)
   );
   const secondaryCtaLabel = getDescriptiveCtaLabel(
     slice.primary.secondaryCtaLabel,
-    resolveLinkHref(slice.primary.secondaryCtaLink),
+    resolveLinkHref(slice.primary.secondaryCtaLink)
   );
 
   useEffect(() => {
@@ -86,8 +86,7 @@ const ParallaxHero = ({ slice, context }: ParallaxHeroProps) => {
     const hero = sectionRef.current;
     if (!hero) return;
 
-    const clamp = (value: number, min: number, max: number) =>
-      Math.min(Math.max(value, min), max);
+    const clamp = (value: number, min: number, max: number) => Math.min(Math.max(value, min), max);
     const bgTravel = clamp(bgStrength * 120, 12, 72);
     const fgTravel = clamp(fgStrength * 120, 20, 96);
 
@@ -142,11 +141,7 @@ const ParallaxHero = ({ slice, context }: ParallaxHeroProps) => {
           <video
             className="hotc-phero__video"
             src={slice.primary.bgVideo.url}
-            poster={
-              slice.primary.bgPoster?.url ??
-              slice.primary.bgImage?.url ??
-              undefined
-            }
+            poster={slice.primary.bgPoster?.url ?? slice.primary.bgImage?.url ?? undefined}
             autoPlay
             muted
             loop
@@ -170,9 +165,7 @@ const ParallaxHero = ({ slice, context }: ParallaxHeroProps) => {
         ) : null}
       </div>
 
-      <div
-        className={`hotc-hero__overlay hotc-overlay--${slice.primary.overlay ?? "strong"}`}
-      />
+      <div className={`hotc-hero__overlay hotc-overlay--${slice.primary.overlay ?? "strong"}`} />
 
       {slice.primary.foreground?.url && (
         <div ref={fgRef} className="hotc-phero__fg">
@@ -190,16 +183,10 @@ const ParallaxHero = ({ slice, context }: ParallaxHeroProps) => {
 
       <div className="bounded hotc-hero__inner hotc-phero__inner">
         {slice.primary.kicker && (
-          <span className="hotc-kicker hotc-hero__kicker">
-            {slice.primary.kicker}
-          </span>
+          <span className="hotc-kicker hotc-hero__kicker">{slice.primary.kicker}</span>
         )}
-        {slice.primary.title && (
-          <h1 className="hotc-hero__title">{slice.primary.title}</h1>
-        )}
-        {slice.primary.subtitle && (
-          <p className="hotc-hero__subtitle">{slice.primary.subtitle}</p>
-        )}
+        {slice.primary.title && <h1 className="hotc-hero__title">{slice.primary.title}</h1>}
+        {slice.primary.subtitle && <p className="hotc-hero__subtitle">{slice.primary.subtitle}</p>}
         {(slice.primary.primaryCtaLabel || slice.primary.secondaryCtaLabel) && (
           <div className="hotc-hero__ctas">
             {slice.primary.primaryCtaLabel && (

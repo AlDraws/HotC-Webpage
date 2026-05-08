@@ -33,9 +33,6 @@ export default async function CharactersPage({ params }: Props) {
   if (charactersPage && !isDocumentVisible(charactersPage)) notFound();
 
   return (
-    <SliceZone
-      slices={normalizeSlices(charactersPage?.data.slices)}
-      components={components}
-    />
+    <SliceZone slices={normalizeSlices(charactersPage?.data.slices)} components={components} />
   );
 }

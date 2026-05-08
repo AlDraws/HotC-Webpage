@@ -43,6 +43,10 @@ yarn-error.log*
 # local scratch / design exploration
 /scratch
 
+# design assets / uploads (tracked in Prismic/CDN instead)
+/uploads
+/preview
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

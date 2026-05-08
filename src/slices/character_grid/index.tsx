@@ -6,11 +6,7 @@ import PrismicImage from "@/components/PrismicImage";
 import { CharacterGridSlice } from "@/../prismicio-types";
 import { isVisibleData } from "@/lib/content-visibility";
 import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
-import {
-  formatUiText,
-  getLocalizedCharacterRole,
-  getUiCopy,
-} from "@/lib/ui-copy";
+import { formatUiText, getLocalizedCharacterRole, getUiCopy } from "@/lib/ui-copy";
 
 export type CharacterGridProps = SliceComponentProps<CharacterGridSlice, HotcSliceContext>;
 
@@ -30,12 +26,8 @@ const CharacterGrid = ({ slice, context }: CharacterGridProps) => {
     >
       {(slice.primary.kicker || slice.primary.title) && (
         <div className="hotc-cgrid__head">
-          {slice.primary.kicker && (
-            <span className="hotc-kicker">{slice.primary.kicker}</span>
-          )}
-          {slice.primary.title && (
-            <h2 className="hotc-h2">{slice.primary.title}</h2>
-          )}
+          {slice.primary.kicker && <span className="hotc-kicker">{slice.primary.kicker}</span>}
+          {slice.primary.title && <h2 className="hotc-h2">{slice.primary.title}</h2>}
         </div>
       )}
       <div className="hotc-cgrid__grid">
@@ -53,8 +45,7 @@ const CharacterGrid = ({ slice, context }: CharacterGridProps) => {
               }
             | undefined;
           const portrait =
-            (data?.portrait?.url ? data.portrait : null) ??
-            (data?.image?.url ? data.image : null);
+            (data?.portrait?.url ? data.portrait : null) ?? (data?.image?.url ? data.image : null);
 
           return (
             <PrismicNextLink
@@ -75,9 +66,11 @@ const CharacterGrid = ({ slice, context }: CharacterGridProps) => {
                     className="hotc-cgrid__portrait-img"
                   />
                 ) : (
+                  // Decorative placeholder — name is in adjacent text, intentionally aria-hidden
                   <Image
                     src="/assets/character-portrait-placeholder.svg"
                     alt=""
+                    aria-hidden="true"
                     fill
                     sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
                     className="hotc-cgrid__portrait-img"

@@ -61,10 +61,7 @@ function isDocumentLink(linkField: unknown): linkField is DocumentLinkLike {
   );
 }
 
-export function resolveAppLinkHref(
-  linkField: unknown,
-  locale?: AppLocale,
-): string | null {
+export function resolveAppLinkHref(linkField: unknown, locale?: AppLocale): string | null {
   if (!isDocumentLink(linkField)) {
     const href = resolveLinkHref(linkField);
     return href && locale ? localizeHref(href, locale) : href;

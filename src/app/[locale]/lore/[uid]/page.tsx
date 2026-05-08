@@ -6,14 +6,10 @@ import Link from "next/link";
 import { createClient, SLICE_FETCH_LINKS } from "@/prismicio";
 import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
 import PrismicImage from "@/components/PrismicImage";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildPageMetadata, metadataBase, SITE_NAME } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
 import { filterVisibleDocuments, isDocumentVisible } from "@/lib/content-visibility";
-import {
-  formatUiText,
-  getLocalizedLoreCategory,
-  getUiCopy,
-} from "@/lib/ui-copy";
+import { formatUiText, getLocalizedLoreCategory, getUiCopy } from "@/lib/ui-copy";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
@@ -23,9 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const lang = toPrismicLang(locale);
   const client = createClient();
   const [item, settings] = await Promise.all([
-    client
-      .getByUID("lore_entry", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
-      .catch(() => null),
+    client.getByUID("lore_entry", uid, { lang, fetchLinks: SLICE_FETCH_LINKS }).catch(() => null),
     getSettings(locale),
   ]);
   if (!isDocumentVisible(item)) return {};
@@ -46,11 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   });
 }
 
-export async function generateStaticParams({
-  params,
-}: {
-  params: { locale: string };
-}) {
+export async function generateStaticParams({ params }: { params: { locale: string } }) {
   if (!isAppLocale(params.locale)) return [];
   const lang = toPrismicLang(params.locale);
   const client = createClient();
@@ -72,9 +62,24 @@ export default async function LoreDetailPage({ params }: Props) {
     .catch(() => null);
   if (!isDocumentVisible(item)) notFound();
   const itemTitle = item.data.title?.trim() || item.uid || copy.lore.entryFallback;
+  const loreUrl = new URL(`/${locale}/lore/${item.uid}`, metadataBase).toString();
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: itemTitle,
+    description: item.data.epithet?.trim() || undefined,
+    image: item.data.cover?.url || item.data.meta_image?.url || undefined,
+    url: loreUrl,
+    inLanguage: locale,
+    isPartOf: { "@type": "CreativeWorkSeries", name: SITE_NAME },
+  };
 
   return (
     <article>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       {/* Hero — replicates LoreProfile's hotc-cprofile__hero section */}
       <section className="hotc-cprofile__hero">
         {item.data.cover?.url ? (
@@ -97,18 +102,13 @@ export default async function LoreDetailPage({ params }: Props) {
               ← {copy.lore.back}
             </Link>
             {item.data.category ? (
-              <span
-                className="hotc-kicker"
-                style={{ color: "var(--hotc-ember)" }}
-              >
+              <span className="hotc-kicker" style={{ color: "var(--hotc-ember)" }}>
                 {getLocalizedLoreCategory(item.data.category || null, locale)}
               </span>
             ) : null}
           </div>
           <h1 className="hotc-cprofile__name">{item.data.title}</h1>
-          {item.data.epithet ? (
-            <p className="hotc-cprofile__epithet">{item.data.epithet}</p>
-          ) : null}
+          {item.data.epithet ? <p className="hotc-cprofile__epithet">{item.data.epithet}</p> : null}
         </div>
       </section>
 
@@ -116,18 +116,13 @@ export default async function LoreDetailPage({ params }: Props) {
       {item.data.slices && item.data.slices.length > 0 ? (
         <section className="bounded bounded--base">
           <div className="hotc-cprofile__bio">
-            <SliceZone
-              slices={item.data.slices}
-              components={components}
-              context={{ locale }}
-            />
+            <SliceZone slices={item.data.slices} components={components} context={{ locale }} />
           </div>
         </section>
       ) : null}
 
       {/* Cover image as body if no slices */}
-      {(!item.data.slices || item.data.slices.length === 0) &&
-      item.data.cover?.url ? (
+      {(!item.data.slices || item.data.slices.length === 0) && item.data.cover?.url ? (
         <section className="bounded bounded--base">
           <div className="hotc-cprofile__bio">
             <PrismicImage

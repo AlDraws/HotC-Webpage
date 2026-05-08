@@ -90,9 +90,7 @@ const ImageTicker = ({ slice, context }: ImageTickerProps) => {
     const viewport = viewportRef.current;
     const rail = railRef.current;
     if (!rail || !viewport || items.length === 0) return;
-    reduceMotionRef.current = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    reduceMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const renderPosition = () => {
       rail.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
@@ -100,9 +98,7 @@ const ImageTicker = ({ slice, context }: ImageTickerProps) => {
 
     const measure = () => {
       const firstCell = rail.children[0] as HTMLElement | undefined;
-      const firstRepeatedCell = rail.children[items.length] as
-        | HTMLElement
-        | undefined;
+      const firstRepeatedCell = rail.children[items.length] as HTMLElement | undefined;
       if (!firstCell || !firstRepeatedCell) return;
 
       const cycleWidth = firstRepeatedCell.offsetLeft - firstCell.offsetLeft;
@@ -143,14 +139,9 @@ const ImageTicker = ({ slice, context }: ImageTickerProps) => {
     const tick = (now: number) => {
       const dt = (now - last) / 1000;
       last = now;
-      if (
-        !pausedRef.current &&
-        !draggingRef.current &&
-        !reduceMotionRef.current
-      ) {
+      if (!pausedRef.current && !draggingRef.current && !reduceMotionRef.current) {
         const cycleWidth = cycleWidthRef.current;
-        const pxPerSecond =
-          cycleWidth > 0 ? cycleWidth / Math.max(speed, 1) : 0;
+        const pxPerSecond = cycleWidth > 0 ? cycleWidth / Math.max(speed, 1) : 0;
         const delta = pxPerSecond * dt * (isReverse ? -1 : 1);
         offsetRef.current = wrapOffset(offsetRef.current + delta, cycleWidth);
         renderPosition();
@@ -223,10 +214,7 @@ const ImageTicker = ({ slice, context }: ImageTickerProps) => {
           if (Math.abs(event.clientX - dragStartXRef.current) > 4) {
             didDragRef.current = true;
           }
-          offsetRef.current = wrapOffset(
-            offsetRef.current - dx,
-            cycleWidthRef.current
-          );
+          offsetRef.current = wrapOffset(offsetRef.current - dx, cycleWidthRef.current);
           if (railRef.current) {
             railRef.current.style.transform = `translate3d(${-offsetRef.current}px, 0, 0)`;
           }
@@ -235,9 +223,7 @@ const ImageTicker = ({ slice, context }: ImageTickerProps) => {
           draggingRef.current = false;
           suppressClickRef.current = didDragRef.current;
           pausedRef.current =
-            event.pointerType === "mouse"
-              ? hoveringRef.current
-              : wasPausedBeforeDragRef.current;
+            event.pointerType === "mouse" ? hoveringRef.current : wasPausedBeforeDragRef.current;
           if (event.currentTarget.hasPointerCapture(event.pointerId)) {
             event.currentTarget.releasePointerCapture(event.pointerId);
           }
@@ -245,9 +231,7 @@ const ImageTicker = ({ slice, context }: ImageTickerProps) => {
         onPointerCancel={(event) => {
           draggingRef.current = false;
           pausedRef.current =
-            event.pointerType === "mouse"
-              ? hoveringRef.current
-              : wasPausedBeforeDragRef.current;
+            event.pointerType === "mouse" ? hoveringRef.current : wasPausedBeforeDragRef.current;
         }}
         onClickCapture={(event) => {
           if (!suppressClickRef.current) return;
@@ -265,12 +249,10 @@ const ImageTicker = ({ slice, context }: ImageTickerProps) => {
                 show_badge?: boolean | null;
                 badge_text?: string | null;
               };
-              const rawHref =
-                getLinkHref(typedItem.link) ?? getLinkHref(typedItem.image_link);
+              const rawHref = getLinkHref(typedItem.link) ?? getLinkHref(typedItem.image_link);
               const href = rawHref ? normalizeHref(rawHref) : null;
               const isExternal = href ? isExternalHref(href) : false;
-              const showBadge =
-                Boolean(typedItem.show_badge) && Boolean(typedItem.badge_text);
+              const showBadge = Boolean(typedItem.show_badge) && Boolean(typedItem.badge_text);
               return (
                 <div
                   key={`${copyIndex}-${itemIndex}`}
@@ -302,9 +284,7 @@ const ImageTicker = ({ slice, context }: ImageTickerProps) => {
                           draggable={false}
                         />
                         {showBadge ? (
-                          <span className="hotc-ticker__badge">
-                            {typedItem.badge_text}
-                          </span>
+                          <span className="hotc-ticker__badge">{typedItem.badge_text}</span>
                         ) : null}
                       </a>
                     ) : (
@@ -325,9 +305,7 @@ const ImageTicker = ({ slice, context }: ImageTickerProps) => {
                           draggable={false}
                         />
                         {showBadge ? (
-                          <span className="hotc-ticker__badge">
-                            {typedItem.badge_text}
-                          </span>
+                          <span className="hotc-ticker__badge">{typedItem.badge_text}</span>
                         ) : null}
                       </>
                     )

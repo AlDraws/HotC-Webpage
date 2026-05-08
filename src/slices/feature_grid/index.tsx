@@ -3,11 +3,7 @@ import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import PrismicImage from "@/components/PrismicImage";
 import { FeatureGridSlice } from "@/../prismicio-types";
-import {
-  getLinkTarget,
-  isExternalHref,
-  resolveLinkHref,
-} from "@/lib/links";
+import { getLinkTarget, isExternalHref, resolveLinkHref } from "@/lib/links";
 import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
 import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 import ZoomButton from "./ZoomButton";
@@ -19,16 +15,10 @@ const FeatureGrid = ({ slice, context }: FeatureGridProps) => {
   const copy = getUiCopy(locale);
 
   return (
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-      as="section"
-    >
+    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation} as="section">
       {(slice.primary.kicker || slice.primary.title) && (
         <div className="hotc-cgrid__head">
-          {slice.primary.kicker && (
-            <span className="hotc-kicker">{slice.primary.kicker}</span>
-          )}
+          {slice.primary.kicker && <span className="hotc-kicker">{slice.primary.kicker}</span>}
           {slice.primary.title && <h2>{slice.primary.title}</h2>}
         </div>
       )}
@@ -43,10 +33,7 @@ const FeatureGrid = ({ slice, context }: FeatureGridProps) => {
           const coverHref = resolveLinkHref(typedItem.cover_link);
           const coverTarget = getLinkTarget(typedItem.cover_link);
           const isExternal = coverHref ? isExternalHref(coverHref) : false;
-          const rel =
-            coverTarget === "_blank" || isExternal
-              ? "noopener noreferrer"
-              : undefined;
+          const rel = coverTarget === "_blank" || isExternal ? "noopener noreferrer" : undefined;
           const featureTitle =
             item.title?.trim() || formatUiText(copy.images.featureTitle, { index: index + 1 });
           const coverAlt = coverImage?.alt || featureTitle;
@@ -85,7 +72,7 @@ const FeatureGrid = ({ slice, context }: FeatureGridProps) => {
             <article
               key={index}
               className={`hotc-fcard hotc-fcard--interactive${
-                coverHref ? " hotc-fcard--linked" : ""
+                coverHref ? "hotc-fcard--linked" : ""
               }`}
             >
               {coverHref ? (

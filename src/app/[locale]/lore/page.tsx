@@ -5,11 +5,7 @@ import { createClient } from "@/prismicio";
 import { filterVisibleDocuments } from "@/lib/content-visibility";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
 import { buildPageMetadata } from "@/lib/seo";
-import {
-  getLocalizedLoreCategory,
-  getLocalizedLoreCategoryKicker,
-  getUiCopy,
-} from "@/lib/ui-copy";
+import { getLocalizedLoreCategory, getLocalizedLoreCategoryKicker, getUiCopy } from "@/lib/ui-copy";
 
 /**
  * Lore / Worldbuilding index — replicates App.jsx "lore" route:
@@ -36,9 +32,7 @@ export default async function LorePage({ params }: Props) {
   const copy = getUiCopy(locale);
   const lang = toPrismicLang(locale);
   const client = createClient();
-  const items = filterVisibleDocuments(
-    await client.getAllByType("lore_entry", { lang }),
-  );
+  const items = filterVisibleDocuments(await client.getAllByType("lore_entry", { lang }));
 
   // Group by category field (select: Environment | Prop | Illustration)
   const order = ["Environment", "Prop", "Illustration"];
@@ -64,35 +58,21 @@ export default async function LorePage({ params }: Props) {
 
       {/* Category sections — replicates ItemGrid usage in WorldbuildingHub */}
       {sortedGroups.map((category) => (
-        <section
-          key={category}
-          className="bounded bounded--base"
-          style={{ paddingTop: "1.5rem" }}
-        >
+        <section key={category} className="bounded bounded--base" style={{ paddingTop: "1.5rem" }}>
           <div className="hotc-cgrid__head">
-            <span className="hotc-kicker">
-              {getLocalizedLoreCategoryKicker(category, locale)}
-            </span>
+            <span className="hotc-kicker">{getLocalizedLoreCategoryKicker(category, locale)}</span>
             <h2 className="hotc-h2">{getLocalizedLoreCategory(category, locale, "plural")}</h2>
           </div>
           <div
             className={`hotc-cgrid__grid${
-              category === "Illustration" ? " hotc-cgrid__grid--wide" : ""
+              category === "Illustration" ? "hotc-cgrid__grid--wide" : ""
             }`}
           >
             {groups[category].map((item) => (
-              <Link
-                key={item.id}
-                href={`/${locale}/lore/${item.uid}`}
-                className="hotc-cgrid__cell"
-              >
+              <Link key={item.id} href={`/${locale}/lore/${item.uid}`} className="hotc-cgrid__cell">
                 <div
                   className="hotc-cgrid__portrait"
-                  style={
-                    category === "Illustration"
-                      ? { aspectRatio: "4 / 3" }
-                      : undefined
-                  }
+                  style={category === "Illustration" ? { aspectRatio: "4 / 3" } : undefined}
                 >
                   {item.data.cover?.url ? (
                     <PrismicImage

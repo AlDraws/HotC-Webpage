@@ -11,9 +11,7 @@ export function normalizeSliceType(sliceType?: string | null): string | undefine
   return SLICE_TYPE_ALIASES[sliceType] ?? sliceType;
 }
 
-export function normalizeSlices<T extends SliceLike>(
-  slices: readonly T[] | null | undefined,
-): T[] {
+export function normalizeSlices<T extends SliceLike>(slices: readonly T[] | null | undefined): T[] {
   return (slices ?? []).map((slice) => {
     const normalizedType = normalizeSliceType(slice.slice_type);
     if (!normalizedType || normalizedType === slice.slice_type) return slice;

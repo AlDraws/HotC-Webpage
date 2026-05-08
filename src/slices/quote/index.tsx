@@ -17,9 +17,7 @@ const Quote = ({ slice }: QuoteProps) => {
       data-slice-variation={slice.variation}
       className="hotc-quote"
     >
-      <p className="hotc-quote__text">
-        &ldquo;{asText(slice.primary.text)}&rdquo;
-      </p>
+      <p className="hotc-quote__text">&ldquo;{asText(slice.primary.text)}&rdquo;</p>
       {(slice.primary.author || slice.primary.author_role) && (
         <span className="hotc-quote__source">
           {slice.primary.author}

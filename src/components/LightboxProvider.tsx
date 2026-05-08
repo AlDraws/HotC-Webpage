@@ -35,13 +35,7 @@ function clampIndex(index: number, length: number): number {
   return index;
 }
 
-export function LightboxProvider({
-  children,
-  locale,
-}: {
-  children: ReactNode;
-  locale: AppLocale;
-}) {
+export function LightboxProvider({ children, locale }: { children: ReactNode; locale: AppLocale }) {
   const copy = getUiCopy(locale);
   const [images, setImages] = useState<LightboxImage[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -56,15 +50,12 @@ export function LightboxProvider({
     setCurrentIndex(0);
   }, []);
 
-  const openLightbox = useCallback(
-    (nextImages: LightboxImage[], startIndex = 0) => {
-      const validImages = nextImages.filter((image) => Boolean(image.src));
-      if (!validImages.length) return;
-      setImages(validImages);
-      setCurrentIndex(clampIndex(startIndex, validImages.length));
-    },
-    []
-  );
+  const openLightbox = useCallback((nextImages: LightboxImage[], startIndex = 0) => {
+    const validImages = nextImages.filter((image) => Boolean(image.src));
+    if (!validImages.length) return;
+    setImages(validImages);
+    setCurrentIndex(clampIndex(startIndex, validImages.length));
+  }, []);
 
   const goNext = useCallback(() => {
     setCurrentIndex((prev) => {
@@ -166,11 +157,7 @@ export function LightboxProvider({
           aria-label={copy.common.imageViewer}
           onClick={closeLightbox}
         >
-          <div
-            ref={panelRef}
-            className="hotc-lightbox__panel"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div ref={panelRef} className="hotc-lightbox__panel" onClick={(e) => e.stopPropagation()}>
             <button
               ref={closeButtonRef}
               type="button"

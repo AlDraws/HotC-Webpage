@@ -6,11 +6,7 @@ import { asText } from "@prismicio/client";
 import { components } from "@/slices";
 import { normalizeSlices } from "@/lib/prismic-slices";
 import { isAppLocale, toPrismicLang, type AppLocale } from "@/lib/locale";
-import {
-  buildPageMetadata,
-  getDefaultSiteDescription,
-  getMetaDescriptionText,
-} from "@/lib/seo";
+import { buildPageMetadata, getDefaultSiteDescription, getMetaDescriptionText } from "@/lib/seo";
 import { getSettings } from "@/lib/server-locale";
 import { filterVisibleDocuments, isDocumentVisible } from "@/lib/content-visibility";
 
@@ -24,25 +20,19 @@ const RESERVED_PAGE_UIDS = new Set([
   "store",
 ]);
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<Params>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { locale, uid } = await params;
   const lang = toPrismicLang(locale);
   const client = createClient();
   const [page, settings] = await Promise.all([
-    client
-      .getByUID("page", uid, { lang, fetchLinks: SLICE_FETCH_LINKS })
-      .catch(() => null),
+    client.getByUID("page", uid, { lang, fetchLinks: SLICE_FETCH_LINKS }).catch(() => null),
     getSettings(locale),
   ]);
   if (!isDocumentVisible(page)) return {};
   const title = page.data.meta_title || asText(page.data.title);
   const description = getMetaDescriptionText(
     page.data.meta_description,
-    getDefaultSiteDescription(locale),
+    getDefaultSiteDescription(locale)
   );
   const socialImage =
     page.data.meta_image?.url ||
@@ -60,11 +50,7 @@ export async function generateMetadata({
   });
 }
 
-export async function generateStaticParams({
-  params,
-}: {
-  params: { locale: string };
-}) {
+export async function generateStaticParams({ params }: { params: { locale: string } }) {
   if (!isAppLocale(params.locale)) return [];
   const lang = toPrismicLang(params.locale);
   const client = createClient();
@@ -78,11 +64,7 @@ export async function generateStaticParams({
  * Catch-all page — renders any Prismic "page" document by UID
  * (about, contact, etc.) using the SliceZone.
  */
-export default async function GenericPage({
-  params,
-}: {
-  params: Promise<Params>;
-}) {
+export default async function GenericPage({ params }: { params: Promise<Params> }) {
   const { locale, uid } = await params;
   const lang = toPrismicLang(locale);
   const client = createClient();

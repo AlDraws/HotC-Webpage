@@ -1,5 +1,14 @@
 import type { NextConfig } from "next";
+import bundleAnalyzer from "@next/bundle-analyzer";
 
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
+
+// 'unsafe-inline' in script-src is required while the site uses ISR/static generation.
+// Nonce-based CSP (the strict alternative) forces fully dynamic rendering per request,
+// which disables ISR and CDN caching — incompatible with the Prismic revalidation model.
+// SRI (experimental) hardens external script integrity without affecting rendering mode.
 const contentSecurityPolicy = [
   "default-src 'self'",
   "base-uri 'self'",
@@ -21,6 +30,9 @@ const contentSecurityPolicy = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  experimental: {
+    sri: { algorithm: "sha256" },
+  },
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [640, 750, 828, 1080, 1200, 1440, 1920],
@@ -90,4 +102,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);

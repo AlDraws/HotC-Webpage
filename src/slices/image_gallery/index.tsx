@@ -5,10 +5,7 @@ import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
 import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 import GalleryTile from "./GalleryTile";
 
-export type ImageGalleryProps = SliceComponentProps<
-  Content.ImageGallerySlice,
-  HotcSliceContext
->;
+export type ImageGalleryProps = SliceComponentProps<Content.ImageGallerySlice, HotcSliceContext>;
 
 const ImageGallery = ({ slice, context }: ImageGalleryProps) => {
   const locale = getSliceLocale(context);
@@ -18,9 +15,7 @@ const ImageGallery = ({ slice, context }: ImageGalleryProps) => {
     .map((item, index) => ({
       field: item.image,
       src: item.image.url || "",
-      alt:
-        item.image.alt ||
-        formatUiText(copy.images.galleryImage, { index: index + 1 }),
+      alt: item.image.alt || formatUiText(copy.images.galleryImage, { index: index + 1 }),
       width: item.image.dimensions?.width,
       height: item.image.dimensions?.height,
     }))
@@ -34,11 +29,7 @@ const ImageGallery = ({ slice, context }: ImageGalleryProps) => {
   }));
 
   return (
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-      as="section"
-    >
+    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation} as="section">
       <div className="hotc-gallery">
         {images.map((image, index) => (
           <GalleryTile

@@ -30,10 +30,7 @@ export default function Bounded({
   children,
 }: BoundedProps) {
   return (
-    <Comp
-      className={`w-full ${yPad[yPadding]} ${className}`}
-      style={style}
-    >
+    <Comp className={`w-full ${yPad[yPadding]} ${className}`} style={style}>
       <div className="mx-auto w-full max-w-6xl px-6">{children}</div>
     </Comp>
   );

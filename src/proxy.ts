@@ -1,9 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import {
-  LOCALE_COOKIE_NAME,
-  normalizeAppLocale,
-  SUPPORTED_LOCALES,
-} from "@/lib/locale";
+import { LOCALE_COOKIE_NAME, normalizeAppLocale, SUPPORTED_LOCALES } from "@/lib/locale";
 
 function getPreferredLocale(request: NextRequest) {
   const cookieLocale = request.cookies.get(LOCALE_COOKIE_NAME)?.value;
@@ -15,7 +11,7 @@ function getPreferredLocale(request: NextRequest) {
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const pathnameHasLocale = SUPPORTED_LOCALES.some(
-    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),
+    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
   );
 
   if (pathnameHasLocale) return NextResponse.next();
@@ -28,7 +24,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|slice-simulator|.*\\..*).*)",
-  ],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico|slice-simulator|.*\\..*).*)"],
 };

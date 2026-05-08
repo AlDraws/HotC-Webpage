@@ -3,21 +3,14 @@ import Link from "next/link";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import PrismicImage from "@/components/PrismicImage";
-import {
-  getLinkTarget,
-  isExternalHref,
-  resolveLinkHref,
-} from "@/lib/links";
+import { getLinkTarget, isExternalHref, resolveLinkHref } from "@/lib/links";
 import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
 import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 
 /**
  * Props for `ImageCards`.
  */
-export type ImageCardsProps = SliceComponentProps<
-  Content.ImageCardsSlice,
-  HotcSliceContext
->;
+export type ImageCardsProps = SliceComponentProps<Content.ImageCardsSlice, HotcSliceContext>;
 
 /**
  * Component for "ImageCards" Slices.
@@ -26,16 +19,10 @@ const ImageCards = ({ slice, context }: ImageCardsProps) => {
   const locale = getSliceLocale(context);
   const copy = getUiCopy(locale);
   return (
-    <Bounded
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-      as="section"
-    >
+    <Bounded data-slice-type={slice.slice_type} data-slice-variation={slice.variation} as="section">
       {(slice.primary.kicker || slice.primary.title) && (
         <div className="hotc-cgrid__head">
-          {slice.primary.kicker && (
-            <span className="hotc-kicker">{slice.primary.kicker}</span>
-          )}
+          {slice.primary.kicker && <span className="hotc-kicker">{slice.primary.kicker}</span>}
           {slice.primary.title && <h2>{slice.primary.title}</h2>}
         </div>
       )}
@@ -49,17 +36,14 @@ const ImageCards = ({ slice, context }: ImageCardsProps) => {
           const href = resolveLinkHref(linkField);
           const target = getLinkTarget(linkField);
           const isExternal = href ? isExternalHref(href) : false;
-          const rel =
-            target === "_blank" || isExternal ? "noopener noreferrer" : undefined;
+          const rel = target === "_blank" || isExternal ? "noopener noreferrer" : undefined;
           const badge = typedItem.badge?.trim();
 
           const card = (
             <>
               <div className="hotc-icard__img-wrap">
                 {badge ? <span className="hotc-icard__badge">{badge}</span> : null}
-                <div
-                  className="hotc-icard__img"
-                >
+                <div className="hotc-icard__img">
                   {item.image.url ? (
                     <PrismicImage
                       field={item.image}
@@ -77,9 +61,7 @@ const ImageCards = ({ slice, context }: ImageCardsProps) => {
                 </div>
               </div>
               {item.title && <h3 className="hotc-icard__title">{item.title}</h3>}
-              {item.caption && (
-                <p className="hotc-icard__caption">{item.caption}</p>
-              )}
+              {item.caption && <p className="hotc-icard__caption">{item.caption}</p>}
             </>
           );
 

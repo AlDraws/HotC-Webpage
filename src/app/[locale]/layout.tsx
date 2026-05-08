@@ -5,10 +5,7 @@ import Footer from "@/components/Footer";
 import { LightboxProvider } from "@/components/LightboxProvider";
 import ScrollReset from "@/components/ScrollReset";
 import { RootDocument } from "../root-document";
-import {
-  isAppLocale,
-  SUPPORTED_LOCALES,
-} from "@/lib/locale";
+import { isAppLocale, SUPPORTED_LOCALES } from "@/lib/locale";
 import {
   buildStaticAlternates,
   getDefaultSiteDescription,
@@ -38,10 +35,9 @@ export async function generateMetadata({
   const settings = await getSettings(locale);
   const siteDescription = getMetaDescriptionText(
     settings?.data.meta_description,
-    getDefaultSiteDescription(locale),
+    getDefaultSiteDescription(locale)
   );
-  const ogImage =
-    settings?.data.og_default?.url || settings?.data.meta_image?.url || undefined;
+  const ogImage = settings?.data.og_default?.url || settings?.data.meta_image?.url || undefined;
   const alternates = buildStaticAlternates(locale, "/");
 
   return {
@@ -56,9 +52,9 @@ export async function generateMetadata({
       type: "website",
       siteName: SITE_NAME,
       locale: locale === "es" ? "es_ES" : "en_US",
-      alternateLocale: SUPPORTED_LOCALES
-        .filter((supportedLocale) => supportedLocale !== locale)
-        .map((supportedLocale) => (supportedLocale === "es" ? "es_ES" : "en_US")),
+      alternateLocale: SUPPORTED_LOCALES.filter(
+        (supportedLocale) => supportedLocale !== locale
+      ).map((supportedLocale) => (supportedLocale === "es" ? "es_ES" : "en_US")),
       url:
         typeof alternates.canonical === "string" || alternates.canonical instanceof URL
           ? alternates.canonical
@@ -86,29 +82,18 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!isAppLocale(locale)) notFound();
 
-  const [settings, navigation] = await Promise.all([
-    getSettings(locale),
-    getNavigation(locale),
-  ]);
+  const [settings, navigation] = await Promise.all([getSettings(locale), getNavigation(locale)]);
 
   return (
     <RootDocument lang={locale}>
       <LightboxProvider locale={locale}>
         <ScrollReset />
         {settings && navigation ? (
-          <Header
-            settings={settings}
-            navigation={navigation}
-            currentLocale={locale}
-          />
+          <Header settings={settings} navigation={navigation} currentLocale={locale} />
         ) : null}
         <main className="flex-1">{children}</main>
         {settings && navigation ? (
-          <Footer
-            settings={settings}
-            navigation={navigation}
-            currentLocale={locale}
-          />
+          <Footer settings={settings} navigation={navigation} currentLocale={locale} />
         ) : null}
       </LightboxProvider>
     </RootDocument>

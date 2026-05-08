@@ -20,7 +20,7 @@ function buildDynamicAlternates(
   locale: AppLocale,
   currentUrl: string,
   alternateLangs: AlternateLang[],
-  pathBuilder: (locale: AppLocale, uid: string) => string,
+  pathBuilder: (locale: AppLocale, uid: string) => string
 ): { languages: Record<string, string> } {
   const languages: Record<string, string> = { [locale]: currentUrl };
   for (const alt of alternateLangs) {
@@ -44,9 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       entries.push({
         url: url(`/${locale}${path}`),
         alternates: {
-          languages: Object.fromEntries(
-            SUPPORTED_LOCALES.map((l) => [l, url(`/${l}${path}`)]),
-          ),
+          languages: Object.fromEntries(SUPPORTED_LOCALES.map((l) => [l, url(`/${l}${path}`)])),
         },
       });
     }
@@ -73,7 +71,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           locale,
           currentUrl,
           ep.alternate_languages ?? [],
-          (l, uid) => `/${l}/episodes/${uid}`,
+          (l, uid) => `/${l}/episodes/${uid}`
         ),
       });
     }
@@ -86,7 +84,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           locale,
           currentUrl,
           char.alternate_languages ?? [],
-          (l, uid) => `/${l}/characters/${uid}`,
+          (l, uid) => `/${l}/characters/${uid}`
         ),
       });
     }
@@ -99,7 +97,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           locale,
           currentUrl,
           entry.alternate_languages ?? [],
-          (l, uid) => `/${l}/lore/${uid}`,
+          (l, uid) => `/${l}/lore/${uid}`
         ),
       });
     }
@@ -113,7 +111,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           locale,
           currentUrl,
           page.alternate_languages ?? [],
-          (l, uid) => `/${l}/${uid}`,
+          (l, uid) => `/${l}/${uid}`
         ),
       });
     }

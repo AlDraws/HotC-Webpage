@@ -21,11 +21,11 @@ const TextWithImage = ({ slice, context }: TextWithImageProps) => {
   const ctaAriaLabel = getContextualCtaAriaLabel(
     slice.primary.cta_label,
     slice.primary.title || slice.primary.kicker,
-    locale,
+    locale
   );
   const ctaLabel = getDescriptiveCtaLabel(
     slice.primary.cta_label,
-    resolveLinkHref(slice.primary.cta_link),
+    resolveLinkHref(slice.primary.cta_link)
   );
 
   return (
@@ -47,9 +47,7 @@ const TextWithImage = ({ slice, context }: TextWithImageProps) => {
           />
         </div>
         <div className="hotc-twi__copy">
-          {slice.primary.kicker && (
-            <span className="hotc-kicker">{slice.primary.kicker}</span>
-          )}
+          {slice.primary.kicker && <span className="hotc-kicker">{slice.primary.kicker}</span>}
           {slice.primary.title && <h2 className="hotc-h2">{slice.primary.title}</h2>}
           <div className="hotc-twi__body">
             <PrismicRichText field={slice.primary.text} />

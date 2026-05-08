@@ -24,13 +24,7 @@ const permanentMarker = Permanent_Marker({
   preload: false,
 });
 
-export function RootDocument({
-  children,
-  lang,
-}: {
-  children: React.ReactNode;
-  lang: string;
-}) {
+export function RootDocument({ children, lang }: { children: React.ReactNode; lang: string }) {
   return (
     <html
       lang={lang}

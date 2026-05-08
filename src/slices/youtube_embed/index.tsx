@@ -70,11 +70,7 @@ const YoutubeEmbed = ({ slice, context }: YoutubeEmbedProps) => {
   const videoTitle = slice.primary.title || copy.youtube.videoFallbackTitle;
 
   return (
-    <Bounded
-      as="section"
-      data-slice-type={slice.slice_type}
-      data-slice-variation={slice.variation}
-    >
+    <Bounded as="section" data-slice-type={slice.slice_type} data-slice-variation={slice.variation}>
       <div className="hotc-ytembed">
         {(slice.primary.kicker || slice.primary.title) && (
           <header className="hotc-ytembed__head">
@@ -82,25 +78,17 @@ const YoutubeEmbed = ({ slice, context }: YoutubeEmbedProps) => {
               <span className="hotc-kicker">{slice.primary.kicker}</span>
             ) : null}
             {slice.primary.title ? (
-              <h2 className="hotc-ytembed__title">
-                {slice.primary.title}
-              </h2>
+              <h2 className="hotc-ytembed__title">{slice.primary.title}</h2>
             ) : null}
           </header>
         )}
 
         {videoId ? (
           <div className="hotc-ytembed__frame">
-            <LiteYouTubeEmbed
-              videoId={videoId}
-              title={videoTitle}
-              playLabel={copy.common.play}
-            />
+            <LiteYouTubeEmbed videoId={videoId} title={videoTitle} playLabel={copy.common.play} />
           </div>
         ) : (
-          <p className="hotc-ytembed__error">
-            {copy.youtube.invalidUrl}
-          </p>
+          <p className="hotc-ytembed__error">{copy.youtube.invalidUrl}</p>
         )}
 
         {isFilled.richText(slice.primary.caption) ? (
