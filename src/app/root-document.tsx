@@ -28,6 +28,7 @@ export function RootDocument({ children, lang }: { children: React.ReactNode; la
   return (
     <html
       lang={lang}
+      dir="ltr"
       className={`${bangers.variable} ${bowlbyOne.variable} ${permanentMarker.variable} h-full antialiased`}
     >
       <head>
