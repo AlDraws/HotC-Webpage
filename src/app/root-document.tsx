@@ -4,15 +4,15 @@ const bangers = Bangers({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-bangers",
-  display: "optional",
-  preload: false,
+  display: "swap",
+  preload: true,
 });
 
 const bowlbyOne = Bowlby_One({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-bowlby-one",
-  display: "optional",
+  display: "swap",
   preload: false,
 });
 
@@ -20,7 +20,7 @@ const permanentMarker = Permanent_Marker({
   weight: "400",
   subsets: ["latin"],
   variable: "--font-permanent-marker",
-  display: "optional",
+  display: "swap",
   preload: false,
 });
 
