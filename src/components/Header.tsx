@@ -2,7 +2,7 @@
 
 import { Content, asLink, asText } from "@prismicio/client";
 import Link from "next/link";
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
@@ -23,7 +23,8 @@ type Props = {
 };
 
 function persistLocalePreference(locale: AppLocale) {
-  document.cookie = `${LOCALE_COOKIE_NAME}=${locale}; path=/; max-age=31536000; samesite=lax`;
+  const secure = location.protocol === "https:" ? "; Secure" : "";
+  document.cookie = `${LOCALE_COOKIE_NAME}=${locale}; path=/; max-age=31536000; samesite=lax${secure}`;
 }
 
 export default function Header({ settings, navigation, currentLocale }: Props) {
@@ -33,6 +34,42 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
   const router = useRouter();
+  const drawerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const drawer = drawerRef.current;
+    if (!drawer) return;
+
+    const focusable = drawer.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+    );
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    first?.focus();
+
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key !== "Tab") return;
+      if (focusable.length === 0) { e.preventDefault(); return; }
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last?.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first?.focus();
+        }
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [open]);
   const nav = navigation?.data.primary_links ?? [];
   const navItems = nav.map((n) => ({
     href: resolveAppLinkHref(n.link, currentLocale) ?? asLink(n.link) ?? "",
@@ -214,6 +251,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
 
       <div
         id="hotc-mobile-menu"
+        ref={drawerRef}
         className={`hotc-header__drawer${open ? " is-open" : ""}`}
         aria-hidden={!open}
       >
