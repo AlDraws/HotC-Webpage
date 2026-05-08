@@ -1,36 +1,71 @@
 {
   "id": "lore_entry",
-  "label": "Lore Entry (Environment / Prop / Illustration / History / Culture)",
+  "label": "Lore Entry (Environment / Prop / Illustration / History / Culture / Faction / Creature / Technology / Event)",
   "format": "page",
   "repeatable": true,
   "status": true,
   "json": {
     "Main": {
-      "uid":         { "type": "UID",    "config": { "label": "Slug" } },
-      "is_visible":  { "type": "Boolean", "config": { "label": "Visible on site", "default_value": true } },
-      "title":       { "type": "Text",   "config": { "label": "Title" } },
-      "cover":       { "type": "Image",  "config": { "label": "Hero background" } },
-      "category":    { "type": "Select", "config": { "label": "Category", "options": ["Environment", "Prop", "Illustration", "History", "Culture"] } },
-      "epithet":     { "type": "Text",   "config": { "label": "Epithet (1 line)", "placeholder": "Built on the bones of the second pantheon." } },
-      "role":        { "type": "Text",   "config": { "label": "Role / location tag", "placeholder": "Town · South" } },
-      "short_intro": { "type": "StructuredText", "config": { "label": "Short intro", "multi": "paragraph,strong,em" } },
+      "uid": { "type": "UID", "config": { "label": "Slug" } },
+      "is_visible": {
+        "type": "Boolean",
+        "config": { "label": "Visible on site", "default_value": true }
+      },
+      "title": { "type": "Text", "config": { "label": "Title" } },
+      "cover": { "type": "Image", "config": { "label": "Hero background" } },
+      "category": {
+        "type": "Select",
+        "config": {
+          "label": "Category",
+          "options": [
+            "Environment",
+            "Prop",
+            "Illustration",
+            "History",
+            "Culture",
+            "Faction",
+            "Creature",
+            "Technology",
+            "Event",
+            "Other"
+          ]
+        }
+      },
+      "epithet": {
+        "type": "Text",
+        "config": {
+          "label": "Epithet (1 line)",
+          "placeholder": "Built on the bones of the second pantheon."
+        }
+      },
+      "role": {
+        "type": "Text",
+        "config": { "label": "Role / location tag", "placeholder": "Town · South" }
+      },
+      "short_intro": {
+        "type": "StructuredText",
+        "config": { "label": "Short intro", "multi": "paragraph,strong,em" }
+      },
       "slices": {
         "type": "Slices",
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
             "text_with_image": { "type": "SharedSlice" },
-            "image_gallery":   { "type": "SharedSlice" },
-            "quote":           { "type": "SharedSlice" }
+            "image_gallery": { "type": "SharedSlice" },
+            "quote": { "type": "SharedSlice" }
           }
         }
       }
     },
     "SEO": {
-      "meta_title":       { "type": "Text",  "config": { "label": "Meta title" } },
-      "meta_description": { "type": "StructuredText", "config": { "label": "Meta description", "multi": "paragraph" } },
-      "meta_image":       { "type": "Image", "config": { "label": "OG image" } },
-      "noindex":          { "type": "Boolean", "config": { "label": "No index", "default_value": false } }
+      "meta_title": { "type": "Text", "config": { "label": "Meta title" } },
+      "meta_description": {
+        "type": "StructuredText",
+        "config": { "label": "Meta description", "multi": "paragraph" }
+      },
+      "meta_image": { "type": "Image", "config": { "label": "OG image" } },
+      "noindex": { "type": "Boolean", "config": { "label": "No index", "default_value": false } }
     }
   }
 }

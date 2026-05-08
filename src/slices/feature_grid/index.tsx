@@ -3,7 +3,7 @@ import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import PrismicImage from "@/components/PrismicImage";
 import { FeatureGridSlice } from "@/../prismicio-types";
-import { getLinkTarget, isExternalHref, resolveLinkHref } from "@/lib/links";
+import { resolveLinkProps } from "@/lib/links";
 import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
 import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 import ZoomButton from "./ZoomButton";
@@ -30,10 +30,7 @@ const FeatureGrid = ({ slice, context }: FeatureGridProps) => {
           };
           const hasDedicatedCover = Boolean(typedItem.cover_image?.url);
           const coverImage = hasDedicatedCover ? typedItem.cover_image : item.icon;
-          const coverHref = resolveLinkHref(typedItem.cover_link);
-          const coverTarget = getLinkTarget(typedItem.cover_link);
-          const isExternal = coverHref ? isExternalHref(coverHref) : false;
-          const rel = coverTarget === "_blank" || isExternal ? "noopener noreferrer" : undefined;
+          const coverLink = resolveLinkProps(typedItem.cover_link, { locale });
           const featureTitle =
             item.title?.trim() || formatUiText(copy.images.featureTitle, { index: index + 1 });
           const coverAlt = coverImage?.alt || featureTitle;
@@ -72,25 +69,25 @@ const FeatureGrid = ({ slice, context }: FeatureGridProps) => {
             <article
               key={index}
               className={`hotc-fcard hotc-fcard--interactive${
-                coverHref ? "hotc-fcard--linked" : ""
+                coverLink ? "hotc-fcard--linked" : ""
               }`}
             >
-              {coverHref ? (
-                isExternal ? (
+              {coverLink ? (
+                coverLink.isExternal ? (
                   <a
-                    href={coverHref}
+                    href={coverLink.href}
                     className="hotc-fcard__main-link"
-                    target={coverTarget ?? "_blank"}
-                    rel={rel}
+                    target={coverLink.target ?? "_blank"}
+                    rel={coverLink.rel ?? "noopener noreferrer"}
                   >
                     {content}
                   </a>
                 ) : (
                   <Link
-                    href={coverHref}
+                    href={coverLink.href}
                     className="hotc-fcard__main-link"
-                    target={coverTarget}
-                    rel={rel}
+                    target={coverLink.target}
+                    rel={coverLink.rel}
                   >
                     {content}
                   </Link>

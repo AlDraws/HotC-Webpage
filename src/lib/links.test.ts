@@ -4,6 +4,7 @@ import {
   isExternalHref,
   localizeHref,
   resolveAppLinkHref,
+  resolveLinkProps,
   getLinkHref,
   getLinkTarget,
 } from "./links";
@@ -146,6 +147,37 @@ describe("resolveAppLinkHref", () => {
 
   it("returns null for empty object", () => {
     expect(resolveAppLinkHref({}, "en")).toBeNull();
+  });
+});
+
+describe("resolveLinkProps", () => {
+  it("normalizes bare external hostnames", () => {
+    expect(resolveLinkProps({ url: "www.google.com" })).toEqual({
+      href: "https://www.google.com",
+      isExternal: true,
+      target: undefined,
+      rel: undefined,
+    });
+  });
+
+  it("applies locale-aware document routing", () => {
+    expect(
+      resolveLinkProps({ link_type: "Document", type: "character", uid: "aria" }, { locale: "es" })
+    ).toEqual({
+      href: "/es/characters/aria",
+      isExternal: false,
+      target: undefined,
+      rel: undefined,
+    });
+  });
+
+  it("adds rel when external links default to a new tab", () => {
+    expect(resolveLinkProps({ url: "amazon.com" }, { defaultExternalTarget: "_blank" })).toEqual({
+      href: "https://amazon.com",
+      isExternal: true,
+      target: "_blank",
+      rel: "noopener noreferrer",
+    });
   });
 });
 

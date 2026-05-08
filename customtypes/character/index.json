@@ -44,7 +44,16 @@
         "config": {
           "label": "role",
           "placeholder": "",
-          "options": ["Protagonist", "Ally", "Antagonist", "Neutral", "Other"]
+          "options": [
+            "Protagonist",
+            "Deuteragonist",
+            "Ally",
+            "Mentor",
+            "Antagonist",
+            "Rival",
+            "Neutral",
+            "Other"
+          ]
         }
       },
       "epithet": {

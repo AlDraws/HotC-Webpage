@@ -10,7 +10,7 @@ import { getLocalizedLoreCategory, getLocalizedLoreCategoryKicker, getUiCopy } f
 /**
  * Lore / Worldbuilding index — replicates App.jsx "lore" route:
  *   - Page head (kicker, h1, intro)
- *   - ItemGrid sections grouped by category (Environment / Prop / Illustration)
+ *   - ItemGrid sections grouped by category
  *   - Uses hotc-cgrid__* classes from Worldbuilding.jsx
  */
 type Props = { params: Promise<{ locale: AppLocale }> };
@@ -34,8 +34,18 @@ export default async function LorePage({ params }: Props) {
   const client = createClient();
   const items = filterVisibleDocuments(await client.getAllByType("lore_entry", { lang }));
 
-  // Group by category field (select: Environment | Prop | Illustration)
-  const order = ["Environment", "Prop", "Illustration"];
+  const order = [
+    "Environment",
+    "Prop",
+    "Illustration",
+    "History",
+    "Culture",
+    "Faction",
+    "Creature",
+    "Technology",
+    "Event",
+    "Other",
+  ];
   const groups: Record<string, typeof items> = {};
   for (const item of items) {
     const cat = (item.data.category as string) || "Other";

@@ -1,6 +1,6 @@
-import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import CmsLink from "@/components/CmsLink";
 import PrismicImage from "@/components/PrismicImage";
 import { getContextualCtaAriaLabel, getDescriptiveCtaLabel } from "@/lib/a11y";
 import { resolveLinkHref } from "@/lib/links";
@@ -66,13 +66,14 @@ const Hero = ({ slice, context }: HeroProps) => {
         )}
         {primary.cta_label && (
           <div className="hotc-hero__ctas">
-            <PrismicNextLink
-              field={primary.cta_link}
+            <CmsLink
+              linkField={primary.cta_link}
+              locale={locale}
               className="hotc-btn hotc-btn--ember"
               aria-label={ctaLabel === primary.cta_label ? ctaAriaLabel : undefined}
             >
               {ctaLabel}
-            </PrismicNextLink>
+            </CmsLink>
           </div>
         )}
       </Bounded>

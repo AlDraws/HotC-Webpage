@@ -4,6 +4,7 @@ import type { ImageField } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import { useEffect, useRef, useState } from "react";
 import PrismicImage from "@/components/PrismicImage";
+import { resolveLinkProps } from "@/lib/links";
 import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
 import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 import { ImageTickerSlice } from "@/../prismicio-types";
@@ -11,45 +12,6 @@ import { ImageTickerSlice } from "@/../prismicio-types";
 export type ImageTickerProps = SliceComponentProps<ImageTickerSlice, HotcSliceContext>;
 
 const MIN_TICKER_COPIES = 3;
-
-function getLinkHref(linkField: unknown): string | null {
-  if (
-    linkField &&
-    typeof linkField === "object" &&
-    "url" in linkField &&
-    typeof (linkField as { url?: unknown }).url === "string" &&
-    (linkField as { url: string }).url
-  ) {
-    return (linkField as { url: string }).url;
-  }
-  return null;
-}
-
-function normalizeHref(rawHref: string): string {
-  const value = rawHref.trim();
-  if (!value) return value;
-
-  if (/^(mailto:|tel:|sms:)/i.test(value)) return value;
-  if (value.startsWith("//")) return `https:${value}`;
-  if (/^https?:\/\//i.test(value)) return value;
-  if (value.startsWith("/")) return value;
-  if (/^[a-z][a-z0-9+.-]*:/i.test(value)) return value;
-
-  return `https://${value.replace(/^\/+/, "")}`;
-}
-
-function isExternalHref(href: string): boolean {
-  if (!href || href.startsWith("/")) return false;
-  if (/^(mailto:|tel:|sms:)/i.test(href)) return true;
-  if (typeof window === "undefined") return /^https?:\/\//i.test(href);
-
-  try {
-    const resolved = new URL(href, window.location.origin);
-    return resolved.origin !== window.location.origin;
-  } catch {
-    return false;
-  }
-}
 
 function wrapOffset(value: number, span: number): number {
   if (!Number.isFinite(span) || span <= 0) return 0;
@@ -249,9 +211,9 @@ const ImageTicker = ({ slice, context }: ImageTickerProps) => {
                 show_badge?: boolean | null;
                 badge_text?: string | null;
               };
-              const rawHref = getLinkHref(typedItem.link) ?? getLinkHref(typedItem.image_link);
-              const href = rawHref ? normalizeHref(rawHref) : null;
-              const isExternal = href ? isExternalHref(href) : false;
+              const link =
+                resolveLinkProps(typedItem.link, { locale }) ??
+                resolveLinkProps(typedItem.image_link, { locale });
               const showBadge = Boolean(typedItem.show_badge) && Boolean(typedItem.badge_text);
               return (
                 <div
@@ -260,12 +222,12 @@ const ImageTicker = ({ slice, context }: ImageTickerProps) => {
                   style={{ position: "relative" }}
                 >
                   {item.image?.url ? (
-                    href ? (
+                    link ? (
                       <a
-                        href={href}
+                        href={link.href}
                         className="hotc-ticker__link"
-                        target={isExternal ? "_blank" : undefined}
-                        rel={isExternal ? "noopener noreferrer" : undefined}
+                        target={link.isExternal ? (link.target ?? "_blank") : link.target}
+                        rel={link.isExternal ? (link.rel ?? "noopener noreferrer") : link.rel}
                         draggable={false}
                       >
                         <PrismicImage

@@ -87,7 +87,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
       s.icon_key && getSocialKey(s.icon_key) !== "other" ? s.icon_key : s.label || s.icon_key || "";
     const key = getSocialKey(iconLabel);
     const href = resolveLinkHref(s.url);
-    if (!href || (key !== "instagram" && key !== "tiktok" && key !== "patreon")) {
+    if (!href || !["instagram", "tiktok", "patreon", "kickstarter", "kofi"].includes(key)) {
       return items;
     }
 

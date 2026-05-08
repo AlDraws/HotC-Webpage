@@ -4,6 +4,7 @@ import { PrismicRichText } from "@prismicio/react";
 import { asText, type RichTextField } from "@prismicio/client";
 import { createClient } from "@/prismicio";
 import { filterVisibleDocuments } from "@/lib/content-visibility";
+import { resolveLinkHref } from "@/lib/links";
 import { toPrismicLang, type AppLocale } from "@/lib/locale";
 import { buildPageMetadata } from "@/lib/seo";
 import { formatUiText, getUiCopy } from "@/lib/ui-copy";
@@ -22,19 +23,6 @@ type ProductDocument = {
     is_visible?: boolean | null;
   };
 };
-
-function getLinkHref(linkField: unknown): string | null {
-  if (
-    linkField &&
-    typeof linkField === "object" &&
-    "url" in linkField &&
-    typeof (linkField as { url?: unknown }).url === "string" &&
-    (linkField as { url: string }).url
-  ) {
-    return (linkField as { url: string }).url;
-  }
-  return null;
-}
 
 type Props = { params: Promise<{ locale: AppLocale }> };
 
@@ -84,7 +72,7 @@ export default async function StorePage({ params }: Props) {
             </div>
             <div className="hotc-store__grid">
               {items.map((p) => {
-                const buyHref = getLinkHref(p.data.buyUrl);
+                const buyHref = resolveLinkHref(p.data.buyUrl);
                 const clickable = !p.data.outOfStock && Boolean(buyHref);
 
                 return (

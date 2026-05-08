@@ -1,9 +1,9 @@
 "use client";
 
 import { isFilled } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
 import { SliceComponentProps } from "@prismicio/react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
+import CmsLink from "@/components/CmsLink";
 import PrismicImage from "@/components/PrismicImage";
 import { getContextualCtaAriaLabel, getDescriptiveCtaLabel } from "@/lib/a11y";
 import { resolveLinkHref } from "@/lib/links";
@@ -190,8 +190,9 @@ const ParallaxHero = ({ slice, context }: ParallaxHeroProps) => {
         {(slice.primary.primaryCtaLabel || slice.primary.secondaryCtaLabel) && (
           <div className="hotc-hero__ctas">
             {slice.primary.primaryCtaLabel && (
-              <PrismicNextLink
-                field={slice.primary.primaryCtaLink}
+              <CmsLink
+                linkField={slice.primary.primaryCtaLink}
+                locale={locale}
                 className="hotc-btn hotc-btn--ember"
                 aria-label={
                   primaryCtaLabel === slice.primary.primaryCtaLabel
@@ -200,11 +201,12 @@ const ParallaxHero = ({ slice, context }: ParallaxHeroProps) => {
                 }
               >
                 {primaryCtaLabel}
-              </PrismicNextLink>
+              </CmsLink>
             )}
             {slice.primary.secondaryCtaLabel && (
-              <PrismicNextLink
-                field={slice.primary.secondaryCtaLink}
+              <CmsLink
+                linkField={slice.primary.secondaryCtaLink}
+                locale={locale}
                 className="hotc-btn hotc-btn--ghost"
                 aria-label={
                   secondaryCtaLabel === slice.primary.secondaryCtaLabel
@@ -214,7 +216,7 @@ const ParallaxHero = ({ slice, context }: ParallaxHeroProps) => {
                 style={{ color: "#fff" }}
               >
                 {secondaryCtaLabel}
-              </PrismicNextLink>
+              </CmsLink>
             )}
           </div>
         )}

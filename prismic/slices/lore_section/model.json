@@ -3,27 +3,48 @@
   "type": "SharedSlice",
   "name": "LoreSection",
   "description": "Grid or section for worldbuilding/lore entries.",
-  "variations": [{
-    "id": "default",
-    "name": "Default",
-    "docURL": "...",
-    "version": "initial",
-    "description": "A list of lore entries.",
-    "primary": {
-      "kicker":         { "type": "Text",   "config": { "label": "Kicker", "placeholder": "Archive" } },
-      "title":          { "type": "Text",   "config": { "label": "Title", "placeholder": "Worldbuilding" } },
-      "default_filter": { "type": "Select", "config": { "label": "Default Filter", "options": ["All", "Environment", "Prop", "Illustration"], "default_value": "All" } }
-    },
-    "items": {
-      "entry": {
-        "type": "Link",
-        "config": {
-          "label": "Lore Entry",
-          "placeholder": "Link to a lore entry document",
-          "select": "document",
-          "customtypes": ["lore_entry"]
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "A list of lore entries.",
+      "primary": {
+        "kicker": { "type": "Text", "config": { "label": "Kicker", "placeholder": "Archive" } },
+        "title": { "type": "Text", "config": { "label": "Title", "placeholder": "Worldbuilding" } },
+        "default_filter": {
+          "type": "Select",
+          "config": {
+            "label": "Default Filter",
+            "options": [
+              "All",
+              "Environment",
+              "Prop",
+              "Illustration",
+              "History",
+              "Culture",
+              "Faction",
+              "Creature",
+              "Technology",
+              "Event",
+              "Other"
+            ],
+            "default_value": "All"
+          }
+        }
+      },
+      "items": {
+        "entry": {
+          "type": "Link",
+          "config": {
+            "label": "Lore Entry",
+            "placeholder": "Link to a lore entry document",
+            "select": "document",
+            "customtypes": ["lore_entry"]
+          }
         }
       }
     }
-  }]
+  ]
 }

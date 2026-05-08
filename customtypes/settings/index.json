@@ -59,10 +59,7 @@
               "config": {
                 "label": "icon_position",
                 "placeholder": "",
-                "options": [
-                  "left",
-                  "right"
-                ]
+                "options": ["left", "right"]
               }
             },
             "hide_label": {
@@ -151,6 +148,8 @@
                   "youtube",
                   "tiktok",
                   "patreon",
+                  "kickstarter",
+                  "ko-fi",
                   "discord",
                   "github",
                   "other"
@@ -250,12 +249,7 @@
               "config": {
                 "label": "provider",
                 "placeholder": "",
-                "options": [
-                  "Beehiiv",
-                  "Mailchimp",
-                  "Buttondown",
-                  "Netlify"
-                ]
+                "options": ["Beehiiv", "Mailchimp", "Buttondown", "Netlify"]
               }
             },
             "embed": {

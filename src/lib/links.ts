@@ -6,6 +6,18 @@ type DocumentLinkLike = {
   uid?: unknown;
 };
 
+type ResolveLinkOptions = {
+  locale?: AppLocale;
+  defaultExternalTarget?: string;
+};
+
+export type ResolvedLinkProps = {
+  href: string;
+  isExternal: boolean;
+  target?: string;
+  rel?: string;
+};
+
 export function getLinkHref(linkField: unknown): string | null {
   if (
     linkField &&
@@ -103,6 +115,25 @@ export function isExternalHref(href: string): boolean {
   if (/^(mailto:|tel:|sms:)/i.test(value)) return true;
 
   return /^[a-z][a-z0-9+.-]*:/i.test(value);
+}
+
+export function resolveLinkProps(
+  linkField: unknown,
+  options: ResolveLinkOptions = {}
+): ResolvedLinkProps | null {
+  const href = resolveAppLinkHref(linkField, options.locale);
+  if (!href) return null;
+
+  const isExternal = isExternalHref(href);
+  const target =
+    getLinkTarget(linkField) ?? (isExternal ? options.defaultExternalTarget : undefined);
+
+  return {
+    href,
+    isExternal,
+    target,
+    rel: target === "_blank" ? "noopener noreferrer" : undefined,
+  };
 }
 
 export function localizeHref(href: string, locale: AppLocale): string {

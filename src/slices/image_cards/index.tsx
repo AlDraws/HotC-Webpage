@@ -3,7 +3,7 @@ import Link from "next/link";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
 import PrismicImage from "@/components/PrismicImage";
-import { getLinkTarget, isExternalHref, resolveLinkHref } from "@/lib/links";
+import { resolveLinkProps } from "@/lib/links";
 import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
 import { formatUiText, getUiCopy } from "@/lib/ui-copy";
 
@@ -33,10 +33,7 @@ const ImageCards = ({ slice, context }: ImageCardsProps) => {
             badge?: string | null;
           };
           const linkField = typedItem.enlace;
-          const href = resolveLinkHref(linkField);
-          const target = getLinkTarget(linkField);
-          const isExternal = href ? isExternalHref(href) : false;
-          const rel = target === "_blank" || isExternal ? "noopener noreferrer" : undefined;
+          const link = resolveLinkProps(linkField, { locale });
           const badge = typedItem.badge?.trim();
 
           const card = (
@@ -65,15 +62,15 @@ const ImageCards = ({ slice, context }: ImageCardsProps) => {
             </>
           );
 
-          if (href) {
-            if (isExternal) {
+          if (link) {
+            if (link.isExternal) {
               return (
                 <a
                   key={index}
-                  href={href}
+                  href={link.href}
                   className="hotc-icard hotc-pressable"
-                  target={target ?? "_blank"}
-                  rel={rel}
+                  target={link.target ?? "_blank"}
+                  rel={link.rel ?? "noopener noreferrer"}
                 >
                   {card}
                 </a>
@@ -83,10 +80,10 @@ const ImageCards = ({ slice, context }: ImageCardsProps) => {
             return (
               <Link
                 key={index}
-                href={href}
+                href={link.href}
                 className="hotc-icard hotc-pressable"
-                target={target}
-                rel={rel}
+                target={link.target}
+                rel={link.rel}
               >
                 {card}
               </Link>

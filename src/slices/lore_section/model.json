@@ -34,7 +34,14 @@
               "All",
               "Environment",
               "Prop",
-              "Illustration"
+              "Illustration",
+              "History",
+              "Culture",
+              "Faction",
+              "Creature",
+              "Technology",
+              "Event",
+              "Other"
             ],
             "default_value": "All"
           }
@@ -47,9 +54,7 @@
             "label": "Lore Entry",
             "placeholder": "Link to a lore entry document",
             "select": "document",
-            "customtypes": [
-              "lore_entry"
-            ]
+            "customtypes": ["lore_entry"]
           }
         }
       }

@@ -43,13 +43,18 @@
         "type": "Select",
         "config": {
           "label": "category",
-          "placeholder": "Environment, Prop, or Illustration",
+          "placeholder": "Environment, Prop, Illustration, History, Culture...",
           "options": [
             "Environment",
             "Prop",
             "Illustration",
             "History",
-            "Culture"
+            "Culture",
+            "Faction",
+            "Creature",
+            "Technology",
+            "Event",
+            "Other"
           ]
         }
       },

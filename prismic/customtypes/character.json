@@ -6,21 +6,51 @@
   "status": true,
   "json": {
     "Main": {
-      "uid":       { "type": "UID",    "config": { "label": "Slug", "placeholder": "mira" } },
-      "is_visible": { "type": "Boolean", "config": { "label": "Visible on site", "default_value": true } },
-      "name":      { "type": "Text",   "config": { "label": "Name (display)" } },
-      "role":      { "type": "Select", "config": { "label": "Role", "options": ["Protagonist", "Ally", "Antagonist", "Neutral", "Other"] } },
-      "epithet":   { "type": "Text",   "config": { "label": "Epithet (1 line)", "placeholder": "The last to remember its names." } },
-      "portrait":  { "type": "Image",  "config": { "label": "Portrait (3:4)", "constraint": { "width": 900, "height": 1200 } } },
-      "cover":     { "type": "Image",  "config": { "label": "Hero background (16:9)" } },
-      "short_bio": { "type": "StructuredText", "config": { "label": "Short Bio", "multi": "paragraph,strong,em" } },
+      "uid": { "type": "UID", "config": { "label": "Slug", "placeholder": "mira" } },
+      "is_visible": {
+        "type": "Boolean",
+        "config": { "label": "Visible on site", "default_value": true }
+      },
+      "name": { "type": "Text", "config": { "label": "Name (display)" } },
+      "role": {
+        "type": "Select",
+        "config": {
+          "label": "Role",
+          "options": [
+            "Protagonist",
+            "Deuteragonist",
+            "Ally",
+            "Mentor",
+            "Antagonist",
+            "Rival",
+            "Neutral",
+            "Other"
+          ]
+        }
+      },
+      "epithet": {
+        "type": "Text",
+        "config": { "label": "Epithet (1 line)", "placeholder": "The last to remember its names." }
+      },
+      "portrait": {
+        "type": "Image",
+        "config": { "label": "Portrait (3:4)", "constraint": { "width": 900, "height": 1200 } }
+      },
+      "cover": { "type": "Image", "config": { "label": "Hero background (16:9)" } },
+      "short_bio": {
+        "type": "StructuredText",
+        "config": { "label": "Short Bio", "multi": "paragraph,strong,em" }
+      },
       "attributes": {
         "type": "Group",
         "config": {
           "label": "Attributes",
           "fields": {
             "label": { "type": "Text", "config": { "label": "Label", "placeholder": "Lineage" } },
-            "value": { "type": "Text", "config": { "label": "Value", "placeholder": "Ember-tongue" } }
+            "value": {
+              "type": "Text",
+              "config": { "label": "Value", "placeholder": "Ember-tongue" }
+            }
           }
         }
       },
@@ -29,8 +59,8 @@
         "config": {
           "label": "Gallery",
           "fields": {
-            "image":   { "type": "Image", "config": { "label": "Image" } },
-            "caption": { "type": "Text",  "config": { "label": "Caption" } }
+            "image": { "type": "Image", "config": { "label": "Image" } },
+            "caption": { "type": "Text", "config": { "label": "Caption" } }
           }
         }
       },
@@ -39,8 +69,11 @@
         "config": {
           "label": "Relations",
           "fields": {
-            "character_ref": { "type": "Link", "config": { "label": "Character", "select": "document", "customtypes": ["character"] } },
-            "note":          { "type": "Text", "config": { "label": "Relationship note" } }
+            "character_ref": {
+              "type": "Link",
+              "config": { "label": "Character", "select": "document", "customtypes": ["character"] }
+            },
+            "note": { "type": "Text", "config": { "label": "Relationship note" } }
           }
         }
       },
@@ -49,19 +82,22 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
-            "parallax_hero":   { "type": "SharedSlice" },
+            "parallax_hero": { "type": "SharedSlice" },
             "text_with_image": { "type": "SharedSlice" },
-            "quote":           { "type": "SharedSlice" },
-            "lore_section":    { "type": "SharedSlice" }
+            "quote": { "type": "SharedSlice" },
+            "lore_section": { "type": "SharedSlice" }
           }
         }
       }
     },
     "SEO": {
-      "meta_title":       { "type": "Text",  "config": { "label": "Meta title" } },
-      "meta_description": { "type": "StructuredText", "config": { "label": "Meta description", "multi": "paragraph" } },
-      "meta_image":       { "type": "Image", "config": { "label": "OG image" } },
-      "noindex":          { "type": "Boolean", "config": { "label": "No index", "default_value": false } }
+      "meta_title": { "type": "Text", "config": { "label": "Meta title" } },
+      "meta_description": {
+        "type": "StructuredText",
+        "config": { "label": "Meta description", "multi": "paragraph" }
+      },
+      "meta_image": { "type": "Image", "config": { "label": "OG image" } },
+      "noindex": { "type": "Boolean", "config": { "label": "No index", "default_value": false } }
     }
   }
 }

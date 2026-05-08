@@ -183,10 +183,17 @@ interface CharacterDocumentData {
    * - **Placeholder**: *None*
    * - **API ID Path**: character.role
    * - **Tab**: Main
-   * - **Documentation**: https://prismic.io/docs/fields/select
+  * - **Documentation**: https://prismic.io/docs/fields/select
    */
   role: prismic.SelectField<
-    "Protagonist" | "Ally" | "Antagonist" | "Neutral" | "Other"
+    | "Protagonist"
+    | "Deuteragonist"
+    | "Ally"
+    | "Mentor"
+    | "Antagonist"
+    | "Rival"
+    | "Neutral"
+    | "Other"
   >;
 
   /**
@@ -851,13 +858,22 @@ interface LoreEntryDocumentData {
    * category field in *lore_entry*
    *
    * - **Field Type**: Select
-   * - **Placeholder**: Environment, Prop, or Illustration
+   * - **Placeholder**: Environment, Prop, Illustration, History, Culture...
    * - **API ID Path**: lore_entry.category
    * - **Tab**: Main
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
   category: prismic.SelectField<
-    "Environment" | "Prop" | "Illustration" | "History" | "Culture"
+    | "Environment"
+    | "Prop"
+    | "Illustration"
+    | "History"
+    | "Culture"
+    | "Faction"
+    | "Creature"
+    | "Technology"
+    | "Event"
+    | "Other"
   >;
 
   /**
@@ -1445,6 +1461,9 @@ export interface SettingsDocumentDataSocialLinksItem {
     | "tapas"
     | "youtube"
     | "tiktok"
+    | "patreon"
+    | "kickstarter"
+    | "ko-fi"
     | "discord"
     | "github"
     | "other"
@@ -3119,7 +3138,17 @@ export interface LoreSectionSliceDefaultPrimary {
    * - **Documentation**: https://prismic.io/docs/fields/select
    */
   default_filter: prismic.SelectField<
-    "All" | "Environment" | "Prop" | "Illustration",
+    | "All"
+    | "Environment"
+    | "Prop"
+    | "Illustration"
+    | "History"
+    | "Culture"
+    | "Faction"
+    | "Creature"
+    | "Technology"
+    | "Event"
+    | "Other",
     "filled"
   >;
 }

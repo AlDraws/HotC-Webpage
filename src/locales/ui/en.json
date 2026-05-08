@@ -90,8 +90,11 @@
     "unknownListItem": "Unknown",
     "roles": {
       "Protagonist": "Protagonist",
+      "Deuteragonist": "Deuteragonist",
       "Ally": "Ally",
+      "Mentor": "Mentor",
       "Antagonist": "Antagonist",
+      "Rival": "Rival",
       "Neutral": "Neutral",
       "Other": "Other"
     }
@@ -142,6 +145,36 @@
         "singular": "Illustration",
         "plural": "Illustrations",
         "kicker": "03"
+      },
+      "History": {
+        "singular": "History",
+        "plural": "Histories",
+        "kicker": "04"
+      },
+      "Culture": {
+        "singular": "Culture",
+        "plural": "Cultures",
+        "kicker": "05"
+      },
+      "Faction": {
+        "singular": "Faction",
+        "plural": "Factions",
+        "kicker": "06"
+      },
+      "Creature": {
+        "singular": "Creature",
+        "plural": "Creatures",
+        "kicker": "07"
+      },
+      "Technology": {
+        "singular": "Technology",
+        "plural": "Technologies",
+        "kicker": "08"
+      },
+      "Event": {
+        "singular": "Event",
+        "plural": "Events",
+        "kicker": "09"
       },
       "Other": {
         "singular": "Other",

@@ -1,8 +1,8 @@
 import { asText, type RichTextField } from "@prismicio/client";
-import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import type { CSSProperties } from "react";
 import Bounded from "@/components/Bounded";
+import CmsLink from "@/components/CmsLink";
 import PrismicImage from "@/components/PrismicImage";
 import { getContextualCtaAriaLabel } from "@/lib/a11y";
 import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
@@ -120,8 +120,9 @@ const ExternalSupport = ({ slice, context }: ExternalSupportProps) => {
                     </span>
                   </div>
                   <p className="text-base text-slate-100">{it.description}</p>
-                  <PrismicNextLink
-                    field={it.url}
+                  <CmsLink
+                    linkField={it.url}
+                    defaultExternalTarget="_blank"
                     className="mt-auto inline-block rounded-sm px-4 py-2 text-sm font-semibold text-slate-950 transition-opacity hover:opacity-90"
                     style={{
                       backgroundColor: it.accent || "var(--hotc-ember, #D97757)",
@@ -129,7 +130,7 @@ const ExternalSupport = ({ slice, context }: ExternalSupportProps) => {
                     aria-label={ctaAriaLabel}
                   >
                     {ctaLabel}
-                  </PrismicNextLink>
+                  </CmsLink>
                 </li>
               );
             })}
@@ -140,8 +141,9 @@ const ExternalSupport = ({ slice, context }: ExternalSupportProps) => {
           <ul className="flex flex-wrap gap-3">
             {items.map((it: ExternalSupportItem, i: number) => (
               <li key={i}>
-                <PrismicNextLink
-                  field={it.url}
+                <CmsLink
+                  linkField={it.url}
+                  defaultExternalTarget="_blank"
                   className="inline-flex items-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-slate-950 transition-opacity hover:opacity-90"
                   style={{
                     backgroundColor: it.accent || "var(--hotc-ember, #D97757)",
@@ -157,7 +159,7 @@ const ExternalSupport = ({ slice, context }: ExternalSupportProps) => {
                     />
                   ) : null}
                   {it.label || it.platform}
-                </PrismicNextLink>
+                </CmsLink>
               </li>
             ))}
           </ul>
@@ -167,16 +169,17 @@ const ExternalSupport = ({ slice, context }: ExternalSupportProps) => {
           <div className="flex flex-col items-start justify-between gap-4 rounded-sm bg-slate-800/60 p-6 md:flex-row md:items-center">
             <div className="flex flex-wrap gap-3">
               {items.map((it: ExternalSupportItem, i: number) => (
-                <PrismicNextLink
+                <CmsLink
                   key={i}
-                  field={it.url}
+                  linkField={it.url}
+                  defaultExternalTarget="_blank"
                   className="inline-flex items-center gap-2 rounded-sm px-5 py-3 text-sm font-semibold text-slate-950 transition-opacity hover:opacity-90"
                   style={{
                     backgroundColor: it.accent || "var(--hotc-ember, #D97757)",
                   }}
                 >
                   {it.label || it.platform}
-                </PrismicNextLink>
+                </CmsLink>
               ))}
             </div>
           </div>

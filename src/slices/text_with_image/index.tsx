@@ -1,6 +1,6 @@
-import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
+import CmsLink from "@/components/CmsLink";
 import { getContextualCtaAriaLabel, getDescriptiveCtaLabel } from "@/lib/a11y";
 import { resolveLinkHref } from "@/lib/links";
 import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
@@ -53,13 +53,14 @@ const TextWithImage = ({ slice, context }: TextWithImageProps) => {
             <PrismicRichText field={slice.primary.text} />
           </div>
           {slice.primary.cta_label && (
-            <PrismicNextLink
-              field={slice.primary.cta_link}
+            <CmsLink
+              linkField={slice.primary.cta_link}
+              locale={locale}
               className="hotc-btn hotc-btn--ink"
               aria-label={ctaLabel === slice.primary.cta_label ? ctaAriaLabel : undefined}
             >
               {ctaLabel}
-            </PrismicNextLink>
+            </CmsLink>
           )}
         </div>
       </div>
