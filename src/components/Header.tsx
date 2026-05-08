@@ -124,7 +124,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
   }
 
   return (
-    <header className={`hotc-header${open ? "is-open" : ""}`}>
+    <header className={open ? "hotc-header is-open" : "hotc-header"}>
       <div className="bounded hotc-header__inner">
         <Link href={`/${currentLocale}`} className="hotc-header__logo" aria-label={siteTitle}>
           {headerLogo?.url ? (
@@ -161,9 +161,11 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
                 <Link
                   key={i}
                   href={item.href}
-                  className={`hotc-header__nav-item${
-                    pathname && item.href.split(/[#?]/, 1)[0] === pathname ? "is-active" : ""
-                  }`}
+                  className={
+                    pathname && item.href.split(/[#?]/, 1)[0] === pathname
+                      ? "hotc-header__nav-item is-active"
+                      : "hotc-header__nav-item"
+                  }
                 >
                   {item.label}
                 </Link>
@@ -187,9 +189,13 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
                 <button
                   key={locale}
                   type="button"
-                  className={`hotc-header__lang-btn${
-                    isActive ? "is-active" : ""
-                  }${isLocalePending ? "is-pending" : ""}`}
+                  className={[
+                    "hotc-header__lang-btn",
+                    isActive && "is-active",
+                    isLocalePending && "is-pending",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
                   onClick={() => switchLocale(locale)}
                   aria-pressed={isActive}
                   aria-busy={isLocalePending}
@@ -244,7 +250,7 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
       <div
         id="hotc-mobile-menu"
         ref={drawerRef}
-        className={`hotc-header__drawer${open ? "is-open" : ""}`}
+        className={open ? "hotc-header__drawer is-open" : "hotc-header__drawer"}
         aria-hidden={!open}
       >
         <nav className="hotc-header__drawer-nav" aria-label={copy.header.mobileNav}>

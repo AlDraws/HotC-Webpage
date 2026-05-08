@@ -49,7 +49,7 @@ const EpisodePanel = ({ slice, index, context }: EpisodePanelProps) => {
             return (
               <div
                 key={`${segment.y}-${segment.height}`}
-                className={`hotc-ep-panel__segment${isFirstSegment ? "is-lcp" : ""}`}
+                className={isFirstSegment ? "hotc-ep-panel__segment is-lcp" : "hotc-ep-panel__segment"}
                 style={{ aspectRatio: `${width} / ${segment.height}` }}
               >
                 <PrismicImage
