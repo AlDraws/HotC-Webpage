@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidateTag } from "next/cache";
+import { timingSafeEqual } from "crypto";
 
 export async function POST(request: NextRequest) {
   const contentType = request.headers.get("content-type") ?? "";
@@ -10,7 +11,14 @@ export async function POST(request: NextRequest) {
   const body = await request.json().catch(() => null);
   const webhookSecret = process.env.PRISMIC_WEBHOOK_SECRET;
 
-  if (!webhookSecret || body?.secret !== webhookSecret) {
+  const incoming = body?.secret;
+  const secretsMatch =
+    webhookSecret &&
+    typeof incoming === "string" &&
+    incoming.length === webhookSecret.length &&
+    timingSafeEqual(Buffer.from(incoming), Buffer.from(webhookSecret));
+
+  if (!secretsMatch) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
