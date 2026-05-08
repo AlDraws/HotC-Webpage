@@ -1,27 +1,19 @@
-"use client";
 import { Content } from "@prismicio/client";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
-import { useLightbox } from "@/components/LightboxProvider";
-import PrismicImage from "@/components/PrismicImage";
 import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
 import { formatUiText, getUiCopy } from "@/lib/ui-copy";
+import GalleryTile from "./GalleryTile";
 
-/**
- * Props for `ImageGallery`.
- */
 export type ImageGalleryProps = SliceComponentProps<
   Content.ImageGallerySlice,
   HotcSliceContext
 >;
 
-/**
- * Component for "ImageGallery" Slices.
- */
 const ImageGallery = ({ slice, context }: ImageGalleryProps) => {
   const locale = getSliceLocale(context);
   const copy = getUiCopy(locale);
-  const { openLightbox } = useLightbox();
+
   const images = slice.items
     .map((item, index) => ({
       field: item.image,
@@ -34,6 +26,13 @@ const ImageGallery = ({ slice, context }: ImageGalleryProps) => {
     }))
     .filter((image) => Boolean(image.src));
 
+  const lightboxImages = images.map(({ src, alt, width, height }) => ({
+    src,
+    alt,
+    width,
+    height,
+  }));
+
   return (
     <Bounded
       data-slice-type={slice.slice_type}
@@ -42,22 +41,14 @@ const ImageGallery = ({ slice, context }: ImageGalleryProps) => {
     >
       <div className="hotc-gallery">
         {images.map((image, index) => (
-          <button
-            key={index}
-            type="button"
-            className="hotc-gallery__tile hotc-pressable"
-            aria-label={formatUiText(copy.images.galleryImage, { index: index + 1 })}
-            onClick={() => openLightbox(images, index)}
-          >
-            <PrismicImage
-              field={image.field}
-              fallbackAlt={image.alt}
-              fill
-              sizes="(max-width: 639px) 50vw, (max-width: 1023px) 33vw, 25vw"
-              quality={75}
-              className="hotc-gallery__image"
-            />
-          </button>
+          <GalleryTile
+            key={image.src}
+            field={image.field}
+            alt={image.alt}
+            ariaLabel={formatUiText(copy.images.galleryImage, { index: index + 1 })}
+            images={lightboxImages}
+            index={index}
+          />
         ))}
       </div>
     </Bounded>

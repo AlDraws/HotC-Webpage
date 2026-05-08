@@ -17,6 +17,7 @@ import { getSettings } from "@/lib/server-locale";
 import type { EpisodePanelSequenceContext } from "@/slices/episode_panel/sequence-context";
 import { filterVisibleDocuments, isDocumentVisible } from "@/lib/content-visibility";
 import { formatUiText, getUiCopy } from "@/lib/ui-copy";
+import { formatDate } from "@/lib/format";
 
 type Props = { params: Promise<{ locale: AppLocale; uid: string }> };
 
@@ -151,6 +152,7 @@ export default async function EpisodeReaderPage({ params }: Props) {
         name: SITE_NAME,
         url: new URL(`/${locale}`, metadataBase).toString(),
       },
+      creator: { "@type": "Organization", name: SITE_NAME },
       issueNumber: ep.data.chapter_number ?? undefined,
       datePublished: ep.data.publish_date || undefined,
       image: ep.data.cover?.url || ep.data.meta_image?.url || undefined,
@@ -197,7 +199,7 @@ export default async function EpisodeReaderPage({ params }: Props) {
         </span>
         <h1 className="hotc-ereader__title">{ep.data.title}</h1>
         <p className="hotc-ereader__date">
-          {ep.data.publish_date ?? ""}
+          {formatDate(ep.data.publish_date, locale)}
           {ep.data.summary
             ? ` · ${asText(ep.data.summary).slice(0, 80)}`
             : ""}

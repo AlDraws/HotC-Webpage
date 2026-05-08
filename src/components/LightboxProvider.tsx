@@ -8,6 +8,7 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import type { AppLocale } from "@/lib/locale";
@@ -46,6 +47,10 @@ export function LightboxProvider({
   const [currentIndex, setCurrentIndex] = useState(0);
   const isOpen = images.length > 0;
 
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<Element | null>(null);
+
   const closeLightbox = useCallback(() => {
     setImages([]);
     setCurrentIndex(0);
@@ -78,20 +83,54 @@ export function LightboxProvider({
   useEffect(() => {
     if (!isOpen) return;
 
+    previousFocusRef.current = document.activeElement;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
+    closeButtonRef.current?.focus();
+
+    const panel = panelRef.current;
+    const getFocusable = () =>
+      panel
+        ? Array.from(
+            panel.querySelectorAll<HTMLElement>(
+              'button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+            )
+          )
+        : [];
+
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        closeLightbox();
-        return;
-      }
-      if (event.key === "ArrowRight") {
-        goNext();
-        return;
-      }
-      if (event.key === "ArrowLeft") {
-        goPrev();
+      switch (event.key) {
+        case "Escape":
+          closeLightbox();
+          return;
+        case "ArrowRight":
+          goNext();
+          return;
+        case "ArrowLeft":
+          goPrev();
+          return;
+        case "Tab": {
+          const focusable = getFocusable();
+          if (!focusable.length) {
+            event.preventDefault();
+            return;
+          }
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (event.shiftKey) {
+            if (document.activeElement === first) {
+              event.preventDefault();
+              last.focus();
+            }
+          } else {
+            if (document.activeElement === last) {
+              event.preventDefault();
+              first.focus();
+            }
+          }
+          return;
+        }
       }
     };
 
@@ -100,6 +139,10 @@ export function LightboxProvider({
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", onKeyDown);
+      if (previousFocusRef.current instanceof HTMLElement) {
+        previousFocusRef.current.focus();
+      }
+      previousFocusRef.current = null;
     };
   }, [closeLightbox, goNext, goPrev, isOpen]);
 
@@ -123,14 +166,28 @@ export function LightboxProvider({
           aria-label={copy.common.imageViewer}
           onClick={closeLightbox}
         >
-          <div className="hotc-lightbox__panel" onClick={(e) => e.stopPropagation()}>
+          <div
+            ref={panelRef}
+            className="hotc-lightbox__panel"
+            onClick={(e) => e.stopPropagation()}
+          >
             <button
+              ref={closeButtonRef}
               type="button"
               className="hotc-lightbox__close"
               aria-label={copy.common.closeImageViewer}
               onClick={closeLightbox}
             >
-              X
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+              >
+                <path d="M6 6l12 12M18 6L6 18" />
+              </svg>
             </button>
 
             {hasMultiple ? (
@@ -140,7 +197,17 @@ export function LightboxProvider({
                 aria-label={copy.common.previousImage}
                 onClick={goPrev}
               >
-                {"<"}
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M15 18l-6-6 6-6" />
+                </svg>
               </button>
             ) : null}
 
@@ -162,7 +229,17 @@ export function LightboxProvider({
                 aria-label={copy.common.nextImage}
                 onClick={goNext}
               >
-                {">"}
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
               </button>
             ) : null}
           </div>

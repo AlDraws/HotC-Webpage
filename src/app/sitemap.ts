@@ -1,11 +1,36 @@
 import { MetadataRoute } from "next";
 import { createClient } from "@/prismicio";
 import { metadataBase } from "@/lib/seo";
-import { SUPPORTED_LOCALES, toPrismicLang, type AppLocale } from "@/lib/locale";
+import {
+  isAppLocale,
+  normalizeAppLocale,
+  SUPPORTED_LOCALES,
+  toPrismicLang,
+  type AppLocale,
+} from "@/lib/locale";
 import { filterVisibleDocuments } from "@/lib/content-visibility";
 
 function url(path: string): string {
   return new URL(path, metadataBase).toString();
+}
+
+type AlternateLang = { uid?: string | null; lang: string };
+
+function buildDynamicAlternates(
+  locale: AppLocale,
+  currentUrl: string,
+  alternateLangs: AlternateLang[],
+  pathBuilder: (locale: AppLocale, uid: string) => string,
+): { languages: Record<string, string> } {
+  const languages: Record<string, string> = { [locale]: currentUrl };
+  for (const alt of alternateLangs) {
+    if (!alt.uid) continue;
+    const altLocale = normalizeAppLocale(alt.lang);
+    if (isAppLocale(altLocale) && altLocale !== locale) {
+      languages[altLocale] = url(pathBuilder(altLocale, alt.uid));
+    }
+  }
+  return { languages };
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -16,7 +41,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPaths = ["", "/episodes", "/characters", "/lore", "/store"];
   for (const locale of SUPPORTED_LOCALES) {
     for (const path of staticPaths) {
-      entries.push({ url: url(`/${locale}${path}`), alternates: { languages: Object.fromEntries(SUPPORTED_LOCALES.map((l) => [l, url(`/${l}${path}`)])) } });
+      entries.push({
+        url: url(`/${locale}${path}`),
+        alternates: {
+          languages: Object.fromEntries(
+            SUPPORTED_LOCALES.map((l) => [l, url(`/${l}${path}`)]),
+          ),
+        },
+      });
     }
   }
 
@@ -34,18 +66,56 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const results: MetadataRoute.Sitemap = [];
 
     for (const ep of filterVisibleDocuments(episodes)) {
-      results.push({ url: url(`/${locale}/episodes/${ep.uid}`) });
+      const currentUrl = url(`/${locale}/episodes/${ep.uid}`);
+      results.push({
+        url: currentUrl,
+        alternates: buildDynamicAlternates(
+          locale,
+          currentUrl,
+          ep.alternate_languages ?? [],
+          (l, uid) => `/${l}/episodes/${uid}`,
+        ),
+      });
     }
+
     for (const char of filterVisibleDocuments(characters)) {
-      results.push({ url: url(`/${locale}/characters/${char.uid}`) });
+      const currentUrl = url(`/${locale}/characters/${char.uid}`);
+      results.push({
+        url: currentUrl,
+        alternates: buildDynamicAlternates(
+          locale,
+          currentUrl,
+          char.alternate_languages ?? [],
+          (l, uid) => `/${l}/characters/${uid}`,
+        ),
+      });
     }
+
     for (const entry of filterVisibleDocuments(loreEntries)) {
-      results.push({ url: url(`/${locale}/lore/${entry.uid}`) });
+      const currentUrl = url(`/${locale}/lore/${entry.uid}`);
+      results.push({
+        url: currentUrl,
+        alternates: buildDynamicAlternates(
+          locale,
+          currentUrl,
+          entry.alternate_languages ?? [],
+          (l, uid) => `/${l}/lore/${uid}`,
+        ),
+      });
     }
+
     for (const page of filterVisibleDocuments(pages)) {
-      if (page.uid && page.uid !== "home") {
-        results.push({ url: url(`/${locale}/${page.uid}`) });
-      }
+      if (!page.uid || page.uid === "home") continue;
+      const currentUrl = url(`/${locale}/${page.uid}`);
+      results.push({
+        url: currentUrl,
+        alternates: buildDynamicAlternates(
+          locale,
+          currentUrl,
+          page.alternate_languages ?? [],
+          (l, uid) => `/${l}/${uid}`,
+        ),
+      });
     }
 
     return results;

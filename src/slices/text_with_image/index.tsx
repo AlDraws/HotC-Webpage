@@ -1,27 +1,18 @@
-"use client";
 import { PrismicNextLink } from "@prismicio/next";
 import { PrismicRichText, SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
-import { useLightbox } from "@/components/LightboxProvider";
-import PrismicImage from "@/components/PrismicImage";
 import { getContextualCtaAriaLabel, getDescriptiveCtaLabel } from "@/lib/a11y";
 import { resolveLinkHref } from "@/lib/links";
 import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
 import { getUiCopy } from "@/lib/ui-copy";
 import { TextWithImageSlice } from "@/../prismicio-types";
+import LightboxImageButton from "./LightboxImageButton";
 
-/**
- * Props for `TextWithImage`.
- */
 export type TextWithImageProps = SliceComponentProps<TextWithImageSlice, HotcSliceContext>;
 
-/**
- * Component for "TextWithImage" Slices.
- */
 const TextWithImage = ({ slice, context }: TextWithImageProps) => {
   const locale = getSliceLocale(context);
   const copy = getUiCopy(locale);
-  const { openLightbox } = useLightbox();
   const imageAlt =
     slice.primary.image.alt ||
     slice.primary.title ||
@@ -46,39 +37,14 @@ const TextWithImage = ({ slice, context }: TextWithImageProps) => {
     >
       <div className="hotc-twi__inner">
         <div className="hotc-twi__media">
-          {slice.primary.image.url ? (
-            <button
-              type="button"
-              className="hotc-twi__img-trigger hotc-pressable"
-              onClick={() =>
-                openLightbox([
-                  {
-                    src: slice.primary.image.url || "",
-                    alt: imageAlt,
-                    width: slice.primary.image.dimensions?.width,
-                    height: slice.primary.image.dimensions?.height,
-                  },
-                ])
-              }
-              aria-label={copy.common.openImage}
-            >
-              <PrismicImage
-                field={slice.primary.image}
-                className="hotc-twi__img"
-                fallbackAlt={imageAlt}
-                sizes="(max-width: 767px) calc(100vw - 48px), 560px"
-                quality={55}
-              />
-            </button>
-          ) : (
-            <PrismicImage
-              field={slice.primary.image}
-              className="hotc-twi__img"
-              fallbackAlt={imageAlt}
-              sizes="(max-width: 767px) calc(100vw - 48px), 560px"
-              quality={55}
-            />
-          )}
+          <LightboxImageButton
+            field={slice.primary.image}
+            alt={imageAlt}
+            ariaLabel={copy.common.openImage}
+            className="hotc-twi__img"
+            sizes="(max-width: 767px) calc(100vw - 48px), 560px"
+            quality={55}
+          />
         </div>
         <div className="hotc-twi__copy">
           {slice.primary.kicker && (

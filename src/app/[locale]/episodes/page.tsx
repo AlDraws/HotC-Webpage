@@ -11,6 +11,7 @@ import {
   getLocalizedEpisodeArc,
   getUiCopy,
 } from "@/lib/ui-copy";
+import { formatDate } from "@/lib/format";
 
 type Props = { params: Promise<{ locale: AppLocale }> };
 
@@ -92,7 +93,7 @@ export default async function EpisodesPage({ params }: Props) {
                   {formatUiText(copy.episodes.chapterShort, {
                     number: ep.data.chapter_number ?? "—",
                   })}&nbsp;·&nbsp;
-                  {ep.data.publish_date ?? ""}
+                  {formatDate(ep.data.publish_date, locale)}
                 </span>
                 <h3 className="hotc-ep-card__title">{ep.data.title}</h3>
                 {ep.data.summary ? (

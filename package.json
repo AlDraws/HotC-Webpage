@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
+    "lint": "eslint . --max-warnings 0",
+    "typecheck": "tsc --noEmit",
     "slicemachine": "start-slicemachine",
     "prismic:translations:export": "node scripts/prismic-translations.mjs export",
     "prismic:translations:import": "node scripts/prismic-translations.mjs import"

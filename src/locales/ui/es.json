@@ -116,12 +116,7 @@
       "Arc I": "Arco I",
       "Arc II": "Arco II",
       "Arc III": "Arco III",
-      "Epilogue": "Epilogo",
-      "Arc": {
-        "I": "Arco I",
-        "II": "Arco II",
-        "III": "Arco III"
-      }
+      "Epilogue": "Epilogo"
     }
   },
   "lore": {

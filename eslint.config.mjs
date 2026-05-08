@@ -17,7 +17,8 @@ const eslintConfig = defineConfig([
     "handoff/**",
     "prismic/**",
     "assets/**",
-    "preview/**"
+    "preview/**",
+    ".claude/**"
   ]),
 ]);
 

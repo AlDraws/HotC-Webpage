@@ -1,76 +1,127 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Heirs of the Collapse — Webpage
 
-## Getting Started
+Next.js 16 + Prismic + Tailwind 4. Internationalized (English / Spanish), deployed on Vercel.
 
-First, run the development server:
+## Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 16 (App Router, RSC) |
+| CMS | Prismic (Slice Machine) |
+| Styling | Tailwind CSS 4 |
+| Language | TypeScript 5 (strict) |
+| i18n | Custom locale routing via middleware |
+
+## Local setup
 
 ```bash
+# 1. Install dependencies
+npm install
+
+# 2. Copy env template and fill in values
+cp .env.example .env.local
+
+# 3. Start the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+See [`.env.example`](.env.example) for the full list. The minimum required for local dev:
 
-## Learn More
+| Variable | Purpose |
+|---|---|
+| `NEXT_PUBLIC_PRISMIC_ENVIRONMENT` | Prismic repository name (overrides `slicemachine.config.json`) |
+| `NEXT_PUBLIC_SITE_URL` | Used for `metadataBase`, OG tags, and sitemap |
+| `PRISMIC_WEBHOOK_SECRET` | Required for `/api/revalidate` to accept Prismic webhooks |
 
-To learn more about Next.js, take a look at the following resources:
+Vercel sets `VERCEL_URL` and `VERCEL_PROJECT_PRODUCTION_URL` automatically in deploy previews and production.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-## Prismic translation workflow
-
-The translation round-trip now includes both:
-
-- Prismic content documents
-- local UI copy in `src/locales/ui/*.json`
-
-Export a round-trip file plus a reviewable Markdown summary:
+## Available scripts
 
 ```bash
+npm run dev                         # Dev server (http://localhost:3000)
+npm run build                       # Production build
+npm run start                       # Start production build locally
+npm run lint                        # ESLint (zero warnings)
+npm run typecheck                   # TypeScript check (no emit)
+npm run slicemachine                # Slice Machine UI (http://localhost:9999)
+npm run prismic:translations:export # Export content for translation
+npm run prismic:translations:import # Import translated content back
+node scripts/check-i18n-parity.mjs  # Verify es.json has all keys from en.json
+```
+
+## Project structure
+
+```
+src/
+  app/
+    [locale]/          # Locale-scoped routes (en, es)
+      page.tsx         # Home (renders Prismic "home" document)
+      episodes/        # Episode index + reader
+      characters/      # Character list + detail
+      lore/            # Lore archive + entry
+      store/           # Store page
+    api/
+      locale/          # POST — sets locale preference cookie (HttpOnly)
+      preview/         # Prismic preview entry point
+      exit-preview/    # Prismic exit preview
+      revalidate/      # Prismic webhook → revalidateTag("prismic")
+  components/          # Shared UI components (Header, Footer, Lightbox…)
+  lib/                 # Utilities (seo, locale, ui-copy, format…)
+  locales/ui/          # en.json / es.json — static UI copy
+  slices/              # Prismic slice components
+  prismicio.ts         # Prismic client + route resolver
+  proxy.ts             # Middleware: locale redirect based on cookie / Accept-Language
+```
+
+## Internationalization
+
+Routes use a `[locale]` segment (`/en/…`, `/es/…`). The middleware in `src/proxy.ts` redirects root paths to the right locale based on:
+
+1. The `hotc-locale` cookie (set by `/api/locale` after the user switches language)
+2. The `Accept-Language` header (fallback)
+
+**Adding a new locale:** add the entry to `PRISMIC_LANG_BY_LOCALE` and `HREFLANG_BY_LOCALE` in `src/lib/locale.ts`, add the corresponding `src/locales/ui/<locale>.json`, and run `node scripts/check-i18n-parity.mjs` to verify parity.
+
+**Translating content:**
+```bash
+# Export a round-trip file and a human-readable Markdown summary
 npm run prismic:translations:export -- --from en --to es
-```
 
-That creates:
+# Edit translations/prismic-en-us-to-es-es.json (translate each "target" value)
 
-- `translations/prismic-en-us-to-es-es.json`
-- `translations/prismic-en-us-to-es-es.md`
-
-Translate the JSON by editing each unit's `target` value:
-
-- plain text fields: replace the string in `target`
-- rich text fields: keep the Prismic JSON structure and translate the text content inside `target`
-- local UI copy entries live under `localResources`
-
-Then import it back into Prismic:
-
-```bash
+# Import back into Prismic as a migration release
 npm run prismic:translations:import -- --file translations/prismic-en-us-to-es-es.json
 ```
 
-Useful environment variables:
+The import does **not** publish automatically — review and publish from the Prismic dashboard.
 
-- `PRISMIC_ACCESS_TOKEN`: optional, for protected Content API access
-- `PRISMIC_WRITE_TOKEN`: required for import
-- `PRISMIC_REPOSITORY`: optional repository override
+## CMS preview
 
-Important: the import writes to a Prismic migration release. It does not publish live automatically; review and publish from Prismic afterwards.
+Prismic draft previews work out of the box via the `/api/preview` route. Enable draft mode by clicking *Preview* in the Prismic editor; exit via the *Exit preview* link or `/api/exit-preview`.
 
-Important: local UI copy is updated directly in `src/locales/ui/es.json` during import.
+## Cache revalidation
+
+On-demand ISR is driven by a Prismic webhook pointing to `/api/revalidate`. The webhook **must** include a secret that matches `PRISMIC_WEBHOOK_SECRET` in your environment.
+
+Configure in Prismic: **Settings → Webhooks** → add URL `https://<your-domain>/api/revalidate` with a secret.
+
+## Slice Machine
+
+```bash
+npm run slicemachine
+```
+
+Opens the Slice Machine UI at [http://localhost:9999](http://localhost:9999) for creating and editing slices. Changes are reflected in `src/slices/` and `customtypes/`.
+
+## Deployment
+
+The project deploys to Vercel. Push to `main` triggers a production deploy. GitHub Actions runs lint, typecheck, i18n parity, and a production build on every push and pull request.
+
+Set the following secrets in **GitHub → Settings → Secrets → Actions** for CI builds:
+
+- `NEXT_PUBLIC_PRISMIC_ENVIRONMENT`
+- `NEXT_PUBLIC_SITE_URL`

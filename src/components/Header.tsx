@@ -6,7 +6,7 @@ import { useState, useTransition, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import BrandLogo from "@/components/BrandLogo";
 import SocialIcon, { getSocialKey } from "@/components/SocialIcon";
-import { LOCALE_COOKIE_NAME, type AppLocale } from "@/lib/locale";
+import { type AppLocale } from "@/lib/locale";
 import {
   getLinkTarget,
   resolveAppLinkHref,
@@ -21,11 +21,6 @@ type Props = {
   navigation: Content.NavigationDocument | null;
   currentLocale: AppLocale;
 };
-
-function persistLocalePreference(locale: AppLocale) {
-  const secure = location.protocol === "https:" ? "; Secure" : "";
-  document.cookie = `${LOCALE_COOKIE_NAME}=${locale}; path=/; max-age=31536000; samesite=lax${secure}`;
-}
 
 export default function Header({ settings, navigation, currentLocale }: Props) {
   const copy = getUiCopy(currentLocale);
@@ -116,7 +111,13 @@ export default function Header({ settings, navigation, currentLocale }: Props) {
 
     setOpen(false);
     setPendingLocale(locale);
-    persistLocalePreference(locale);
+
+    // Best-effort: set HttpOnly cookie server-side so the proxy remembers the preference
+    fetch("/api/locale", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ locale }),
+    }).catch(() => {});
 
     startTransition(() => {
       router.push(localizeHref(pathname || "/", locale));

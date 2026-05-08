@@ -1,8 +1,6 @@
-"use client";
 import Link from "next/link";
 import { SliceComponentProps } from "@prismicio/react";
 import Bounded from "@/components/Bounded";
-import { useLightbox } from "@/components/LightboxProvider";
 import PrismicImage from "@/components/PrismicImage";
 import { FeatureGridSlice } from "@/../prismicio-types";
 import {
@@ -12,19 +10,13 @@ import {
 } from "@/lib/links";
 import { getSliceLocale, type HotcSliceContext } from "@/lib/slice-context";
 import { formatUiText, getUiCopy } from "@/lib/ui-copy";
+import ZoomButton from "./ZoomButton";
 
-/**
- * Props for `FeatureGrid`.
- */
 export type FeatureGridProps = SliceComponentProps<FeatureGridSlice, HotcSliceContext>;
 
-/**
- * Component for "FeatureGrid" Slices.
- */
 const FeatureGrid = ({ slice, context }: FeatureGridProps) => {
   const locale = getSliceLocale(context);
   const copy = getUiCopy(locale);
-  const { openLightbox } = useLightbox();
 
   return (
     <Bounded
@@ -121,25 +113,19 @@ const FeatureGrid = ({ slice, context }: FeatureGridProps) => {
               )}
 
               {coverImage?.url ? (
-                <button
-                  type="button"
-                  className="hotc-fcard__zoom hotc-pressable"
-                  onClick={() =>
-                    openLightbox([
-                      {
-                        src: coverImage.url || "",
-                        alt: coverAlt,
-                        width: coverImage.dimensions?.width,
-                        height: coverImage.dimensions?.height,
-                      },
-                    ])
-                  }
-                  aria-label={formatUiText(copy.images.featureImageAria, {
+                <ZoomButton
+                  image={{
+                    src: coverImage.url || "",
+                    alt: coverAlt,
+                    width: coverImage.dimensions?.width,
+                    height: coverImage.dimensions?.height,
+                  }}
+                  label={formatUiText(copy.images.featureImageAria, {
                     title: item.title || featureTitle,
                   })}
                 >
                   {copy.common.viewArtwork}
-                </button>
+                </ZoomButton>
               ) : null}
             </article>
           );
