@@ -16,12 +16,12 @@ const contentSecurityPolicy = [
   "frame-ancestors 'none'",
   "form-action 'self'",
   process.env.NODE_ENV === "development"
-    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
-    : "script-src 'self' 'unsafe-inline'",
+    ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://connect.facebook.net"
+    : "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://connect.facebook.net",
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' data: blob: https://images.prismic.io https://*.cdn.prismic.io https://prismic-io.s3.amazonaws.com https://i.ytimg.com https://*.vercel.app https://*.vercel-storage.com",
+  "img-src 'self' data: blob: https://images.prismic.io https://*.cdn.prismic.io https://prismic-io.s3.amazonaws.com https://i.ytimg.com https://*.vercel.app https://*.vercel-storage.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://www.facebook.com",
   "font-src 'self' data:",
-  "connect-src 'self' https://*.prismic.io https://*.cdn.prismic.io https://prismic-io.s3.amazonaws.com https://www.youtube.com https://www.youtube-nocookie.com https://*.googlevideo.com",
+  "connect-src 'self' https://*.prismic.io https://*.cdn.prismic.io https://prismic-io.s3.amazonaws.com https://www.youtube.com https://www.youtube-nocookie.com https://*.googlevideo.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://stats.g.doubleclick.net https://www.facebook.com https://connect.facebook.net",
   "media-src 'self' blob: https://images.prismic.io https://*.cdn.prismic.io https://prismic-io.s3.amazonaws.com https://*.googlevideo.com",
   "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com",
   "worker-src 'self' blob:",
